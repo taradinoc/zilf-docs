@@ -1,45 +1,70 @@
+@prefix : <http://example.org/zilf/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix zilf: <http://example.org/zilf/> .
-@prefix dc: <http://purl.org/dc/elements/1.1/> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@base <http://example.org/zilf/> .
 
-# --- Ontology Metadata ---
-zilf:Ontology a owl:Ontology ;
-    owl:imports <http://www.w3.org/2004/02/skos/core> ;
-    dc:description "A SKOS-based ontology for ZILF with OWL reasoning constraints." .
+<http://example.org/zilf/> rdf:type owl:Ontology ;
+    owl:imports <http://www.w3.org/2004/02/skos/core> .
 
-# --- Custom Object Properties (Logic Layer) ---
-zilf:hasFlag a owl:ObjectProperty ;
-    rdfs:label "has flag" ;
-    rdfs:domain zilf:ObjectConstruct ;
-    rdfs:range zilf:StandardFlags .
+#################################################################
+#    Classes
+#################################################################
 
-zilf:isInside a owl:ObjectProperty ;
-    rdfs:label "is inside" ;
-    rdfs:domain zilf:ObjectConstruct ;
-    rdfs:range zilf:ObjectConstruct ;
-    a owl:FunctionalProperty .
+zilf:LanguageConstruct rdf:type owl:Class ;
+    rdfs:subClassOf skos:Concept .
 
-# --- ZILF Concept Scheme ---
-zilf:Scheme a skos:ConceptScheme ;
-    skos:hasTopConcept zilf:DataTypes, zilf:CoreFunctions, zilf:ObjectSystem, zilf:ParserSystem .
+#################################################################
+#    Individuals (ZILF Content)
+#################################################################
 
-# --- Hierarchical Data ---
-zilf:ObjectSystem a skos:Concept ;
-    skos:prefLabel "Object System" ;
-    skos:narrower zilf:ObjectConstruct, zilf:StandardFlags .
+# The Main Scheme
+zilf:ZILF_Scheme rdf:type owl:NamedIndividual , skos:ConceptScheme ;
+    skos:prefLabel "ZILF Reference Scheme"@en ;
+    skos:hasTopConcept zilf:CoreFunctions , zilf:ObjectSystem , zilf:ParserSystem .
 
-zilf:ObjectConstruct a skos:Concept ;
-    skos:prefLabel "OBJECT" ;
-    skos:broader zilf:ObjectSystem ;
-    # OWL Axiom for reasoning
-    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty zilf:hasFlag ; owl:someValuesFrom zilf:StandardFlags ] .
+# --- Parser System Category ---
+zilf:ParserSystem rdf:type owl:NamedIndividual , skos:Concept ;
+    skos:prefLabel "Parser System"@en ;
+    skos:topConceptOf zilf:ZILF_Scheme ;
+    skos:narrower zilf:VERB , zilf:SYNTAX , zilf:PREP .
 
-zilf:StandardFlags a skos:Concept ;
-    skos:prefLabel "Standard Flags" ;
-    skos:narrower zilf:Takebit, zilf:Lightbit .
+zilf:VERB rdf:type owl:NamedIndividual , skos:Concept ;
+    skos:prefLabel "VERB"@en ;
+    skos:broader zilf:ParserSystem ;
+    skos:definition "Defines action words (e.g., TAKE, DROP) and links them to syntax patterns." ;
+    skos:example "<VERB TAKE T TAKE>" .
 
-zilf:Takebit a skos:Concept ;
-    skos:prefLabel "TAKEBIT" ;
-    skos:broader zilf:StandardFlags .
+zilf:SYNTAX rdf:type owl:NamedIndividual , skos:Concept ;
+    skos:prefLabel "SYNTAX"@en ;
+    skos:broader zilf:ParserSystem ;
+    skos:definition "Defines the grammatical structure of a command (e.g., VERB OBJECT WITH OBJECT)." .
+
+zilf:PREP rdf:type owl:NamedIndividual , skos:Concept ;
+    skos:prefLabel "PREP"@en ;
+    skos:altLabel "Preposition"@en ;
+    skos:broader zilf:ParserSystem ;
+    skos:definition "Words like IN, ON, or WITH used to clarify object relationships in a command." .
+
+# --- Existing Categories ---
+zilf:CoreFunctions rdf:type owl:NamedIndividual , skos:Concept ;
+    skos:prefLabel "Core Functions"@en ;
+    skos:topConceptOf zilf:ZILF_Scheme ;
+    skos:narrower zilf:SETG .
+
+zilf:ObjectSystem rdf:type owl:NamedIndividual , skos:Concept ;
+    skos:prefLabel "Object System"@en ;
+    skos:topConceptOf zilf:ZILF_Scheme ;
+    skos:narrower zilf:OBJECT .
+
+zilf:SETG rdf:type owl:NamedIndividual , skos:Concept ;
+    skos:prefLabel "SETG"@en ;
+    skos:broader zilf:CoreFunctions .
+
+zilf:OBJECT rdf:type owl:NamedIndividual , skos:Concept ;
+    skos:prefLabel "OBJECT"@en ;
+    skos:broader zilf:ObjectSystem .
