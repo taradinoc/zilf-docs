@@ -1,0 +1,45 @@
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix zilf: <http://example.org/zilf/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+# --- Ontology Metadata ---
+zilf:Ontology a owl:Ontology ;
+    owl:imports <http://www.w3.org/2004/02/skos/core> ;
+    dc:description "A SKOS-based ontology for ZILF with OWL reasoning constraints." .
+
+# --- Custom Object Properties (Logic Layer) ---
+zilf:hasFlag a owl:ObjectProperty ;
+    rdfs:label "has flag" ;
+    rdfs:domain zilf:ObjectConstruct ;
+    rdfs:range zilf:StandardFlags .
+
+zilf:isInside a owl:ObjectProperty ;
+    rdfs:label "is inside" ;
+    rdfs:domain zilf:ObjectConstruct ;
+    rdfs:range zilf:ObjectConstruct ;
+    a owl:FunctionalProperty .
+
+# --- ZILF Concept Scheme ---
+zilf:Scheme a skos:ConceptScheme ;
+    skos:hasTopConcept zilf:DataTypes, zilf:CoreFunctions, zilf:ObjectSystem, zilf:ParserSystem .
+
+# --- Hierarchical Data ---
+zilf:ObjectSystem a skos:Concept ;
+    skos:prefLabel "Object System" ;
+    skos:narrower zilf:ObjectConstruct, zilf:StandardFlags .
+
+zilf:ObjectConstruct a skos:Concept ;
+    skos:prefLabel "OBJECT" ;
+    skos:broader zilf:ObjectSystem ;
+    # OWL Axiom for reasoning
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty zilf:hasFlag ; owl:someValuesFrom zilf:StandardFlags ] .
+
+zilf:StandardFlags a skos:Concept ;
+    skos:prefLabel "Standard Flags" ;
+    skos:narrower zilf:Takebit, zilf:Lightbit .
+
+zilf:Takebit a skos:Concept ;
+    skos:prefLabel "TAKEBIT" ;
+    skos:broader zilf:StandardFlags .
