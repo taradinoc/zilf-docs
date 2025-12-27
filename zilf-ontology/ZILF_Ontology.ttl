@@ -9,76 +9,141 @@
 @base <http://example.org/zilf/> .
 
 <http://example.org/zilf/> rdf:type owl:Ontology ;
-    owl:imports <http://www.w3.org/2004/02/skos/core> .
+                            owl:imports <http://www.w3.org/2004/02/skos/core> .
 
 #################################################################
 #    Classes
 #################################################################
 
+###  http://example.org/zilf/LanguageConstruct
 zilf:LanguageConstruct rdf:type owl:Class ;
-    rdfs:subClassOf skos:Concept .
+                       rdfs:subClassOf skos:Concept .
+
 
 #################################################################
-#    Individuals (ZILF Content)
+#    Individuals
 #################################################################
 
-# --- The Main Scheme ---
-zilf:ZILF_Scheme rdf:type owl:NamedIndividual , skos:ConceptScheme ;
-    skos:prefLabel "ZILF Reference Scheme"@en ;
-    skos:hasTopConcept zilf:CoreFunctions , zilf:ObjectSystem , zilf:ParserSystem .
+###  http://example.org/zilf/BitOn
+zilf:BitOn rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:PropFlags ;
+           skos:definition "Flag indicating that a light-source object is currently providing light." ;
+           skos:prefLabel "ONBIT"@en .
 
-# --- Object System Category ---
-zilf:ObjectSystem rdf:type owl:NamedIndividual , skos:Concept ;
-    skos:prefLabel "Object System"@en ;
-    skos:topConceptOf zilf:ZILF_Scheme ;
-    skos:narrower zilf:OBJECT , zilf:ObjectProperties .
 
-zilf:OBJECT rdf:type owl:NamedIndividual , skos:Concept ;
-    skos:prefLabel "OBJECT"@en ;
-    skos:broader zilf:ObjectSystem ;
-    skos:definition "The fundamental construct for game entities like rooms and items." .
+###  http://example.org/zilf/BitTake
+zilf:BitTake rdf:type owl:NamedIndividual ,
+                      skos:Concept ;
+             skos:broader zilf:PropFlags ;
+             skos:definition "Flag indicating that an object can be picked up by the player." ;
+             skos:prefLabel "TAKEBIT"@en .
 
-# --- Object Properties (New Scavenger Hunt Results) ---
-zilf:ObjectProperties rdf:type owl:NamedIndividual , skos:Concept ;
-    skos:prefLabel "Object Properties"@en ;
-    skos:broader zilf:ObjectSystem ;
-    skos:narrower zilf:PropAdjective , zilf:PropSynonym , zilf:PropDesc .
 
-zilf:PropAdjective rdf:type owl:NamedIndividual , skos:Concept ;
-    skos:prefLabel "ADJECTIVE"@en ;
-    skos:broader zilf:ObjectProperties ;
-    skos:definition "A list of adjectives the parser accepts to identify a specific object." ;
-    skos:example "ADJECTIVE BRASS SMALL" .
+###  http://example.org/zilf/CoreFunctions
+zilf:CoreFunctions rdf:type owl:NamedIndividual ,
+                            skos:Concept ;
+                   skos:narrower zilf:SETG ;
+                   skos:topConceptOf zilf:ZILF_Scheme ;
+                   skos:prefLabel "Core Functions"@en .
 
-zilf:PropSynonym rdf:type owl:NamedIndividual , skos:Concept ;
-    skos:prefLabel "SYNONYM"@en ;
-    skos:broader zilf:ObjectProperties ;
-    skos:definition "A list of nouns the parser accepts for this object." .
 
-zilf:PropDesc rdf:type owl:NamedIndividual , skos:Concept ;
-    skos:prefLabel "DESC"@en ;
-    skos:broader zilf:ObjectProperties ;
-    skos:definition "A short string used to name the object in game output." .
+###  http://example.org/zilf/OBJECT
+zilf:OBJECT rdf:type owl:NamedIndividual .
 
-# --- Parser & Core Categories ---
-zilf:ParserSystem rdf:type owl:NamedIndividual , skos:Concept ;
-    skos:prefLabel "Parser System"@en ;
-    skos:topConceptOf zilf:ZILF_Scheme ;
-    skos:narrower zilf:VERB , zilf:SYNTAX .
 
-zilf:CoreFunctions rdf:type owl:NamedIndividual , skos:Concept ;
-    skos:prefLabel "Core Functions"@en ;
-    skos:topConceptOf zilf:ZILF_Scheme ;
-    skos:narrower zilf:SETG .
+###  http://example.org/zilf/ObjectProperties
+zilf:ObjectProperties rdf:type owl:NamedIndividual ,
+                               skos:Concept ;
+                      skos:broader zilf:ObjectSystem ;
+                      skos:narrower zilf:PropAdjective ,
+                                    zilf:PropDesc ,
+                                    zilf:PropFlags ,
+                                    zilf:PropSynonym ;
+                      skos:prefLabel "Object Properties"@en .
 
-zilf:SETG rdf:type owl:NamedIndividual , skos:Concept ;
-    skos:prefLabel "SETG"@en ;
-    skos:broader zilf:CoreFunctions .
 
-zilf:VERB rdf:type owl:NamedIndividual , skos:Concept ;
-    skos:prefLabel "VERB"@en ;
-    skos:broader zilf:ParserSystem .
+###  http://example.org/zilf/ObjectSystem
+zilf:ObjectSystem rdf:type owl:NamedIndividual ,
+                           skos:Concept ;
+                  skos:narrower zilf:OBJECT ,
+                                zilf:ObjectProperties ;
+                  skos:topConceptOf zilf:ZILF_Scheme ;
+                  skos:prefLabel "Object System"@en .
 
-zilf:SYNTAX rdf:type owl:NamedIndividual , skos:Concept ;
-    skos:prefLabel "SYNTAX"@en ;
-    skos:broader zilf:ParserSystem .
+
+###  http://example.org/zilf/ParserSystem
+zilf:ParserSystem rdf:type owl:NamedIndividual ,
+                           skos:Concept ;
+                  skos:narrower zilf:SYNTAX ,
+                                zilf:VERB ;
+                  skos:topConceptOf zilf:ZILF_Scheme ;
+                  skos:prefLabel "Parser System"@en .
+
+
+###  http://example.org/zilf/PropAdjective
+zilf:PropAdjective rdf:type owl:NamedIndividual ,
+                            skos:Concept ;
+                   skos:broader zilf:ObjectProperties ;
+                   skos:definition "A list of adjectives the parser accepts to identify a specific object." ;
+                   skos:example "ADJECTIVE BRASS SMALL" ;
+                   skos:prefLabel "ADJECTIVE"@en .
+
+
+###  http://example.org/zilf/PropDesc
+zilf:PropDesc rdf:type owl:NamedIndividual ,
+                       skos:Concept ;
+              skos:broader zilf:ObjectProperties ;
+              skos:definition "A short string used to name the object in game output." ;
+              skos:prefLabel "DESC"@en .
+
+
+###  http://example.org/zilf/PropFlags
+zilf:PropFlags rdf:type owl:NamedIndividual ,
+                        skos:Concept ;
+               skos:broader zilf:ObjectProperties ;
+               skos:narrower zilf:BitOn ,
+                             zilf:BitTake ;
+               skos:definition "A collection of boolean bits (flags) that define the state or behavior of an object." ;
+               skos:prefLabel "FLAGS"@en .
+
+
+###  http://example.org/zilf/PropSynonym
+zilf:PropSynonym rdf:type owl:NamedIndividual ,
+                          skos:Concept ;
+                 skos:broader zilf:ObjectProperties ;
+                 skos:definition "A list of nouns the parser accepts for this object." ;
+                 skos:prefLabel "SYNONYM"@en .
+
+
+###  http://example.org/zilf/SETG
+zilf:SETG rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
+          skos:prefLabel "SETG"@en .
+
+
+###  http://example.org/zilf/SYNTAX
+zilf:SYNTAX rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ParserSystem ;
+            skos:prefLabel "SYNTAX"@en .
+
+
+###  http://example.org/zilf/VERB
+zilf:VERB rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:ParserSystem ;
+          skos:prefLabel "VERB"@en .
+
+
+###  http://example.org/zilf/ZILF_Scheme
+zilf:ZILF_Scheme rdf:type owl:NamedIndividual ,
+                          skos:ConceptScheme ;
+                 skos:hasTopConcept zilf:CoreFunctions ,
+                                    zilf:ObjectSystem ,
+                                    zilf:ParserSystem ;
+                 skos:prefLabel "ZILF Reference Scheme"@en .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
