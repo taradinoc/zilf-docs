@@ -43,7 +43,8 @@ zilf:BitTake rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/CoreFunctions
 zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                             skos:Concept ;
-                   skos:narrower zilf:SETG ;
+                   skos:narrower zilf:SETG ,
+                                 zilf:SETG20 ;
                    skos:topConceptOf zilf:ZILF_Scheme ;
                    skos:prefLabel "Core Functions"@en .
 
@@ -120,7 +121,19 @@ zilf:PropSynonym rdf:type owl:NamedIndividual ,
 zilf:SETG rdf:type owl:NamedIndividual ,
                    skos:Concept ;
           skos:broader zilf:CoreFunctions ;
+          skos:definition "MDL built-in that assigns a value to the global atom. If an atom is already assigned a value, it is changed."@en ;
+          skos:example "<SETG MYVAR 42> ; Store 42 in global atom MYVAR"@en ;
           skos:prefLabel "SETG"@en .
+
+
+###  http://example.org/zilf/SETG20
+zilf:SETG20 rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "A member of the ZIL library, which assigs a value to the global atom. If an atom is already assigned a value, it is changed. SETG20 is an alias for SETG."@en ;
+            skos:example "<SETG20 MYVAR 42> ; Store 42 in global atom MYVAR"@en ;
+            skos:prefLabel "SETG20"@en .
 
 
 ###  http://example.org/zilf/SYNTAX
