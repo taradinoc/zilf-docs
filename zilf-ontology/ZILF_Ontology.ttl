@@ -110,6 +110,7 @@ zilf:ObjectSystem rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/PICFILE
 zilf:PICFILE rdf:type owl:NamedIndividual ,
                       skos:Concept ;
+             skos:broader zilf:CoreFunctions ;
              skos:inScheme zilf:ZILF_Scheme ;
              skos:definition "ZIL library function that is a compiler directive used to associate a graphics resource file with a game, which ran on Version 6 of the Z-Machine, also known as YZIP)."@en ;
              skos:editorialNote "ZILF ignores this and always returns FALSE because modern compilation for Z-Machine graphics is typically handled by the assembler (ZAPF) or by defining resources in a separate project file rather than within the ZIL logic itself."@en ;
