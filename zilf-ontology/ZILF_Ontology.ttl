@@ -53,9 +53,11 @@ zilf:BitTake rdf:type owl:NamedIndividual ,
 zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                             skos:Concept ;
                    skos:narrower zilf:EVAL ,
+                                 zilf:ROOT ,
                                  zilf:SET ,
                                  zilf:SETG ,
-                                 zilf:SETG20 ;
+                                 zilf:SETG20 ,
+                                 zilf:STRING ;
                    skos:topConceptOf zilf:ZILF_Scheme ;
                    skos:prefLabel "Core Functions"@en .
 
@@ -145,6 +147,16 @@ zilf:PropSynonym rdf:type owl:NamedIndividual ,
                  skos:prefLabel "SYNONYM"@en .
 
 
+###  http://example.org/zilf/ROOT
+zilf:ROOT rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition "MDL built-in that returns the OBLIST containing names of primitives (the same as <2 .OBLIST>)."@en ;
+          skos:editorialNote "Initially contains all predefined SUBRs or FSUBRs, as well as OBLIST, DEFAULT, T, etc."@en ;
+          skos:example "<ROOT>"@en ;
+          skos:prefLabel "ROOT"@en .
+
+
 ###  http://example.org/zilf/SET
 zilf:SET rdf:type owl:NamedIndividual ,
                   skos:Concept ;
@@ -172,6 +184,16 @@ zilf:SETG20 rdf:type owl:NamedIndividual ,
             skos:definition "A member of the ZIL library, which assigs a value to the global atom. If an atom is already assigned a value, it is changed. SETG20 is an alias for SETG."@en ;
             skos:example "<SETG20 MYVAR 42> ; Store 42 in global atom MYVAR"@en ;
             skos:prefLabel "SETG20"@en .
+
+
+###  http://example.org/zilf/STRING
+zilf:STRING rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "MDL built-in that returns a concatenated string of all values. values can be character or string."@en ;
+            skos:editorialNote "A string is a block of contiguous bytes where each byte holds a character. See more about STRING  structure in The MDL Programming Language, Appendix 1."@en ;
+            skos:example "<STRING !\\A <ASCII 66> \"CD\"> ; \"ABCD\""@en ;
+            skos:prefLabel "STRING"@en .
 
 
 ###  http://example.org/zilf/SYNTAX
