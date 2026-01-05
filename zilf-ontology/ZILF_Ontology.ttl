@@ -57,6 +57,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:SET ,
                                  zilf:SETG ,
                                  zilf:SETG20 ,
+                                 zilf:SPNAME ,
                                  zilf:STRING ;
                    skos:topConceptOf zilf:ZILF_Scheme ;
                    skos:prefLabel "Core Functions"@en .
@@ -184,6 +185,16 @@ zilf:SETG20 rdf:type owl:NamedIndividual ,
             skos:definition "A member of the ZIL library, which assigs a value to the global atom. If an atom is already assigned a value, it is changed. SETG20 is an alias for SETG."@en ;
             skos:example "<SETG20 MYVAR 42> ; Store 42 in global atom MYVAR"@en ;
             skos:prefLabel "SETG20"@en .
+
+
+###  http://example.org/zilf/SPNAME
+zilf:SPNAME rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "MDL built-in for \"shared printed name\", which should return the same string of the atom's pname that is in its OBLIST (i.e. pointing to the same storage and therefore not able to change or modify)."@en ;
+            skos:editorialNote "ZILF treats SPNAME as an alias to PNAME and returns a string copy of the atom’s pname."@en ;
+            skos:example "<SPNAME atom>"@en ;
+            skos:prefLabel "SPNAME"@en .
 
 
 ###  http://example.org/zilf/STRING
