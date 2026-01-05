@@ -67,6 +67,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/EVAL
 zilf:EVAL rdf:type owl:NamedIndividual ,
                    skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
           skos:inScheme zilf:ZILF_Scheme ;
           skos:definition "MDL built-in that evaluates value (usually a FORM created by FORM or QUOTE)."@en ;
           skos:editorialNote "It is possible to supply an environment for EVAL. This tells EVAL from which environment. EVAL should take variable bindings. See The MDL Programming Language, chap. 9.7 for more about the environment."@en ;
@@ -108,6 +109,7 @@ zilf:ObjectSystem rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/PNAME
 zilf:PNAME rdf:type owl:NamedIndividual ,
                     skos:Concept ;
+           skos:broader zilf:CoreFunctions ;
            skos:inScheme zilf:ZILF_Scheme ;
            skos:definition "MDL built-in for \"printed name\", which returns a newly created string copy of the atom's pname."@en ;
            skos:editorialNote "PNAME never prints an ATOMs trailers, unlike UNPARSE, and is therefore quicker."@en ;
@@ -164,6 +166,7 @@ zilf:PropSynonym rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/ROOT
 zilf:ROOT rdf:type owl:NamedIndividual ,
                    skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
           skos:inScheme zilf:ZILF_Scheme ;
           skos:definition "MDL built-in that returns the OBLIST containing names of primitives (the same as <2 .OBLIST>)."@en ;
           skos:editorialNote "Initially contains all predefined SUBRs or FSUBRs, as well as OBLIST, DEFAULT, T, etc."@en ;
@@ -174,6 +177,7 @@ zilf:ROOT rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/SET
 zilf:SET rdf:type owl:NamedIndividual ,
                   skos:Concept ;
+         skos:broader zilf:CoreFunctions ;
          skos:inScheme zilf:ZILF_Scheme ;
          skos:definition "MDL built-in that asigns a value to the local atom."@en ;
          skos:editorialNote "It is possible to supply an environment for SET. See EVAL for more about the environment."@en ;
@@ -203,6 +207,7 @@ zilf:SETG20 rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/SPNAME
 zilf:SPNAME rdf:type owl:NamedIndividual ,
                      skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
             skos:inScheme zilf:ZILF_Scheme ;
             skos:definition "MDL built-in for \"shared printed name\", which should return the same string of the atom's pname that is in its OBLIST (i.e. pointing to the same storage and therefore not able to change or modify)."@en ;
             skos:editorialNote "ZILF treats SPNAME as an alias to PNAME and returns a string copy of the atom’s pname."@en ;
@@ -213,6 +218,7 @@ zilf:SPNAME rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/STRING
 zilf:STRING rdf:type owl:NamedIndividual ,
                      skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
             skos:inScheme zilf:ZILF_Scheme ;
             skos:definition "MDL built-in that returns a concatenated string of all values. values can be character or string."@en ;
             skos:editorialNote "A string is a block of contiguous bytes where each byte holds a character. See more about STRING  structure in The MDL Programming Language, Appendix 1."@en ;
