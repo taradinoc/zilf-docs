@@ -53,6 +53,7 @@ zilf:BitTake rdf:type owl:NamedIndividual ,
 zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                             skos:Concept ;
                    skos:narrower zilf:EVAL ,
+                                 zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
                                  zilf:ROOT ,
@@ -85,6 +86,20 @@ zilf:EVAL rdf:type owl:NamedIndividual ,
 
 ###  http://example.org/zilf/OBJECT
 zilf:OBJECT rdf:type owl:NamedIndividual .
+
+
+###  http://example.org/zilf/OR
+zilf:OR rdf:type owl:NamedIndividual ,
+                 skos:Concept ;
+        skos:broader zilf:CoreFunctions ;
+        skos:inScheme zilf:ZILF_Scheme ;
+        skos:definition "MDL built-in that is a boolean OR. Requires that one of the expressions evaluates to true to return true. Exits on the first expression that evaluates to true (rest of expressions are not evaluated)."@en ;
+        skos:editorialNote "Because false is its own TYPE outside a routine OR returns #FALSE if all expressions are false or the value of the first true expression."@en ;
+        skos:example """<OR <=? 1 2> <=? 1 1>>  ;  True 
+ <OR <=? 1 1> <SET X 2>> ;  X is never set to 2 because first predicate evaluates to true 
+ <SET X <OR 0 1 2 3>>  ;  X is set to 0 
+ <SET X <OR <> 1 2 3>>  ;  X is set to 1"""@en ;
+        skos:prefLabel "OR"@en .
 
 
 ###  http://example.org/zilf/ObjectProperties
