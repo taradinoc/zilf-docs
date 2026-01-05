@@ -53,6 +53,7 @@ zilf:BitTake rdf:type owl:NamedIndividual ,
 zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                             skos:Concept ;
                    skos:narrower zilf:EVAL ,
+                                 zilf:PNAME ,
                                  zilf:ROOT ,
                                  zilf:SET ,
                                  zilf:SETG ,
@@ -102,6 +103,18 @@ zilf:ObjectSystem rdf:type owl:NamedIndividual ,
                                 zilf:ObjectProperties ;
                   skos:topConceptOf zilf:ZILF_Scheme ;
                   skos:prefLabel "Object System"@en .
+
+
+###  http://example.org/zilf/PNAME
+zilf:PNAME rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "MDL built-in for \"printed name\", which returns a newly created string copy of the atom's pname."@en ;
+           skos:editorialNote "PNAME never prints an ATOMs trailers, unlike UNPARSE, and is therefore quicker."@en ;
+           skos:example """<PNAME FOO> ; \"FOO\"
+<PNAME FOO!-NEW-OBLIST> ; \"FOO\"
+<UNPARSE FOO!-NEW-OBLIST> ; \"FOO!-NEW-OBLIST\""""@en ;
+           skos:prefLabel "PNAME"@en .
 
 
 ###  http://example.org/zilf/ParserSystem
