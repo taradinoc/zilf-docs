@@ -57,6 +57,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
+                                 zilf:QUIT ,
                                  zilf:ROOT ,
                                  zilf:ROUTINE ,
                                  zilf:SET ,
@@ -201,6 +202,16 @@ zilf:PropSynonym rdf:type owl:NamedIndividual ,
                  skos:broader zilf:ObjectProperties ;
                  skos:definition "A list of nouns the parser accepts for this object." ;
                  skos:prefLabel "SYNONYM"@en .
+
+
+###  http://example.org/zilf/QUIT
+zilf:QUIT rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition "MDL built-in function that exits ZILF (interpreter mode) and returns to the operating system with exit-code."@en ;
+          skos:example "<QUIT>"@en ;
+          skos:prefLabel "<QUIT [exit-code]>"@en .
 
 
 ###  http://example.org/zilf/ROOT
