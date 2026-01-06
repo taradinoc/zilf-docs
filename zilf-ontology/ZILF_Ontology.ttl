@@ -75,7 +75,7 @@ zilf:EVAL rdf:type owl:NamedIndividual ,
                    skos:Concept ;
           skos:broader zilf:CoreFunctions ;
           skos:inScheme zilf:ZILF_Scheme ;
-          skos:definition "MDL built-in that evaluates value (usually a FORM created by FORM or QUOTE)."@en ;
+          skos:definition "MDL built-in function that evaluates value (usually a FORM created by FORM or QUOTE)."@en ;
           skos:editorialNote "It is possible to supply an environment for EVAL. This tells EVAL from which environment. EVAL should take variable bindings. See The MDL Programming Language, chap. 9.7 for more about the environment."@en ;
           skos:example """<SET F '<+ 1 2>> 
 .F ; Sets up the stack operator and operands, + 1 2.
@@ -108,7 +108,7 @@ zilf:OR rdf:type owl:NamedIndividual ,
                  skos:Concept ;
         skos:broader zilf:CoreFunctions ;
         skos:inScheme zilf:ZILF_Scheme ;
-        skos:definition "MDL built-in that is a boolean OR. Requires that one of the expressions evaluates to true to return true. Exits on the first expression that evaluates to true (rest of expressions are not evaluated)."@en ;
+        skos:definition "MDL built-in function that is a boolean OR. Requires that one of the expressions evaluates to true to return true. Exits on the first expression that evaluates to true (rest of expressions are not evaluated)."@en ;
         skos:editorialNote "Because false is its own TYPE outside a routine OR returns #FALSE if all expressions are false or the value of the first true expression."@en ;
         skos:example """<OR <=? 1 2> <=? 1 1>>  ;  True 
  <OR <=? 1 1> <SET X 2>> ;  X is never set to 2 because first predicate evaluates to true 
@@ -152,7 +152,7 @@ zilf:PNAME rdf:type owl:NamedIndividual ,
                     skos:Concept ;
            skos:broader zilf:CoreFunctions ;
            skos:inScheme zilf:ZILF_Scheme ;
-           skos:definition "MDL built-in for \"printed name\", which returns a newly created string copy of the atom's pname."@en ;
+           skos:definition "MDL built-in function for \"printed name\", which returns a newly created string copy of the atom's pname."@en ;
            skos:editorialNote "PNAME never prints an ATOMs trailers, unlike UNPARSE, and is therefore quicker."@en ;
            skos:example """<PNAME FOO> ; \"FOO\"
 <PNAME FOO!-NEW-OBLIST> ; \"FOO\"
@@ -219,7 +219,7 @@ zilf:ROOT rdf:type owl:NamedIndividual ,
                    skos:Concept ;
           skos:broader zilf:CoreFunctions ;
           skos:inScheme zilf:ZILF_Scheme ;
-          skos:definition "MDL built-in that returns the OBLIST containing names of primitives (the same as <2 .OBLIST>)."@en ;
+          skos:definition "MDL built-in function that returns the OBLIST containing names of primitives (the same as <2 .OBLIST>)."@en ;
           skos:editorialNote "Initially contains all predefined SUBRs or FSUBRs, as well as OBLIST, DEFAULT, T, etc."@en ;
           skos:example "<ROOT>"@en ;
           skos:prefLabel "<ROOT>"@en .
@@ -263,7 +263,7 @@ zilf:SET rdf:type owl:NamedIndividual ,
                   skos:Concept ;
          skos:broader zilf:CoreFunctions ;
          skos:inScheme zilf:ZILF_Scheme ;
-         skos:definition "MDL built-in that asigns a value to the local atom."@en ;
+         skos:definition "MDL built-in function that asigns a value to the local atom."@en ;
          skos:editorialNote "It is possible to supply an environment for SET. See EVAL for more about the environment."@en ;
          skos:example "<PROG (X) <SET X 5> <RETURN .X>> ; Returns 5 after setting X."@en ;
          skos:prefLabel "<SET atom value [environment]>"@en .
@@ -273,7 +273,7 @@ zilf:SET rdf:type owl:NamedIndividual ,
 zilf:SETG rdf:type owl:NamedIndividual ,
                    skos:Concept ;
           skos:broader zilf:CoreFunctions ;
-          skos:definition "MDL built-in that assigns a value to the global atom. If an atom is already assigned a value, it is changed."@en ;
+          skos:definition "MDL built-in function that assigns a value to the global atom. If an atom is already assigned a value, it is changed."@en ;
           skos:example "<SETG MYVAR 42> ; Store 42 in global atom MYVAR"@en ;
           skos:prefLabel "<SETG atom value>"@en .
 
@@ -283,7 +283,7 @@ zilf:SETG20 rdf:type owl:NamedIndividual ,
                      skos:Concept ;
             skos:broader zilf:CoreFunctions ;
             skos:inScheme zilf:ZILF_Scheme ;
-            skos:definition "A member of the ZIL library, which assigs a value to the global atom. If an atom is already assigned a value, it is changed. SETG20 is an alias for SETG."@en ;
+            skos:definition "ZIL library function that assigs a value to the global atom. If an atom is already assigned a value, it is changed. SETG20 is an alias for SETG."@en ;
             skos:example "<SETG20 MYVAR 42> ; Store 42 in global atom MYVAR"@en ;
             skos:prefLabel "<SETG20 atom value>"@en .
 
@@ -293,7 +293,7 @@ zilf:SPNAME rdf:type owl:NamedIndividual ,
                      skos:Concept ;
             skos:broader zilf:CoreFunctions ;
             skos:inScheme zilf:ZILF_Scheme ;
-            skos:definition "MDL built-in for \"shared printed name\", which should return the same string of the atom's pname that is in its OBLIST (i.e. pointing to the same storage and therefore not able to change or modify)."@en ;
+            skos:definition "MDL built-in function for \"shared printed name\", which should return the same string of the atom's pname that is in its OBLIST (i.e. pointing to the same storage and therefore not able to change or modify)."@en ;
             skos:editorialNote "ZILF treats SPNAME as an alias to PNAME and returns a string copy of the atom’s pname."@en ;
             skos:example "<SPNAME atom>"@en ;
             skos:prefLabel "<SPNAME atom>"@en .
@@ -304,7 +304,7 @@ zilf:STRING rdf:type owl:NamedIndividual ,
                      skos:Concept ;
             skos:broader zilf:CoreFunctions ;
             skos:inScheme zilf:ZILF_Scheme ;
-            skos:definition "MDL built-in that returns a concatenated string of all values. values can be character or string."@en ;
+            skos:definition "MDL built-in function that returns a concatenated string of all values. values can be character or string."@en ;
             skos:editorialNote "A string is a block of contiguous bytes where each byte holds a character. See more about STRING  structure in The MDL Programming Language, Appendix 1."@en ;
             skos:example "<STRING !\\A <ASCII 66> \"CD\"> ; \"ABCD\""@en ;
             skos:prefLabel "<STRING values ...>"@en .
@@ -322,7 +322,7 @@ zilf:TIME rdf:type owl:NamedIndividual ,
                    skos:Concept ;
           skos:broader zilf:CoreFunctions ;
           skos:inScheme zilf:ZILF_Scheme ;
-          skos:definition "MDL built-in that is used for measuring CPU execution time, typically used for debugging ZILCH."@en ;
+          skos:definition "MDL built-in function that is used for measuring CPU execution time, typically used for debugging ZILCH."@en ;
           skos:editorialNote "ZILF ignores this and always returns 1, because modern IDE's offer different methods of debugging ZILCH."@en ;
           skos:prefLabel "<TIME>"@en .
 
@@ -348,7 +348,7 @@ zilf:ZILF_Scheme rdf:type owl:NamedIndividual ,
                                        skos:Concept ;
                               skos:broader zilf:CoreFunctions ;
                               skos:inScheme zilf:ZILF_Scheme ;
-                              skos:definition "MDL built-in that returns the same result as OR with the difference that all exressions are evaluated."@en ;
+                              skos:definition "MDL built-in function that returns the same result as OR with the difference that all exressions are evaluated."@en ;
                               skos:editorialNote """<OR? <=? 1 2> <=? 1 1>>  ; True 
  <OR? <=? 1 1> <SET X 2>> ;  X is set to 2 because all expressions are evaluated"""@en ;
                               skos:prefLabel "<OR? Expressions ...>"@en .
