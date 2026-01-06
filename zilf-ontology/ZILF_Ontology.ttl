@@ -53,6 +53,7 @@ zilf:BitTake rdf:type owl:NamedIndividual ,
 zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                             skos:Concept ;
                    skos:narrower zilf:EVAL ,
+                                 zilf:GLOBAL ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
@@ -83,6 +84,17 @@ zilf:EVAL rdf:type owl:NamedIndividual ,
 <WRONG .A> ; 1
 <RIGHT .A> ; 0"""@en ;
           skos:prefLabel "<EVAL value [environment]>"@en .
+
+
+###  http://example.org/zilf/GLOBAL
+zilf:GLOBAL rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "ZIL library function that declares a global variable atom, which can laater be used inside a ROUTINE. The variable is initialized with default-value."@en ;
+            skos:editorialNote "ZILF ignores the decl."@en ;
+            skos:example "<GLOBAL MYVAR 0>"@en ;
+            skos:prefLabel "<GLOBAL atom default-value [decl] [size]>"@en .
 
 
 ###  http://example.org/zilf/OBJECT
