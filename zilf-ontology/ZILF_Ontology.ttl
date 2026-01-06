@@ -62,6 +62,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
+                                 zilf:PTABLE ,
                                  zilf:QUIT ,
                                  zilf:QUOTE ,
                                  zilf:ROOT ,
@@ -164,6 +165,17 @@ zilf:PNAME rdf:type owl:NamedIndividual ,
 <PNAME FOO!-NEW-OBLIST> ; \"FOO\"
 <UNPARSE FOO!-NEW-OBLIST> ; \"FOO!-NEW-OBLIST\""""@en ;
            skos:prefLabel "<PNAME atom>"@en .
+
+
+###  http://example.org/zilf/PTABLE
+zilf:PTABLE rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "ZIL library function that defines a table containing the specified values and with the PURE flag (see TABLE about PURE and other flags)."@en ;
+            skos:editorialNote "TABLE is a ZIL-specific structure that can be used both outside and inside ROUTINES."@en ;
+            skos:example "<PTABLE 1 2 3 4>"@en ;
+            skos:prefLabel "<PTABLE [(flags ...)] values ...>"@en .
 
 
 ###  http://example.org/zilf/ParserSystem
