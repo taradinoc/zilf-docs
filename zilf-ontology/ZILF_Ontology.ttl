@@ -58,6 +58,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
                                  zilf:ROOT ,
+                                 zilf:ROUTINE ,
                                  zilf:SET ,
                                  zilf:SETG ,
                                  zilf:SETG20 ,
@@ -211,6 +212,39 @@ zilf:ROOT rdf:type owl:NamedIndividual ,
           skos:editorialNote "Initially contains all predefined SUBRs or FSUBRs, as well as OBLIST, DEFAULT, T, etc."@en ;
           skos:example "<ROOT>"@en ;
           skos:prefLabel "<ROOT>"@en .
+
+
+###  http://example.org/zilf/ROUTINE
+zilf:ROUTINE rdf:type owl:NamedIndividual ,
+                      skos:Concept ;
+             skos:broader zilf:CoreFunctions ;
+             skos:inScheme zilf:ZILF_Scheme ;
+             skos:definition "ZIL library function that is the central building block of a ZIL-program. Inside the ROUTINE it is only possible to use the reduced instruction set that can be executed on the Z-machine. It is the instructions inside the ROUTINEs that are compiled to the actual ZIP-program."@en ;
+             skos:editorialNote """ROUTINE defines a program block with its own set of bindings. It is possible to specify an activation-atom to use as an argument to control the RETURN statement inside the ROUTINE. 
+
+The arg-list is formatted the same way as FUNCTION, but the legal tokens is reduced to these:
+
+Arguments: The required arguments for this ROUTINE. The arguments are bound to local variables inside this ROUTINE. 
+
+\"OPT\": The optional arguments for this ROUTINE. The arguments are bound to local variables inside this ROUTINE and can be defined with a default value. \"OPTIONAL\" is an alias for \"OPT\".
+
+\"AUX\": Followed by any number of ATOMs that becomes local variables inside this ROUTINE and can be defined with a default value. \"EXTRA\" is a alias for \"AUX\". 
+
+\"NAME\": Followed by an ATOM that becomes the activation-atom for this ROUTINE. This is equivalent to naming the activation-atom  before the arg-list. \"ACT\" is an alias for \"NAME\". 
+
+Default values for \"OPT\" and \"AUX\" are defined by a two-element LIST whose first element is the ATOM and the second element it is assigned to.
+
+<ROUTINE TEST (\"AUX\" (X 1) (Y 2)) <+ .X .Y>>  Means that the local variables X and Y are initially assigned 1 and 2. After the arg-list follows the ZIL-instructions that makes up the body of the ROUTINE."""@en ;
+             skos:example """;\"Move all child objects from object src to object dst\" 
+    <ROUTINE MOVE-INVENTORY (SRC DST \"AUX\" X N) 
+        <SET X <FIRST? .SRC>> 
+        <REPEAT () 
+            <COND (.X 
+                <SET N <NEXT? .X>> 
+                <MOVE .X .DST> 
+                <SET X .N>) 
+            (T <RETURN>)>>>"""@en ;
+             skos:prefLabel "<ROUTINE name [activation-atom] arg-list body ...>"@en .
 
 
 ###  http://example.org/zilf/SET
