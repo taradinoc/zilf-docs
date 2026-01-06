@@ -265,8 +265,8 @@ zilf:TIME rdf:type owl:NamedIndividual ,
                    skos:Concept ;
           skos:broader zilf:CoreFunctions ;
           skos:inScheme zilf:ZILF_Scheme ;
-          skos:definition "MDL built-in that is used for measuring CPU execution time, typically used for debugging."@en ;
-          skos:editorialNote "ZILF ignores this and always returns 1, because <TIME> was a hardware-dependent command that queried the PDP-10 mainframe's operating system for the compiler's own CPU usage, a concept that cannot be translated into the portable, virtual instruction set of the Z-Machine."@en ;
+          skos:definition "MDL built-in that is used for measuring CPU execution time, typically used for debugging ZILCH."@en ;
+          skos:editorialNote "ZILF ignores this and always returns 1, because modern IDE's offer different methods of debugging ZILCH."@en ;
           skos:prefLabel "<TIME>"@en .
 
 
