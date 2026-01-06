@@ -128,8 +128,8 @@ zilf:PICFILE rdf:type owl:NamedIndividual ,
                       skos:Concept ;
              skos:broader zilf:CoreFunctions ;
              skos:inScheme zilf:ZILF_Scheme ;
-             skos:definition "ZIL library function that is a compiler directive used to associate a graphics resource file with a game, which ran on Version 6 of the Z-Machine, also known as YZIP)."@en ;
-             skos:editorialNote "ZILF ignores this and always returns FALSE because modern compilation for Z-Machine graphics is typically handled by the assembler (ZAPF) or by defining resources in a separate project file rather than within the ZIL logic itself."@en ;
+             skos:definition "ZIL library function that is a compiler directive used to associate a graphics resource file with a game, and Infocom's version of PICFILE translates to a ZAP .PICFILE directive."@en ;
+             skos:editorialNote "The current version of ZILF ignores PICFILE and always returns FALSE. The next release of ZILF will bundle images into Blorb files (without ZAPF)."@en ;
              skos:prefLabel "<PICFILE>"@en .
 
 
