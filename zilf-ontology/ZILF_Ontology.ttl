@@ -66,6 +66,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:PRIMTYPE ,
                                  zilf:PRIN1 ,
                                  zilf:PRINC ,
+                                 zilf:PRINT ,
                                  zilf:PTABLE ,
                                  zilf:PUTREST ,
                                  zilf:QUIT ,
@@ -226,6 +227,26 @@ zilf:PRINC rdf:type owl:NamedIndividual ,
 <PRINC (1 2 3)>  ;  (1 2 3)
 <PRINC <+ 1 2>>  ;  3"""@en ;
            skos:prefLabel "<PRINC value [channel]>"@en .
+
+
+###  http://example.org/zilf/PRINT
+zilf:PRINT rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:CoreFunctions ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           rdfs:isDefinedBy """<PRINT !\\A>  ;  !\\A<space>
+<PRINT 42>  ; 42<space>
+<PRINT \"Hello, world!\">  ;  \"Hello, world!\"<space>
+<PRINT (1 2 3)>  ;  (1 2 3)<space>
+<PRINT <+ 1 2>>  ;  3<space>"""@en ;
+           skos:definition "MDL built-in function that returns the evaluated representation of value."@en ;
+           skos:editorialNote "PRINT is just like PRIN1, except that it first prints a CRLF, then the evaluated representation of value and lastly a space."@en ;
+           skos:example """<PRINT !\\A>  ;  !\\A<space>
+<PRINT 42>  ; 42<space>
+<PRINT \"Hello, world!\">  ;  \"Hello, world!\"<space>
+<PRINT (1 2 3)>  ;  (1 2 3)<space>
+<PRINT <+ 1 2>>  ;  3<space>"""@en ;
+           skos:prefLabel "<PRINT value [channel]>"@en .
 
 
 ###  http://example.org/zilf/PTABLE
