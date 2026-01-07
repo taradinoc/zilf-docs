@@ -65,6 +65,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:PREP-SYNONYM ,
                                  zilf:PRIMTYPE ,
                                  zilf:PRIN1 ,
+                                 zilf:PRINC ,
                                  zilf:PTABLE ,
                                  zilf:PUTREST ,
                                  zilf:QUIT ,
@@ -210,6 +211,21 @@ zilf:PRIN1 rdf:type owl:NamedIndividual ,
 <PRIN1 (1 2 3)>  ;  (1 2 3)
 <PRIN1 <+ 1 2>>  ;  3"""@en ;
            skos:prefLabel "<PRIN1 value [channel]>"@en .
+
+
+###  http://example.org/zilf/PRINC
+zilf:PRINC rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:CoreFunctions ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "MDL built-in function that returns the evaluated representation of value."@en ;
+           skos:editorialNote "PRINC is just like PRIN1, except for STRING and CHARACTER where surrounding double quote (\") and initial !\\ is suppressed."@en ;
+           skos:example """<PRINC !\\A>  ;  !\\A
+<PRINC 42>  ; 42
+<PRINC \"Hello, world!\">  ;  \"Hello, world!\"
+<PRINC (1 2 3)>  ;  (1 2 3)
+<PRINC <+ 1 2>>  ;  3"""@en ;
+           skos:prefLabel "<PRINC value [channel]>"@en .
 
 
 ###  http://example.org/zilf/PTABLE
