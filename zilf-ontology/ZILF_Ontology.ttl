@@ -62,6 +62,8 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
+                                 zilf:PREP-SYNONYM ,
+                                 zilf:PRIMTYPE ,
                                  zilf:PTABLE ,
                                  zilf:PUTREST ,
                                  zilf:QUIT ,
@@ -166,6 +168,33 @@ zilf:PNAME rdf:type owl:NamedIndividual ,
 <PNAME FOO!-NEW-OBLIST> ; \"FOO\"
 <UNPARSE FOO!-NEW-OBLIST> ; \"FOO!-NEW-OBLIST\""""@en ;
            skos:prefLabel "<PNAME atom>"@en .
+
+
+###  http://example.org/zilf/PREP-SYNONYM
+zilf:PREP-SYNONYM rdf:type owl:NamedIndividual ,
+                           skos:Concept ;
+                  skos:broader zilf:CoreFunctions ;
+                  skos:inScheme zilf:ZILF_Scheme ;
+                  skos:definition "ZIL parser library function that creates one or more synonyms to the original preposition."@en ;
+                  skos:editorialNote "ZILF treats PREP-SYNONYM as an alias to SYNONYM."@en ;
+                  skos:example """<PREP-SYNONYM NORTH FORE>
+<PREP-SYNONYM SOUTH AFT>
+<PREP-SYNONYM WEST PORT LEFT>
+<PREP-SYNONYM EAST STARBOARD RIGHT>"""@en ;
+                  skos:prefLabel "<PREP-SYNONYM original synonyms ...>"@en .
+
+
+###  http://example.org/zilf/PRIMTYPE
+zilf:PRIMTYPE rdf:type owl:NamedIndividual ,
+                       skos:Concept ;
+              skos:broader zilf:CoreFunctions ;
+              skos:inScheme zilf:ZILF_Scheme ;
+              skos:definition "MDL built-in function that evaluates to the primitive type of value."@en ;
+              skos:editorialNote "The primitive types are  ATOM, FIX, LIST, STRING, TABLE and VECTOR."@en ;
+              skos:example """<PRIMTYPE !\\A>  ;  FIX
+<PRIMTYPE <+1 2>>  ;  FIX
+<PRIMTYPE \"ABC\">  ;  STRING"""@en ;
+              skos:prefLabel "<PRIMTYPE value>"@en .
 
 
 ###  http://example.org/zilf/PTABLE
