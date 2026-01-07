@@ -463,6 +463,7 @@ zilf:TIME rdf:type owl:NamedIndividual ,
           skos:inScheme zilf:ZILF_Scheme ;
           skos:definition "MDL built-in function that is used for measuring CPU execution time, typically used for debugging ZILCH."@en ;
           skos:editorialNote "ZILF ignores this and always returns 1, because modern IDE's offer different methods of debugging ZILCH."@en ;
+          skos:example "<TIME>"@en ;
           skos:prefLabel "<TIME>"@en .
 
 
