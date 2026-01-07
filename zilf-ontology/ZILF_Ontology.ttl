@@ -64,6 +64,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:PNAME ,
                                  zilf:PREP-SYNONYM ,
                                  zilf:PRIMTYPE ,
+                                 zilf:PRIN1 ,
                                  zilf:PTABLE ,
                                  zilf:PUTREST ,
                                  zilf:QUIT ,
@@ -195,6 +196,20 @@ zilf:PRIMTYPE rdf:type owl:NamedIndividual ,
 <PRIMTYPE <+1 2>>  ;  FIX
 <PRIMTYPE \"ABC\">  ;  STRING"""@en ;
               skos:prefLabel "<PRIMTYPE value>"@en .
+
+
+###  http://example.org/zilf/PRIN1
+zilf:PRIN1 rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:CoreFunctions ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Prints the evaluated representation of value to channel (default for channel is <LVAL OUTCHAN> - the console). PRIN1 also returns the evaluated representation of value."@en ;
+           skos:example """<PRIN1 !\\A>  ;  !\\A
+<PRIN1 42>  ; 42
+<PRIN1 \"Hello, world!\">  ;  \"Hello, world!\"
+<PRIN1 (1 2 3)>  ;  (1 2 3)
+<PRIN1 <+ 1 2>>  ;  3"""@en ;
+           skos:prefLabel "<PRIN1 value [channel]>"@en .
 
 
 ###  http://example.org/zilf/PTABLE
