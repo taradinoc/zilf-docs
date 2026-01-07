@@ -63,6 +63,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
                                  zilf:PTABLE ,
+                                 zilf:PUTREST ,
                                  zilf:QUIT ,
                                  zilf:QUOTE ,
                                  zilf:ROOT ,
@@ -176,6 +177,31 @@ zilf:PTABLE rdf:type owl:NamedIndividual ,
             skos:editorialNote "TABLE is a ZIL-specific structure that can be used both outside and inside ROUTINES."@en ;
             skos:example "<PTABLE 1 2 3 4>"@en ;
             skos:prefLabel "<PTABLE [(flags ...)] values ...>"@en .
+
+
+###  http://example.org/zilf/PUTREST
+zilf:PUTREST rdf:type owl:NamedIndividual ,
+                      skos:Concept ;
+             skos:broader zilf:CoreFunctions ;
+             skos:inScheme zilf:ZILF_Scheme ;
+             skos:definition """MDL built-in function that replaces the REST of list with new-rest and returns list. In other words, list is assigned the first element of list and then all the elements from new-rest. 
+
+Note that this actually changes the list."""@en ;
+             skos:example """<PUTREST (1 2 3) (A B)>  ;  (1 A B)
+
+<SET L1 [<SET L2 (1 2 3)>]>
+<PUTREST .L2 (A B)>
+.L1 ;  [(1 A B)]
+
+<SET L1 [1 2 3]>
+<SET L2 <PUTREST (!.L1) (A B)>>
+.L1  ;  [1 2 3]
+.L2  ;  (1 A B)
+
+<SET L1 (1 2 3 4 5 6 7 8 9)>
+<PUTREST <REST .L1 3> <REST .L1 7>>
+.L1  ;  (1 2 3 4 8 9)"""@en ;
+             skos:prefLabel "<PUTREST list new-rest>"@en .
 
 
 ###  http://example.org/zilf/ParserSystem
