@@ -12,6 +12,20 @@
                             owl:imports <http://www.w3.org/2004/02/skos/core> .
 
 #################################################################
+#    Annotation properties
+#################################################################
+
+###  http://www.w3.org/2004/02/skos/core#altLabel
+skos:altLabel rdf:type owl:AnnotationProperty ;
+              rdfs:subPropertyOf rdfs:label .
+
+
+###  http://www.w3.org/2004/02/skos/core#editorialNote
+skos:editorialNote rdf:type owl:AnnotationProperty ;
+                   rdfs:subPropertyOf rdfs:label .
+
+
+#################################################################
 #    Classes
 #################################################################
 
@@ -43,13 +57,77 @@ zilf:BitTake rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/CoreFunctions
 zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                             skos:Concept ;
-                   skos:narrower zilf:SETG ;
+                   skos:narrower zilf:EVAL ,
+                                 zilf:GLOBAL ,
+                                 zilf:OR ,
+                                 zilf:PICFILE ,
+                                 zilf:PNAME ,
+                                 zilf:PREP-SYNONYM ,
+                                 zilf:PRIMTYPE ,
+                                 zilf:PRIN1 ,
+                                 zilf:PRINC ,
+                                 zilf:PRINT ,
+                                 zilf:PTABLE ,
+                                 zilf:PUTREST ,
+                                 zilf:QUIT ,
+                                 zilf:QUOTE ,
+                                 zilf:ROOT ,
+                                 zilf:ROUTINE ,
+                                 zilf:SET ,
+                                 zilf:SETG ,
+                                 zilf:SETG20 ,
+                                 zilf:SPNAME ,
+                                 zilf:STRING ,
+                                 <http://example.org/zilf/OR?> ;
                    skos:topConceptOf zilf:ZILF_Scheme ;
                    skos:prefLabel "Core Functions"@en .
 
 
+###  http://example.org/zilf/EVAL
+zilf:EVAL rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition "MDL built-in function that evaluates value (usually a FORM created by FORM or QUOTE)."@en ;
+          skos:editorialNote "It is possible to supply an environment for EVAL. This tells EVAL from which environment. EVAL should take variable bindings. See The MDL Programming Language, chap. 9.7 for more about the environment."@en ;
+          skos:example """<SET F '<+ 1 2>> 
+.F ; Sets up the stack operator and operands, + 1 2.
+<EVAL .F> ; Evaluates the operands with the given operator from the stack to 3.
+<SET A 0>
+<DEFINE WRONG ('B \"AUX\" (A 1)) <EVAL .B>> 
+<DEFINE RIGHT (\"BIND\" E 'B \"AUX\" (A 1)) <EVAL .B .E>> 
+<WRONG .A> ; 1
+<RIGHT .A> ; 0"""@en ;
+          skos:prefLabel "<EVAL value [environment]>"@en .
+
+
+###  http://example.org/zilf/GLOBAL
+zilf:GLOBAL rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "ZIL library function that declares a global variable atom, which can laater be used inside a ROUTINE. The variable is initialized with default-value."@en ;
+            skos:editorialNote "ZILF ignores the decl."@en ;
+            skos:example "<GLOBAL MYVAR 0>"@en ;
+            skos:prefLabel "<GLOBAL atom default-value [decl] [size]>"@en .
+
+
 ###  http://example.org/zilf/OBJECT
 zilf:OBJECT rdf:type owl:NamedIndividual .
+
+
+###  http://example.org/zilf/OR
+zilf:OR rdf:type owl:NamedIndividual ,
+                 skos:Concept ;
+        skos:broader zilf:CoreFunctions ;
+        skos:inScheme zilf:ZILF_Scheme ;
+        skos:definition "MDL built-in function that is a boolean OR. Requires that one of the expressions evaluates to true to return true. Exits on the first expression that evaluates to true (rest of expressions are not evaluated)."@en ;
+        skos:editorialNote "Because false is its own TYPE outside a routine OR returns #FALSE if all expressions are false or the value of the first true expression."@en ;
+        skos:example """<OR <=? 1 2> <=? 1 1>>  ;  True 
+ <OR <=? 1 1> <SET X 2>> ;  X is never set to 2 because first predicate evaluates to true 
+ <SET X <OR 0 1 2 3>>  ;  X is set to 0 
+ <SET X <OR <> 1 2 3>>  ;  X is set to 1"""@en ;
+        skos:prefLabel "<OR expressions...>"@en .
 
 
 ###  http://example.org/zilf/ObjectProperties
@@ -70,6 +148,141 @@ zilf:ObjectSystem rdf:type owl:NamedIndividual ,
                                 zilf:ObjectProperties ;
                   skos:topConceptOf zilf:ZILF_Scheme ;
                   skos:prefLabel "Object System"@en .
+
+
+###  http://example.org/zilf/PICFILE
+zilf:PICFILE rdf:type owl:NamedIndividual ,
+                      skos:Concept ;
+             skos:broader zilf:CoreFunctions ;
+             skos:inScheme zilf:ZILF_Scheme ;
+             skos:definition "ZIL library function that is a compiler directive used to associate a graphics resource file with a game, and Infocom's version of PICFILE translates to a ZAP .PICFILE directive."@en ;
+             skos:editorialNote "The current version of ZILF ignores PICFILE and always returns FALSE because modern interpreters do not support Infocom's graphics format. The next release of ZILF will bundle images into Blorb files (without ZAPF)."@en ;
+             skos:prefLabel "<PICFILE>"@en .
+
+
+###  http://example.org/zilf/PNAME
+zilf:PNAME rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:CoreFunctions ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "MDL built-in function for \"printed name\", which returns a newly created string copy of the atom's pname."@en ;
+           skos:editorialNote "PNAME never prints an ATOMs trailers, unlike UNPARSE, and is therefore quicker."@en ;
+           skos:example """<PNAME FOO> ; \"FOO\"
+<PNAME FOO!-NEW-OBLIST> ; \"FOO\"
+<UNPARSE FOO!-NEW-OBLIST> ; \"FOO!-NEW-OBLIST\""""@en ;
+           skos:prefLabel "<PNAME atom>"@en .
+
+
+###  http://example.org/zilf/PREP-SYNONYM
+zilf:PREP-SYNONYM rdf:type owl:NamedIndividual ,
+                           skos:Concept ;
+                  skos:broader zilf:CoreFunctions ;
+                  skos:inScheme zilf:ZILF_Scheme ;
+                  skos:definition "ZIL parser library function that creates one or more synonyms to the original preposition."@en ;
+                  skos:editorialNote "ZILF treats PREP-SYNONYM as an alias to SYNONYM."@en ;
+                  skos:example """<PREP-SYNONYM NORTH FORE>
+<PREP-SYNONYM SOUTH AFT>
+<PREP-SYNONYM WEST PORT LEFT>
+<PREP-SYNONYM EAST STARBOARD RIGHT>"""@en ;
+                  skos:prefLabel "<PREP-SYNONYM original synonyms ...>"@en .
+
+
+###  http://example.org/zilf/PRIMTYPE
+zilf:PRIMTYPE rdf:type owl:NamedIndividual ,
+                       skos:Concept ;
+              skos:broader zilf:CoreFunctions ;
+              skos:inScheme zilf:ZILF_Scheme ;
+              skos:definition "MDL built-in function that evaluates to the primitive type of value."@en ;
+              skos:editorialNote "The primitive types are  ATOM, FIX, LIST, STRING, TABLE and VECTOR."@en ;
+              skos:example """<PRIMTYPE !\\A>  ;  FIX
+<PRIMTYPE <+1 2>>  ;  FIX
+<PRIMTYPE \"ABC\">  ;  STRING"""@en ;
+              skos:prefLabel "<PRIMTYPE value>"@en .
+
+
+###  http://example.org/zilf/PRIN1
+zilf:PRIN1 rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:CoreFunctions ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Prints the evaluated representation of value to channel (default for channel is <LVAL OUTCHAN> - the console). PRIN1 also returns the evaluated representation of value."@en ;
+           skos:example """<PRIN1 !\\A>  ;  !\\A
+<PRIN1 42>  ; 42
+<PRIN1 \"Hello, world!\">  ;  \"Hello, world!\"
+<PRIN1 (1 2 3)>  ;  (1 2 3)
+<PRIN1 <+ 1 2>>  ;  3"""@en ;
+           skos:prefLabel "<PRIN1 value [channel]>"@en .
+
+
+###  http://example.org/zilf/PRINC
+zilf:PRINC rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:CoreFunctions ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "MDL built-in function that returns the evaluated representation of value."@en ;
+           skos:editorialNote "PRINC is just like PRIN1, except for STRING and CHARACTER where surrounding double quote (\") and initial !\\ is suppressed."@en ;
+           skos:example """<PRINC !\\A>  ;  !\\A
+<PRINC 42>  ; 42
+<PRINC \"Hello, world!\">  ;  \"Hello, world!\"
+<PRINC (1 2 3)>  ;  (1 2 3)
+<PRINC <+ 1 2>>  ;  3"""@en ;
+           skos:prefLabel "<PRINC value [channel]>"@en .
+
+
+###  http://example.org/zilf/PRINT
+zilf:PRINT rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:CoreFunctions ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           rdfs:isDefinedBy """<PRINT !\\A>  ;  !\\A<space>
+<PRINT 42>  ; 42<space>
+<PRINT \"Hello, world!\">  ;  \"Hello, world!\"<space>
+<PRINT (1 2 3)>  ;  (1 2 3)<space>
+<PRINT <+ 1 2>>  ;  3<space>"""@en ;
+           skos:definition "MDL built-in function that returns the evaluated representation of value."@en ;
+           skos:editorialNote "PRINT is just like PRIN1, except that it first prints a CRLF, then the evaluated representation of value and lastly a space."@en ;
+           skos:example """<PRINT !\\A>  ;  !\\A<space>
+<PRINT 42>  ; 42<space>
+<PRINT \"Hello, world!\">  ;  \"Hello, world!\"<space>
+<PRINT (1 2 3)>  ;  (1 2 3)<space>
+<PRINT <+ 1 2>>  ;  3<space>"""@en ;
+           skos:prefLabel "<PRINT value [channel]>"@en .
+
+
+###  http://example.org/zilf/PTABLE
+zilf:PTABLE rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "ZIL library function that defines a table containing the specified values and with the PURE flag (see TABLE about PURE and other flags)."@en ;
+            skos:editorialNote "TABLE is a ZIL-specific structure that can be used both outside and inside ROUTINES."@en ;
+            skos:example "<PTABLE 1 2 3 4>"@en ;
+            skos:prefLabel "<PTABLE [(flags ...)] values ...>"@en .
+
+
+###  http://example.org/zilf/PUTREST
+zilf:PUTREST rdf:type owl:NamedIndividual ,
+                      skos:Concept ;
+             skos:broader zilf:CoreFunctions ;
+             skos:inScheme zilf:ZILF_Scheme ;
+             skos:definition """MDL built-in function that replaces the REST of list with new-rest and returns list. In other words, list is assigned the first element of list and then all the elements from new-rest. 
+
+Note that this actually changes the list."""@en ;
+             skos:example """<PUTREST (1 2 3) (A B)>  ;  (1 A B)
+
+<SET L1 [<SET L2 (1 2 3)>]>
+<PUTREST .L2 (A B)>
+.L1 ;  [(1 A B)]
+
+<SET L1 [1 2 3]>
+<SET L2 <PUTREST (!.L1) (A B)>>
+.L1  ;  [1 2 3]
+.L2  ;  (1 A B)
+
+<SET L1 (1 2 3 4 5 6 7 8 9)>
+<PUTREST <REST .L1 3> <REST .L1 7>>
+.L1  ;  (1 2 3 4 8 9)"""@en ;
+             skos:prefLabel "<PUTREST list new-rest>"@en .
 
 
 ###  http://example.org/zilf/ParserSystem
@@ -116,11 +329,124 @@ zilf:PropSynonym rdf:type owl:NamedIndividual ,
                  skos:prefLabel "SYNONYM"@en .
 
 
+###  http://example.org/zilf/QUIT
+zilf:QUIT rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition "MDL built-in function that exits ZILF (interpreter mode) and returns to the operating system with exit-code."@en ;
+          skos:example "<QUIT>"@en ;
+          skos:prefLabel "<QUIT [exit-code]>"@en .
+
+
+###  http://example.org/zilf/QUOTE
+zilf:QUOTE rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:CoreFunctions ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:altLabel "'value  ;  \"Alternative syntax\""@en ;
+           skos:definition "MDL built-in function that returns unevaluated value."@en ;
+           skos:example """<SET F <QUOTE <+ 1 2>> ; Or <SET F '<+ 1 2>>
+.F  ;  <+ 1 2>
+<EVAL .F>  ;  3
+'%<+ 1 2>  ;  3"""@en ;
+           skos:prefLabel "<QUOTE value>"@en .
+
+
+###  http://example.org/zilf/ROOT
+zilf:ROOT rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition "MDL built-in function that returns the OBLIST containing names of primitives (the same as <2 .OBLIST>)."@en ;
+          skos:editorialNote "Initially contains all predefined SUBRs or FSUBRs, as well as OBLIST, DEFAULT, T, etc."@en ;
+          skos:example "<ROOT>"@en ;
+          skos:prefLabel "<ROOT>"@en .
+
+
+###  http://example.org/zilf/ROUTINE
+zilf:ROUTINE rdf:type owl:NamedIndividual ,
+                      skos:Concept ;
+             skos:broader zilf:CoreFunctions ;
+             skos:inScheme zilf:ZILF_Scheme ;
+             skos:definition "ZIL library function that is the central building block of a ZIL-program. Inside the ROUTINE it is only possible to use the reduced instruction set that can be executed on the Z-machine. It is the instructions inside the ROUTINEs that are compiled to the actual ZIP-program."@en ;
+             skos:editorialNote """ROUTINE defines a program block with its own set of bindings. It is possible to specify an activation-atom to use as an argument to control the RETURN statement inside the ROUTINE. 
+
+The arg-list is formatted the same way as FUNCTION, but the legal tokens is reduced to these:
+
+Arguments: The required arguments for this ROUTINE. The arguments are bound to local variables inside this ROUTINE. 
+
+\"OPT\": The optional arguments for this ROUTINE. The arguments are bound to local variables inside this ROUTINE and can be defined with a default value. \"OPTIONAL\" is an alias for \"OPT\".
+
+\"AUX\": Followed by any number of ATOMs that becomes local variables inside this ROUTINE and can be defined with a default value. \"EXTRA\" is a alias for \"AUX\". 
+
+\"NAME\": Followed by an ATOM that becomes the activation-atom for this ROUTINE. This is equivalent to naming the activation-atom  before the arg-list. \"ACT\" is an alias for \"NAME\". 
+
+Default values for \"OPT\" and \"AUX\" are defined by a two-element LIST whose first element is the ATOM and the second element it is assigned to.
+
+<ROUTINE TEST (\"AUX\" (X 1) (Y 2)) <+ .X .Y>>  Means that the local variables X and Y are initially assigned 1 and 2. After the arg-list follows the ZIL-instructions that makes up the body of the ROUTINE."""@en ;
+             skos:example """;\"Move all child objects from object src to object dst\" 
+    <ROUTINE MOVE-INVENTORY (SRC DST \"AUX\" X N) 
+        <SET X <FIRST? .SRC>> 
+        <REPEAT () 
+            <COND (.X 
+                <SET N <NEXT? .X>> 
+                <MOVE .X .DST> 
+                <SET X .N>) 
+            (T <RETURN>)>>>"""@en ;
+             skos:prefLabel "<ROUTINE name [activation-atom] arg-list body ...>"@en .
+
+
+###  http://example.org/zilf/SET
+zilf:SET rdf:type owl:NamedIndividual ,
+                  skos:Concept ;
+         skos:broader zilf:CoreFunctions ;
+         skos:inScheme zilf:ZILF_Scheme ;
+         skos:definition "MDL built-in function that asigns a value to the local atom."@en ;
+         skos:editorialNote "It is possible to supply an environment for SET. See EVAL for more about the environment."@en ;
+         skos:example "<PROG (X) <SET X 5> <RETURN .X>> ; Returns 5 after setting X."@en ;
+         skos:prefLabel "<SET atom value [environment]>"@en .
+
+
 ###  http://example.org/zilf/SETG
 zilf:SETG rdf:type owl:NamedIndividual ,
                    skos:Concept ;
           skos:broader zilf:CoreFunctions ;
-          skos:prefLabel "SETG"@en .
+          skos:definition "MDL built-in function that assigns a value to the global atom. If an atom is already assigned a value, it is changed."@en ;
+          skos:example "<SETG MYVAR 42> ; Store 42 in global atom MYVAR"@en ;
+          skos:prefLabel "<SETG atom value>"@en .
+
+
+###  http://example.org/zilf/SETG20
+zilf:SETG20 rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "ZIL library function that assigs a value to the global atom. If an atom is already assigned a value, it is changed. SETG20 is an alias for SETG."@en ;
+            skos:example "<SETG20 MYVAR 42> ; Store 42 in global atom MYVAR"@en ;
+            skos:prefLabel "<SETG20 atom value>"@en .
+
+
+###  http://example.org/zilf/SPNAME
+zilf:SPNAME rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "MDL built-in function for \"shared printed name\", which should return the same string of the atom's pname that is in its OBLIST (i.e. pointing to the same storage and therefore not able to change or modify)."@en ;
+            skos:editorialNote "ZILF treats SPNAME as an alias to PNAME and returns a string copy of the atom’s pname."@en ;
+            skos:example "<SPNAME atom>"@en ;
+            skos:prefLabel "<SPNAME atom>"@en .
+
+
+###  http://example.org/zilf/STRING
+zilf:STRING rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "MDL built-in function that returns a concatenated string of all values. values can be character or string."@en ;
+            skos:editorialNote "A string is a block of contiguous bytes where each byte holds a character. See more about STRING  structure in The MDL Programming Language, Appendix 1."@en ;
+            skos:example "<STRING !\\A <ASCII 66> \"CD\"> ; \"ABCD\""@en ;
+            skos:prefLabel "<STRING values ...>"@en .
 
 
 ###  http://example.org/zilf/SYNTAX
@@ -128,6 +454,17 @@ zilf:SYNTAX rdf:type owl:NamedIndividual ,
                      skos:Concept ;
             skos:broader zilf:ParserSystem ;
             skos:prefLabel "SYNTAX"@en .
+
+
+###  http://example.org/zilf/TIME
+zilf:TIME rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition "MDL built-in function that is used for measuring CPU execution time, typically used for debugging ZILCH."@en ;
+          skos:editorialNote "ZILF ignores this and always returns 1, because modern IDE's offer different methods of debugging ZILCH."@en ;
+          skos:example "<TIME>"@en ;
+          skos:prefLabel "<TIME>"@en .
 
 
 ###  http://example.org/zilf/VERB
@@ -144,6 +481,17 @@ zilf:ZILF_Scheme rdf:type owl:NamedIndividual ,
                                     zilf:ObjectSystem ,
                                     zilf:ParserSystem ;
                  skos:prefLabel "ZILF Reference Scheme"@en .
+
+
+###  http://example.org/zilf/OR?
+<http://example.org/zilf/OR?> rdf:type owl:NamedIndividual ,
+                                       skos:Concept ;
+                              skos:broader zilf:CoreFunctions ;
+                              skos:inScheme zilf:ZILF_Scheme ;
+                              skos:definition "MDL built-in function that returns the same result as OR with the difference that all exressions are evaluated."@en ;
+                              skos:editorialNote """<OR? <=? 1 2> <=? 1 1>>  ; True 
+ <OR? <=? 1 1> <SET X 2>> ;  X is set to 2 because all expressions are evaluated"""@en ;
+                              skos:prefLabel "<OR? Expressions ...>"@en .
 
 
 ###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
