@@ -21,7 +21,14 @@ MDL built-in function that evaluates value (usually a FORM created by FORM or QU
 
 ZIL library function that declares a global variable atom, which can laater be used inside a ROUTINE. The variable is initialized with default-value.
 
-> **Note:** ZILF ignores the decl.
+> **Note:** ZILF ignores the DECL because DECL is checked in code that runs at compile time (i.e. MDL code); however, there is no type checking for compiled code inside routines, at runtime or compile time.
+
+For example, the following:
+<GDECL (BAR) FIX> T
+<SETG BAR "fsdf">
+
+Outputs this error: 
+[error MDL0206] <stdin>:1: expected GVAL of BAR to match DECL FIX, but got "fdsf"
 
 ---
 
