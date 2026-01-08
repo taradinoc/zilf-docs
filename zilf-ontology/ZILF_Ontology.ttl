@@ -180,10 +180,10 @@ zilf:PREP-SYNONYM rdf:type owl:NamedIndividual ,
                   skos:inScheme zilf:ZILF_Scheme ;
                   skos:definition "ZIL parser library function that creates one or more synonyms to the original preposition."@en ;
                   skos:editorialNote "ZILF treats PREP-SYNONYM as an alias to SYNONYM."@en ;
-                  skos:example """<PREP-SYNONYM NORTH FORE>
-<PREP-SYNONYM SOUTH AFT>
-<PREP-SYNONYM WEST PORT LEFT>
-<PREP-SYNONYM EAST STARBOARD RIGHT>"""@en ;
+                  skos:example """<PREP-SYNONYM INTO IN>
+<PREP-SYNONYM UPON ON>
+<PREP-SYNONYM ACROSS OVER BEYOND>
+<PREP-SYNONYM ABOUT REGARDING CONCERNING>"""@en ;
                   skos:prefLabel "<PREP-SYNONYM original synonyms ...>"@en .
 
 
