@@ -90,6 +90,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:SETG20 ,
                                  zilf:SPNAME ,
                                  zilf:STRING ,
+                                 zilf:VALUE ,
                                  <http://example.org/zilf/OR?> ;
                    skos:topConceptOf zilf:ZILF_Scheme ;
                    skos:prefLabel "Core Functions"@en .
@@ -484,6 +485,21 @@ zilf:TIME rdf:type owl:NamedIndividual ,
           skos:editorialNote "ZILF ignores this and always returns 1, because modern IDE's offer different methods of debugging ZILCH."@en ;
           skos:example "<TIME>"@en ;
           skos:prefLabel "<TIME>"@en .
+
+
+###  http://example.org/zilf/VALUE
+zilf:VALUE rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:CoreFunctions ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "MDL built-in function that returns the value of an atom. If  the atom has an LVAL then the LVAL is returned, otherwise the GVAL of the atom is returned."@en ;
+           skos:editorialNote "It is possible to supply an environment for VALUE. See EVAL for more about the environment."@en ;
+           skos:example """<SETG X 3>
+<SET X 4>
+<VALUE X>  ;  4
+<UNASSIGN X>
+<VALUE X>  ;  3"""@en ;
+           skos:prefLabel "<VALUE atom [environment]>"@en .
 
 
 ###  http://example.org/zilf/VERB
