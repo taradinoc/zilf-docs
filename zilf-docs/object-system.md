@@ -14,18 +14,22 @@ The base entity definition.
 
 ## Object Properties
 
-### ADJECTIVE
-**Usage:** ADJECTIVE
+### PropAdjective
+**Usage:** `ADJECTIVE`
 
 A list of adjectives the parser accepts to identify a specific object.
 
-### DESC
-**Usage:** DESC
+---
+
+### PropDesc
+**Usage:** `DESC`
 
 A short string used to name the object in game output.
 
-### SYNONYM
-**Usage:** SYNONYM
+---
+
+### PropSynonym
+**Usage:** `SYNONYM`
 
 A list of nouns the parser accepts for this object.
 
@@ -34,12 +38,16 @@ A list of nouns the parser accepts for this object.
 ## Flags
 *A collection of boolean bits (flags) that define the state or behavior of an object.*
 
-### ONBIT
-**Usage:** ONBIT
+### BitOn
+**Usage:** `ONBIT`
 
 Flag indicating that a light-source object is currently providing light.
 
-### TAKEBIT
-**Usage:** TAKEBIT
+---
+
+### BitTake
+**Usage:** `TAKEBIT`
 
 Flag indicating that an object can be picked up by the player.
+
+---

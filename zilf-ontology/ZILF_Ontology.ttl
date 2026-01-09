@@ -25,6 +25,11 @@ skos:editorialNote rdf:type owl:AnnotationProperty ;
                    rdfs:subPropertyOf rdfs:label .
 
 
+###  http://www.w3.org/2004/02/skos/core#historyNote
+skos:historyNote rdf:type owl:AnnotationProperty ;
+                 rdfs:subPropertyOf rdfs:label .
+
+
 #################################################################
 #    Classes
 #################################################################
@@ -225,6 +230,22 @@ zilf:PNAME rdf:type owl:NamedIndividual ,
 <PNAME FOO!-NEW-OBLIST> ; \"FOO\"
 <UNPARSE FOO!-NEW-OBLIST> ; \"FOO!-NEW-OBLIST\""""@en ;
            skos:prefLabel "<PNAME atom>"@en .
+
+
+###  http://example.org/zilf/POP
+zilf:POP rdf:type owl:NamedIndividual ,
+                  skos:Concept ;
+         skos:broader zilf:ZCodeBuiltIns ;
+         skos:inScheme zilf:ZILF_Scheme ;
+         skos:definition "Z-code built-in function used inside ROUTINE that pops a value from a stack."@en ;
+         skos:editorialNote "If no stack is given, a value is popped from the game stack."@en ;
+         skos:example """Zapf syntax
+POP
+
+Inform syntax
+pull"""@en ;
+         skos:historyNote "Versions: 6-"@en ;
+         skos:prefLabel "<POP [stack]>"@en .
 
 
 ###  http://example.org/zilf/PREP-SYNONYM
@@ -568,6 +589,13 @@ zilf:VERB-SYNONYM rdf:type owl:NamedIndividual ,
 <VERB-SYNONYM MAKE CREATE BUILD>
 <VERB-SYNONYM GET OBTAIN ACQUIRE>"""@en ;
                   skos:prefLabel "<VERB-SYNONYM original synonyms ...>"@en .
+
+
+###  http://example.org/zilf/ZCodeBuiltIns
+zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
+                            skos:Concept ;
+                   skos:inScheme zilf:ZILF_Scheme ;
+                   skos:narrower zilf:POP .
 
 
 ###  http://example.org/zilf/ZILF_Scheme

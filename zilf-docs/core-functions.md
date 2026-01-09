@@ -1,10 +1,6 @@
 [← Back to Main Index](./index.md)
 
 # Core Functions
-**Parent Concept:** Core Functions
-
-Fundamental MDL built-in functions and ZIL library functions.
-
 ---
 
 ### ASCII
