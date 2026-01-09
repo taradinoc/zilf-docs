@@ -527,6 +527,19 @@ zilf:VERB rdf:type owl:NamedIndividual ,
           skos:prefLabel "VERB"@en .
 
 
+###  http://example.org/zilf/VERB-SYNONYM
+zilf:VERB-SYNONYM rdf:type owl:NamedIndividual ,
+                           skos:Concept ;
+                  skos:inScheme zilf:ZILF_Scheme ;
+                  skos:definition "ZIL parser library function that creates one or more synonyms to the original verb."@en ;
+                  skos:editorialNote "ZILF treats VERB-SYNONYM as an alias to SYNONYM."@en ;
+                  skos:example """<VERB-SYNONYM SAY TELL>
+<VERB-SYNONYM GO MOVE>
+<VERB-SYNONYM MAKE CREATE BUILD>
+<VERB-SYNONYM GET OBTAIN ACQUIRE>"""@en ;
+                  skos:prefLabel "<VERB-SYNONYM original synonyms ...>"@en .
+
+
 ###  http://example.org/zilf/ZILF_Scheme
 zilf:ZILF_Scheme rdf:type owl:NamedIndividual ,
                           skos:ConceptScheme ;
