@@ -61,8 +61,9 @@ zilf:BEGIN-SEGMENT rdf:type owl:NamedIndividual ,
                    skos:inScheme zilf:ZILF_Scheme ;
                    skos:definition "ZIL library function that groups code and data into segments of memory outside the main game memory. BEGIN-SEGMENT pairs with END-SEGMENT."@en ;
                    skos:editorialNote "ZILF ignores this and always returns FALSE."@en ;
-                   skos:example "<BEGIN-SEGMENT>"@en ;
-                   skos:prefLabel "<BEGIN-SEGMENT>"@en .
+                   skos:example "<BEGIN-SEGMENT 0>"@en ;
+                   skos:historyNote "BEGIN-SEGMENT was used in The Abyss, an unreleased interactive fiction game written by Bob Bates for Infocom under historical source code for the game, entitled The Abyss Source Code Collection."@en ;
+                   skos:prefLabel "<BEGIN-SEGMENT value>"@en .
 
 
 ###  http://example.org/zilf/BIT-SYNONYM
@@ -132,7 +133,8 @@ zilf:END-SEGMENT rdf:type owl:NamedIndividual ,
                  skos:definition "ZIL library function that terminates the current code and data group, returning to main game memory. END-SEGMENT pairs with BEGIN-SEGMENT."@en ;
                  skos:editorialNote "ZILF ignores this and always returns FALSE."@en ;
                  skos:example "<END-SEGMENT>"@en ;
-                 skos:prefLabel "<ENDBLOCK>"@en .
+                 skos:historyNote "END-SEGMENT was used in The Abyss, an unreleased interactive fiction game written by Bob Bates for Infocom under historical source code for the game, entitled The Abyss Source Code Collection."@en ;
+                 skos:prefLabel "<END-SEGMENT>"@en .
 
 
 ###  http://example.org/zilf/EVAL
@@ -237,14 +239,13 @@ zilf:POP rdf:type owl:NamedIndividual ,
                   skos:Concept ;
          skos:broader zilf:ZCodeBuiltIns ;
          skos:inScheme zilf:ZILF_Scheme ;
-         skos:definition "Z-code built-in function used inside ROUTINE that pops a value from a stack."@en ;
-         skos:editorialNote "If no stack is given, a value is popped from the game stack."@en ;
+         skos:definition "Z-code built-in function used inside ROUTINE that pops a value from a stack. If no stack is given, a value is popped from the game stack."@en ;
+         skos:editorialNote "ZILF currently supports POP in V6."@en ;
          skos:example """Zapf syntax
 POP
 
 Inform syntax
 pull"""@en ;
-         skos:historyNote "POP is a valid opcode for all versions but ZILF only recognizes POP for Version 6. Inform used the PUSH opcode instead of POP because Inform featured an RFATAL macro, which was usually defined as <PUSH 2> <RSTACK>."@en ;
          skos:prefLabel "<POP [stack]>"@en .
 
 
