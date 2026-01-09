@@ -310,7 +310,7 @@ zilf:ParserSystem rdf:type owl:NamedIndividual ,
                   skos:narrower zilf:PREP-SYNONYM ,
                                 zilf:SYNONYM ,
                                 zilf:SYNTAX ,
-                                zilf:VERB ;
+                                zilf:VERB-SYNONYM ;
                   skos:topConceptOf zilf:ZILF_Scheme ;
                   skos:prefLabel "Parser System"@en .
 
@@ -520,16 +520,10 @@ zilf:VALUE rdf:type owl:NamedIndividual ,
            skos:prefLabel "<VALUE atom [environment]>"@en .
 
 
-###  http://example.org/zilf/VERB
-zilf:VERB rdf:type owl:NamedIndividual ,
-                   skos:Concept ;
-          skos:broader zilf:ParserSystem ;
-          skos:prefLabel "VERB"@en .
-
-
 ###  http://example.org/zilf/VERB-SYNONYM
 zilf:VERB-SYNONYM rdf:type owl:NamedIndividual ,
                            skos:Concept ;
+                  skos:broaderTransitive zilf:ParserSystem ;
                   skos:inScheme zilf:ZILF_Scheme ;
                   skos:definition "ZIL parser library function that creates one or more synonyms to the original verb."@en ;
                   skos:editorialNote "ZILF treats VERB-SYNONYM as an alias to SYNONYM."@en ;
