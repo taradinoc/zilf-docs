@@ -38,6 +38,28 @@ zilf:LanguageConstruct rdf:type owl:Class ;
 #    Individuals
 #################################################################
 
+###  http://example.org/zilf/ASCII
+zilf:ASCII rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:CoreFunctions ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "MDL built-in function that converts a number to a character or a character to a number."@en ;
+           skos:example """<ASCII !\\A>  ;  65
+<ASCII 65>  ;  !\\A"""@en ;
+           skos:prefLabel "<ASCII {number | character}>"@en .
+
+
+###  http://example.org/zilf/BIT-SYNONYM
+zilf:BIT-SYNONYM rdf:type owl:NamedIndividual ,
+                          skos:Concept ;
+                 skos:broader zilf:ParserSystem ;
+                 skos:inScheme zilf:ZILF_Scheme ;
+                 skos:definition "ZIL parser library function that creates synonyms to flag-bits."@en ;
+                 skos:example """<BIT-SYNONYM TAKEBIT GETBIT PICKBIT>
+<BIT-SYNONYM LIGHTBIT DAYBIT>"""@en ;
+                 skos:prefLabel "<BIT-SYNONYM first synonyms ...>"@en .
+
+
 ###  http://example.org/zilf/BitOn
 zilf:BitOn rdf:type owl:NamedIndividual ,
                     skos:Concept ;
@@ -57,12 +79,12 @@ zilf:BitTake rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/CoreFunctions
 zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                             skos:Concept ;
-                   skos:narrower zilf:EVAL ,
+                   skos:narrower zilf:ASCII ,
+                                 zilf:EVAL ,
                                  zilf:GLOBAL ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
-                                 zilf:PREP-SYNONYM ,
                                  zilf:PRIMTYPE ,
                                  zilf:PRIN1 ,
                                  zilf:PRINC ,
@@ -78,6 +100,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:SETG20 ,
                                  zilf:SPNAME ,
                                  zilf:STRING ,
+                                 zilf:VALUE ,
                                  <http://example.org/zilf/OR?> ;
                    skos:topConceptOf zilf:ZILF_Scheme ;
                    skos:prefLabel "Core Functions"@en .
@@ -183,7 +206,7 @@ zilf:PNAME rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/PREP-SYNONYM
 zilf:PREP-SYNONYM rdf:type owl:NamedIndividual ,
                            skos:Concept ;
-                  skos:broader zilf:CoreFunctions ;
+                  skos:broader zilf:ParserSystem ;
                   skos:inScheme zilf:ZILF_Scheme ;
                   skos:definition "ZIL parser library function that creates one or more synonyms to the original preposition."@en ;
                   skos:editorialNote "ZILF treats PREP-SYNONYM as an alias to SYNONYM."@en ;
@@ -212,7 +235,7 @@ zilf:PRIN1 rdf:type owl:NamedIndividual ,
                     skos:Concept ;
            skos:broader zilf:CoreFunctions ;
            skos:inScheme zilf:ZILF_Scheme ;
-           skos:definition "Prints the evaluated representation of value to channel (default for channel is <LVAL OUTCHAN> - the console). PRIN1 also returns the evaluated representation of value."@en ;
+           skos:definition "MDL built-in function that prints the evaluated representation of value to channel (default for channel is <LVAL OUTCHAN> - the console). PRIN1 also returns the evaluated representation of value."@en ;
            skos:example """<PRIN1 !\\A>  ;  !\\A
 <PRIN1 42>  ; 42
 <PRIN1 \"Hello, world!\">  ;  \"Hello, world!\"
@@ -295,8 +318,11 @@ Note that this actually changes the list."""@en ;
 ###  http://example.org/zilf/ParserSystem
 zilf:ParserSystem rdf:type owl:NamedIndividual ,
                            skos:Concept ;
-                  skos:narrower zilf:SYNTAX ,
-                                zilf:VERB ;
+                  skos:narrower zilf:BIT-SYNONYM ,
+                                zilf:PREP-SYNONYM ,
+                                zilf:SYNONYM ,
+                                zilf:SYNTAX ,
+                                zilf:VERB-SYNONYM ;
                   skos:topConceptOf zilf:ZILF_Scheme ;
                   skos:prefLabel "Parser System"@en .
 
@@ -456,6 +482,23 @@ zilf:STRING rdf:type owl:NamedIndividual ,
             skos:prefLabel "<STRING values ...>"@en .
 
 
+###  http://example.org/zilf/SYNONYM
+zilf:SYNONYM rdf:type owl:NamedIndividual ,
+                      skos:Concept ;
+             skos:broader zilf:ParserSystem ;
+             skos:inScheme zilf:ZILF_Scheme ;
+             skos:definition "ZIL parser library function that creates one or more synonyms to the original verb, adjective, preposition or direction. Instead of  SYNONYM it is also possible to use VERB-SYNONYM, ADJ-SYNONYM, PREP-SYNONYM and DIR-SYNONYM for verbs, adjectives, prepositions and directions respectively, ZILF handles them all like aliases to SYNONYM."@en ;
+             skos:editorialNote "Note that due to the way words, especially adjectives and nouns,  are stored in the vocabulary synonyms for adjectives only work in version 3 (ZIP) games."@en ;
+             skos:example """<SYNONYM NORTH FORE>
+<SYNONYM SOUTH AFT>
+<SYNONYM WEST PORT>
+<SYNONYM EAST STARBOARD>
+
+<SYNTAX PUT OBJECT = V-INSERT>
+<VERB-SYNONYM PUT SLIDE DIP SOAK>"""@en ;
+             skos:prefLabel "<SYNONYM original synonyms ...>"@en .
+
+
 ###  http://example.org/zilf/SYNTAX
 zilf:SYNTAX rdf:type owl:NamedIndividual ,
                      skos:Concept ;
@@ -474,11 +517,33 @@ zilf:TIME rdf:type owl:NamedIndividual ,
           skos:prefLabel "<TIME>"@en .
 
 
-###  http://example.org/zilf/VERB
-zilf:VERB rdf:type owl:NamedIndividual ,
-                   skos:Concept ;
-          skos:broader zilf:ParserSystem ;
-          skos:prefLabel "VERB"@en .
+###  http://example.org/zilf/VALUE
+zilf:VALUE rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:CoreFunctions ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "MDL built-in function that returns the value of an atom. If  the atom has an LVAL then the LVAL is returned, otherwise the GVAL of the atom is returned."@en ;
+           skos:editorialNote "It is possible to supply an environment for VALUE. See EVAL for more about the environment."@en ;
+           skos:example """<SETG X 3>
+<SET X 4>
+<VALUE X>  ;  4
+<UNASSIGN X>
+<VALUE X>  ;  3"""@en ;
+           skos:prefLabel "<VALUE atom [environment]>"@en .
+
+
+###  http://example.org/zilf/VERB-SYNONYM
+zilf:VERB-SYNONYM rdf:type owl:NamedIndividual ,
+                           skos:Concept ;
+                  skos:broader zilf:ParserSystem ;
+                  skos:inScheme zilf:ZILF_Scheme ;
+                  skos:definition "ZIL parser library function that creates one or more synonyms to the original verb."@en ;
+                  skos:editorialNote "ZILF treats VERB-SYNONYM as an alias to SYNONYM."@en ;
+                  skos:example """<VERB-SYNONYM SAY TELL>
+<VERB-SYNONYM GO MOVE>
+<VERB-SYNONYM MAKE CREATE BUILD>
+<VERB-SYNONYM GET OBTAIN ACQUIRE>"""@en ;
+                  skos:prefLabel "<VERB-SYNONYM original synonyms ...>"@en .
 
 
 ###  http://example.org/zilf/ZILF_Scheme
