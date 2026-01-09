@@ -7,6 +7,20 @@ A collection of code examples extracted directly from the ZILF ontology.
 
 ---
 
+### ASCII
+```zil
+<ASCII !\A>  ;  65
+<ASCII 65>  ;  !\A
+```
+
+
+### BIT-SYNONYM
+```zil
+<BIT-SYNONYM TAKEBIT GETBIT PICKBIT>
+<BIT-SYNONYM LIGHTBIT DAYBIT>
+```
+
+
 ### EVAL
 ```zil
 <SET F '<+ 1 2>> 
@@ -186,7 +200,38 @@ ADJECTIVE BRASS SMALL
 ```
 
 
+### SYNONYM
+```zil
+<SYNONYM NORTH FORE>
+<SYNONYM SOUTH AFT>
+<SYNONYM WEST PORT>
+<SYNONYM EAST STARBOARD>
+
+<SYNTAX PUT OBJECT = V-INSERT>
+<VERB-SYNONYM PUT SLIDE DIP SOAK>
+```
+
+
 ### TIME
 ```zil
 <TIME>
+```
+
+
+### VALUE
+```zil
+<SETG X 3>
+<SET X 4>
+<VALUE X>  ;  4
+<UNASSIGN X>
+<VALUE X>  ;  3
+```
+
+
+### VERB-SYNONYM
+```zil
+<VERB-SYNONYM SAY TELL>
+<VERB-SYNONYM GO MOVE>
+<VERB-SYNONYM MAKE CREATE BUILD>
+<VERB-SYNONYM GET OBTAIN ACQUIRE>
 ```
