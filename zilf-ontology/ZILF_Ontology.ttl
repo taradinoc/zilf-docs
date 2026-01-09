@@ -49,6 +49,17 @@ zilf:ASCII rdf:type owl:NamedIndividual ,
            skos:prefLabel "<ASCII {number | character}>"@en .
 
 
+###  http://example.org/zilf/BIT-SYNONYM
+zilf:BIT-SYNONYM rdf:type owl:NamedIndividual ,
+                          skos:Concept ;
+                 skos:broaderTransitive zilf:ParserSystem ;
+                 skos:inScheme zilf:ZILF_Scheme ;
+                 skos:definition "ZIL parser library function that creates synonyms to flag-bits."@en ;
+                 skos:example """<BIT-SYNONYM TAKEBIT GETBIT PICKBIT>
+<BIT-SYNONYM LIGHTBIT DAYBIT>"""@en ;
+                 skos:prefLabel "<BIT-SYNONYM first synonyms ...>"@en .
+
+
 ###  http://example.org/zilf/BitOn
 zilf:BitOn rdf:type owl:NamedIndividual ,
                     skos:Concept ;
@@ -307,7 +318,8 @@ Note that this actually changes the list."""@en ;
 ###  http://example.org/zilf/ParserSystem
 zilf:ParserSystem rdf:type owl:NamedIndividual ,
                            skos:Concept ;
-                  skos:narrower zilf:PREP-SYNONYM ,
+                  skos:narrower zilf:BIT-SYNONYM ,
+                                zilf:PREP-SYNONYM ,
                                 zilf:SYNONYM ,
                                 zilf:SYNTAX ,
                                 zilf:VERB-SYNONYM ;
