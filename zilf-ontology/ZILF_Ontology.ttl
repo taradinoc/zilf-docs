@@ -244,7 +244,7 @@ POP
 
 Inform syntax
 pull"""@en ;
-         skos:historyNote "Versions: 6-"@en ;
+         skos:historyNote "POP is a valid opcode for all versions but ZILF only recognizes POP for Version 6. Inform used the PUSH opcode instead of POP because Inform featured an RFATAL macro, which was usually defined as <PUSH 2> <RSTACK>."@en ;
          skos:prefLabel "<POP [stack]>"@en .
 
 

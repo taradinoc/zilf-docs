@@ -52,11 +52,13 @@ def append_concept_documentation(g, subj, lines):
     usage = get_literal(g, subj, SKOS.prefLabel)
     definition = get_literal(g, subj, SKOS.definition)
     note = get_literal(g, subj, SKOS.editorialNote)
+    history = get_literal(g, subj, SKOS.historyNote)
     
     lines.append(f"\n### {name}")
     if usage: lines.append(f"**Usage:** `{usage}`\n")
     if definition: lines.append(f"{definition}\n")
     if note: lines.append(f"> **Note:** {note}\n")
+    if history: lines.append(f"**History:** {history}\n")
     lines.append("---")
 
 def generate_index_md():
