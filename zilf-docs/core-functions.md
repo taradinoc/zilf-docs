@@ -7,6 +7,13 @@ Fundamental MDL built-in functions and ZIL library functions.
 
 ---
 
+### ASCII
+**Usage:** `<ASCII {number | character}>`
+
+MDL built-in function that converts a number to a character or a character to a number.
+
+---
+
 ### EVAL
 **Usage:** `<EVAL value [environment]>`
 
@@ -21,7 +28,14 @@ MDL built-in function that evaluates value (usually a FORM created by FORM or QU
 
 ZIL library function that declares a global variable atom, which can laater be used inside a ROUTINE. The variable is initialized with default-value.
 
-> **Note:** ZILF ignores the decl.
+> **Note:** ZILF ignores the DECL because DECL is checked in code that runs at compile time (i.e. MDL code); however, there is no type checking for compiled code inside routines, at runtime or compile time.
+
+For example, the following:
+<GDECL (BAR) FIX> T
+<SETG BAR "fsdf">
+
+Outputs this error: 
+[error MDL0206] <stdin>:1: expected GVAL of BAR to match DECL FIX, but got "fdsf"
 
 ---
 
@@ -62,15 +76,6 @@ MDL built-in function for "printed name", which returns a newly created string c
 
 ---
 
-### PREP-SYNONYM
-**Usage:** `<PREP-SYNONYM original synonyms ...>`
-
-ZIL parser library function that creates one or more synonyms to the original preposition.
-
-> **Note:** ZILF treats PREP-SYNONYM as an alias to SYNONYM.
-
----
-
 ### PRIMTYPE
 **Usage:** `<PRIMTYPE value>`
 
@@ -83,7 +88,7 @@ MDL built-in function that evaluates to the primitive type of value.
 ### PRIN1
 **Usage:** `<PRIN1 value [channel]>`
 
-Prints the evaluated representation of value to channel (default for channel is <LVAL OUTCHAN> - the console). PRIN1 also returns the evaluated representation of value.
+MDL built-in function that prints the evaluated representation of value to channel (default for channel is <LVAL OUTCHAN> - the console). PRIN1 also returns the evaluated representation of value.
 
 ---
 
@@ -216,5 +221,14 @@ MDL built-in function that returns a concatenated string of all values. values c
 MDL built-in function that is used for measuring CPU execution time, typically used for debugging ZILCH.
 
 > **Note:** ZILF ignores this and always returns 1, because modern IDE's offer different methods of debugging ZILCH.
+
+---
+
+### VALUE
+**Usage:** `<VALUE atom [environment]>`
+
+MDL built-in function that returns the value of an atom. If  the atom has an LVAL then the LVAL is returned, otherwise the GVAL of the atom is returned.
+
+> **Note:** It is possible to supply an environment for VALUE. See EVAL for more about the environment.
 
 ---

@@ -52,7 +52,7 @@ zilf:ASCII rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/BIT-SYNONYM
 zilf:BIT-SYNONYM rdf:type owl:NamedIndividual ,
                           skos:Concept ;
-                 skos:broaderTransitive zilf:ParserSystem ;
+                 skos:broader zilf:ParserSystem ;
                  skos:inScheme zilf:ZILF_Scheme ;
                  skos:definition "ZIL parser library function that creates synonyms to flag-bits."@en ;
                  skos:example """<BIT-SYNONYM TAKEBIT GETBIT PICKBIT>
@@ -206,7 +206,7 @@ zilf:PNAME rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/PREP-SYNONYM
 zilf:PREP-SYNONYM rdf:type owl:NamedIndividual ,
                            skos:Concept ;
-                  skos:broaderTransitive zilf:ParserSystem ;
+                  skos:broader zilf:ParserSystem ;
                   skos:inScheme zilf:ZILF_Scheme ;
                   skos:definition "ZIL parser library function that creates one or more synonyms to the original preposition."@en ;
                   skos:editorialNote "ZILF treats PREP-SYNONYM as an alias to SYNONYM."@en ;
@@ -485,7 +485,7 @@ zilf:STRING rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/SYNONYM
 zilf:SYNONYM rdf:type owl:NamedIndividual ,
                       skos:Concept ;
-             skos:broaderTransitive zilf:ParserSystem ;
+             skos:broader zilf:ParserSystem ;
              skos:inScheme zilf:ZILF_Scheme ;
              skos:definition "ZIL parser library function that creates one or more synonyms to the original verb, adjective, preposition or direction. Instead of  SYNONYM it is also possible to use VERB-SYNONYM, ADJ-SYNONYM, PREP-SYNONYM and DIR-SYNONYM for verbs, adjectives, prepositions and directions respectively, ZILF handles them all like aliases to SYNONYM."@en ;
              skos:editorialNote "Note that due to the way words, especially adjectives and nouns,  are stored in the vocabulary synonyms for adjectives only work in version 3 (ZIP) games."@en ;
@@ -535,7 +535,7 @@ zilf:VALUE rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/VERB-SYNONYM
 zilf:VERB-SYNONYM rdf:type owl:NamedIndividual ,
                            skos:Concept ;
-                  skos:broaderTransitive zilf:ParserSystem ;
+                  skos:broader zilf:ParserSystem ;
                   skos:inScheme zilf:ZILF_Scheme ;
                   skos:definition "ZIL parser library function that creates one or more synonyms to the original verb."@en ;
                   skos:editorialNote "ZILF treats VERB-SYNONYM as an alias to SYNONYM."@en ;
