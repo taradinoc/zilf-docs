@@ -20,7 +20,7 @@ ZIL library function that groups code and data into segments of memory outside t
 ---
 
 ### END-SEGMENT
-**Usage:** `<ENDBLOCK>`
+**Usage:** `<END-SEGMENT>`
 
 ZIL library function that terminates the current code and data group, returning to main game memory. END-SEGMENT pairs with BEGIN-SEGMENT.
 
