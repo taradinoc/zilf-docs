@@ -27,6 +27,12 @@ A collection of code examples extracted directly from the ZILF ontology.
 ```
 
 
+### END-SEGMENT
+```zil
+<END-SEGMENT>
+```
+
+
 ### EVAL
 ```zil
 <SET F '<+ 1 2>> 

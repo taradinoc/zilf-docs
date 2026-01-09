@@ -17,7 +17,16 @@ MDL built-in function that converts a number to a character or a character to a 
 ### BEGIN-SEGMENT
 **Usage:** `<BEGIN-SEGMENT>`
 
-ZIL library function that groups code and data into segments of memory outside the main game memory. BEGIN-SEGMENT is paired with END-SEGMENT.
+ZIL library function that groups code and data into segments of memory outside the main game memory. BEGIN-SEGMENT pairs with END-SEGMENT.
+
+> **Note:** ZILF ignores this and always returns FALSE.
+
+---
+
+### END-SEGMENT
+**Usage:** `<ENDBLOCK>`
+
+ZIL library function that terminates the current code and data group, returning to main game memory. END-SEGMENT pairs with BEGIN-SEGMENT.
 
 > **Note:** ZILF ignores this and always returns FALSE.
 

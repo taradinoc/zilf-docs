@@ -54,7 +54,7 @@ zilf:BEGIN-SEGMENT rdf:type owl:NamedIndividual ,
                             skos:Concept ;
                    skos:broader zilf:CoreFunctions ;
                    skos:inScheme zilf:ZILF_Scheme ;
-                   skos:definition "ZIL library function that groups code and data into segments of memory outside the main game memory. BEGIN-SEGMENT is paired with END-SEGMENT."@en ;
+                   skos:definition "ZIL library function that groups code and data into segments of memory outside the main game memory. BEGIN-SEGMENT pairs with END-SEGMENT."@en ;
                    skos:editorialNote "ZILF ignores this and always returns FALSE."@en ;
                    skos:example "<BEGIN-SEGMENT>"@en ;
                    skos:prefLabel "<BEGIN-SEGMENT>"@en .
@@ -92,6 +92,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                             skos:Concept ;
                    skos:narrower zilf:ASCII ,
                                  zilf:BEGIN-SEGMENT ,
+                                 zilf:END-SEGMENT ,
                                  zilf:EVAL ,
                                  zilf:GLOBAL ,
                                  zilf:OR ,
@@ -116,6 +117,17 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  <http://example.org/zilf/OR?> ;
                    skos:topConceptOf zilf:ZILF_Scheme ;
                    skos:prefLabel "Core Functions"@en .
+
+
+###  http://example.org/zilf/END-SEGMENT
+zilf:END-SEGMENT rdf:type owl:NamedIndividual ,
+                          skos:Concept ;
+                 skos:broader zilf:CoreFunctions ;
+                 skos:inScheme zilf:ZILF_Scheme ;
+                 skos:definition "ZIL library function that terminates the current code and data group, returning to main game memory. END-SEGMENT pairs with BEGIN-SEGMENT."@en ;
+                 skos:editorialNote "ZILF ignores this and always returns FALSE."@en ;
+                 skos:example "<END-SEGMENT>"@en ;
+                 skos:prefLabel "<ENDBLOCK>"@en .
 
 
 ###  http://example.org/zilf/EVAL
