@@ -224,7 +224,7 @@ zilf:PRIN1 rdf:type owl:NamedIndividual ,
                     skos:Concept ;
            skos:broader zilf:CoreFunctions ;
            skos:inScheme zilf:ZILF_Scheme ;
-           skos:definition "Prints the evaluated representation of value to channel (default for channel is <LVAL OUTCHAN> - the console). PRIN1 also returns the evaluated representation of value."@en ;
+           skos:definition "MDL built-in function that prints the evaluated representation of value to channel (default for channel is <LVAL OUTCHAN> - the console). PRIN1 also returns the evaluated representation of value."@en ;
            skos:example """<PRIN1 !\\A>  ;  !\\A
 <PRIN1 42>  ; 42
 <PRIN1 \"Hello, world!\">  ;  \"Hello, world!\"
