@@ -1,10 +1,6 @@
 [← Back to Main Index](./index.md)
 
 # ZILF Cookbook
-**Reference:** `skos:example` data from ZILF Reference Scheme
-
-A collection of code examples extracted directly from the ZILF ontology.
-
 ---
 
 ### ASCII
@@ -14,10 +10,22 @@ A collection of code examples extracted directly from the ZILF ontology.
 ```
 
 
+### BEGIN-SEGMENT
+```zil
+<BEGIN-SEGMENT>
+```
+
+
 ### BIT-SYNONYM
 ```zil
 <BIT-SYNONYM TAKEBIT GETBIT PICKBIT>
 <BIT-SYNONYM LIGHTBIT DAYBIT>
+```
+
+
+### END-SEGMENT
+```zil
+<END-SEGMENT>
 ```
 
 
@@ -54,6 +62,16 @@ A collection of code examples extracted directly from the ZILF ontology.
 <PNAME FOO> ; "FOO"
 <PNAME FOO!-NEW-OBLIST> ; "FOO"
 <UNPARSE FOO!-NEW-OBLIST> ; "FOO!-NEW-OBLIST"
+```
+
+
+### POP
+```zil
+Zapf syntax
+POP
+
+Inform syntax
+pull
 ```
 
 

@@ -25,6 +25,11 @@ skos:editorialNote rdf:type owl:AnnotationProperty ;
                    rdfs:subPropertyOf rdfs:label .
 
 
+###  http://www.w3.org/2004/02/skos/core#historyNote
+skos:historyNote rdf:type owl:AnnotationProperty ;
+                 rdfs:subPropertyOf rdfs:label .
+
+
 #################################################################
 #    Classes
 #################################################################
@@ -47,6 +52,17 @@ zilf:ASCII rdf:type owl:NamedIndividual ,
            skos:example """<ASCII !\\A>  ;  65
 <ASCII 65>  ;  !\\A"""@en ;
            skos:prefLabel "<ASCII {number | character}>"@en .
+
+
+###  http://example.org/zilf/BEGIN-SEGMENT
+zilf:BEGIN-SEGMENT rdf:type owl:NamedIndividual ,
+                            skos:Concept ;
+                   skos:broader zilf:CoreFunctions ;
+                   skos:inScheme zilf:ZILF_Scheme ;
+                   skos:definition "ZIL library function that groups code and data into segments of memory outside the main game memory. BEGIN-SEGMENT pairs with END-SEGMENT."@en ;
+                   skos:editorialNote "ZILF ignores this and always returns FALSE."@en ;
+                   skos:example "<BEGIN-SEGMENT>"@en ;
+                   skos:prefLabel "<BEGIN-SEGMENT>"@en .
 
 
 ###  http://example.org/zilf/BIT-SYNONYM
@@ -80,6 +96,8 @@ zilf:BitTake rdf:type owl:NamedIndividual ,
 zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                             skos:Concept ;
                    skos:narrower zilf:ASCII ,
+                                 zilf:BEGIN-SEGMENT ,
+                                 zilf:END-SEGMENT ,
                                  zilf:EVAL ,
                                  zilf:GLOBAL ,
                                  zilf:OR ,
@@ -104,6 +122,17 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  <http://example.org/zilf/OR?> ;
                    skos:topConceptOf zilf:ZILF_Scheme ;
                    skos:prefLabel "Core Functions"@en .
+
+
+###  http://example.org/zilf/END-SEGMENT
+zilf:END-SEGMENT rdf:type owl:NamedIndividual ,
+                          skos:Concept ;
+                 skos:broader zilf:CoreFunctions ;
+                 skos:inScheme zilf:ZILF_Scheme ;
+                 skos:definition "ZIL library function that terminates the current code and data group, returning to main game memory. END-SEGMENT pairs with BEGIN-SEGMENT."@en ;
+                 skos:editorialNote "ZILF ignores this and always returns FALSE."@en ;
+                 skos:example "<END-SEGMENT>"@en ;
+                 skos:prefLabel "<ENDBLOCK>"@en .
 
 
 ###  http://example.org/zilf/EVAL
@@ -201,6 +230,22 @@ zilf:PNAME rdf:type owl:NamedIndividual ,
 <PNAME FOO!-NEW-OBLIST> ; \"FOO\"
 <UNPARSE FOO!-NEW-OBLIST> ; \"FOO!-NEW-OBLIST\""""@en ;
            skos:prefLabel "<PNAME atom>"@en .
+
+
+###  http://example.org/zilf/POP
+zilf:POP rdf:type owl:NamedIndividual ,
+                  skos:Concept ;
+         skos:broader zilf:ZCodeBuiltIns ;
+         skos:inScheme zilf:ZILF_Scheme ;
+         skos:definition "Z-code built-in function used inside ROUTINE that pops a value from a stack."@en ;
+         skos:editorialNote "If no stack is given, a value is popped from the game stack."@en ;
+         skos:example """Zapf syntax
+POP
+
+Inform syntax
+pull"""@en ;
+         skos:historyNote "POP is a valid opcode for all versions but ZILF only recognizes POP for Version 6. Inform used the PUSH opcode instead of POP because Inform featured an RFATAL macro, which was usually defined as <PUSH 2> <RSTACK>."@en ;
+         skos:prefLabel "<POP [stack]>"@en .
 
 
 ###  http://example.org/zilf/PREP-SYNONYM
@@ -544,6 +589,13 @@ zilf:VERB-SYNONYM rdf:type owl:NamedIndividual ,
 <VERB-SYNONYM MAKE CREATE BUILD>
 <VERB-SYNONYM GET OBTAIN ACQUIRE>"""@en ;
                   skos:prefLabel "<VERB-SYNONYM original synonyms ...>"@en .
+
+
+###  http://example.org/zilf/ZCodeBuiltIns
+zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
+                            skos:Concept ;
+                   skos:inScheme zilf:ZILF_Scheme ;
+                   skos:narrower zilf:POP .
 
 
 ###  http://example.org/zilf/ZILF_Scheme
