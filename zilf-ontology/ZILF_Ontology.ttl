@@ -308,6 +308,7 @@ Note that this actually changes the list."""@en ;
 zilf:ParserSystem rdf:type owl:NamedIndividual ,
                            skos:Concept ;
                   skos:narrower zilf:PREP-SYNONYM ,
+                                zilf:SYNONYM ,
                                 zilf:SYNTAX ,
                                 zilf:VERB ;
                   skos:topConceptOf zilf:ZILF_Scheme ;
@@ -467,6 +468,23 @@ zilf:STRING rdf:type owl:NamedIndividual ,
             skos:editorialNote "A string is a block of contiguous bytes where each byte holds a character. See more about STRING  structure in The MDL Programming Language, Appendix 1."@en ;
             skos:example "<STRING !\\A <ASCII 66> \"CD\"> ; \"ABCD\""@en ;
             skos:prefLabel "<STRING values ...>"@en .
+
+
+###  http://example.org/zilf/SYNONYM
+zilf:SYNONYM rdf:type owl:NamedIndividual ,
+                      skos:Concept ;
+             skos:broaderTransitive zilf:ParserSystem ;
+             skos:inScheme zilf:ZILF_Scheme ;
+             skos:definition "ZIL parser library function that creates one or more synonyms to the original verb, adjective, preposition or direction. Instead of  SYNONYM it is also possible to use VERB-SYNONYM, ADJ-SYNONYM, PREP-SYNONYM and DIR-SYNONYM for verbs, adjectives, prepositions and directions respectively, ZILF handles them all like aliases to SYNONYM."@en ;
+             skos:editorialNote "Note that due to the way words, especially adjectives and nouns,  are stored in the vocabulary synonyms for adjectives only work in version 3 (ZIP) games."@en ;
+             skos:example """<SYNONYM NORTH FORE>
+<SYNONYM SOUTH AFT>
+<SYNONYM WEST PORT>
+<SYNONYM EAST STARBOARD>
+
+<SYNTAX PUT OBJECT = V-INSERT>
+<VERB-SYNONYM PUT SLIDE DIP SOAK>"""@en ;
+             skos:prefLabel "<SYNONYM original synonyms ...>"@en .
 
 
 ###  http://example.org/zilf/SYNTAX
