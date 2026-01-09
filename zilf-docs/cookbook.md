@@ -14,6 +14,12 @@ A collection of code examples extracted directly from the ZILF ontology.
 ```
 
 
+### BEGIN-SEGMENT
+```zil
+<BEGIN-SEGMENT>
+```
+
+
 ### BIT-SYNONYM
 ```zil
 <BIT-SYNONYM TAKEBIT GETBIT PICKBIT>
