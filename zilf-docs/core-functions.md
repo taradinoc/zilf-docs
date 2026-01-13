@@ -10,6 +10,13 @@ MDL built-in function that converts a number to a character or a character to a 
 
 ---
 
+### ATOM
+**Usage:** `<ATOM pname>`
+
+MDL built-in that returns a newly created ATOM with pname (string). The ATOM is not on any OBLIST and therefore has the trailer !-#FALSE () attached to it.
+
+---
+
 ### BEGIN-SEGMENT
 **Usage:** `<BEGIN-SEGMENT value>`
 

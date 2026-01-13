@@ -57,6 +57,7 @@ zilf:ASCII rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/ATOM
 zilf:ATOM rdf:type owl:NamedIndividual ,
                    skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
           skos:inScheme zilf:ZILF_Scheme ;
           skos:definition "MDL built-in that returns a newly created ATOM with pname (string). The ATOM is not on any OBLIST and therefore has the trailer !-#FALSE () attached to it."@en ;
           skos:example """<ATOM \"FOO\">  ;  FOO!-#FALSE ()
@@ -115,6 +116,7 @@ zilf:BitTake rdf:type owl:NamedIndividual ,
 zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                             skos:Concept ;
                    skos:narrower zilf:ASCII ,
+                                 zilf:ATOM ,
                                  zilf:BEGIN-SEGMENT ,
                                  zilf:END-SEGMENT ,
                                  zilf:EVAL ,
