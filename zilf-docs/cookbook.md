@@ -10,9 +10,24 @@
 ```
 
 
+### ATOM
+```zil
+<ATOM "FOO">  ;  FOO!-#FALSE ()
+<==? <ATOM "FOO"> <ATOM "FOO">>  ;  #FALSE
+```
+
+
 ### BEGIN-SEGMENT
 ```zil
+; From The Abyss
 <BEGIN-SEGMENT 0>
+; Code
+<END-SEGMENT>
+
+; From Shogun
+<BEGIN-SEGMENT RECORD>
+; Code
+<END-SEGMENT>
 ```
 
 
@@ -25,6 +40,14 @@
 
 ### END-SEGMENT
 ```zil
+; From The Abyss
+<BEGIN-SEGMENT 0>
+; Code
+<END-SEGMENT>
+
+; From Shogun
+<BEGIN-SEGMENT RECORD>
+; Code
 <END-SEGMENT>
 ```
 

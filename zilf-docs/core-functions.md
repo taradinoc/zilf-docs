@@ -17,7 +17,7 @@ ZIL library function that groups code and data into segments of memory outside t
 
 > **Note:** ZILF ignores this and always returns FALSE.
 
-**History:** BEGIN-SEGMENT was used in The Abyss, an unreleased interactive fiction game written by Bob Bates for Infocom under historical source code for the game, entitled The Abyss Source Code Collection.
+**History:** Having been used in a few InfoCom projects, BEGIN-SEGMENT was notably used in The Abyss, an unreleased interactive fiction game written by Bob Bates for Infocom under historical source code for the game, entitled The Abyss Source Code Collection.
 
 ---
 
@@ -28,7 +28,7 @@ ZIL library function that terminates the current code and data group, returning 
 
 > **Note:** ZILF ignores this and always returns FALSE.
 
-**History:** END-SEGMENT was used in The Abyss, an unreleased interactive fiction game written by Bob Bates for Infocom under historical source code for the game, entitled The Abyss Source Code Collection.
+**History:** Having been used in a few InfoCom projects, BEGIN-SEGMENT was notably used in The Abyss, an unreleased interactive fiction game written by Bob Bates for Infocom under historical source code for the game, entitled The Abyss Source Code Collection.
 
 ---
 
