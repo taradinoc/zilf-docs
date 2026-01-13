@@ -140,8 +140,16 @@ zilf:END-SEGMENT rdf:type owl:NamedIndividual ,
                  skos:inScheme zilf:ZILF_Scheme ;
                  skos:definition "ZIL library function that terminates the current code and data group, returning to main game memory. END-SEGMENT pairs with BEGIN-SEGMENT."@en ;
                  skos:editorialNote "ZILF ignores this and always returns FALSE."@en ;
-                 skos:example "<END-SEGMENT>"@en ;
-                 skos:historyNote "END-SEGMENT was used in The Abyss, an unreleased interactive fiction game written by Bob Bates for Infocom under historical source code for the game, entitled The Abyss Source Code Collection."@en ;
+                 skos:example """; From The Abyss
+<BEGIN-SEGMENT 0>
+; Code
+<END-SEGMENT>
+
+; From Shogun
+<BEGIN-SEGMENT RECORD>
+; Code
+<END-SEGMENT>"""@en ;
+                 skos:historyNote "Having been used in a few InfoCom projects, BEGIN-SEGMENT was notably used in The Abyss, an unreleased interactive fiction game written by Bob Bates for Infocom under historical source code for the game, entitled The Abyss Source Code Collection."@en ;
                  skos:prefLabel "<END-SEGMENT>"@en .
 
 
