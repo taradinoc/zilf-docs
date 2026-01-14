@@ -10,11 +10,7 @@ Z-code built-in function that Writes picture data from picture-number into table
 
 > **Note:** ZILF currently supports PICSET in V6.
 
-**History:** Zapf syntax
-PICINF
-
-Inform syntax
-picture_data
+**History:** Zapf syntax: PICINF, Inform syntax: picture_data
 
 ---
 
@@ -25,11 +21,7 @@ Z-code built-in function that gives the interpreter a table of picture numbers t
 
 > **Note:** ZILF currently supports PICSET in V6.
 
-**History:** Zapf syntax
-PICSET
-
-Inform syntax
-picture_table
+**History:** Zapf syntax: PICSET, Inform syntax: picture_table
 
 ---
 
@@ -40,10 +32,6 @@ Z-code built-in function used inside ROUTINE that pops a value from a stack. If 
 
 > **Note:** ZILF currently supports POP in V6.
 
-**History:** Zapf syntax
-POP
-
-Inform syntax
-pull
+**History:** Zapf syntax: POP, Inform syntax: pull
 
 ---

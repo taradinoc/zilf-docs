@@ -319,11 +319,7 @@ zilf:PICINF rdf:type owl:NamedIndividual ,
             skos:editorialNote "ZILF currently supports PICSET in V6."@en ;
             skos:example """<GLOBAL MYPIC <ITABLE 2048 0>>
 <PICINFO 1 ,MYPIC>  ;  Writes picture data into MYPIC"""@en ;
-            skos:historyNote """Zapf syntax
-PICINF
-
-Inform syntax
-picture_data"""@en ;
+            skos:historyNote "Zapf syntax: PICINF, Inform syntax: picture_data"@en ;
             skos:prefLabel "<PICINF picture-number table>"@en .
 
 
@@ -336,11 +332,7 @@ zilf:PICSET rdf:type owl:NamedIndividual ,
             skos:editorialNote "ZILF currently supports PICSET in V6."@en ;
             skos:example """; From Zork Zero
 <PICSET ,B-PICSET-TBL>"""@en ;
-            skos:historyNote """Zapf syntax
-PICSET
-
-Inform syntax
-picture_table"""@en ;
+            skos:historyNote "Zapf syntax: PICSET, Inform syntax: picture_table"@en ;
             skos:prefLabel "<PICSET table>"@en .
 
 
@@ -370,11 +362,7 @@ FAKINT <PUSH P* A>
 ; Code
 <POP P* E>
 <POP P* A>"""@en ;
-         skos:historyNote """Zapf syntax
-POP
-
-Inform syntax
-pull"""@en ;
+         skos:historyNote "Zapf syntax: POP, Inform syntax: pull"@en ;
          skos:prefLabel "<POP [stack]>"@en .
 
 
