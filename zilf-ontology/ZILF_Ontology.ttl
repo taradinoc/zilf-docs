@@ -43,6 +43,20 @@ zilf:LanguageConstruct rdf:type owl:Class ;
 #    Individuals
 #################################################################
 
+###  http://example.org/zilf/ADJ-SYNONYM
+zilf:ADJ-SYNONYM rdf:type owl:NamedIndividual ,
+                          skos:Concept ;
+                 skos:broader zilf:ParserSystem ;
+                 skos:inScheme zilf:ZILF_Scheme ;
+                 skos:definition "ZIL parser library function that creates one or more synonyms to the original adjective. ZILF treats ADJ-SYNONYM as an alias to SYNONYM."@en ;
+                 skos:editorialNote "Note that due to the way words, especially adjectives and nouns, are stored in the vocabulary synonyms for adjectives only work in version 3 (ZIP) games."@en ;
+                 skos:example """<ADJ-SYNONYM HAPPY JOYFUL>
+<ADJ-SYNONYM INTELLIGENT SMART>
+<ADJ-SYNONYM BAD AWFUL>
+<ADJ-SYNONYM STRONG SOLID>"""@en ;
+                 skos:prefLabel "<ADJ-SYNONYM original synonyms ...>"@en .
+
+
 ###  http://example.org/zilf/ASCII
 zilf:ASCII rdf:type owl:NamedIndividual ,
                     skos:Concept ;
@@ -439,7 +453,8 @@ Note that this actually changes the list."""@en ;
 ###  http://example.org/zilf/ParserSystem
 zilf:ParserSystem rdf:type owl:NamedIndividual ,
                            skos:Concept ;
-                  skos:narrower zilf:BIT-SYNONYM ,
+                  skos:narrower zilf:ADJ-SYNONYM ,
+                                zilf:BIT-SYNONYM ,
                                 zilf:BUZZ ,
                                 zilf:PREP-SYNONYM ,
                                 zilf:SYNONYM ,
