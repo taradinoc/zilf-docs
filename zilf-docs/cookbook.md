@@ -142,12 +142,10 @@
 
 ### POP
 ```zil
-; From Zork
-FAKINT <PUSH P* A>
-<PUSH P* E>
-; Code
-<POP P* E>
-<POP P* A>
+<PUSH .FOO>
+<SET FOO some-new-value>
+;code
+<SET FOO <POP>>
 ```
 
 
