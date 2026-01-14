@@ -3,10 +3,37 @@
 # Parser System
 ---
 
+### ADJ-SYNONYM
+**Usage:** `<ADJ-SYNONYM original synonyms ...>`
+
+ZIL parser library function that creates one or more synonyms to the original adjective. ZILF treats ADJ-SYNONYM as an alias to SYNONYM.
+
+> **Note:** Note that due to the way words, especially adjectives and nouns, are stored in the vocabulary synonyms for adjectives only work in version 3 (ZIP) games.
+
+---
+
 ### BIT-SYNONYM
 **Usage:** `<BIT-SYNONYM first synonyms ...>`
 
 ZIL parser library function that creates synonyms to flag-bits.
+
+---
+
+### BUZZ
+**Usage:** `<BUZZ atoms ...>`
+
+ZIL parser library function that creates words in the vocabulary with the part-of-speech BUZZ.
+
+> **Note:** These are words that can be ignored by the parser or have special handling in the parser.
+
+---
+
+### DIR-SYNONYM
+**Usage:** `<DIR-SYNONYM original synonyms ...>`
+
+ZIL parser library function that creates one or more synonyms to the original direction.
+
+> **Note:** ZILF treats DIR-SYNONYM as an alias to SYNONYM.
 
 ---
 

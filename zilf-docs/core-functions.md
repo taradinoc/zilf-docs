@@ -17,6 +17,15 @@ MDL built-in that returns a newly created ATOM with pname (string). The ATOM is 
 
 ---
 
+### AVALUE
+**Usage:** `<AVALUE asoc>`
+
+MDL built-in function that returns the value part from an asoc entry, of TYPE ASOC, in the ASSOCIATION chain.
+
+> **Note:** See ASSOCIATIONS, GETPROP, INDICATOR, ITEM, NEXT and PUTPROP.
+
+---
+
 ### BEGIN-SEGMENT
 **Usage:** `<BEGIN-SEGMENT value>`
 
@@ -246,6 +255,22 @@ MDL built-in function that returns a concatenated string of all values. values c
 MDL built-in function that is used for measuring CPU execution time, typically used for debugging ZILCH.
 
 > **Note:** ZILF ignores this and always returns 1, because modern IDE's offer different methods of debugging ZILCH.
+
+---
+
+### TOP
+**Usage:** `<TOP array>`
+
+MDL built-in function that returns array with all elements put back in  array. TOP only works on the structures VECTOR or STRING (arrays) and not on a LIST (a LIST is only pointing forward).
+
+> **Note:** The returned array is not a copy but pointing to the same array with another starting element. Also see BACK, NTH, PUT, REST and SUBSTRUC.
+
+---
+
+### VALID-TYPE?
+**Usage:** `<VALID-TYPE? atom>`
+
+MDL build-in function that returns the TYPE if the atom is a valid name of a TYPE (the atom name is in ALLTYPES), otherwise FALSE.
 
 ---
 

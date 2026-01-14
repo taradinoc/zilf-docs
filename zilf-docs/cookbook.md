@@ -3,6 +3,15 @@
 # ZILF Cookbook
 ---
 
+### ADJ-SYNONYM
+```zil
+<ADJ-SYNONYM HAPPY JOYFUL>
+<ADJ-SYNONYM INTELLIGENT SMART>
+<ADJ-SYNONYM BAD AWFUL>
+<ADJ-SYNONYM STRONG SOLID>
+```
+
+
 ### ASCII
 ```zil
 <ASCII !\A>  ;  65
@@ -14,6 +23,19 @@
 ```zil
 <ATOM "FOO">  ;  FOO!-#FALSE ()
 <==? <ATOM "FOO"> <ATOM "FOO">>  ;  #FALSE
+```
+
+
+### AVALUE
+```zil
+<DEFINE LAST-ASOC ()
+    <REPEAT ((A <ASSOCIATIONS>))
+        <COND (<=? .A <>> <RETURN <>>)
+        (<=? <NEXT .A> <>> <RETURN .A>)>
+    <SET A <NEXT .A>>>>
+<PUTPROP NEW-ASOC TEXT "Hello, world!">
+<SET A <LAST-ASOC>>
+<AVALUE .A>  ;  "Hello, world!"
 ```
 
 
@@ -35,6 +57,22 @@
 ```zil
 <BIT-SYNONYM TAKEBIT GETBIT PICKBIT>
 <BIT-SYNONYM LIGHTBIT DAYBIT>
+```
+
+
+### BUZZ
+```zil
+<BUZZ A AN AND ANY ALL EVERY EVERYTHING BUT EXCEPT OF ONE
+              THE THEN UNDO OOPS \. \, \">
+```
+
+
+### DIR-SYNONYM
+```zil
+<DIR-SYNONYM FORE F>
+<DIR-SYNONYM AFT A>
+<DIR-SYNONYM PORT P>
+<DIR-SYNONYM STARBOARD SB>
 ```
 
 
@@ -80,6 +118,20 @@
 ```
 
 
+### PICINF
+```zil
+<GLOBAL MYPIC <ITABLE 2048 0>>
+<PICINFO 1 ,MYPIC>  ;  Writes picture data into MYPIC
+```
+
+
+### PICSET
+```zil
+; From Zork Zero
+<PICSET ,B-PICSET-TBL>
+```
+
+
 ### PNAME
 ```zil
 <PNAME FOO> ; "FOO"
@@ -90,11 +142,12 @@
 
 ### POP
 ```zil
-Zapf syntax
-POP
-
-Inform syntax
-pull
+; From Zork
+FAKINT <PUSH P* A>
+<PUSH P* E>
+; Code
+<POP P* E>
+<POP P* A>
 ```
 
 
@@ -256,6 +309,23 @@ ADJECTIVE BRASS SMALL
 ### TIME
 ```zil
 <TIME>
+```
+
+
+### TOP
+```zil
+<SETG STRUCT1 [1 2 3 4 5]>  ;  STRUCT1 = [1 2 3 4 5]
+<SETG STRUCT2 <REST ,STRUCT1 2>>  ;  STRUCT2 = [3 4 5]
+<TOP ,STRUCT2>  ;  STRUCT2 = [1 2 3 4 5]
+```
+
+
+### VALID-TYPE?
+```zil
+<VALID-TYPE? VECTOR>  ;  VECTOR
+<VALID-TYPE? FOO>  ;  #FALSE
+<NEWTYPE FOO FIX> 
+<VALID-TYPE? FOO>  ;  FOO
 ```
 
 
