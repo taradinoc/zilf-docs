@@ -114,6 +114,18 @@ zilf:BIT-SYNONYM rdf:type owl:NamedIndividual ,
                  skos:prefLabel "<BIT-SYNONYM first synonyms ...>"@en .
 
 
+###  http://example.org/zilf/BUZZ
+zilf:BUZZ rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:ParserSystem ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition "ZIL parser library function that creates words in the vocabulary with the part-of-speech BUZZ."@en ;
+          skos:editorialNote "These are words that can be ignored by the parser or have special handling in the parser."@en ;
+          skos:example """<BUZZ A AN AND ANY ALL EVERY EVERYTHING BUT EXCEPT OF ONE
+              THE THEN UNDO OOPS \\. \\, \\\">"""@en ;
+          skos:prefLabel "<BUZZ atoms ...>"@en .
+
+
 ###  http://example.org/zilf/BitOn
 zilf:BitOn rdf:type owl:NamedIndividual ,
                     skos:Concept ;
@@ -412,6 +424,7 @@ Note that this actually changes the list."""@en ;
 zilf:ParserSystem rdf:type owl:NamedIndividual ,
                            skos:Concept ;
                   skos:narrower zilf:BIT-SYNONYM ,
+                                zilf:BUZZ ,
                                 zilf:PREP-SYNONYM ,
                                 zilf:SYNONYM ,
                                 zilf:SYNTAX ,
