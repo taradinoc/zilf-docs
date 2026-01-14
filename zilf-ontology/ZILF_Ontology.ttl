@@ -280,6 +280,21 @@ zilf:PICFILE rdf:type owl:NamedIndividual ,
              skos:prefLabel "<PICFILE>"@en .
 
 
+###  http://example.org/zilf/PICSET
+zilf:PICSET rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "Z-code built-in function that gives the interpreter a table of picture numbers that the interpreter can then unpack from disc and cache in memory."@en ;
+            skos:editorialNote "ZILF currently supports PICSET in V6."@en ;
+            skos:example """Zapf syntax
+PICSET
+
+Inform syntax
+picture_table"""@en ;
+            skos:prefLabel "<PICSET table>"@en .
+
+
 ###  http://example.org/zilf/PNAME
 zilf:PNAME rdf:type owl:NamedIndividual ,
                     skos:Concept ;
@@ -656,7 +671,8 @@ zilf:VERB-SYNONYM rdf:type owl:NamedIndividual ,
 zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                             skos:Concept ;
                    skos:inScheme zilf:ZILF_Scheme ;
-                   skos:narrower zilf:POP .
+                   skos:narrower zilf:PICSET ,
+                                 zilf:POP .
 
 
 ###  http://example.org/zilf/ZILF_Scheme
