@@ -192,6 +192,20 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                    skos:prefLabel "Core Functions"@en .
 
 
+###  http://example.org/zilf/DIR-SYNONYM
+zilf:DIR-SYNONYM rdf:type owl:NamedIndividual ,
+                          skos:Concept ;
+                 skos:broader zilf:ParserSystem ;
+                 skos:inScheme zilf:ZILF_Scheme ;
+                 skos:definition "ZIL parser library function that creates one or more synonyms to the original direction."@en ;
+                 skos:editorialNote "ZILF treats DIR-SYNONYM as an alias to SYNONYM."@en ;
+                 skos:example """<DIR-SYNONYM FORE F>
+<DIR-SYNONYM AFT A>
+<DIR-SYNONYM PORT P>
+<DIR-SYNONYM STARBOARD SB>"""@en ;
+                 skos:prefLabel "<DIR-SYNONYM original synonyms ...>"@en .
+
+
 ###  http://example.org/zilf/END-SEGMENT
 zilf:END-SEGMENT rdf:type owl:NamedIndividual ,
                           skos:Concept ;
@@ -482,6 +496,7 @@ zilf:ParserSystem rdf:type owl:NamedIndividual ,
                   skos:narrower zilf:ADJ-SYNONYM ,
                                 zilf:BIT-SYNONYM ,
                                 zilf:BUZZ ,
+                                zilf:DIR-SYNONYM ,
                                 zilf:PREP-SYNONYM ,
                                 zilf:SYNONYM ,
                                 zilf:SYNTAX ,
