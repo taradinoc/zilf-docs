@@ -65,6 +65,24 @@ zilf:ATOM rdf:type owl:NamedIndividual ,
           skos:prefLabel "<ATOM pname>"@en .
 
 
+###  http://example.org/zilf/AVALUE
+zilf:AVALUE rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "MDL built-in function that returns the value part from an asoc entry, of TYPE ASOC, in the ASSOCIATION chain."@en ;
+            skos:editorialNote "See ASSOCIATIONS, GETPROP, INDICATOR, ITEM, NEXT and PUTPROP."@en ;
+            skos:example """<DEFINE LAST-ASOC ()
+    <REPEAT ((A <ASSOCIATIONS>))
+        <COND (<=? .A <>> <RETURN <>>)
+        (<=? <NEXT .A> <>> <RETURN .A>)>
+    <SET A <NEXT .A>>>>
+<PUTPROP NEW-ASOC TEXT \"Hello, world!\">
+<SET A <LAST-ASOC>>
+<AVALUE .A>  ;  \"Hello, world!\""""@en ;
+            skos:prefLabel "<AVALUE asoc>"@en .
+
+
 ###  http://example.org/zilf/BEGIN-SEGMENT
 zilf:BEGIN-SEGMENT rdf:type owl:NamedIndividual ,
                             skos:Concept ;
@@ -117,6 +135,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                             skos:Concept ;
                    skos:narrower zilf:ASCII ,
                                  zilf:ATOM ,
+                                 zilf:AVALUE ,
                                  zilf:BEGIN-SEGMENT ,
                                  zilf:END-SEGMENT ,
                                  zilf:EVAL ,
