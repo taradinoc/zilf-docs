@@ -170,6 +170,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:SETG20 ,
                                  zilf:SPNAME ,
                                  zilf:STRING ,
+                                 zilf:TOP ,
                                  zilf:VALUE ,
                                  <http://example.org/zilf/OR?> ;
                    skos:topConceptOf zilf:ZILF_Scheme ;
@@ -636,6 +637,19 @@ zilf:TIME rdf:type owl:NamedIndividual ,
           skos:editorialNote "ZILF ignores this and always returns 1, because modern IDE's offer different methods of debugging ZILCH."@en ;
           skos:example "<TIME>"@en ;
           skos:prefLabel "<TIME>"@en .
+
+
+###  http://example.org/zilf/TOP
+zilf:TOP rdf:type owl:NamedIndividual ,
+                  skos:Concept ;
+         skos:broader zilf:CoreFunctions ;
+         skos:inScheme zilf:ZILF_Scheme ;
+         skos:definition "MDL built-in function that returns array with all elements put back in  array. TOP only works on the structures VECTOR or STRING (arrays) and not on a LIST (a LIST is only pointing forward)."@en ;
+         skos:editorialNote "The returned array is not a copy but pointing to the same array with another starting element. Also see BACK, NTH, PUT, REST and SUBSTRUC."@en ;
+         skos:example """<SETG STRUCT1 [1 2 3 4 5]>  ;  STRUCT1 = [1 2 3 4 5]
+<SETG STRUCT2 <REST ,STRUCT1 2>>  ;  STRUCT2 = [3 4 5]
+<TOP ,STRUCT2>  ;  STRUCT2 = [1 2 3 4 5]"""@en ;
+         skos:prefLabel "<TOP array>"@en .
 
 
 ###  http://example.org/zilf/VALUE
