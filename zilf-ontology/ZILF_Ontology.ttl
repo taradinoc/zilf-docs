@@ -295,6 +295,23 @@ zilf:PICFILE rdf:type owl:NamedIndividual ,
              skos:prefLabel "<PICFILE>"@en .
 
 
+###  http://example.org/zilf/PICINF
+zilf:PICINF rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "Z-code built-in function that Writes picture data from picture-number into table. Word 0 of table holds picture width and word 1 holds picture height. Then follows the picture data. If picture-number is 0, the number of available pictures is written into word 0 of table and release number of picture file is written into word 1."@en ;
+            skos:editorialNote "ZILF currently supports PICSET in V6."@en ;
+            skos:example """<GLOBAL MYPIC <ITABLE 2048 0>>
+<PICINFO 1 ,MYPIC>  ;  Writes picture data into MYPIC"""@en ;
+            skos:historyNote """Zapf syntax
+PICINF
+
+Inform syntax
+picture_data"""@en ;
+            skos:prefLabel "<PICINF picture-number table>"@en .
+
+
 ###  http://example.org/zilf/PICSET
 zilf:PICSET rdf:type owl:NamedIndividual ,
                      skos:Concept ;
@@ -700,7 +717,8 @@ zilf:VERB-SYNONYM rdf:type owl:NamedIndividual ,
 zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                             skos:Concept ;
                    skos:inScheme zilf:ZILF_Scheme ;
-                   skos:narrower zilf:PICSET ,
+                   skos:narrower zilf:PICINF ,
+                                 zilf:PICSET ,
                                  zilf:POP .
 
 
