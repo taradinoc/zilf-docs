@@ -347,7 +347,13 @@ zilf:POP rdf:type owl:NamedIndividual ,
          skos:inScheme zilf:ZILF_Scheme ;
          skos:definition "Z-code built-in function used inside ROUTINE that pops a value from a stack. If no stack is given, a value is popped from the game stack."@en ;
          skos:editorialNote "ZILF currently supports POP in V6."@en ;
-         skos:example """Zapf syntax
+         skos:example """; From Zork
+FAKINT <PUSH P* A>
+<PUSH P* E>
+; Code
+<POP P* E>
+<POP P* A>"""@en ;
+         skos:historyNote """Zapf syntax
 POP
 
 Inform syntax
