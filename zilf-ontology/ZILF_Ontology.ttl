@@ -451,6 +451,18 @@ zilf:PTABLE rdf:type owl:NamedIndividual ,
             skos:prefLabel "<PTABLE [(flags ...)] values ...>"@en .
 
 
+###  http://example.org/zilf/PUSH
+zilf:PUSH rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:ZCodeBuiltIns ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition "Z-code built-in function that pushes value on the game stack."@en ;
+          skos:editorialNote "ZILF supports POP in all versions."@en ;
+          skos:example "<PUSH 123>"@en ;
+          skos:historyNote "Zapf syntax: PUT, Inform syntax: storew"@en ;
+          skos:prefLabel "<PUSH value>"@en .
+
+
 ###  http://example.org/zilf/PUTREST
 zilf:PUTREST rdf:type owl:NamedIndividual ,
                       skos:Concept ;
@@ -729,7 +741,8 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                    skos:inScheme zilf:ZILF_Scheme ;
                    skos:narrower zilf:PICINF ,
                                  zilf:PICSET ,
-                                 zilf:POP .
+                                 zilf:POP ,
+                                 zilf:PUSH .
 
 
 ###  http://example.org/zilf/ZILF_Scheme
