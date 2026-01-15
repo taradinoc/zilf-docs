@@ -575,6 +575,20 @@ zilf:QUOTE rdf:type owl:NamedIndividual ,
            skos:prefLabel "<QUOTE value>"@en .
 
 
+###  http://example.org/zilf/REMOVE
+zilf:REMOVE rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "Z-code built-in function that removes object from parent. To reattach it to another object, see MOVE."@en ;
+            skos:editorialNote "ZILF supports REMOVE in all versions."@en ;
+            skos:example """<OBJECT ANIMAL>
+<OBJECT CAT (LOC ANIMAL)>
+<REMOVE ,CAT)  ;  Detach CAT from ANIMAL"""@en ;
+            skos:historyNote "Zapf syntax: REMOVE, Inform syntax: remove_obj"@en ;
+            skos:prefLabel "<REMOVE object>"@en .
+
+
 ###  http://example.org/zilf/ROOT
 zilf:ROOT rdf:type owl:NamedIndividual ,
                    skos:Concept ;
@@ -756,7 +770,8 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:PICSET ,
                                  zilf:POP ,
                                  zilf:PTSIZE ,
-                                 zilf:PUSH .
+                                 zilf:PUSH ,
+                                 zilf:REMOVE .
 
 
 ###  http://example.org/zilf/ZILF_Scheme
