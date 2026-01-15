@@ -491,6 +491,20 @@ Also see BACK, GET, GETB, PUTB and REST."""@en ;
          skos:prefLabel "<PUT table offset value>"@en .
 
 
+###  http://example.org/zilf/PUTB
+zilf:PUTB rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:ZCodeBuiltIns ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition """Z-code built-in function that puts a byte value in the table at byte position offset. The actual address is table-address+offset. Note that table can be a byte-address in dynamic memory.
+
+Also see BACK, GET, GETB, PUT and REST."""@en ;
+          skos:editorialNote "ZILF supports PUTB in all versions."@en ;
+          skos:example "<PUTB ,MYTABLE 1 !\\A>  ;  Stores character A at position 1 in MYTABLE"@en ;
+          skos:historyNote "Zapf syntax: PUTB, Inform syntax: storeb"@en ;
+          skos:prefLabel "<PUTB table offset value>"@en .
+
+
 ###  http://example.org/zilf/PUTREST
 zilf:PUTREST rdf:type owl:NamedIndividual ,
                       skos:Concept ;
@@ -799,6 +813,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:PTSIZE ,
                                  zilf:PUSH ,
                                  zilf:PUT ,
+                                 zilf:PUTB ,
                                  zilf:RANDOM ,
                                  zilf:REMOVE .
 
