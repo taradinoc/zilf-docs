@@ -244,6 +244,18 @@ zilf:EVAL rdf:type owl:NamedIndividual ,
           skos:prefLabel "<EVAL value [environment]>"@en .
 
 
+###  http://example.org/zilf/FSET
+zilf:FSET rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:ZCodeBuiltIns ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition "Z-code built-in function adds flag to object."@en ;
+          skos:editorialNote "ZILF supports FSET in all versions."@en ;
+          skos:example "<FSET ,TRAP-DOOR ,OPENBIT> --> Marks the trap-door as open"@en ;
+          skos:historyNote "Zapf syntax: FSET, Inform syntax: set_attr"@en ;
+          skos:prefLabel "<FSET object flag>"@en .
+
+
 ###  http://example.org/zilf/GET
 zilf:GET rdf:type owl:NamedIndividual ,
                   skos:Concept ;
@@ -875,7 +887,8 @@ zilf:VERB-SYNONYM rdf:type owl:NamedIndividual ,
 zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                             skos:Concept ;
                    skos:inScheme zilf:ZILF_Scheme ;
-                   skos:narrower zilf:GET ,
+                   skos:narrower zilf:FSET ,
+                                 zilf:GET ,
                                  zilf:GETB ,
                                  zilf:GETP ,
                                  zilf:GETPT ,
