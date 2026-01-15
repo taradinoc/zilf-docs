@@ -244,6 +244,27 @@ zilf:EVAL rdf:type owl:NamedIndividual ,
           skos:prefLabel "<EVAL value [environment]>"@en .
 
 
+###  http://example.org/zilf/GET
+zilf:GET rdf:type owl:NamedIndividual ,
+                  skos:Concept ;
+         skos:broader zilf:ZCodeBuiltIns ;
+         skos:inScheme zilf:ZILF_Scheme ;
+         skos:definition """Z-code built-in function that returns WORD-record (2 bytes) stored at offset. Note that table is an address in memory so the WORD that is returned is at table+offset*2. It is legal to use, for example, 0 as an address to retrieve information from the header. 
+
+Also see BACK, GETB, PUT, PUTB and REST."""@en ;
+         skos:editorialNote "ZILF supports GET in all versions."@en ;
+         skos:example "<GET <TABLE 0 1 2 3> 2>  ;  2"@en ;
+         skos:historyNote "Zapf syntax: GET, Inform syntax: loadw"@en ;
+         skos:prefLabel "<GET table offset>"@en .
+
+
+###  http://example.org/zilf/GETB
+zilf:GETB rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:prefLabel "<GETB table offset>"@en .
+
+
 ###  http://example.org/zilf/GLOBAL
 zilf:GLOBAL rdf:type owl:NamedIndividual ,
                      skos:Concept ;
@@ -820,7 +841,8 @@ zilf:VERB-SYNONYM rdf:type owl:NamedIndividual ,
 zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                             skos:Concept ;
                    skos:inScheme zilf:ZILF_Scheme ;
-                   skos:narrower zilf:PICINF ,
+                   skos:narrower zilf:GET ,
+                                 zilf:PICINF ,
                                  zilf:PICSET ,
                                  zilf:POP ,
                                  zilf:PTSIZE ,
