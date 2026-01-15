@@ -202,6 +202,19 @@
 ```
 
 
+### PTSIZE
+```zil
+<OBJECT MYOBJECT (FOO 1 2 3)>
+<PTSIZE <GETPT ,MYOBJECT ,P?FOO>>  ;  6
+```
+
+
+### PUSH
+```zil
+<PUSH 123>
+```
+
+
 ### PUTREST
 ```zil
 <PUTREST (1 2 3) (A B)>  ;  (1 A B)
@@ -239,6 +252,14 @@ ADJECTIVE BRASS SMALL
 .F  ;  <+ 1 2>
 <EVAL .F>  ;  3
 '%<+ 1 2>  ;  3
+```
+
+
+### REMOVE
+```zil
+<OBJECT ANIMAL>
+<OBJECT CAT (LOC ANIMAL)>
+<REMOVE ,CAT)  ;  Detach CAT from ANIMAL
 ```
 
 

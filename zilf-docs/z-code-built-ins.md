@@ -35,3 +35,36 @@ Z-code built-in function used inside ROUTINE that pops a value from a stack. If 
 **History:** Zapf syntax: POP, Inform syntax: pull
 
 ---
+
+### PTSIZE
+**Usage:** `<PTSIZE property-value>`
+
+Z-code built-in function that gets the property size in bytes at property-address.
+
+> **Note:** ZILF supports PTSIZE in all versions.
+
+**History:** Zapf syntax: PTSIZE, Inform syntax: get_prop_len
+
+---
+
+### PUSH
+**Usage:** `<PUSH value>`
+
+Z-code built-in function that pushes value on the game stack.
+
+> **Note:** ZILF supports POP in all versions.
+
+**History:** Zapf syntax: PUT, Inform syntax: storew
+
+---
+
+### REMOVE
+**Usage:** `<REMOVE object>`
+
+Z-code built-in function that removes object from parent. To reattach it to another object, see MOVE.
+
+> **Note:** ZILF supports REMOVE in all versions.
+
+**History:** Zapf syntax: REMOVE, Inform syntax: remove_obj
+
+---
