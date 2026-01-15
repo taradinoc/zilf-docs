@@ -508,7 +508,7 @@ Also see BACK, GET, GETB, PUT and REST."""@en ;
 ###  http://example.org/zilf/PUTP
 zilf:PUTP rdf:type owl:NamedIndividual ,
                    skos:Concept ;
-          skos:broader zilf:PUTP ;
+          skos:broader zilf:ZCodeBuiltIns ;
           skos:inScheme zilf:ZILF_Scheme ;
           skos:definition "Z-code built-in function that puts value into property on the object."@en ;
           skos:editorialNote "ZILF supports PUTP in all versions."@en ;
