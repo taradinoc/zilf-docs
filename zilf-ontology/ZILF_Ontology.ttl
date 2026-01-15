@@ -476,6 +476,21 @@ zilf:PUSH rdf:type owl:NamedIndividual ,
           skos:prefLabel "<PUSH value>"@en .
 
 
+###  http://example.org/zilf/PUT
+zilf:PUT rdf:type owl:NamedIndividual ,
+                  skos:Concept ;
+         skos:broader zilf:ZCodeBuiltIns ;
+         skos:inScheme zilf:ZILF_Scheme ;
+         skos:definition """Z-code built-in function that puts a 16-bit WORD value in the table at word position offset. Actual address is table-address+offset*2. Note that table can be a byte-address in dynamic memory. 
+
+Also see BACK, GET, GETB, PUTB and REST."""@en ;
+         skos:editorialNote "ZILF supports PUT in all versions."@en ;
+         skos:example """<PUT ,MYTABLE 1 123>  ;  Stores 123 at position 1 in MYTABLE
+<PUT 0 8 <BOR <GET 0 8> 2>>  ;  Sets bit 1 in Flags 2 in header (force monospace)"""@en ;
+         skos:historyNote "Zapf syntax: PUT, Inform syntax: storew"@en ;
+         skos:prefLabel "<PUT table offset value>"@en .
+
+
 ###  http://example.org/zilf/PUTREST
 zilf:PUTREST rdf:type owl:NamedIndividual ,
                       skos:Concept ;
@@ -581,7 +596,7 @@ zilf:RANDOM rdf:type owl:NamedIndividual ,
             skos:broader zilf:ZCodeBuiltIns ;
             skos:inScheme zilf:ZILF_Scheme ;
             skos:definition "Z-code built-in function that returns a random number between 1 and range. If range is negative the randomizer is reseeded with -range (absolute value of range)."@en ;
-            skos:editorialNote "ZILF supports PTSIZE in all versions."@en ;
+            skos:editorialNote "ZILF supports RANDOM in all versions."@en ;
             skos:example "<- <RANDOM 101> 1>  ;  Generates random number between 0-100"@en ;
             skos:historyNote "Zapf syntax: RANDOM, Inform syntax: random"@en ;
             skos:prefLabel "<RANDOM range>"@en .
@@ -783,6 +798,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:POP ,
                                  zilf:PTSIZE ,
                                  zilf:PUSH ,
+                                 zilf:PUT ,
                                  zilf:RANDOM ,
                                  zilf:REMOVE .
 
