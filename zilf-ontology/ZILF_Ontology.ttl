@@ -505,6 +505,19 @@ Also see BACK, GET, GETB, PUT and REST."""@en ;
           skos:prefLabel "<PUTB table offset value>"@en .
 
 
+###  http://example.org/zilf/PUTP
+zilf:PUTP rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:PUTP ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition "Z-code built-in function that puts value into property on the object."@en ;
+          skos:editorialNote "ZILF supports PUTP in all versions."@en ;
+          skos:example """<OBJECT MYOBJ (MYPROP 123)>
+<PUTP ,MYOBJ ,P?MYPROP 456>  ;  Stores 456 in property MYPROP on MYOBJ"""@en ;
+          skos:historyNote "Zapf syntax: PUTP, Inform syntax: put_prop"@en ;
+          skos:prefLabel "<PUTP object property value>"@en .
+
+
 ###  http://example.org/zilf/PUTREST
 zilf:PUTREST rdf:type owl:NamedIndividual ,
                       skos:Concept ;
@@ -814,6 +827,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:PUSH ,
                                  zilf:PUT ,
                                  zilf:PUTB ,
+                                 zilf:PUTP ,
                                  zilf:RANDOM ,
                                  zilf:REMOVE .
 
