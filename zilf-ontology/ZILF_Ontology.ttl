@@ -285,6 +285,20 @@ zilf:GETP rdf:type owl:NamedIndividual ,
           skos:prefLabel "<GETP object property>"@en .
 
 
+###  http://example.org/zilf/GETPT
+zilf:GETPT rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:ZCodeBuiltIns ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Z-code built-in that gets property address from object. Returns 0 (false) if property is not declared in the object."@en ;
+           skos:editorialNote "ZILF supports GETPT in all versions."@en ;
+           skos:example """<OBJECT MYOBJ (MYPROP 123)>
+<GET <GETPT ,MYOBJ ,P?MYPROP> 0>  ;  123
+<GETPT ,MYOBJ ,P?MYPROP2>  ;  0"""@en ;
+           skos:historyNote "Zapf syntax: GETPT, Inform syntax: get_prop_addr"@en ;
+           skos:prefLabel "<GETPT object property>"@en .
+
+
 ###  http://example.org/zilf/GLOBAL
 zilf:GLOBAL rdf:type owl:NamedIndividual ,
                      skos:Concept ;
@@ -864,6 +878,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                    skos:narrower zilf:GET ,
                                  zilf:GETB ,
                                  zilf:GETP ,
+                                 zilf:GETPT ,
                                  zilf:PICINF ,
                                  zilf:PICSET ,
                                  zilf:POP ,
