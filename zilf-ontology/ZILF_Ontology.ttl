@@ -451,6 +451,19 @@ zilf:PTABLE rdf:type owl:NamedIndividual ,
             skos:prefLabel "<PTABLE [(flags ...)] values ...>"@en .
 
 
+###  http://example.org/zilf/PTSIZE
+zilf:PTSIZE rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "Z-code built-in function that gets the property size in bytes at property-address."@en ;
+            skos:editorialNote "ZILF supports PTSIZE in all versions."@en ;
+            skos:example """<OBJECT MYOBJECT (FOO 1 2 3)>
+<PTSIZE <GETPT ,MYOBJECT ,P?FOO>>  ;  6"""@en ;
+            skos:historyNote "Zapf syntax: PTSIZE, Inform syntax: get_prop_len"@en ;
+            skos:prefLabel "<PTSIZE property-value>"@en .
+
+
 ###  http://example.org/zilf/PUSH
 zilf:PUSH rdf:type owl:NamedIndividual ,
                    skos:Concept ;
@@ -742,6 +755,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                    skos:narrower zilf:PICINF ,
                                  zilf:PICSET ,
                                  zilf:POP ,
+                                 zilf:PTSIZE ,
                                  zilf:PUSH .
 
 
