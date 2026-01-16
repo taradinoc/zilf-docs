@@ -103,6 +103,45 @@
 ```
 
 
+### FSET
+```zil
+<FSET ,TRAP-DOOR ,OPENBIT> --> Marks the trap-door as open
+```
+
+
+### FSET?
+```zil
+<FSET? ,TRAP-DOOR ,OPENBIT>  ;  True if OPENBIT is set
+```
+
+
+### GET
+```zil
+<GET <TABLE 0 1 2 3> 2>  ;  2
+```
+
+
+### GETB
+```zil
+<GETB <TABLE (BYTE) !\A !\B !\C !\D> 2>  ;  !\C
+```
+
+
+### GETP
+```zil
+<OBJECT MYOBJ (MYPROP 123)>
+<GETP ,MYOBJ ,P?MYPROP>  ;  123
+```
+
+
+### GETPT
+```zil
+<OBJECT MYOBJ (MYPROP 123)>
+<GET <GETPT ,MYOBJ ,P?MYPROP> 0>  ;  123
+<GETPT ,MYOBJ ,P?MYPROP2>  ;  0
+```
+
+
 ### GLOBAL
 ```zil
 <GLOBAL MYVAR 0>
@@ -215,6 +254,26 @@
 ```
 
 
+### PUT
+```zil
+<PUT ,MYTABLE 1 123>  ;  Stores 123 at position 1 in MYTABLE
+<PUT 0 8 <BOR <GET 0 8> 2>>  ;  Sets bit 1 in Flags 2 in header (force monospace)
+```
+
+
+### PUTB
+```zil
+<PUTB ,MYTABLE 1 !\A>  ;  Stores character A at position 1 in MYTABLE
+```
+
+
+### PUTP
+```zil
+<OBJECT MYOBJ (MYPROP 123)>
+<PUTP ,MYOBJ ,P?MYPROP 456>  ;  Stores 456 in property MYPROP on MYOBJ
+```
+
+
 ### PUTREST
 ```zil
 <PUTREST (1 2 3) (A B)>  ;  (1 A B)
@@ -252,6 +311,12 @@ ADJECTIVE BRASS SMALL
 .F  ;  <+ 1 2>
 <EVAL .F>  ;  3
 '%<+ 1 2>  ;  3
+```
+
+
+### RANDOM
+```zil
+<- <RANDOM 101> 1>  ;  Generates random number between 0-100
 ```
 
 
