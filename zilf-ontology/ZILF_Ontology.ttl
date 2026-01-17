@@ -933,6 +933,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:RANDOM ,
                                  zilf:REMOVE ,
                                  <http://example.org/zilf/F?> ,
+                                 <http://example.org/zilf/FIRST?> ,
                                  <http://example.org/zilf/FSET?> .
 
 
@@ -954,6 +955,18 @@ zilf:ZILF_Scheme rdf:type owl:NamedIndividual ,
                              skos:example """<F? <=? 1 1>>  ;  False
 <F? <=? 1 2>>  ;  True"""@en ;
                              skos:prefLabel "<F? expression>"@en .
+
+
+###  http://example.org/zilf/FIRST?
+<http://example.org/zilf/FIRST?> rdf:type owl:NamedIndividual ,
+                                          skos:Concept ;
+                                 skos:broader zilf:ZCodeBuiltIns ;
+                                 skos:inScheme zilf:ZILF_Scheme ;
+                                 skos:definition "Z-code built-in function that returns the first object inside (contained) in the object. Returns 0 (false) if no object exists."@en ;
+                                 skos:editorialNote "ZILF supports FIRST? in all versions."@en ;
+                                 skos:example "<SET RM <FIRST? ,ROOMS>>  ;  Sets RM to first object in ROOMS. Also evaluates to true (all values not 0 is true)"@en ;
+                                 skos:historyNote "Zapf syntax: FIRST?, Inform syntax: get_child"@en ;
+                                 skos:prefLabel "<FIRST? object>"@en .
 
 
 ###  http://example.org/zilf/FSET?
