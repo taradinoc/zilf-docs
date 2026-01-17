@@ -935,7 +935,7 @@ zilf:ZILF_Scheme rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/F?
 <http://example.org/zilf/F?> rdf:type owl:NamedIndividual ,
                                       skos:Concept ;
-                             skos:broader <http://example.org/zilf/F?> ;
+                             skos:broader zilf:ZCodeBuiltIns ;
                              skos:inScheme zilf:ZILF_Scheme ;
                              skos:definition "Z-code built-in predicate that tests is expression evaluates to false."@en ;
                              skos:example """<F? <=? 1 1>>  ;  False
