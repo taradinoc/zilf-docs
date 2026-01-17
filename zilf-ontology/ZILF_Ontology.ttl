@@ -231,7 +231,9 @@ zilf:ERASE rdf:type owl:NamedIndividual ,
                     skos:Concept ;
            skos:broader zilf:ZCodeBuiltIns ;
            skos:inScheme zilf:ZILF_Scheme ;
-           skos:definition """Versions 4 and 5: if the value is 1, erase from the current cursor position to the end of its line in the current window. If the value is anything other than 1, do nothing.  
+           skos:definition """Z-code built-in function that erases from the current cursor position. This functions behavior is dependent on the supported version.
+
+Versions 4 and 5: if the value is 1, erase from the current cursor position to the end of its line in the current window. If the value is anything other than 1, do nothing.  
 
 Version 6: if the value is 1, erase from the current cursor position to the end of its line in the current window. If not, erase the given number of pixels minus one across from the cursor (clipped to stay inside the right margin). The cursor does not move."""@en ;
            skos:editorialNote "ZILF supports ERASE in versions 4-6."@en ;
@@ -917,6 +919,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:PUTP ,
                                  zilf:RANDOM ,
                                  zilf:REMOVE ,
+                                 <http://example.org/zilf/F?> ,
                                  <http://example.org/zilf/FSET?> .
 
 
@@ -927,6 +930,17 @@ zilf:ZILF_Scheme rdf:type owl:NamedIndividual ,
                                     zilf:ObjectSystem ,
                                     zilf:ParserSystem ;
                  skos:prefLabel "ZILF Reference Scheme"@en .
+
+
+###  http://example.org/zilf/F?
+<http://example.org/zilf/F?> rdf:type owl:NamedIndividual ,
+                                      skos:Concept ;
+                             skos:broader <http://example.org/zilf/F?> ;
+                             skos:inScheme zilf:ZILF_Scheme ;
+                             skos:definition "Z-code built-in predicate that tests is expression evaluates to false."@en ;
+                             skos:example """<F? <=? 1 1>>  ;  False
+<F? <=? 1 2>>  ;  True"""@en ;
+                             skos:prefLabel "<F? expression>"@en .
 
 
 ###  http://example.org/zilf/FSET?
