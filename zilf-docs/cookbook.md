@@ -90,6 +90,12 @@
 ```
 
 
+### ERASE
+```zil
+<ERASE 1>  ;  Clears from cursor to end of line
+```
+
+
 ### EVAL
 ```zil
 <SET F '<+ 1 2>> 
@@ -100,6 +106,25 @@
 <DEFINE RIGHT ("BIND" E 'B "AUX" (A 1)) <EVAL .B .E>> 
 <WRONG .A> ; 1
 <RIGHT .A> ; 0
+```
+
+
+### F?
+```zil
+<F? <=? 1 1>>  ;  False
+<F? <=? 1 2>>  ;  True
+```
+
+
+### FCLEAR
+```zil
+<FCLEAR ,TRAP-DOOR ,OPENBIT>  ;  Marks the trap-door as closed
+```
+
+
+### FIRST?
+```zil
+<SET RM <FIRST? ,ROOMS>>  ;  Sets RM to first object in ROOMS. Also evaluates to true (all values not 0 is true)
 ```
 
 

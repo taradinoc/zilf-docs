@@ -3,6 +3,50 @@
 # Z-Code Built-ins
 ---
 
+### ERASE
+**Usage:** `<ERASE value>`
+
+Z-code built-in function that erases from the current cursor position. This functions behavior is dependent on the supported version.
+
+Versions 4 and 5: if the value is 1, erase from the current cursor position to the end of its line in the current window. If the value is anything other than 1, do nothing.  
+
+Version 6: if the value is 1, erase from the current cursor position to the end of its line in the current window. If not, erase the given number of pixels minus one across from the cursor (clipped to stay inside the right margin). The cursor does not move.
+
+> **Note:** ZILF supports ERASE in versions 4-6.
+
+**History:** Zapf syntax: ERASE, Inform syntax: erase_line
+
+---
+
+### F?
+**Usage:** `<F? expression>`
+
+Z-code built-in predicate that tests is expression evaluates to false.
+
+---
+
+### FCLEAR
+**Usage:** `<FCLEAR object flag>`
+
+Z-code built-in function that removes flag from object.
+
+> **Note:** ZILF supports FCLEAR in all versions.
+
+**History:** Zapf syntax: FCLEAR, Inform syntax: clear_attr
+
+---
+
+### FIRST?
+**Usage:** `<FIRST? object>`
+
+Z-code built-in function that returns the first object inside (contained) in the object. Returns 0 (false) if no object exists.
+
+> **Note:** ZILF supports FIRST? in all versions.
+
+**History:** Zapf syntax: FIRST?, Inform syntax: get_child
+
+---
+
 ### FSET
 **Usage:** `<FSET object flag>`
 
