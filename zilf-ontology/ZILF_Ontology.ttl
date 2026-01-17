@@ -260,6 +260,18 @@ zilf:EVAL rdf:type owl:NamedIndividual ,
           skos:prefLabel "<EVAL value [environment]>"@en .
 
 
+###  http://example.org/zilf/FCLEAR
+zilf:FCLEAR rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "Z-code built-in function that removes flag from object."@en ;
+            skos:editorialNote "ZILF supports FCLEAR in all versions."@en ;
+            skos:example "<FCLEAR ,TRAP-DOOR ,OPENBIT>  ;  Marks the trap-door as closed"@en ;
+            skos:historyNote "Zapf syntax: FCLEAR, Inform syntax: clear_attr"@en ;
+            skos:prefLabel "<FCLEAR object flag>"@en .
+
+
 ###  http://example.org/zilf/FSET
 zilf:FSET rdf:type owl:NamedIndividual ,
                    skos:Concept ;
@@ -904,6 +916,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                             skos:Concept ;
                    skos:inScheme zilf:ZILF_Scheme ;
                    skos:narrower zilf:ERASE ,
+                                 zilf:FCLEAR ,
                                  zilf:FSET ,
                                  zilf:GET ,
                                  zilf:GETB ,
