@@ -709,10 +709,13 @@ zilf:PropSynonym rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/QUIT
 zilf:QUIT rdf:type owl:NamedIndividual ,
                    skos:Concept ;
-          skos:broader zilf:CoreFunctions ;
+          skos:broader zilf:CoreFunctions ,
+                       zilf:ZCodeBuiltIns ;
           skos:inScheme zilf:ZILF_Scheme ;
           skos:definition "MDL built-in function that exits ZILF (interpreter mode) and returns to the operating system with exit-code."@en ;
+          skos:editorialNote "ZILF supports QUIT in all versions."@en ;
           skos:example "<QUIT>"@en ;
+          skos:historyNote "Zapf syntax: QUIT, Inform syntax: quit"@en ;
           skos:prefLabel "<QUIT [exit-code]>"@en .
 
 
@@ -949,6 +952,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:PUT ,
                                  zilf:PUTB ,
                                  zilf:PUTP ,
+                                 zilf:QUIT ,
                                  zilf:RANDOM ,
                                  zilf:REMOVE ,
                                  <http://example.org/zilf/F?> ,
