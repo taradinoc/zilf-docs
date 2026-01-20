@@ -272,6 +272,24 @@ zilf:FCLEAR rdf:type owl:NamedIndividual ,
             skos:prefLabel "<FCLEAR object flag>"@en .
 
 
+###  http://example.org/zilf/FONT
+zilf:FONT rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:ZCodeBuiltIns ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition """Z-code built-in function that Sets current font to number. Returns old fonts number. If the font number is not available 0, return false.
+
+The following numbers map to font types.
+1 := Normal font
+3 := Character graphics font (see section 16 in the Z-Machine Standards Document).
+4 := Monospace (fixed-pitch) font"""@en ;
+          skos:editorialNote "ZILF supports FONT in Versions 5-."@en ;
+          skos:example "<FONT 4>  ;  Sets fixed-pitch font. In versions 3-4, this is done by setting bit 1 of Flags 2 in header <PUT 0 8 <BOR <GET 0 8> 2>>"@en ;
+          skos:historyNote "Zapf syntax: FONT, Inform syntax: set_font"@en ;
+          skos:prefLabel """<FONT number>  ;  Version 5
+<FONT number [window-number]>  ;  Version 6-"""@en .
+
+
 ###  http://example.org/zilf/FSET
 zilf:FSET rdf:type owl:NamedIndividual ,
                    skos:Concept ;
@@ -917,6 +935,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                    skos:inScheme zilf:ZILF_Scheme ;
                    skos:narrower zilf:ERASE ,
                                  zilf:FCLEAR ,
+                                 zilf:FONT ,
                                  zilf:FSET ,
                                  zilf:GET ,
                                  zilf:GETB ,
