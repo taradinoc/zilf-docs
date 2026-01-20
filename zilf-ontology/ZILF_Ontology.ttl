@@ -825,6 +825,19 @@ Default values for \"OPT\" and \"AUX\" are defined by a two-element LIST whose f
              skos:prefLabel "<ROUTINE name [activation-atom] arg-list body ...>"@en .
 
 
+###  http://example.org/zilf/RSTACK
+zilf:RSTACK rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "Z-code built-in function that pops value from the game stack and returns that value."@en ;
+            skos:editorialNote "ZILF supports RSTACK in all versions."@en ;
+            skos:example """<PUSH 42>
+<RSTACK>  ;  Returns 42"""@en ;
+            skos:historyNote "Zapf syntax: RSTACK, Inform syntax: ret_popped"@en ;
+            skos:prefLabel "<RSTACK>"@en .
+
+
 ###  http://example.org/zilf/SET
 zilf:SET rdf:type owl:NamedIndividual ,
                   skos:Concept ;
@@ -979,6 +992,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:REMOVE ,
                                  zilf:RFALSE ,
                                  zilf:RFATAL ,
+                                 zilf:RSTACK ,
                                  <http://example.org/zilf/F?> ,
                                  <http://example.org/zilf/FIRST?> ,
                                  <http://example.org/zilf/FSET?> .
