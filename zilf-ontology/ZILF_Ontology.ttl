@@ -771,6 +771,16 @@ zilf:RFALSE rdf:type owl:NamedIndividual ,
             skos:prefLabel "<RFALSE>"@en .
 
 
+###  http://example.org/zilf/RFATAL
+zilf:RFATAL rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "Z-code built-in function that always exits routine and returns FATAL-VALUE (2). Note that this differs from RETURN that can both exit program blocks and routines."@en ;
+            skos:example "<RFATAL>"@en ;
+            skos:prefLabel "<RFATAL>"@en .
+
+
 ###  http://example.org/zilf/ROOT
 zilf:ROOT rdf:type owl:NamedIndividual ,
                    skos:Concept ;
@@ -968,6 +978,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:RANDOM ,
                                  zilf:REMOVE ,
                                  zilf:RFALSE ,
+                                 zilf:RFATAL ,
                                  <http://example.org/zilf/F?> ,
                                  <http://example.org/zilf/FIRST?> ,
                                  <http://example.org/zilf/FSET?> .
