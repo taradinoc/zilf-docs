@@ -236,7 +236,7 @@ zilf:ERASE rdf:type owl:NamedIndividual ,
 Versions 4 and 5: if the value is 1, erase from the current cursor position to the end of its line in the current window. If the value is anything other than 1, do nothing.  
 
 Version 6: if the value is 1, erase from the current cursor position to the end of its line in the current window. If not, erase the given number of pixels minus one across from the cursor (clipped to stay inside the right margin). The cursor does not move."""@en ;
-           skos:editorialNote "ZILF supports ERASE in versions 4-6."@en ;
+           skos:editorialNote "ZILF supports ERASE in versions 4-."@en ;
            skos:example "<ERASE 1>  ;  Clears from cursor to end of line"@en ;
            skos:historyNote "Zapf syntax: ERASE, Inform syntax: erase_line"@en ;
            skos:prefLabel "<ERASE value>"@en .
@@ -283,7 +283,7 @@ The following numbers map to font types.
 1 := Normal font
 3 := Character graphics font (see section 16 in the Z-Machine Standards Document).
 4 := Monospace (fixed-pitch) font"""@en ;
-          skos:editorialNote "ZILF supports FONT in Versions 5-."@en ;
+          skos:editorialNote "ZILF supports FONT in versions 5-."@en ;
           skos:example "<FONT 4>  ;  Sets fixed-pitch font. In versions 3-4, this is done by setting bit 1 of Flags 2 in header <PUT 0 8 <BOR <GET 0 8> 2>>"@en ;
           skos:historyNote "Zapf syntax: FONT, Inform syntax: set_font"@en ;
           skos:prefLabel """<FONT number>  ;  Version 5
@@ -429,7 +429,7 @@ zilf:PICINF rdf:type owl:NamedIndividual ,
             skos:broader zilf:ZCodeBuiltIns ;
             skos:inScheme zilf:ZILF_Scheme ;
             skos:definition "Z-code built-in function that Writes picture data from picture-number into table. Word 0 of table holds picture width and word 1 holds picture height. Then follows the picture data. If picture-number is 0, the number of available pictures is written into word 0 of table and release number of picture file is written into word 1."@en ;
-            skos:editorialNote "ZILF currently supports PICSET in V6."@en ;
+            skos:editorialNote "ZILF currently supports PICINF in versions 6-."@en ;
             skos:example """<GLOBAL MYPIC <ITABLE 2048 0>>
 <PICINFO 1 ,MYPIC>  ;  Writes picture data into MYPIC"""@en ;
             skos:historyNote "Zapf syntax: PICINF, Inform syntax: picture_data"@en ;
@@ -442,7 +442,7 @@ zilf:PICSET rdf:type owl:NamedIndividual ,
             skos:broader zilf:ZCodeBuiltIns ;
             skos:inScheme zilf:ZILF_Scheme ;
             skos:definition "Z-code built-in function that gives the interpreter a table of picture numbers that the interpreter can then unpack from disc and cache in memory."@en ;
-            skos:editorialNote "ZILF currently supports PICSET in V6."@en ;
+            skos:editorialNote "ZILF currently supports PICSET in versions 6-."@en ;
             skos:example """; From Zork Zero
 <PICSET ,B-PICSET-TBL>"""@en ;
             skos:historyNote "Zapf syntax: PICSET, Inform syntax: picture_table"@en ;
@@ -468,7 +468,7 @@ zilf:POP rdf:type owl:NamedIndividual ,
          skos:broader zilf:ZCodeBuiltIns ;
          skos:inScheme zilf:ZILF_Scheme ;
          skos:definition "Z-code built-in function used inside ROUTINE that pops a value from a stack. If no stack is given, a value is popped from the game stack."@en ;
-         skos:editorialNote "ZILF currently supports POP in V6."@en ;
+         skos:editorialNote "ZILF currently supports POP in versions 6-."@en ;
          skos:example """<PUSH .FOO>
 <SET FOO some-new-value>
 ;code
@@ -971,6 +971,7 @@ zilf:ZILF_Scheme rdf:type owl:NamedIndividual ,
                              skos:broader zilf:ZCodeBuiltIns ;
                              skos:inScheme zilf:ZILF_Scheme ;
                              skos:definition "Z-code built-in predicate that tests is expression evaluates to false."@en ;
+                             skos:editorialNote "ZILF supports FONT in all versions."@en ;
                              skos:example """<F? <=? 1 1>>  ;  False
 <F? <=? 1 2>>  ;  True"""@en ;
                              skos:prefLabel "<F? expression>"@en .
