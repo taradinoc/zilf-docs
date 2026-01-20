@@ -762,6 +762,7 @@ zilf:REMOVE rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/RFALSE
 zilf:RFALSE rdf:type owl:NamedIndividual ,
                      skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
             skos:inScheme zilf:ZILF_Scheme ;
             skos:definition "Z-code built-in function that  always exits routine and returns false (0). Note that this differs from RETURN that can both exit program blocks and routines."@en ;
             skos:editorialNote "ZILF supports RFALSE in all versions."@en ;
@@ -966,6 +967,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:QUIT ,
                                  zilf:RANDOM ,
                                  zilf:REMOVE ,
+                                 zilf:RFALSE ,
                                  <http://example.org/zilf/F?> ,
                                  <http://example.org/zilf/FIRST?> ,
                                  <http://example.org/zilf/FSET?> .
