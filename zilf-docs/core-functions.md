@@ -167,6 +167,10 @@ Note that this actually changes the list.
 
 MDL built-in function that exits ZILF (interpreter mode) and returns to the operating system with exit-code.
 
+> **Note:** ZILF supports QUIT in all versions.
+
+**History:** Zapf syntax: QUIT, Inform syntax: quit
+
 ---
 
 ### QUOTE

@@ -128,6 +128,12 @@
 ```
 
 
+### FONT
+```zil
+<FONT 4>  ;  Sets fixed-pitch font. In versions 3-4, this is done by setting bit 1 of Flags 2 in header <PUT 0 8 <BOR <GET 0 8> 2>>
+```
+
+
 ### FSET
 ```zil
 <FSET ,TRAP-DOOR ,OPENBIT> --> Marks the trap-door as open
@@ -353,6 +359,18 @@ ADJECTIVE BRASS SMALL
 ```
 
 
+### RFALSE
+```zil
+<RFALSE>
+```
+
+
+### RFATAL
+```zil
+<RFATAL>
+```
+
+
 ### ROOT
 ```zil
 <ROOT>
@@ -370,6 +388,19 @@ ADJECTIVE BRASS SMALL
                 <MOVE .X .DST> 
                 <SET X .N>) 
             (T <RETURN>)>>>
+```
+
+
+### RSTACK
+```zil
+<PUSH 42>
+<RSTACK>  ;  Returns 42
+```
+
+
+### RTRUE
+```zil
+<RTRUE>
 ```
 
 

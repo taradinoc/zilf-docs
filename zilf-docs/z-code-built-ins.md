@@ -12,7 +12,7 @@ Versions 4 and 5: if the value is 1, erase from the current cursor position to t
 
 Version 6: if the value is 1, erase from the current cursor position to the end of its line in the current window. If not, erase the given number of pixels minus one across from the cursor (clipped to stay inside the right margin). The cursor does not move.
 
-> **Note:** ZILF supports ERASE in versions 4-6.
+> **Note:** ZILF supports ERASE in versions 4-.
 
 **History:** Zapf syntax: ERASE, Inform syntax: erase_line
 
@@ -22,6 +22,8 @@ Version 6: if the value is 1, erase from the current cursor position to the end 
 **Usage:** `<F? expression>`
 
 Z-code built-in predicate that tests is expression evaluates to false.
+
+> **Note:** ZILF supports FONT in all versions.
 
 ---
 
@@ -44,6 +46,22 @@ Z-code built-in function that returns the first object inside (contained) in the
 > **Note:** ZILF supports FIRST? in all versions.
 
 **History:** Zapf syntax: FIRST?, Inform syntax: get_child
+
+---
+
+### FONT
+**Usage:** `Version 5: <FONT number>, Version 6-: <FONT number [window-number]>`
+
+Z-code built-in function that Sets current font to number. Returns old fonts number. If the font number is not available 0, return false.
+
+The following numbers map to font types.
+1 := Normal font
+3 := Character graphics font (see section 16 in the Z-Machine Standards Document).
+4 := Monospace (fixed-pitch) font
+
+> **Note:** ZILF supports FONT in versions 5-.
+
+**History:** Zapf syntax: FONT, Inform syntax: set_font
 
 ---
 
@@ -122,7 +140,7 @@ Z-code built-in that gets property address from object. Returns 0 (false) if pro
 
 Z-code built-in function that Writes picture data from picture-number into table. Word 0 of table holds picture width and word 1 holds picture height. Then follows the picture data. If picture-number is 0, the number of available pictures is written into word 0 of table and release number of picture file is written into word 1.
 
-> **Note:** ZILF currently supports PICSET in V6.
+> **Note:** ZILF currently supports PICINF in versions 6-.
 
 **History:** Zapf syntax: PICINF, Inform syntax: picture_data
 
@@ -133,7 +151,7 @@ Z-code built-in function that Writes picture data from picture-number into table
 
 Z-code built-in function that gives the interpreter a table of picture numbers that the interpreter can then unpack from disc and cache in memory.
 
-> **Note:** ZILF currently supports PICSET in V6.
+> **Note:** ZILF currently supports PICSET in versions 6-.
 
 **History:** Zapf syntax: PICSET, Inform syntax: picture_table
 
@@ -144,7 +162,7 @@ Z-code built-in function that gives the interpreter a table of picture numbers t
 
 Z-code built-in function used inside ROUTINE that pops a value from a stack. If no stack is given, a value is popped from the game stack.
 
-> **Note:** ZILF currently supports POP in V6.
+> **Note:** ZILF currently supports POP in versions 6-.
 
 **History:** Zapf syntax: POP, Inform syntax: pull
 
@@ -209,6 +227,17 @@ Z-code built-in function that puts value into property on the object.
 
 ---
 
+### QUIT
+**Usage:** `<QUIT [exit-code]>`
+
+MDL built-in function that exits ZILF (interpreter mode) and returns to the operating system with exit-code.
+
+> **Note:** ZILF supports QUIT in all versions.
+
+**History:** Zapf syntax: QUIT, Inform syntax: quit
+
+---
+
 ### RANDOM
 **Usage:** `<RANDOM range>`
 
@@ -228,5 +257,45 @@ Z-code built-in function that removes object from parent. To reattach it to anot
 > **Note:** ZILF supports REMOVE in all versions.
 
 **History:** Zapf syntax: REMOVE, Inform syntax: remove_obj
+
+---
+
+### RFALSE
+**Usage:** `<RFALSE>`
+
+Z-code built-in function that  always exits routine and returns false (0). Note that this differs from RETURN that can both exit program blocks and routines.
+
+> **Note:** ZILF supports RFALSE in all versions.
+
+**History:** Zapf syntax: RFALSE, Inform syntax: rfalse
+
+---
+
+### RFATAL
+**Usage:** `<RFATAL>`
+
+Z-code built-in function that always exits routine and returns FATAL-VALUE (2). Note that this differs from RETURN that can both exit program blocks and routines.
+
+---
+
+### RSTACK
+**Usage:** `<RSTACK>`
+
+Z-code built-in function that pops value from the game stack and returns that value.
+
+> **Note:** ZILF supports RSTACK in all versions.
+
+**History:** Zapf syntax: RSTACK, Inform syntax: ret_popped
+
+---
+
+### RTRUE
+**Usage:** `<RTRUE>`
+
+Z-code built-in function that always exits routine and returns true (1). Note that this differs from RETURN that can both exit program blocks and routines.
+
+> **Note:** ZILF supports RTRUE in all versions.
+
+**History:** Zapf syntax: RTRUE, Inform syntax: rtrue
 
 ---
