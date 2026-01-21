@@ -849,6 +849,27 @@ zilf:RTRUE rdf:type owl:NamedIndividual ,
            skos:prefLabel "<RTRUE>"@en .
 
 
+###  http://example.org/zilf/SAVE
+zilf:SAVE rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:ZCodeBuiltIns ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition """Z-code built-in function that saves a game state that later can be restored. All questions about filename and path are asked by the interpreter. 
+
+SAVE returns 0 if SAVE fails and 1 if it is successful. 
+
+SAVE also can return 2. That means this is a continuation from a successful RESTORE.
+
+See RESTORE on code example on SAVE and RESTORE.
+
+See The Inform Designer’s Manual (ch. §42, p. 319) and The Z-machine Standards Document for a description about how to SAVE and RESTORE auxiliary files."""@en ;
+          skos:editorialNote "ZILF supports SAVE in all versions."@en ;
+          skos:example "<SAVE>  ;  Versions 1-4"@en ;
+          skos:historyNote "Zapf syntax: SAVE, Inform syntax: save"@en ;
+          skos:prefLabel """<SAVE>  ;  Versions 1-4, 
+<SAVE [table] [bytes] [filename]>  ;  Versions 5-"""@en .
+
+
 ###  http://example.org/zilf/SET
 zilf:SET rdf:type owl:NamedIndividual ,
                   skos:Concept ;
@@ -1005,6 +1026,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:RFATAL ,
                                  zilf:RSTACK ,
                                  zilf:RTRUE ,
+                                 zilf:SAVE ,
                                  <http://example.org/zilf/F?> ,
                                  <http://example.org/zilf/FIRST?> ,
                                  <http://example.org/zilf/FSET?> .
