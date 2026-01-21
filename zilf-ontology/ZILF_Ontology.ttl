@@ -864,7 +864,30 @@ See RESTORE on code example on SAVE and RESTORE.
 
 See The Inform Designer’s Manual (ch. §42, p. 319) and The Z-machine Standards Document for a description about how to SAVE and RESTORE auxiliary files."""@en ;
           skos:editorialNote "ZILF supports SAVE in all versions."@en ;
-          skos:example "<SAVE>  ;  Versions 1-4"@en ;
+          skos:example """;  Versions 1-4
+<SAVE>
+
+;  Version 5-
+;  From Zork Zero
+<ROUTINE SOFT-SAVE-DEFS ()
+    <CLEAR 0>
+    <SCREEN 0>
+    <COND (<NOT <SAVE ,FKEY-TBL
+                             ,FKEYS-STRTABLE-LEN
+                             ,DEFS-NAME>>
+                    <TELL \"Failed.\">)>
+    <CLEAR 0>
+    <SCREEN ,SOFT-WINDOW>
+    <RFALSE>>
+
+<ROUTINE SOFT-RESTORE-DEFS ()
+    <CLEAR 0>
+    <SCREEN 0>
+    <COND (<NOT <RESTORE ,FKEY-TBL ,FKEYS-STRTABLE-LEN ,DEFS-NAME>>
+                    <TELL \"Failed.\">)>
+    <CLEAR 0>
+    <SCREEN ,SOFT-WINDOW>
+    <RFALSE>>"""@en ;
           skos:historyNote "Zapf syntax: SAVE, Inform syntax: save"@en ;
           skos:prefLabel """<SAVE>  ;  Versions 1-4, 
 <SAVE [table] [bytes] [filename]>  ;  Versions 5-"""@en .
