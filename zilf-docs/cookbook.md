@@ -404,6 +404,12 @@ ADJECTIVE BRASS SMALL
 ```
 
 
+### SAVE
+```zil
+<SAVE>  ;  Versions 1-4
+```
+
+
 ### SET
 ```zil
 <PROG (X) <SET X 5> <RETURN .X>> ; Returns 5 after setting X.

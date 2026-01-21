@@ -299,3 +299,23 @@ Z-code built-in function that always exits routine and returns true (1). Note th
 **History:** Zapf syntax: RTRUE, Inform syntax: rtrue
 
 ---
+
+### SAVE
+**Usage:** `<SAVE>  ;  Versions 1-4, 
+<SAVE [table] [bytes] [filename]>  ;  Versions 5-`
+
+Z-code built-in function that saves a game state that later can be restored. All questions about filename and path are asked by the interpreter. 
+
+SAVE returns 0 if SAVE fails and 1 if it is successful. 
+
+SAVE also can return 2. That means this is a continuation from a successful RESTORE.
+
+See RESTORE on code example on SAVE and RESTORE.
+
+See The Inform Designer’s Manual (ch. §42, p. 319) and The Z-machine Standards Document for a description about how to SAVE and RESTORE auxiliary files.
+
+> **Note:** ZILF supports SAVE in all versions.
+
+**History:** Zapf syntax: SAVE, Inform syntax: save
+
+---
