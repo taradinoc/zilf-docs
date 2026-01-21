@@ -406,7 +406,30 @@ ADJECTIVE BRASS SMALL
 
 ### SAVE
 ```zil
-<SAVE>  ;  Versions 1-4
+;  Versions 1-4
+<SAVE>
+
+;  Version 5-
+;  From Zork Zero
+<ROUTINE SOFT-SAVE-DEFS ()
+    <CLEAR 0>
+    <SCREEN 0>
+    <COND (<NOT <SAVE ,FKEY-TBL
+                             ,FKEYS-STRTABLE-LEN
+                             ,DEFS-NAME>>
+                    <TELL "Failed.">)>
+    <CLEAR 0>
+    <SCREEN ,SOFT-WINDOW>
+    <RFALSE>>
+
+<ROUTINE SOFT-RESTORE-DEFS ()
+    <CLEAR 0>
+    <SCREEN 0>
+    <COND (<NOT <RESTORE ,FKEY-TBL ,FKEYS-STRTABLE-LEN ,DEFS-NAME>>
+                    <TELL "Failed.">)>
+    <CLEAR 0>
+    <SCREEN ,SOFT-WINDOW>
+    <RFALSE>>
 ```
 
 
