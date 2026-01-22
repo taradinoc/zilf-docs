@@ -908,6 +908,21 @@ zilf:SCREEN rdf:type owl:NamedIndividual ,
             skos:prefLabel "<SCREEN window-number>"@en .
 
 
+###  http://example.org/zilf/SCROLL
+zilf:SCROLL rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "Z-code built-in function that scrolls window-number up (pixels is positive) or down (pixels is negative) by the number of supplied pixels. New lines are empty (background color)."@en ;
+            skos:editorialNote "ZILF supports SCROLL in versions 6-."@en ;
+            skos:example """;  From Arthur
+<SETG GL-AUTHOR-SIZE <RT-COUNT-LINES ,K-DIROUT-TBL>>
+<SET AY <* ,GL-AUTHOR-SIZE ,GL-FONT-Y>>
+<SCROLL 0 .AY>"""@en ;
+            skos:historyNote "Zapf syntax: SCROLL, Inform syntax: scroll_window"@en ;
+            skos:prefLabel "<SCROLL window-number pixels>"@en .
+
+
 ###  http://example.org/zilf/SET
 zilf:SET rdf:type owl:NamedIndividual ,
                   skos:Concept ;
@@ -1066,6 +1081,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:RTRUE ,
                                  zilf:SAVE ,
                                  zilf:SCREEN ,
+                                 zilf:SCROLL ,
                                  <http://example.org/zilf/F?> ,
                                  <http://example.org/zilf/FIRST?> ,
                                  <http://example.org/zilf/FSET?> .
