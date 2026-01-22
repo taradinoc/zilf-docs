@@ -992,6 +992,23 @@ See The Inform Designer’s Manual (ch. §42, p. 315-316 and ch. §43) and The Z
 <SOUND number [effect] [volrep] [routine]>  ;  \"Versions 5-\""""@en .
 
 
+###  http://example.org/zilf/SPLIT
+zilf:SPLIT rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:ZCodeBuiltIns ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition """Z-code built-in function that splits the screen  in two parts with the upper part having number rows. If number is 0 the screen is unsplit.The upper screen is window-number 1 and the lower screen is window-number 0.
+
+See SCREEN for example on how to use SPLIT."""@en ;
+           skos:editorialNote "ZILF supports SPLIT in versions 3-."@en ;
+           skos:example """<SPLIT 3>
+<SCREEN 1>
+<TELL \"West of House\">  ;  Split screen in 2 (upper screen is 3 rows) 
+                                               ;  and write \"West of House\" in upper screen"""@en ;
+           skos:historyNote "Zapf syntax: SPLIT, Inform syntax: split_window"@en ;
+           skos:prefLabel "<SPLIT number>"@en .
+
+
 ###  http://example.org/zilf/SPNAME
 zilf:SPNAME rdf:type owl:NamedIndividual ,
                      skos:Concept ;
@@ -1124,6 +1141,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:SET ,
                                  zilf:SETG ,
                                  zilf:SOUND ,
+                                 zilf:SPLIT ,
                                  <http://example.org/zilf/F?> ,
                                  <http://example.org/zilf/FIRST?> ,
                                  <http://example.org/zilf/FSET?> .
