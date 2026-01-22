@@ -933,20 +933,26 @@ zilf:SET rdf:type owl:NamedIndividual ,
 
 Z-code built-in function that stores value in local variable name."""@en ;
          skos:editorialNote "ZILF supports SET in all versions."@en ;
-         skos:example """MDL: <PROG (X) <SET X 5> <RETURN .X>> ; Returns 5 after setting X.
+         skos:example """MDL: <PROG (X) <SET X 5> <RETURN .X>>  ;  Returns 5 after setting X.
 Zapf: <SET MYVAR 42>  ;  Store 42 in local variable MYVAR"""@en ;
          skos:historyNote "Zapf syntax: SET, Inform syntax: store"@en ;
-         skos:prefLabel """MDL: <SET atom value [environment]>
+         skos:prefLabel """MDL: <SET atom value [environment]>,
 Zapf: <SET name value>"""@en .
 
 
 ###  http://example.org/zilf/SETG
 zilf:SETG rdf:type owl:NamedIndividual ,
                    skos:Concept ;
-          skos:broader zilf:CoreFunctions ;
-          skos:definition "MDL built-in function that assigns a value to the global atom. If an atom is already assigned a value, it is changed."@en ;
-          skos:example "<SETG MYVAR 42> ; Store 42 in global atom MYVAR"@en ;
-          skos:prefLabel "<SETG atom value>"@en .
+          skos:broader zilf:CoreFunctions ,
+                       zilf:ZCodeBuiltIns ;
+          skos:definition """MDL built-in function that assigns a value to the global atom. If an atom is already assigned a value, it is changed.
+
+Z-code built-in function that Store value in global variable name. The name variable must be declared with GLOBAL outside the ROUTINE."""@en ;
+          skos:editorialNote "ZILF supports SETG in all versions."@en ;
+          skos:example "MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR"@en ;
+          skos:historyNote "Zapf syntax: SETG, Inform syntax: store"@en ;
+          skos:prefLabel """MDL: <SETG atom value>,
+Zapf: <SETG name value>"""@en .
 
 
 ###  http://example.org/zilf/SETG20
@@ -1089,6 +1095,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:SCREEN ,
                                  zilf:SCROLL ,
                                  zilf:SET ,
+                                 zilf:SETG ,
                                  <http://example.org/zilf/F?> ,
                                  <http://example.org/zilf/FIRST?> ,
                                  <http://example.org/zilf/FSET?> .

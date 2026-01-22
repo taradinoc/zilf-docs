@@ -213,7 +213,7 @@ Default values for "OPT" and "AUX" are defined by a two-element LIST whose first
 ---
 
 ### SET
-**Usage:** `MDL: <SET atom value [environment]>
+**Usage:** `MDL: <SET atom value [environment]>,
 Zapf: <SET name value>`
 
 MDL built-in function that asigns a value to the local atom. It is possible to supply an environment for SET. See EVAL for more about the environment.
@@ -227,9 +227,16 @@ Z-code built-in function that stores value in local variable name.
 ---
 
 ### SETG
-**Usage:** `<SETG atom value>`
+**Usage:** `MDL: <SETG atom value>,
+Zapf: <SETG name value>`
 
 MDL built-in function that assigns a value to the global atom. If an atom is already assigned a value, it is changed.
+
+Z-code built-in function that Store value in global variable name. The name variable must be declared with GLOBAL outside the ROUTINE.
+
+> **Note:** ZILF supports SETG in all versions.
+
+**History:** Zapf syntax: SETG, Inform syntax: store
 
 ---
 

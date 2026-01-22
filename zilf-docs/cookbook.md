@@ -453,14 +453,14 @@ ADJECTIVE BRASS SMALL
 
 ### SET
 ```zil
-MDL: <PROG (X) <SET X 5> <RETURN .X>> ; Returns 5 after setting X.
+MDL: <PROG (X) <SET X 5> <RETURN .X>>  ;  Returns 5 after setting X.
 Zapf: <SET MYVAR 42>  ;  Store 42 in local variable MYVAR
 ```
 
 
 ### SETG
 ```zil
-<SETG MYVAR 42> ; Store 42 in global atom MYVAR
+MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR
 ```
 
 
