@@ -1101,6 +1101,18 @@ zilf:TOP rdf:type owl:NamedIndividual ,
          skos:prefLabel "<TOP array>"@en .
 
 
+###  http://example.org/zilf/USL
+zilf:USL rdf:type owl:NamedIndividual ,
+                  skos:Concept ;
+         skos:broader zilf:ZCodeBuiltIns ;
+         skos:inScheme zilf:ZILF_Scheme ;
+         skos:definition "Z-code built-in function that updates the status line. This command is only recognized in version 3."@en ;
+         skos:editorialNote "ZILF supports USL in version 3."@en ;
+         skos:example "<USL>"@en ;
+         skos:historyNote "Zapf syntax: USL, Inform syntax: show_status"@en ;
+         skos:prefLabel "<USL>"@en .
+
+
 ###  http://example.org/zilf/VALUE
 zilf:VALUE rdf:type owl:NamedIndividual ,
                     skos:Concept ;
@@ -1165,6 +1177,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:SOUND ,
                                  zilf:SPLIT ,
                                  zilf:THROW ,
+                                 zilf:USL ,
                                  <http://example.org/zilf/F?> ,
                                  <http://example.org/zilf/FIRST?> ,
                                  <http://example.org/zilf/FSET?> .
