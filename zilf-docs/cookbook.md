@@ -475,10 +475,10 @@ MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR
 ;  From Sherlock
 <ROUTINE RT-S-CAB-ARRIVES ()
     <COND (<==? ,CAB-RAMP 0>
-        <SOUNDS ,S-HORSE ,S-START 4>)
+        <SOUND ,S-HORSE ,S-START 4>)
         (T
         <SETG CAB-RAMP <- ,CAB-RAMP 1>>
-        <SOUNDS ,S-HORSE ,S-START <- 2 ,CAB-RAMP> 1 RT-S-CAB-ARRIVES>)>>
+        <SOUND ,S-HORSE ,S-START <- 2 ,CAB-RAMP> 1 RT-S-CAB-ARRIVES>)>>
 ```
 
 

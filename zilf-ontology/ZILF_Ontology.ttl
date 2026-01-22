@@ -983,10 +983,10 @@ See The Inform Designer’s Manual (ch. §42, p. 315-316 and ch. §43) and The Z
            skos:example """;  From Sherlock
 <ROUTINE RT-S-CAB-ARRIVES ()
     <COND (<==? ,CAB-RAMP 0>
-        <SOUNDS ,S-HORSE ,S-START 4>)
+        <SOUND ,S-HORSE ,S-START 4>)
         (T
         <SETG CAB-RAMP <- ,CAB-RAMP 1>>
-        <SOUNDS ,S-HORSE ,S-START <- 2 ,CAB-RAMP> 1 RT-S-CAB-ARRIVES>)>>"""@en ;
+        <SOUND ,S-HORSE ,S-START <- 2 ,CAB-RAMP> 1 RT-S-CAB-ARRIVES>)>>"""@en ;
            skos:historyNote "Zapf syntax: SOUND, Inform syntax: sound_effect"@en ;
            skos:prefLabel """<SOUND number [effect] [volume]>  ;  \"Versions 3-4\",
 <SOUND number [effect] [volrep] [routine]>  ;  \"Versions 5-\""""@en .
