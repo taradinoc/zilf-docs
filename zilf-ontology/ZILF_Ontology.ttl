@@ -1055,6 +1055,28 @@ zilf:SYNTAX rdf:type owl:NamedIndividual ,
             skos:prefLabel "SYNTAX"@en .
 
 
+###  http://example.org/zilf/THROW
+zilf:THROW rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:ZCodeBuiltIns ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Z-code built-in function that is used with CATCH. THROW sets the stack to stack-frame and returns value (the result is that execution returns from the routine where the stack-frame was \"caught\" with value as the routines return value. Also see CATCH."@en ;
+           skos:editorialNote "ZILF supports THROW in versions 5-."@en ;
+           skos:example """<ROUTINE TEST-CATCH (\"AUX\" X)
+    <SET X <CATCH>>
+    <THROWER .X>
+    123
+>
+
+<ROUTINE THROWER (F)
+    <THROW 456 .F>
+>
+
+<TEST-CATCH>  ;  456"""@en ;
+           skos:historyNote "Zapf syntax: THROW, Inform syntax: throw"@en ;
+           skos:prefLabel "<THROW value stack-frame>"@en .
+
+
 ###  http://example.org/zilf/TIME
 zilf:TIME rdf:type owl:NamedIndividual ,
                    skos:Concept ;
@@ -1142,6 +1164,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:SETG ,
                                  zilf:SOUND ,
                                  zilf:SPLIT ,
+                                 zilf:THROW ,
                                  <http://example.org/zilf/F?> ,
                                  <http://example.org/zilf/FIRST?> ,
                                  <http://example.org/zilf/FSET?> .
