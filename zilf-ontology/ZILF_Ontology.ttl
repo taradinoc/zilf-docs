@@ -1116,16 +1116,26 @@ zilf:USL rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/VALUE
 zilf:VALUE rdf:type owl:NamedIndividual ,
                     skos:Concept ;
-           skos:broader zilf:CoreFunctions ;
+           skos:broader zilf:CoreFunctions ,
+                        zilf:ZCodeBuiltIns ;
            skos:inScheme zilf:ZILF_Scheme ;
-           skos:definition "MDL built-in function that returns the value of an atom. If  the atom has an LVAL then the LVAL is returned, otherwise the GVAL of the atom is returned."@en ;
-           skos:editorialNote "It is possible to supply an environment for VALUE. See EVAL for more about the environment."@en ;
-           skos:example """<SETG X 3>
+           skos:definition """MDL built-in function that returns the value of an atom. If  the atom has an LVAL then the LVAL is returned, otherwise the GVAL of the atom is returned. It is possible to supply an environment for VALUE. See EVAL for more about the environment.
+
+Z-code built-in function that loads name/number. Note that this command is mostly redundant and rarely used."""@en ;
+           skos:editorialNote "ZILF supports VALUE in all versions."@en ;
+           skos:example """;  MDL
+<SETG X 3>
 <SET X 4>
 <VALUE X>  ;  4
 <UNASSIGN X>
-<VALUE X>  ;  3"""@en ;
-           skos:prefLabel "<VALUE atom [environment]>"@en .
+<VALUE X>  ;  3
+
+;  Zapf
+<VALUE X>  ;  Loads local or global variable X. 
+                       ;  Recommended to use LVAL or GVAL instead (.X or ,X)"""@en ;
+           skos:historyNote "Zapf syntax: VALUE, Inform syntax: load"@en ;
+           skos:prefLabel """MDL: <VALUE atom [environment]>, 
+Zapf: <VALUE name/number>"""@en .
 
 
 ###  http://example.org/zilf/VERB-SYNONYM
@@ -1178,6 +1188,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:SPLIT ,
                                  zilf:THROW ,
                                  zilf:USL ,
+                                 zilf:VALUE ,
                                  <http://example.org/zilf/F?> ,
                                  <http://example.org/zilf/FIRST?> ,
                                  <http://example.org/zilf/FSET?> .
