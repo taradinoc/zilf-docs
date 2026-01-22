@@ -965,6 +965,33 @@ zilf:SETG20 rdf:type owl:NamedIndividual ,
             skos:prefLabel "<SETG20 atom value>"@en .
 
 
+###  http://example.org/zilf/SOUND
+zilf:SOUND rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:ZCodeBuiltIns ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition """Z-code built-in  that plays sound number (1 = high-pitch beep, 2 = low-pitch beep and 3- is user defined). 
+
+Valid entries for effect are 1 = prepare, 2 = start, 3 = stop and 4 = finished with. 
+
+The volrep is calculated as 256 * repetitions + volume. Repetitions can be 0-255 (255 = infinite) and volume 1-8, 255 (1 =  quiet, 8 = loud, 255 = loudest possible. Note that repetitions only are valid from version 5 onward. For version 5 and later a repetition equal to 0 is considered illegal but it’s suggested that interpreters should treat this as a request to play the sound once. 
+
+If routine is supplied it is called after sound is finished. 
+
+See The Inform Designer’s Manual (ch. §42, p. 315-316 and ch. §43) and The Z-machine Standards Document for a description about how to include sound in games."""@en ;
+           skos:editorialNote "ZILF supports SOUND in versions 3-."@en ;
+           skos:example """;  From Sherlock
+<ROUTINE RT-S-CAB-ARRIVES ()
+    <COND (<==? ,CAB-RAMP 0>
+        <SOUNDS ,S-HORSE ,S-START 4>)
+        (T
+        <SETG CAB-RAMP <- ,CAB-RAMP 1>>
+        <SOUNDS ,S-HORSE ,S-START <- 2 ,CAB-RAMP> 1 RT-S-CAB-ARRIVES>)>>"""@en ;
+           skos:historyNote "Zapf syntax: SOUND, Inform syntax: sound_effect"@en ;
+           skos:prefLabel """<SOUND number [effect] [volume]>  ;  \"Versions 3-4\",
+<SOUND number [effect] [volrep] [routine]>  ;  \"Versions 5-\""""@en .
+
+
 ###  http://example.org/zilf/SPNAME
 zilf:SPNAME rdf:type owl:NamedIndividual ,
                      skos:Concept ;
@@ -1096,6 +1123,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:SCROLL ,
                                  zilf:SET ,
                                  zilf:SETG ,
+                                 zilf:SOUND ,
                                  <http://example.org/zilf/F?> ,
                                  <http://example.org/zilf/FIRST?> ,
                                  <http://example.org/zilf/FSET?> .
