@@ -893,6 +893,21 @@ See The Inform Designer’s Manual (ch. §42, p. 319) and The Z-machine Standard
 <SAVE [table] [bytes] [filename]>  ;  Versions 5-"""@en .
 
 
+###  http://example.org/zilf/SCREEN
+zilf:SCREEN rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "Z-code built-in function that selects window-number for text output. Note that in versions 3-5 only the lower screen (window-number = 0) has text-buffering and word-wrap."@en ;
+            skos:editorialNote "ZILF supports SCREEN in versions 3-."@en ;
+            skos:example """<SPLIT 3>
+<SCREEN 1>
+<TELL \"West of House\">  ;  Split screen in 2 (upper screen is 3 rows) 
+                                               ;  and write \"West of House\" in upper screen"""@en ;
+            skos:historyNote "Zapf syntax: SCREEN, Inform syntax: set_window"@en ;
+            skos:prefLabel "<SCREEN window-number>"@en .
+
+
 ###  http://example.org/zilf/SET
 zilf:SET rdf:type owl:NamedIndividual ,
                   skos:Concept ;
@@ -1050,6 +1065,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:RSTACK ,
                                  zilf:RTRUE ,
                                  zilf:SAVE ,
+                                 zilf:SCREEN ,
                                  <http://example.org/zilf/F?> ,
                                  <http://example.org/zilf/FIRST?> ,
                                  <http://example.org/zilf/FSET?> .
