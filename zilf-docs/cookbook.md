@@ -470,6 +470,27 @@ MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR
 ```
 
 
+### SOUND
+```zil
+;  From Sherlock
+<ROUTINE RT-S-CAB-ARRIVES ()
+    <COND (<==? ,CAB-RAMP 0>
+        <SOUNDS ,S-HORSE ,S-START 4>)
+        (T
+        <SETG CAB-RAMP <- ,CAB-RAMP 1>>
+        <SOUNDS ,S-HORSE ,S-START <- 2 ,CAB-RAMP> 1 RT-S-CAB-ARRIVES>)>>
+```
+
+
+### SPLIT
+```zil
+<SPLIT 3>
+<SCREEN 1>
+<TELL "West of House">  ;  Split screen in 2 (upper screen is 3 rows) 
+                                               ;  and write "West of House" in upper screen
+```
+
+
 ### SPNAME
 ```zil
 <SPNAME atom>

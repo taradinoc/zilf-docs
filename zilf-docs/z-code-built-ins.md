@@ -369,3 +369,36 @@ Z-code built-in function that Store value in global variable name. The name vari
 **History:** Zapf syntax: SETG, Inform syntax: store
 
 ---
+
+### SOUND
+**Usage:** `<SOUND number [effect] [volume]>  ;  "Versions 3-4",
+<SOUND number [effect] [volrep] [routine]>  ;  "Versions 5-"`
+
+Z-code built-in  that plays sound number (1 = high-pitch beep, 2 = low-pitch beep and 3- is user defined). 
+
+Valid entries for effect are 1 = prepare, 2 = start, 3 = stop and 4 = finished with. 
+
+The volrep is calculated as 256 * repetitions + volume. Repetitions can be 0-255 (255 = infinite) and volume 1-8, 255 (1 =  quiet, 8 = loud, 255 = loudest possible. Note that repetitions only are valid from version 5 onward. For version 5 and later a repetition equal to 0 is considered illegal but it’s suggested that interpreters should treat this as a request to play the sound once. 
+
+If routine is supplied it is called after sound is finished. 
+
+See The Inform Designer’s Manual (ch. §42, p. 315-316 and ch. §43) and The Z-machine Standards Document for a description about how to include sound in games.
+
+> **Note:** ZILF supports SOUND in versions 3-.
+
+**History:** Zapf syntax: SOUND, Inform syntax: sound_effect
+
+---
+
+### SPLIT
+**Usage:** `<SPLIT number>`
+
+Z-code built-in function that splits the screen  in two parts with the upper part having number rows. If number is 0 the screen is unsplit.The upper screen is window-number 1 and the lower screen is window-number 0.
+
+See SCREEN for example on how to use SPLIT.
+
+> **Note:** ZILF supports SPLIT in versions 3-.
+
+**History:** Zapf syntax: SPLIT, Inform syntax: split_window
+
+---
