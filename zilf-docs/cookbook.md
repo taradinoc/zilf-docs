@@ -433,9 +433,28 @@ ADJECTIVE BRASS SMALL
 ```
 
 
+### SCREEN
+```zil
+<SPLIT 3>
+<SCREEN 1>
+<TELL "West of House">  ;  Split screen in 2 (upper screen is 3 rows) 
+                                               ;  and write "West of House" in upper screen
+```
+
+
+### SCROLL
+```zil
+;  From Arthur
+<SETG GL-AUTHOR-SIZE <RT-COUNT-LINES ,K-DIROUT-TBL>>
+<SET AY <* ,GL-AUTHOR-SIZE ,GL-FONT-Y>>
+<SCROLL 0 .AY>
+```
+
+
 ### SET
 ```zil
-<PROG (X) <SET X 5> <RETURN .X>> ; Returns 5 after setting X.
+MDL: <PROG (X) <SET X 5> <RETURN .X>> ; Returns 5 after setting X.
+Zapf: <SET MYVAR 42>  ;  Store 42 in local variable MYVAR
 ```
 
 

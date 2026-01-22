@@ -319,3 +319,39 @@ See The Inform Designer’s Manual (ch. §42, p. 319) and The Z-machine Standard
 **History:** Zapf syntax: SAVE, Inform syntax: save
 
 ---
+
+### SCREEN
+**Usage:** `<SCREEN window-number>`
+
+Z-code built-in function that selects window-number for text output. Note that in versions 3-5 only the lower screen (window-number = 0) has text-buffering and word-wrap.
+
+> **Note:** ZILF supports SCREEN in versions 3-.
+
+**History:** Zapf syntax: SCREEN, Inform syntax: set_window
+
+---
+
+### SCROLL
+**Usage:** `<SCROLL window-number pixels>`
+
+Z-code built-in function that scrolls window-number up (pixels is positive) or down (pixels is negative) by the number of supplied pixels. New lines are empty (background color).
+
+> **Note:** ZILF supports SCROLL in versions 6-.
+
+**History:** Zapf syntax: SCROLL, Inform syntax: scroll_window
+
+---
+
+### SET
+**Usage:** `MDL: <SET atom value [environment]>
+Zapf: <SET name value>`
+
+MDL built-in function that asigns a value to the local atom. It is possible to supply an environment for SET. See EVAL for more about the environment.
+
+Z-code built-in function that stores value in local variable name.
+
+> **Note:** ZILF supports SET in all versions.
+
+**History:** Zapf syntax: SET, Inform syntax: store
+
+---

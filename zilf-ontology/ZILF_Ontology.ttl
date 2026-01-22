@@ -926,12 +926,18 @@ zilf:SCROLL rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/SET
 zilf:SET rdf:type owl:NamedIndividual ,
                   skos:Concept ;
-         skos:broader zilf:CoreFunctions ;
+         skos:broader zilf:CoreFunctions ,
+                      zilf:ZCodeBuiltIns ;
          skos:inScheme zilf:ZILF_Scheme ;
-         skos:definition "MDL built-in function that asigns a value to the local atom."@en ;
-         skos:editorialNote "It is possible to supply an environment for SET. See EVAL for more about the environment."@en ;
-         skos:example "<PROG (X) <SET X 5> <RETURN .X>> ; Returns 5 after setting X."@en ;
-         skos:prefLabel "<SET atom value [environment]>"@en .
+         skos:definition """MDL built-in function that asigns a value to the local atom. It is possible to supply an environment for SET. See EVAL for more about the environment.
+
+Z-code built-in function that stores value in local variable name."""@en ;
+         skos:editorialNote "ZILF supports SET in all versions."@en ;
+         skos:example """MDL: <PROG (X) <SET X 5> <RETURN .X>> ; Returns 5 after setting X.
+Zapf: <SET MYVAR 42>  ;  Store 42 in local variable MYVAR"""@en ;
+         skos:historyNote "Zapf syntax: SET, Inform syntax: store"@en ;
+         skos:prefLabel """MDL: <SET atom value [environment]>
+Zapf: <SET name value>"""@en .
 
 
 ###  http://example.org/zilf/SETG
@@ -1082,6 +1088,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:SAVE ,
                                  zilf:SCREEN ,
                                  zilf:SCROLL ,
+                                 zilf:SET ,
                                  <http://example.org/zilf/F?> ,
                                  <http://example.org/zilf/FIRST?> ,
                                  <http://example.org/zilf/FSET?> .
