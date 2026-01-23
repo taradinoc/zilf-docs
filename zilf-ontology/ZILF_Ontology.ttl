@@ -1164,6 +1164,23 @@ zilf:VERIFY rdf:type owl:NamedIndividual ,
             skos:prefLabel "<VERIFY>"@en .
 
 
+###  http://example.org/zilf/WINGET
+zilf:WINGET rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "Z-code built-in function that reads property on window-number."@en ;
+            skos:editorialNote "ZILF supports WINGET in versions 6-."@en ;
+            skos:example """;  From Shogun
+<ROUTINE GO
+    <CLEAR -1>
+    <SPLIT </ <WINGET 0 ,WHIGH> 4>>
+    <ANIMATE ,CEL-TABLE>
+    <QUIT>>"""@en ;
+            skos:historyNote "Zapf syntax: WINGET, Inform syntax: get_wind_prop"@en ;
+            skos:prefLabel "<WINGET window-number property>"@en .
+
+
 ###  http://example.org/zilf/ZCodeBuiltIns
 zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                             skos:Concept ;
@@ -1202,6 +1219,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:USL ,
                                  zilf:VALUE ,
                                  zilf:VERIFY ,
+                                 zilf:WINGET ,
                                  <http://example.org/zilf/F?> ,
                                  <http://example.org/zilf/FIRST?> ,
                                  <http://example.org/zilf/FSET?> .
