@@ -1152,6 +1152,18 @@ zilf:VERB-SYNONYM rdf:type owl:NamedIndividual ,
                   skos:prefLabel "<VERB-SYNONYM original synonyms ...>"@en .
 
 
+###  http://example.org/zilf/VERIFY
+zilf:VERIFY rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "Z-code built-in function that returns true if sum($0040:PLENTH (byte 26-27 in header)) MOD $10000 = PCHKSUM (byte 28-29 in header), otherwise false."@en ;
+            skos:editorialNote "ZILF supports VERIFY in all versions."@en ;
+            skos:example "<VERIFY>"@en ;
+            skos:historyNote "Zapf syntax: VERIFY, Inform syntax: verify"@en ;
+            skos:prefLabel "<VERIFY>"@en .
+
+
 ###  http://example.org/zilf/ZCodeBuiltIns
 zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                             skos:Concept ;
@@ -1189,6 +1201,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:THROW ,
                                  zilf:USL ,
                                  zilf:VALUE ,
+                                 zilf:VERIFY ,
                                  <http://example.org/zilf/F?> ,
                                  <http://example.org/zilf/FIRST?> ,
                                  <http://example.org/zilf/FSET?> .
