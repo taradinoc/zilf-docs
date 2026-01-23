@@ -291,10 +291,15 @@ MDL build-in function that returns the TYPE if the atom is a valid name of a TYP
 ---
 
 ### VALUE
-**Usage:** `<VALUE atom [environment]>`
+**Usage:** `MDL: <VALUE atom [environment]>, 
+Zapf: <VALUE name/number>`
 
-MDL built-in function that returns the value of an atom. If  the atom has an LVAL then the LVAL is returned, otherwise the GVAL of the atom is returned.
+MDL built-in function that returns the value of an atom. If  the atom has an LVAL then the LVAL is returned, otherwise the GVAL of the atom is returned. It is possible to supply an environment for VALUE. See EVAL for more about the environment.
 
-> **Note:** It is possible to supply an environment for VALUE. See EVAL for more about the environment.
+Z-code built-in function that loads name/number. Note that this command is mostly redundant and rarely used.
+
+> **Note:** ZILF supports VALUE in all versions.
+
+**History:** Zapf syntax: VALUE, Inform syntax: load
 
 ---

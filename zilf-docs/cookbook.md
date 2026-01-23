@@ -515,6 +515,22 @@ MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR
 ```
 
 
+### THROW
+```zil
+<ROUTINE TEST-CATCH ("AUX" X)
+    <SET X <CATCH>>
+    <THROWER .X>
+    123
+>
+
+<ROUTINE THROWER (F)
+    <THROW 456 .F>
+>
+
+<TEST-CATCH>  ;  456
+```
+
+
 ### TIME
 ```zil
 <TIME>
@@ -529,6 +545,12 @@ MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR
 ```
 
 
+### USL
+```zil
+<USL>
+```
+
+
 ### VALID-TYPE?
 ```zil
 <VALID-TYPE? VECTOR>  ;  VECTOR
@@ -540,11 +562,15 @@ MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR
 
 ### VALUE
 ```zil
+;  MDL
 <SETG X 3>
 <SET X 4>
 <VALUE X>  ;  4
 <UNASSIGN X>
 <VALUE X>  ;  3
+
+;  Zapf
+<VALUE X>  ;  Loads local or global variable X. Recommended to use LVAL or GVAL instead (.X or ,X)
 ```
 
 
@@ -554,4 +580,21 @@ MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR
 <VERB-SYNONYM GO MOVE>
 <VERB-SYNONYM MAKE CREATE BUILD>
 <VERB-SYNONYM GET OBTAIN ACQUIRE>
+```
+
+
+### VERIFY
+```zil
+<VERIFY>
+```
+
+
+### WINGET
+```zil
+;  From Shogun
+<ROUTINE GO
+    <CLEAR -1>
+    <SPLIT </ <WINGET 0 ,WHIGH> 4>>
+    <ANIMATE ,CEL-TABLE>
+    <QUIT>>
 ```

@@ -402,3 +402,61 @@ See SCREEN for example on how to use SPLIT.
 **History:** Zapf syntax: SPLIT, Inform syntax: split_window
 
 ---
+
+### THROW
+**Usage:** `<THROW value stack-frame>`
+
+Z-code built-in function that is used with CATCH. THROW sets the stack to stack-frame and returns value (the result is that execution returns from the routine where the stack-frame was "caught" with value as the routines return value. Also see CATCH.
+
+> **Note:** ZILF supports THROW in versions 5-.
+
+**History:** Zapf syntax: THROW, Inform syntax: throw
+
+---
+
+### USL
+**Usage:** `<USL>`
+
+Z-code built-in function that updates the status line. This command is only recognized in version 3.
+
+> **Note:** ZILF supports USL in version 3.
+
+**History:** Zapf syntax: USL, Inform syntax: show_status
+
+---
+
+### VALUE
+**Usage:** `MDL: <VALUE atom [environment]>, 
+Zapf: <VALUE name/number>`
+
+MDL built-in function that returns the value of an atom. If  the atom has an LVAL then the LVAL is returned, otherwise the GVAL of the atom is returned. It is possible to supply an environment for VALUE. See EVAL for more about the environment.
+
+Z-code built-in function that loads name/number. Note that this command is mostly redundant and rarely used.
+
+> **Note:** ZILF supports VALUE in all versions.
+
+**History:** Zapf syntax: VALUE, Inform syntax: load
+
+---
+
+### VERIFY
+**Usage:** `<VERIFY>`
+
+Z-code built-in function that returns true if sum($0040:PLENTH (byte 26-27 in header)) MOD $10000 = PCHKSUM (byte 28-29 in header), otherwise false.
+
+> **Note:** ZILF supports VERIFY in all versions.
+
+**History:** Zapf syntax: VERIFY, Inform syntax: verify
+
+---
+
+### WINGET
+**Usage:** `<WINGET window-number property>`
+
+Z-code built-in function that reads property on window-number.
+
+> **Note:** ZILF supports WINGET in versions 6-.
+
+**History:** Zapf syntax: WINGET, Inform syntax: get_wind_prop
+
+---

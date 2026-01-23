@@ -1131,8 +1131,7 @@ Z-code built-in function that loads name/number. Note that this command is mostl
 <VALUE X>  ;  3
 
 ;  Zapf
-<VALUE X>  ;  Loads local or global variable X. 
-                       ;  Recommended to use LVAL or GVAL instead (.X or ,X)"""@en ;
+<VALUE X>  ;  Loads local or global variable X. Recommended to use LVAL or GVAL instead (.X or ,X)"""@en ;
            skos:historyNote "Zapf syntax: VALUE, Inform syntax: load"@en ;
            skos:prefLabel """MDL: <VALUE atom [environment]>, 
 Zapf: <VALUE name/number>"""@en .
