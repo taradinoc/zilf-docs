@@ -1283,6 +1283,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:WINPUT ,
                                  zilf:WINSIZE ,
                                  zilf:XPUSH ,
+                                 zilf:ZWSTR ,
                                  <http://example.org/zilf/F?> ,
                                  <http://example.org/zilf/FIRST?> ,
                                  <http://example.org/zilf/FSET?> .
@@ -1295,6 +1296,22 @@ zilf:ZILF_Scheme rdf:type owl:NamedIndividual ,
                                     zilf:ObjectSystem ,
                                     zilf:ParserSystem ;
                  skos:prefLabel "ZILF Reference Scheme"@en .
+
+
+###  http://example.org/zilf/ZWSTR
+zilf:ZWSTR rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:ZCodeBuiltIns ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Z-code built-in function that encodes length characters starting at offset from ZSCII word zscii-text and stores result in 6-byte Z-encoded dest-table."@en ;
+           skos:editorialNote "ZILF supports ZWSTR in versions 5-."@en ;
+           skos:example """<GLOBAL SRCBUF <TABLE (STRING) \"hello\">>
+<GLOBAL DSTBUF <TABLE 0 0 0>>
+
+<ZWSTR ,SRCBUF 5 1 ,DSTBUF> 
+<PRINTB ,DSTBUF>  ;  \"hello\""""@en ;
+           skos:historyNote "Zapf syntax: ZWSTR, Inform syntax: encode_text"@en ;
+           skos:prefLabel "<ZWSTR src-table length offset dest-table>"@en .
 
 
 ###  http://example.org/zilf/F?
