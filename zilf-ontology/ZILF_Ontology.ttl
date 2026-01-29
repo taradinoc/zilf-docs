@@ -97,6 +97,18 @@ zilf:AVALUE rdf:type owl:NamedIndividual ,
             skos:prefLabel "<AVALUE asoc>"@en .
 
 
+###  http://example.org/zilf/BCOM
+zilf:BCOM rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:ZCodeBuiltIns ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition "Z-code built-in function that is a bitwise NOT, reversing all bits in the WORD value (16 bits)."@en ;
+          skos:editorialNote "ZILF supports BCOM in all versions."@en ;
+          skos:example "<BCOM #2 000011110001111>  ;  #2 1111000011110000"@en ;
+          skos:historyNote "Zapf syntax: BCOM, Inform syntax: not"@en ;
+          skos:prefLabel "<BCOM value>"@en .
+
+
 ###  http://example.org/zilf/BEGIN-SEGMENT
 zilf:BEGIN-SEGMENT rdf:type owl:NamedIndividual ,
                             skos:Concept ;
@@ -1244,7 +1256,8 @@ zilf:XPUSH rdf:type owl:NamedIndividual ,
 zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                             skos:Concept ;
                    skos:inScheme zilf:ZILF_Scheme ;
-                   skos:narrower zilf:ERASE ,
+                   skos:narrower zilf:BCOM ,
+                                 zilf:ERASE ,
                                  zilf:FCLEAR ,
                                  zilf:FONT ,
                                  zilf:FSET ,
