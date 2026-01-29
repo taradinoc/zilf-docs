@@ -195,6 +195,18 @@ zilf:BitTake rdf:type owl:NamedIndividual ,
              skos:prefLabel "TAKEBIT"@en .
 
 
+###  http://example.org/zilf/CATCH
+zilf:CATCH rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:ZCodeBuiltIns ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Used in conjunction with THROW, this Z-code built-in function returns the current state of the stack (the \"stack frame\"). Also see THROW."@en ;
+           skos:editorialNote "ZILF supports CATCH in versions 5-."@en ;
+           skos:example "<SETG CATCH-POINT <CATCH>>  ;  Saves the current stack fram in global variable."@en ;
+           skos:historyNote "Zapf syntax: CATCH, Inform syntax: catch"@en ;
+           skos:prefLabel "<CATCH>"@en .
+
+
 ###  http://example.org/zilf/CoreFunctions
 zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                             skos:Concept ;
@@ -1286,6 +1298,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                    skos:narrower zilf:BCOM ,
                                  zilf:BTST ,
                                  zilf:BUFOUT ,
+                                 zilf:CATCH ,
                                  zilf:ERASE ,
                                  zilf:FCLEAR ,
                                  zilf:FONT ,
