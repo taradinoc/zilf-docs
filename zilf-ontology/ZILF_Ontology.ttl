@@ -154,6 +154,19 @@ zilf:BTST rdf:type owl:NamedIndividual ,
           skos:prefLabel "<BTST value1 value2>"@en .
 
 
+###  http://example.org/zilf/BUFOUT
+zilf:BUFOUT rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "Z-code built-in flag that controls if output is buffered (to enable proper word-wrap). value can be true or false."@en ;
+            skos:editorialNote "ZILF supports BUFOUT in versions 4-."@en ;
+            skos:example """<BUFOUT <>>  ;  Turns off buffering(disables word-wrap)
+<BUFOUT T>  ;  Turns on buffering"""@en ;
+            skos:historyNote "Zapf syntax: BUFOUT, Inform syntax: buffer_mode"@en ;
+            skos:prefLabel "<BUFOUT value>"@en .
+
+
 ###  http://example.org/zilf/BUZZ
 zilf:BUZZ rdf:type owl:NamedIndividual ,
                    skos:Concept ;
@@ -1272,6 +1285,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                    skos:inScheme zilf:ZILF_Scheme ;
                    skos:narrower zilf:BCOM ,
                                  zilf:BTST ,
+                                 zilf:BUFOUT ,
                                  zilf:ERASE ,
                                  zilf:FCLEAR ,
                                  zilf:FONT ,
