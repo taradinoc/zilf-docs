@@ -460,3 +460,58 @@ Z-code built-in function that reads property on window-number.
 **History:** Zapf syntax: WINGET, Inform syntax: get_wind_prop
 
 ---
+
+### WINPOS
+**Usage:** `<WINPOS window-number row column>`
+
+Z-code built-in function that moves window-number to position row column (pixels). (1, 1) is in the top left corner.
+
+> **Note:** ZILF supports WINPOS in versions 6-.
+
+**History:** Zapf syntax: WINPOS, Inform syntax: move_window
+
+---
+
+### WINPUT
+**Usage:** `<WINPUT window-number property value>`
+
+Z-code built-in function that writes value to property window-number.
+
+> **Note:** ZILF supports WINPUT in versions 6-.
+
+**History:** Zapf syntax: WINPUT, Inform syntax: put_wind_prop
+
+---
+
+### WINSIZE
+**Usage:** `<WINSIZE window-number height width>`
+
+Z-code built-in function that changes window-number size.
+
+> **Note:** ZILF supports WINSIZE in versions 6-.
+
+**History:** Zapf syntax: WINSIZE, Inform syntax: window_size
+
+---
+
+### XPUSH
+**Usage:** `<XPUSH value stack>`
+
+Z-code built-in function that pushes value on the stack.
+
+> **Note:** ZILF supports XPUSH in versions 6-.
+
+**History:** Zapf syntax: XPUSH, Inform syntax: push_stack
+
+---
+
+### ZWSTR
+**Usage:** `<ZWSTR src-table length offset dest-table>`
+
+Z-code built-in function that encodes length characters starting at offset from ZSCII word zscii-text and stores result in 6-byte Z-encoded dest-table.
+
+> **Note:** ZILF supports ZWSTR in versions 5-.
+
+**History:** Zapf syntax: ZWSTR, Inform syntax: encode_text
+
+---

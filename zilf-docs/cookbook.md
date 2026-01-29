@@ -598,3 +598,49 @@ MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR
     <ANIMATE ,CEL-TABLE>
     <QUIT>>
 ```
+
+
+### WINPOS
+```zil
+;  From Shogun
+<ROUTINE WINDEF (W TOP LEFT HIGH WIDE)
+    <WINPOS .W .TOP .LEFT>
+    <WINSIZE .W .HIGH .WIDE>>
+```
+
+
+### WINPUT
+```zil
+;  From Shogun
+<WINPUT 0 ,WCRFUNC
+    <COND (.BORD? ,RESET-MARGIN-1)
+        (ELSE ,RESET-MARGIN)>>
+<COND (<EQUAL? .P ,P-OAR>
+    <SET Y <+ .Y 1>>)>
+<WINPUT 0 ,WCRCNT .Y>)>)>
+```
+
+
+### WINSIZE
+```zil
+;  From Arthur
+<SET WX <WINGET 0 ,K-W-XSIZE>>
+<WINSIZE 0 .WY .WX>
+```
+
+
+### XPUSH
+```zil
+<GLOBAL MY-STACK <TABLE 1 0 0 0>>
+<XPUSH 123 ,MY-STACK>  ;  MY-STACK <TABLE 2 0 123 0>
+```
+
+
+### ZWSTR
+```zil
+<GLOBAL SRCBUF <TABLE (STRING) "hello">>
+<GLOBAL DSTBUF <TABLE 0 0 0>>
+
+<ZWSTR ,SRCBUF 5 1 ,DSTBUF> 
+<PRINTB ,DSTBUF>  ;  "hello"
+```
