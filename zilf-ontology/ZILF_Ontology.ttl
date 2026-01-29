@@ -1195,6 +1195,38 @@ zilf:WINPOS rdf:type owl:NamedIndividual ,
             skos:prefLabel "<WINPOS window-number row column>"@en .
 
 
+###  http://example.org/zilf/WINPUT
+zilf:WINPUT rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "Z-code built-in function that writes value to property window-number."@en ;
+            skos:editorialNote "ZILF supports WINPUT in versions 6-."@en ;
+            skos:example """;  From Shogun
+<WINPUT 0 ,WCRFUNC
+    <COND (.BORD? ,RESET-MARGIN-1)
+        (ELSE ,RESET-MARGIN)>>
+<COND (<EQUAL? .P ,P-OAR>
+    <SET Y <+ .Y 1>>)>
+<WINPUT 0 ,WCRCNT .Y>)>)>"""@en ;
+            skos:historyNote "Zapf syntax: WINPUT, Inform syntax: put_wind_prop"@en ;
+            skos:prefLabel "<WINPUT window-number property value>"@en .
+
+
+###  http://example.org/zilf/WINSIZE
+zilf:WINSIZE rdf:type owl:NamedIndividual ,
+                      skos:Concept ;
+             skos:broader zilf:ZCodeBuiltIns ;
+             skos:inScheme zilf:ZILF_Scheme ;
+             skos:definition "Z-code built-in function that changes window-number size."@en ;
+             skos:editorialNote "ZILF supports WINSIZE in versions 6-."@en ;
+             skos:example """;  From Arthur
+<SET WX <WINGET 0 ,K-W-XSIZE>>
+<WINSIZE 0 .WY .WX>"""@en ;
+             skos:historyNote "Zapf syntax: WINSIZE, Inform syntax: window_size"@en ;
+             skos:prefLabel "<WINSIZE window-number height width>"@en .
+
+
 ###  http://example.org/zilf/ZCodeBuiltIns
 zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                             skos:Concept ;
@@ -1235,6 +1267,8 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:VERIFY ,
                                  zilf:WINGET ,
                                  zilf:WINPOS ,
+                                 zilf:WINPUT ,
+                                 zilf:WINSIZE ,
                                  <http://example.org/zilf/F?> ,
                                  <http://example.org/zilf/FIRST?> ,
                                  <http://example.org/zilf/FSET?> .
