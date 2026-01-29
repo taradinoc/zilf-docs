@@ -1227,6 +1227,19 @@ zilf:WINSIZE rdf:type owl:NamedIndividual ,
              skos:prefLabel "<WINSIZE window-number height width>"@en .
 
 
+###  http://example.org/zilf/XPUSH
+zilf:XPUSH rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:ZCodeBuiltIns ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Z-code built-in function that pushes value on the stack."@en ;
+           skos:editorialNote "ZILF supports XPUSH in versions 6-."@en ;
+           skos:example """<GLOBAL MY-STACK <TABLE 1 0 0 0>>
+<XPUSH 123 ,MY-STACK>  ;  MY-STACK <TABLE 2 0 123 0>"""@en ;
+           skos:historyNote "Zapf syntax: XPUSH, Inform syntax: push_stack"@en ;
+           skos:prefLabel "<XPUSH value stack>"@en .
+
+
 ###  http://example.org/zilf/ZCodeBuiltIns
 zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                             skos:Concept ;
@@ -1269,6 +1282,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:WINPOS ,
                                  zilf:WINPUT ,
                                  zilf:WINSIZE ,
+                                 zilf:XPUSH ,
                                  <http://example.org/zilf/F?> ,
                                  <http://example.org/zilf/FIRST?> ,
                                  <http://example.org/zilf/FSET?> .
