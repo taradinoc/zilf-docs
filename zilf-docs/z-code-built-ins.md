@@ -3,6 +3,59 @@
 # Z-Code Built-ins
 ---
 
+### BACK
+**Usage:** `<BACK table [bytes]>`
+
+Z-code built-in function that returns table with address moved bytes back. If the count moves past the start of the table no error is raised. Default value for bytes is 1. 
+
+Note that this is not a copy of the table, it is pointing to the same table with another starting address. Also see GET, GETB, PUT, PUTB and REST.
+
+---
+
+### BCOM
+**Usage:** `<BCOM value>`
+
+Z-code built-in function that is a bitwise NOT, reversing all bits in the WORD value (16 bits).
+
+> **Note:** ZILF supports BCOM in all versions.
+
+**History:** Zapf syntax: BCOM, Inform syntax: not
+
+---
+
+### BTST
+**Usage:** `<BTST value1 value2>`
+
+Z-code built-in predicate that performs a binary test that evaluates to true if all value2 bits are set in value1. Could be expressed as <=? <BAND value1 value2> value2>.
+
+> **Note:** ZILF supports BTST in all versions.
+
+**History:** Zapf syntax: BTST, Inform syntax: test
+
+---
+
+### BUFOUT
+**Usage:** `<BUFOUT value>`
+
+Z-code built-in flag that controls if output is buffered (to enable proper word-wrap). value can be true or false.
+
+> **Note:** ZILF supports BUFOUT in versions 4-.
+
+**History:** Zapf syntax: BUFOUT, Inform syntax: buffer_mode
+
+---
+
+### CATCH
+**Usage:** `<CATCH>`
+
+Used in conjunction with THROW, this Z-code built-in function returns the current state of the stack (the "stack frame"). Also see THROW.
+
+> **Note:** ZILF supports CATCH in versions 5-.
+
+**History:** Zapf syntax: CATCH, Inform syntax: catch
+
+---
+
 ### ERASE
 **Usage:** `<ERASE value>`
 

@@ -39,6 +39,20 @@
 ```
 
 
+### BACK
+```zil
+<GLOBAL TBL1 <TABLE 1 2 3 4>>  ;  TBL1 = [1 2 3 4]
+<GLOBAL TBL2 <REST ,STRUCT1 4>>  ;  TBL2 = [3 4] Move 4 because WORD-table!
+<SETG TBL2 <BACK ,TBL2 2>>  ;  TBL2 = [2 3 4]
+```
+
+
+### BCOM
+```zil
+<BCOM #2 000011110001111>  ;  #2 1111000011110000
+```
+
+
 ### BEGIN-SEGMENT
 ```zil
 ; From The Abyss
@@ -60,10 +74,31 @@
 ```
 
 
+### BTST
+```zil
+<BTST 64 64>  ;  TRUE
+<BTST 64 63>  ;  FALSE
+<BTST 97 33>  ;  TRUE
+```
+
+
+### BUFOUT
+```zil
+<BUFOUT <>>  ;  Turns off buffering(disables word-wrap)
+<BUFOUT T>  ;  Turns on buffering
+```
+
+
 ### BUZZ
 ```zil
 <BUZZ A AN AND ANY ALL EVERY EVERYTHING BUT EXCEPT OF ONE
               THE THEN UNDO OOPS \. \, \">
+```
+
+
+### CATCH
+```zil
+<SETG CATCH-POINT <CATCH>>  ;  Saves the current stack fram in global variable.
 ```
 
 
