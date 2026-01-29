@@ -140,6 +140,20 @@ zilf:BIT-SYNONYM rdf:type owl:NamedIndividual ,
                  skos:prefLabel "<BIT-SYNONYM first synonyms ...>"@en .
 
 
+###  http://example.org/zilf/BTST
+zilf:BTST rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:ZCodeBuiltIns ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition "Z-code built-in predicate that performs a binary test that evaluates to true if all value2 bits are set in value1. Could be expressed as <=? <BAND value1 value2> value2>."@en ;
+          skos:editorialNote "ZILF supports BTST in all versions."@en ;
+          skos:example """<BTST 64 64>  ;  TRUE
+<BTST 64 63>  ;  FALSE
+<BTST 97 33>  ;  TRUE"""@en ;
+          skos:historyNote "Zapf syntax: BTST, Inform syntax: test"@en ;
+          skos:prefLabel "<BTST value1 value2>"@en .
+
+
 ###  http://example.org/zilf/BUZZ
 zilf:BUZZ rdf:type owl:NamedIndividual ,
                    skos:Concept ;
@@ -1257,6 +1271,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                             skos:Concept ;
                    skos:inScheme zilf:ZILF_Scheme ;
                    skos:narrower zilf:BCOM ,
+                                 zilf:BTST ,
                                  zilf:ERASE ,
                                  zilf:FCLEAR ,
                                  zilf:FONT ,
