@@ -97,6 +97,20 @@ zilf:AVALUE rdf:type owl:NamedIndividual ,
             skos:prefLabel "<AVALUE asoc>"@en .
 
 
+###  http://example.org/zilf/BACK
+zilf:BACK rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:ZCodeBuiltIns ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition """Z-code built-in function that returns table with address moved bytes back. If the count moves past the start of the table no error is raised. Default value for bytes is 1. 
+
+Note that this is not a copy of the table, it is pointing to the same table with another starting address. Also see GET, GETB, PUT, PUTB and REST."""@en ;
+          skos:example """<GLOBAL TBL1 <TABLE 1 2 3 4>>  ;  TBL1 = [1 2 3 4]
+<GLOBAL TBL2 <REST ,STRUCT1 4>>  ;  TBL2 = [3 4] Move 4 because WORD-table!
+<SETG TBL2 <BACK ,TBL2 2>>  ;  TBL2 = [2 3 4]"""@en ;
+          skos:prefLabel "<BACK table [bytes]>"@en .
+
+
 ###  http://example.org/zilf/BCOM
 zilf:BCOM rdf:type owl:NamedIndividual ,
                    skos:Concept ;
@@ -1295,7 +1309,8 @@ zilf:XPUSH rdf:type owl:NamedIndividual ,
 zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                             skos:Concept ;
                    skos:inScheme zilf:ZILF_Scheme ;
-                   skos:narrower zilf:BCOM ,
+                   skos:narrower zilf:BACK ,
+                                 zilf:BCOM ,
                                  zilf:BTST ,
                                  zilf:BUFOUT ,
                                  zilf:CATCH ,
