@@ -1180,6 +1180,21 @@ zilf:WINGET rdf:type owl:NamedIndividual ,
             skos:prefLabel "<WINGET window-number property>"@en .
 
 
+###  http://example.org/zilf/WINPOS
+zilf:WINPOS rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "Z-code built-in function that moves window-number to position row column (pixels). (1, 1) is in the top left corner."@en ;
+            skos:editorialNote "ZILF supports WINPOS in versions 6-."@en ;
+            skos:example """;  From Shogun
+<ROUTINE WINDEF (W TOP LEFT HIGH WIDE)
+    <WINPOS .W .TOP .LEFT>
+    <WINSIZE .W .HIGH .WIDE>>"""@en ;
+            skos:historyNote "Zapf syntax: WINPOS, Inform syntax: move_window"@en ;
+            skos:prefLabel "<WINPOS window-number row column>"@en .
+
+
 ###  http://example.org/zilf/ZCodeBuiltIns
 zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                             skos:Concept ;
@@ -1219,6 +1234,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:VALUE ,
                                  zilf:VERIFY ,
                                  zilf:WINGET ,
+                                 zilf:WINPOS ,
                                  <http://example.org/zilf/F?> ,
                                  <http://example.org/zilf/FIRST?> ,
                                  <http://example.org/zilf/FSET?> .
