@@ -228,6 +228,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:ATOM ,
                                  zilf:AVALUE ,
                                  zilf:BEGIN-SEGMENT ,
+                                 zilf:DEFAULT-DEFINITION ,
                                  zilf:END-SEGMENT ,
                                  zilf:EVAL ,
                                  zilf:GLOBAL ,
@@ -245,6 +246,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:READSTRING ,
                                  zilf:RENTRY ,
                                  zilf:REPEAT ,
+                                 zilf:REPLACE-DEFINITION ,
                                  zilf:ROOT ,
                                  zilf:ROUTINE ,
                                  zilf:SET ,
@@ -258,6 +260,33 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  <http://example.org/zilf/VALID-TYPE?> ;
                    skos:topConceptOf zilf:ZILF_Scheme ;
                    skos:prefLabel "Core Functions"@en .
+
+
+###  http://example.org/zilf/DEFAULT-DEFINITION
+zilf:DEFAULT-DEFINITION rdf:type owl:NamedIndividual ,
+                                 skos:Concept ;
+                        skos:broader zilf:CoreFunctions ;
+                        skos:inScheme zilf:ZILF_Scheme ;
+                        skos:definition """ZIL library function that defines a “replaceable” block with the given name.  
+
+If neither DELAY-DEFINITION nor REPLACE-DEFINITION was previously called for the given name, then the body is evaluated, and this function returns the result of evaluating the last element of the body. 
+
+If the block was replaced (via REPLACE-DEFINITION), the replacement body supplied earlier is used instead. 
+
+If the block was delayed (via DELAY-DEFINITION), the body is ignored, and this function returns FALSE."""@en ;
+                        skos:editorialNote """It is possible to do the same by setting REDEFINE to true. This actually makes it possible to change ALL definitions (it is the last one that becomes the one actually compiled). 
+
+See DELAY-DEFINITION and REPLACE-DEFINITION."""@en ;
+                        skos:example """<ROUTINE MY-ROUTINE ()  
+    <TELL \"Original version of MY-ROUTINE\" CR> 
+> 
+<SET REDEFINE T> 
+    <ROUTINE MY-ROUTINE ()  
+        <TELL \"Replaced version of MY-ROUTINE\" CR> 
+    > 
+<SET REDEFINE <>> 
+<MY-ROUTINE>  ;  \"Replaced version of MY-ROUTINE\""""@en ;
+                        skos:prefLabel "<DEFAULT-DEFINITION name body ...>"@en .
 
 
 ###  http://example.org/zilf/DIR-SYNONYM
@@ -885,6 +914,31 @@ The decl is used to specify the valid TYPE of the variables. In its simplest for
 > 
     <TEST-REPEAT>  ;  \"START 123 END\""""@en ;
             skos:prefLabel "<REPEAT [activation] (bindings ...) [decl] expressions ...>"@en .
+
+
+###  http://example.org/zilf/REPLACE-DEFINITION
+zilf:REPLACE-DEFINITION rdf:type owl:NamedIndividual ,
+                                 skos:Concept ;
+                        skos:broader zilf:CoreFunctions ;
+                        skos:inScheme zilf:ZILF_Scheme ;
+                        skos:definition """ZIL library function that  tells the compiler this block of code defined by name should replace a later  DEFAULT-DEFINITION block of code with the same name. 
+
+This is usually used when there is a library that is inserted (like \"parser.zil\") where some definitions are possible to override."""@en ;
+                        skos:editorialNote """Note that the REPLACE-DEFINITION is required to appear before the DEFAULT-DEFINITION. It is possible to do the same by setting REDEFINE to true. This actually makes it possible to change ALL definitions (it is the last one that becomes the one actually compiled).
+
+See DEFAULT-DEFINITION and REPLACE-DEFINITION."""@en ;
+                        skos:example """<REPLACE-DEFINITION MY-ROUTINE 
+     <ROUTINE MY-ROUTINE ()  
+        <TELL \"Replaced version of MY-ROUTINE\" CR> 
+    > 
+> 
+<DEFAULT-DEFINITION MY-ROUTINE 
+    <ROUTINE MY-ROUTINE ()  
+        <TELL \"Original version of MY-ROUTINE\" CR> 
+    > 
+> 
+<MY-ROUTINE>  ;  \"Replaced version of MY-ROUTINE\""""@en ;
+                        skos:prefLabel "<REPLACE-DEFINITION name body ...>"@en .
 
 
 ###  http://example.org/zilf/RFALSE
