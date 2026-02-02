@@ -242,6 +242,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:PUTREST ,
                                  zilf:QUIT ,
                                  zilf:QUOTE ,
+                                 zilf:READSTRING ,
                                  zilf:ROOT ,
                                  zilf:ROUTINE ,
                                  zilf:SET ,
@@ -807,6 +808,26 @@ zilf:RANDOM rdf:type owl:NamedIndividual ,
             skos:example "<- <RANDOM 101> 1>  ;  Generates random number between 0-100"@en ;
             skos:historyNote "Zapf syntax: RANDOM, Inform syntax: random"@en ;
             skos:prefLabel "<RANDOM range>"@en .
+
+
+###  http://example.org/zilf/READSTRING
+zilf:READSTRING rdf:type owl:NamedIndividual ,
+                         skos:Concept ;
+                skos:broader zilf:CoreFunctions ;
+                skos:inScheme zilf:ZILF_Scheme ;
+                skos:definition "MDL built-in function that reads bytes from the channel into buffer-str and returns the number of bytes read into buffer-str. The buffer-str needs to have room for the input. For each call to READSTRING it either reads bytes to fill up the buffer-str or until max-length-or-stop-chars is reached. The max-length-or-stop-chars can be a FIX number of bytes or a STRING that halts input."@en ;
+                skos:editorialNote "READSTRING returns the actual number of bytes read and returns 0 when the EOF is reached."@en ;
+                skos:example """;\"ZILF ver 0.9\"
+<SET CH <OPEN \"READ\" \"../zillib/parser.zil\">> 
+<SET BUFFER <ISTRING 10>>
+<READSTRING .BUFFER .CH>  ;  10
+<LVAL BUFFER>  ;  \"\\\"Library h\"
+<READSTRING .BUFFER .CH 6>  ;  6
+<LVAL BUFFER>  ;  \"eader\\\"ry h\"
+<READSTRING .BUFFER .CH \"ZIL\">  ;  10
+<LVAL BUFFER>  ;  \"\\n\\n<SETG \"
+<CLOSE .CH>  ;  \"\\n = CR+LF\""""@en ;
+                skos:prefLabel "<READSTRING buffer-str channel [max-length-or-stop-chars]>"@en .
 
 
 ###  http://example.org/zilf/REMOVE
