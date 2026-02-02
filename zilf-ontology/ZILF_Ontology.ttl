@@ -229,6 +229,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:AVALUE ,
                                  zilf:BEGIN-SEGMENT ,
                                  zilf:DEFAULT-DEFINITION ,
+                                 zilf:DEFAULTS-DEFINED ,
                                  zilf:END-SEGMENT ,
                                  zilf:EVAL ,
                                  zilf:GLOBAL ,
@@ -287,6 +288,16 @@ See DELAY-DEFINITION and REPLACE-DEFINITION."""@en ;
 <SET REDEFINE <>> 
 <MY-ROUTINE>  ;  \"Replaced version of MY-ROUTINE\""""@en ;
                         skos:prefLabel "<DEFAULT-DEFINITION name body ...>"@en .
+
+
+###  http://example.org/zilf/DEFAULTS-DEFINED
+zilf:DEFAULTS-DEFINED rdf:type owl:NamedIndividual ,
+                               skos:Concept ;
+                      skos:broader zilf:CoreFunctions ;
+                      skos:inScheme zilf:ZILF_Scheme ;
+                      skos:definition "ZIL library function."@en ;
+                      skos:editorialNote "ZILF ignores this and always returns FALSE."@en ;
+                      skos:prefLabel "<DEFAULTS-DEFINED>"@en .
 
 
 ###  http://example.org/zilf/DIR-SYNONYM
