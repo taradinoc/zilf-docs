@@ -37,6 +37,32 @@ ZIL library function that groups code and data into segments of memory outside t
 
 ---
 
+### DEFAULT-DEFINITION
+**Usage:** `<DEFAULT-DEFINITION name body ...>`
+
+ZIL library function that defines a “replaceable” block with the given name.  
+
+If neither DELAY-DEFINITION nor REPLACE-DEFINITION was previously called for the given name, then the body is evaluated, and this function returns the result of evaluating the last element of the body. 
+
+If the block was replaced (via REPLACE-DEFINITION), the replacement body supplied earlier is used instead. 
+
+If the block was delayed (via DELAY-DEFINITION), the body is ignored, and this function returns FALSE.
+
+> **Note:** It is possible to do the same by setting REDEFINE to true. This actually makes it possible to change ALL definitions (it is the last one that becomes the one actually compiled). 
+
+See DELAY-DEFINITION and REPLACE-DEFINITION.
+
+---
+
+### DEFAULTS-DEFINED
+**Usage:** `<DEFAULTS-DEFINED>`
+
+ZIL library function.
+
+> **Note:** ZILF ignores this and always returns FALSE.
+
+---
+
 ### END-SEGMENT
 **Usage:** `<END-SEGMENT>`
 
@@ -177,6 +203,48 @@ MDL built-in function that exits ZILF (interpreter mode) and returns to the oper
 **Usage:** `<QUOTE value>`
 
 MDL built-in function that returns unevaluated value.
+
+---
+
+### READSTRING
+**Usage:** `<READSTRING buffer-str channel [max-length-or-stop-chars]>`
+
+MDL built-in function that reads bytes from the channel into buffer-str and returns the number of bytes read into buffer-str. The buffer-str needs to have room for the input. For each call to READSTRING it either reads bytes to fill up the buffer-str or until max-length-or-stop-chars is reached. The max-length-or-stop-chars can be a FIX number of bytes or a STRING that halts input.
+
+> **Note:** READSTRING returns the actual number of bytes read and returns 0 when the EOF is reached.
+
+---
+
+### RENTRY
+**Usage:** `<RENTRY atoms ...>`
+
+MDL built-in function that creates/moves one or more ATOMs to <ROOT> in a PACKAGE or DEFINITION. RENTRY is only valid inside a PACKAGE or DEFINITION, if it's used outside an error is raised.
+
+> **Note:** See DEFINITIONS, ENTRY, INCLUDE, INCLUDE-WHEN, PACKAGE, USE, USE-WHEN.
+
+---
+
+### REPEAT
+**Usage:** `<REPEAT [activation] (bindings ...) [decl] expressions ...>`
+
+MDL built-in function that  defines a program block with its own set of bindings. REPEAT is similar to BIND and PROG but unlike BIND it creates a default activation (like PROG) at the start of the block but unlike PROG it also has an automatic AGAIN at the end of the block. It is possible to name an atom to the activation but it is not necessary. A REPEAT-block repeatedly executes expressions until it encounters a RETURN statement that will exit the block. 
+
+The decl is used to specify the valid TYPE of the variables. In its simplest form decl is formatted like: #DECL ((X) FIX), meaning that X must be of the TYPE FIX. For more information on how to format the decl see GDECL.
+
+> **Note:** Also see AGAIN, BIND, PROG and RETURN for more details on how to control program flow.
+
+---
+
+### REPLACE-DEFINITION
+**Usage:** `<REPLACE-DEFINITION name body ...>`
+
+ZIL library function that  tells the compiler this block of code defined by name should replace a later  DEFAULT-DEFINITION block of code with the same name. 
+
+This is usually used when there is a library that is inserted (like "parser.zil") where some definitions are possible to override.
+
+> **Note:** Note that the REPLACE-DEFINITION is required to appear before the DEFAULT-DEFINITION. It is possible to do the same by setting REDEFINE to true. This actually makes it possible to change ALL definitions (it is the last one that becomes the one actually compiled).
+
+See DEFAULT-DEFINITION and REPLACE-DEFINITION.
 
 ---
 

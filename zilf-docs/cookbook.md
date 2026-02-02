@@ -102,6 +102,20 @@
 ```
 
 
+### DEFAULT-DEFINITION
+```zil
+<ROUTINE MY-ROUTINE ()  
+    <TELL "Original version of MY-ROUTINE" CR> 
+> 
+<SET REDEFINE T> 
+    <ROUTINE MY-ROUTINE ()  
+        <TELL "Replaced version of MY-ROUTINE" CR> 
+    > 
+<SET REDEFINE <>> 
+<MY-ROUTINE>  ;  "Replaced version of MY-ROUTINE"
+```
+
+
 ### DIR-SYNONYM
 ```zil
 <DIR-SYNONYM FORE F>
@@ -386,11 +400,71 @@ ADJECTIVE BRASS SMALL
 ```
 
 
+### READSTRING
+```zil
+;"ZILF ver 0.9"
+<SET CH <OPEN "READ" "../zillib/parser.zil">> 
+<SET BUFFER <ISTRING 10>>
+<READSTRING .BUFFER .CH>  ;  10
+<LVAL BUFFER>  ;  "\"Library h"
+<READSTRING .BUFFER .CH 6>  ;  6
+<LVAL BUFFER>  ;  "eader\"ry h"
+<READSTRING .BUFFER .CH "ZIL">  ;  10
+<LVAL BUFFER>  ;  "\n\n<SETG "
+<CLOSE .CH>  ;  "\n = CR+LF"
+```
+
+
 ### REMOVE
 ```zil
 <OBJECT ANIMAL>
 <OBJECT CAT (LOC ANIMAL)>
 <REMOVE ,CAT)  ;  Detach CAT from ANIMAL
+```
+
+
+### RENTRY
+```zil
+<REMOVE ANSWER>  ;  "Secure that ATOM not on any OBLIST"
+<PACKAGE "FOO"> 
+<SETG ANSWER 42> 
+<RENTRY ANSWER> 
+<ENDPACKAGE> 
+,ANSWER  ;  42 ;”Accessible without previous USE”
+```
+
+
+### REPEAT
+```zil
+<REPEAT ((X 1)) #DECL ((X) FIX)  
+    <REPEAT ((X 2)) <PRIN1 .X> <RETURN>>  
+    <PRIN1 .X> <RETURN>>  ;  "21"
+<DEFINE TEST-REPEAT () 
+    <PRINC "START "> 
+    <REPEAT ((X 0)) 
+        <SET X <+ .X 1>> 
+        <PRIN1 .X> 
+        <COND (<=? .X 3> <RETURN>)>  ;  "--> exit block" 
+    > 
+    <PRINC " END"> 
+> 
+    <TEST-REPEAT>  ;  "START 123 END"
+```
+
+
+### REPLACE-DEFINITION
+```zil
+<REPLACE-DEFINITION MY-ROUTINE 
+     <ROUTINE MY-ROUTINE ()  
+        <TELL "Replaced version of MY-ROUTINE" CR> 
+    > 
+> 
+<DEFAULT-DEFINITION MY-ROUTINE 
+    <ROUTINE MY-ROUTINE ()  
+        <TELL "Original version of MY-ROUTINE" CR> 
+    > 
+> 
+<MY-ROUTINE>  ;  "Replaced version of MY-ROUTINE"
 ```
 
 
