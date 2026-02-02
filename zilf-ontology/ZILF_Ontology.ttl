@@ -243,6 +243,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:QUIT ,
                                  zilf:QUOTE ,
                                  zilf:READSTRING ,
+                                 zilf:RENTRY ,
                                  zilf:ROOT ,
                                  zilf:ROUTINE ,
                                  zilf:SET ,
@@ -842,6 +843,22 @@ zilf:REMOVE rdf:type owl:NamedIndividual ,
 <REMOVE ,CAT)  ;  Detach CAT from ANIMAL"""@en ;
             skos:historyNote "Zapf syntax: REMOVE, Inform syntax: remove_obj"@en ;
             skos:prefLabel "<REMOVE object>"@en .
+
+
+###  http://example.org/zilf/RENTRY
+zilf:RENTRY rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "MDL built-in function that creates/moves one or more ATOMs to <ROOT> in a PACKAGE or DEFINITION. RENTRY is only valid inside a PACKAGE or DEFINITION, if it's used outside an error is raised."@en ;
+            skos:editorialNote "See DEFINITIONS, ENTRY, INCLUDE, INCLUDE-WHEN, PACKAGE, USE, USE-WHEN."@en ;
+            skos:example """<REMOVE ANSWER>  ;  \"Secure that ATOM not on any OBLIST\"
+<PACKAGE \"FOO\"> 
+<SETG ANSWER 42> 
+<RENTRY ANSWER> 
+<ENDPACKAGE> 
+,ANSWER  ;  42 ;”Accessible without previous USE”"""@en ;
+            skos:prefLabel "<RENTRY atoms ...>"@en .
 
 
 ###  http://example.org/zilf/RFALSE
