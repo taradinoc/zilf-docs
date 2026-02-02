@@ -244,6 +244,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:QUOTE ,
                                  zilf:READSTRING ,
                                  zilf:RENTRY ,
+                                 zilf:REPEAT ,
                                  zilf:ROOT ,
                                  zilf:ROUTINE ,
                                  zilf:SET ,
@@ -859,6 +860,31 @@ zilf:RENTRY rdf:type owl:NamedIndividual ,
 <ENDPACKAGE> 
 ,ANSWER  ;  42 ;”Accessible without previous USE”"""@en ;
             skos:prefLabel "<RENTRY atoms ...>"@en .
+
+
+###  http://example.org/zilf/REPEAT
+zilf:REPEAT rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition """MDL built-in function that  defines a program block with its own set of bindings. REPEAT is similar to BIND and PROG but unlike BIND it creates a default activation (like PROG) at the start of the block but unlike PROG it also has an automatic AGAIN at the end of the block. It is possible to name an atom to the activation but it is not necessary. A REPEAT-block repeatedly executes expressions until it encounters a RETURN statement that will exit the block. 
+
+The decl is used to specify the valid TYPE of the variables. In its simplest form decl is formatted like: #DECL ((X) FIX), meaning that X must be of the TYPE FIX. For more information on how to format the decl see GDECL."""@en ;
+            skos:editorialNote "Also see AGAIN, BIND, PROG and RETURN for more details on how to control program flow."@en ;
+            skos:example """<REPEAT ((X 1)) #DECL ((X) FIX)  
+    <REPEAT ((X 2)) <PRIN1 .X> <RETURN>>  
+    <PRIN1 .X> <RETURN>>  ;  \"21\"
+<DEFINE TEST-REPEAT () 
+    <PRINC \"START \"> 
+    <REPEAT ((X 0)) 
+        <SET X <+ .X 1>> 
+        <PRIN1 .X> 
+        <COND (<=? .X 3> <RETURN>)>  ;  \"--> exit block\" 
+    > 
+    <PRINC \" END\"> 
+> 
+    <TEST-REPEAT>  ;  \"START 123 END\""""@en ;
+            skos:prefLabel "<REPEAT [activation] (bindings ...) [decl] expressions ...>"@en .
 
 
 ###  http://example.org/zilf/RFALSE
