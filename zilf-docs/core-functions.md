@@ -116,6 +116,15 @@ See DEFAULT-DEFINITION and REPLACE-DEFINITION.
 
 ---
 
+### EMPTY?
+**Usage:** `<EMPTY? structure>`
+
+MDL built-in predicate that returns true if structure contains no elements, otherwise false.
+
+> **Note:** structure must be an object that STRUCTURED? evaluates to true.
+
+---
+
 ### END-SEGMENT
 **Usage:** `<END-SEGMENT>`
 

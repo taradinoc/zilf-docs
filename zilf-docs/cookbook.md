@@ -219,6 +219,13 @@
 ```
 
 
+### EMPTY?
+```zil
+<EMPTY? [1 2 3]>  ;  False
+<EMPTY? []>  ;  True
+```
+
+
 ### END-SEGMENT
 ```zil
 ; From The Abyss
