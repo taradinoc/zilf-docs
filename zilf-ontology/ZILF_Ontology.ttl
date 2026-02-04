@@ -231,6 +231,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:DEFAULT-DEFINITION ,
                                  zilf:DEFAULTS-DEFINED ,
                                  zilf:DEFINE ,
+                                 zilf:DEFINE-GLOBALS ,
                                  zilf:END-SEGMENT ,
                                  zilf:EVAL ,
                                  zilf:GLOBAL ,
@@ -304,7 +305,7 @@ zilf:DEFAULTS-DEFINED rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/DEFINE
 zilf:DEFINE rdf:type owl:NamedIndividual ,
                      skos:Concept ;
-            skos:broader zilf:DEFINE ;
+            skos:broader zilf:CoreFunctions ;
             skos:inScheme zilf:ZILF_Scheme ;
             skos:definition "MDL built-in function that  assigns the global variable name with a FUNCTION. See FUNCTION for an explanation of activation, arg-list, decl and expressions."@en ;
             skos:editorialNote "<DEFINE name ...> is equivalent to <SETG name #FUNCTION ...> with the exception that DEFINE protects from overwriting a name with a new FUNCTION (this behaviour can be changed by setting REDEFINE to true, instead of false)."@en ;
@@ -324,6 +325,39 @@ zilf:DEFINE rdf:type owl:NamedIndividual ,
 <POWER-TO 3 4>  ;  81
 <POWER-TO 3 0>  ;  1"""@en ;
             skos:prefLabel "<DEFINE name [activation] arg-list [decl] expressions ...>"@en .
+
+
+###  http://example.org/zilf/DEFINE-GLOBALS
+zilf:DEFINE-GLOBALS rdf:type owl:NamedIndividual ,
+                             skos:Concept ;
+                    skos:broader zilf:CoreFunctions ;
+                    skos:inScheme zilf:ZILF_Scheme ;
+                    skos:definition """ZIL library function that defines a set of macros that can be used for global storage in Z-code, similar to global variables. 
+
+Each atom-or-adecl becomes the name of a new macro which can be called with no arguments (to read the global value) or one argument (to write it). The optional initializer sets the initial value, as in GLOBAL. BYTE or WORD can be specified to set the global’s size; WORD is the default."""@en ;
+                    skos:editorialNote """ZILF ignores the group-name.  
+
+See FUNNY-GLOBALS? for a more convenient way to bypass the Z-machine’s global variable limit. (In fact, ZILF implements DEFINE-GLOBALS by turning on FUNNY-GLOBALS? and defining a global variable for each macro.)"""@en ;
+                    skos:example """;  From Bureaucracy
+<DEFINE-GLOBALS COMPUTER-GLOBALS
+    (LAST-LINE-USED:FIX BYTE 0)
+    (TIMES-THROUGH-LOOP:FIX BYTE 0)
+    (FILES-ON-SCREEN? BYTE <>)
+    (TELECOM? BYTE <>)
+    (EXITED-ALREADY? BYTE <>)
+    (COMPUTER-DEAD? BYTE <>)
+    (COMP-X:FIX BYTE 0)
+    (COMP-Y:FIX BYTE 0)
+    (CURRENT-TARGET-NAME <>)  ;  \"String for interrupt messages\"
+    (REAL-TARGET-NAME <>)  ; \"LTABLE for looking stuff up in directory\"
+    (REMAINING-TARGET-TURNS:FIX BYTE 0)  ;  \"Turns left until this one's done\"
+    (LINES-TO-NEXT-TARGET:FIX BYTE 0)  ;  \"Lines to output before select next target\"
+    (TERMINATE-CURRENT:FIX BYTE 0)  ;  \"Lines to output before terminating this one\"
+    (COMMANDS-SINCE-START:FIX BYTE 0)  ;  \"Command lines read since target started\"
+    (DIE-ON-NEXT-COMMAND BYTE <>)  ;  \"To avoid hair of faking non-local return\"
+    (WILL-WIN? BYTE <>)  ;  \"True if killed computer\"
+    (FERROR-ACTIVE? BYTE <>)>"""@en ;
+                    skos:prefLabel "<DEFINE-GLOBALS group-name (atom-or-adecl [{BYTE | WORD}] [initializer]) ...>"@en .
 
 
 ###  http://example.org/zilf/DIR-SYNONYM
