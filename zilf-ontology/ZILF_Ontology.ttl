@@ -230,6 +230,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:BEGIN-SEGMENT ,
                                  zilf:DEFAULT-DEFINITION ,
                                  zilf:DEFAULTS-DEFINED ,
+                                 zilf:DEFINE ,
                                  zilf:END-SEGMENT ,
                                  zilf:EVAL ,
                                  zilf:GLOBAL ,
@@ -298,6 +299,31 @@ zilf:DEFAULTS-DEFINED rdf:type owl:NamedIndividual ,
                       skos:definition "ZIL library function."@en ;
                       skos:editorialNote "ZILF ignores this and always returns FALSE."@en ;
                       skos:prefLabel "<DEFAULTS-DEFINED>"@en .
+
+
+###  http://example.org/zilf/DEFINE
+zilf:DEFINE rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:DEFINE ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "MDL built-in function that  assigns the global variable name with a FUNCTION. See FUNCTION for an explanation of activation, arg-list, decl and expressions."@en ;
+            skos:editorialNote "<DEFINE name ...> is equivalent to <SETG name #FUNCTION ...> with the exception that DEFINE protects from overwriting a name with a new FUNCTION (this behaviour can be changed by setting REDEFINE to true, instead of false)."@en ;
+            skos:example """<DEFINE MYADD (X1 X2) <+ .X1 .X2>>
+<MYADD 4 5>  ;  9
+<DEFINE SQUARE (X) <* .X .X>>
+<SQUARE 5>  ;  25
+<DEFINE POWER-TO ACT (X \"OPT\" (Y 2)) 
+    <COND (<=? .Y 0> <RETURN 1 .ACT>)> 
+    <REPEAT ((Z 1)(I 0)) 
+        <SET Z <* .Z .X>> 
+        <SET I <+ .I 1>> 
+        <COND (<=? .I .Y> <RETURN .Z>)> 
+    > 
+> 
+<POWER-TO 2 3>  ;  8
+<POWER-TO 3 4>  ;  81
+<POWER-TO 3 0>  ;  1"""@en ;
+            skos:prefLabel "<DEFINE name [activation] arg-list [decl] expressions ...>"@en .
 
 
 ###  http://example.org/zilf/DIR-SYNONYM
