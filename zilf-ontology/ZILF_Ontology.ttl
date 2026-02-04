@@ -232,6 +232,8 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:DEFAULTS-DEFINED ,
                                  zilf:DEFINE ,
                                  zilf:DEFINE-GLOBALS ,
+                                 zilf:DEFINITIONS ,
+                                 zilf:DEFMAC ,
                                  zilf:END-SEGMENT ,
                                  zilf:EVAL ,
                                  zilf:GLOBAL ,
@@ -358,6 +360,48 @@ See FUNNY-GLOBALS? for a more convenient way to bypass the Z-machine’s global 
     (WILL-WIN? BYTE <>)  ;  \"True if killed computer\"
     (FERROR-ACTIVE? BYTE <>)>"""@en ;
                     skos:prefLabel "<DEFINE-GLOBALS group-name (atom-or-adecl [{BYTE | WORD}] [initializer]) ...>"@en .
+
+
+###  http://example.org/zilf/DEFINITIONS
+zilf:DEFINITIONS rdf:type owl:NamedIndividual ,
+                          skos:Concept ;
+                 skos:broader zilf:CoreFunctions ;
+                 skos:inScheme zilf:ZILF_Scheme ;
+                 skos:definition """MDL package system that is exactly the same as PACKAGE except that there is no internal OBLIST with DEFINITIONS, 
+
+See END-DEFINITIONS, INCLUDE, INCLUDE-WHEN, PACKAGE and RENTRY."""@en ;
+                 skos:editorialNote "To activate a package-name INCLUDE or INCLUDE-WHEN is used."@en ;
+                 skos:example """;\"Define PACKAGE\" 
+<REMOVE ANSWER> ;\"Secure that ATOM not on any OBLIST\"  
+<DEFINITIONS \"FOO\"> 
+<SETG ANSWER 42> 
+<END-DEFINITIONS> 
+
+<TYPE? <GETPROP FOO!-PACKAGE OBLIST> OBLIST>  ;  OBLIST
+<GASSIGNED? ANSWER>  ;  #FALSE
+<GASSIGNED? ANSWER!-FOO!-PACKAGE>  ;  T
+,ANSWER!-FOO!-PACKAGE  ;  42
+
+<REMOVE ANSWER> ;\"Secure that ATOM not on any OBLIST\"
+<INCLUDE \"FOO\">
+,ANSWER  ;  42"""@en ;
+                 skos:prefLabel "<DEFINITIONS package-name>"@en .
+
+
+###  http://example.org/zilf/DEFMAC
+zilf:DEFMAC rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "MDL built-in function that  has the same syntax as DEFINE, but defines a MACRO instead of a FUNCTION. A MACRO is evaluated two times, the first evaluation inserts the arguments in the MACRO and creates an object that is evaluated during the second evaluation. The first evaluation is done at “top-level”, in other words during compilation. EXPAND is used to perform the first evaluation."@en ;
+            skos:editorialNote "Note that two identical calls to a MACRO always generate the same result from the first evaluation."@en ;
+            skos:example """<DEFMAC INC (ATM \"OPTIONAL\" (N 1))
+    <FORM SET .ATM 
+        <FORM + <FORM LVAL .ATM> .N>>>
+<SET X 1>
+<INC X 2>  ;  3
+<EXPAND '<INC X 2>>  ;  <SET X <+ .X 2>>"""@en ;
+            skos:prefLabel "<DEFMAC name [activation] arg-list [decl] expressions ...>"@en .
 
 
 ###  http://example.org/zilf/DIR-SYNONYM
