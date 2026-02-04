@@ -234,6 +234,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:DEFINE-GLOBALS ,
                                  zilf:DEFINITIONS ,
                                  zilf:DEFMAC ,
+                                 zilf:DELAY-DEFINITION ,
                                  zilf:END-SEGMENT ,
                                  zilf:EVAL ,
                                  zilf:GLOBAL ,
@@ -402,6 +403,34 @@ zilf:DEFMAC rdf:type owl:NamedIndividual ,
 <INC X 2>  ;  3
 <EXPAND '<INC X 2>>  ;  <SET X <+ .X 2>>"""@en ;
             skos:prefLabel "<DEFMAC name [activation] arg-list [decl] expressions ...>"@en .
+
+
+###  http://example.org/zilf/DELAY-DEFINITION
+zilf:DELAY-DEFINITION rdf:type owl:NamedIndividual ,
+                               skos:Concept ;
+                      skos:broader zilf:CoreFunctions ;
+                      skos:inScheme zilf:ZILF_Scheme ;
+                      skos:definition """ZIL library function that tells ZILF that a REPLACE-DEFINITION for name should be expected thus the DEFAULT-DEFINITION never is evaluated for the name. This means that REPLACE-DEFINITION can appear after the DEFAULT-DEFINITION.
+
+DELAY-DEFINITION also means that the body of REPLACE-DEFINITION will be evaluated at the place of REPLACE-DEFINITION. 
+
+See DEFAULT-DEFINITION and REPLACE-DEFINITION."""@en ;
+                      skos:example """;\"REPLACE can be defined after DEFAULT\" 
+<DELAY-DEFINITION FOO-ROUTINE> 
+<DEFAULT-DEFINITION FOO-ROUTINE <DEFINE FOO () 123>> 
+<REPLACE-DEFINITION FOO-ROUTINE <DEFINE FOO () 456>>
+<FOO>  ;  456
+
+;\"DELAY means that REPLACE is evaluated at right place\" 
+<DELAY-DEFINITION BAR-ROUTINE> 
+<SETG BAR-RESULT 789> 
+<REPLACE-DEFINITION BAR-ROUTINE 
+<EVAL <FORM DEFINE BAR '() ,BAR-RESULT>>> 
+<SETG BAR-RESULT 123> 
+<DEFAULT-DEFINITION BAR-ROUTINE 
+<EVAL <FORM DEFINE BAR '() ,BAR-RESULT>>>
+<BAR>  ;  789 (\"123 without DELAY\")"""@en ;
+                      skos:prefLabel "<DELAY-DEFINITION name>"@en .
 
 
 ###  http://example.org/zilf/DIR-SYNONYM
