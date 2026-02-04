@@ -63,6 +63,59 @@ ZIL library function.
 
 ---
 
+### DEFINE
+**Usage:** `<DEFINE name [activation] arg-list [decl] expressions ...>`
+
+MDL built-in function that  assigns the global variable name with a FUNCTION. See FUNCTION for an explanation of activation, arg-list, decl and expressions.
+
+> **Note:** <DEFINE name ...> is equivalent to <SETG name #FUNCTION ...> with the exception that DEFINE protects from overwriting a name with a new FUNCTION (this behaviour can be changed by setting REDEFINE to true, instead of false).
+
+---
+
+### DEFINE-GLOBALS
+**Usage:** `<DEFINE-GLOBALS group-name (atom-or-adecl [{BYTE | WORD}] [initializer]) ...>`
+
+ZIL library function that defines a set of macros that can be used for global storage in Z-code, similar to global variables. 
+
+Each atom-or-adecl becomes the name of a new macro which can be called with no arguments (to read the global value) or one argument (to write it). The optional initializer sets the initial value, as in GLOBAL. BYTE or WORD can be specified to set the global’s size; WORD is the default.
+
+> **Note:** ZILF ignores the group-name.  
+
+See FUNNY-GLOBALS? for a more convenient way to bypass the Z-machine’s global variable limit. (In fact, ZILF implements DEFINE-GLOBALS by turning on FUNNY-GLOBALS? and defining a global variable for each macro.)
+
+---
+
+### DEFINITIONS
+**Usage:** `<DEFINITIONS package-name>`
+
+MDL package system that is exactly the same as PACKAGE except that there is no internal OBLIST with DEFINITIONS, 
+
+See END-DEFINITIONS, INCLUDE, INCLUDE-WHEN, PACKAGE and RENTRY.
+
+> **Note:** To activate a package-name INCLUDE or INCLUDE-WHEN is used.
+
+---
+
+### DEFMAC
+**Usage:** `<DEFMAC name [activation] arg-list [decl] expressions ...>`
+
+MDL built-in function that  has the same syntax as DEFINE, but defines a MACRO instead of a FUNCTION. A MACRO is evaluated two times, the first evaluation inserts the arguments in the MACRO and creates an object that is evaluated during the second evaluation. The first evaluation is done at “top-level”, in other words during compilation. EXPAND is used to perform the first evaluation.
+
+> **Note:** Note that two identical calls to a MACRO always generate the same result from the first evaluation.
+
+---
+
+### DELAY-DEFINITION
+**Usage:** `<DELAY-DEFINITION name>`
+
+ZIL library function that tells ZILF that a REPLACE-DEFINITION for name should be expected thus the DEFAULT-DEFINITION never is evaluated for the name. This means that REPLACE-DEFINITION can appear after the DEFAULT-DEFINITION.
+
+DELAY-DEFINITION also means that the body of REPLACE-DEFINITION will be evaluated at the place of REPLACE-DEFINITION. 
+
+See DEFAULT-DEFINITION and REPLACE-DEFINITION.
+
+---
+
 ### END-SEGMENT
 **Usage:** `<END-SEGMENT>`
 

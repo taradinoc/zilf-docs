@@ -116,6 +116,100 @@
 ```
 
 
+### DEFINE
+```zil
+<DEFINE MYADD (X1 X2) <+ .X1 .X2>>
+<MYADD 4 5>  ;  9
+<DEFINE SQUARE (X) <* .X .X>>
+<SQUARE 5>  ;  25
+<DEFINE POWER-TO ACT (X "OPT" (Y 2)) 
+    <COND (<=? .Y 0> <RETURN 1 .ACT>)> 
+    <REPEAT ((Z 1)(I 0)) 
+        <SET Z <* .Z .X>> 
+        <SET I <+ .I 1>> 
+        <COND (<=? .I .Y> <RETURN .Z>)> 
+    > 
+> 
+<POWER-TO 2 3>  ;  8
+<POWER-TO 3 4>  ;  81
+<POWER-TO 3 0>  ;  1
+```
+
+
+### DEFINE-GLOBALS
+```zil
+;  From Bureaucracy
+<DEFINE-GLOBALS COMPUTER-GLOBALS
+    (LAST-LINE-USED:FIX BYTE 0)
+    (TIMES-THROUGH-LOOP:FIX BYTE 0)
+    (FILES-ON-SCREEN? BYTE <>)
+    (TELECOM? BYTE <>)
+    (EXITED-ALREADY? BYTE <>)
+    (COMPUTER-DEAD? BYTE <>)
+    (COMP-X:FIX BYTE 0)
+    (COMP-Y:FIX BYTE 0)
+    (CURRENT-TARGET-NAME <>)  ;  "String for interrupt messages"
+    (REAL-TARGET-NAME <>)  ; "LTABLE for looking stuff up in directory"
+    (REMAINING-TARGET-TURNS:FIX BYTE 0)  ;  "Turns left until this one's done"
+    (LINES-TO-NEXT-TARGET:FIX BYTE 0)  ;  "Lines to output before select next target"
+    (TERMINATE-CURRENT:FIX BYTE 0)  ;  "Lines to output before terminating this one"
+    (COMMANDS-SINCE-START:FIX BYTE 0)  ;  "Command lines read since target started"
+    (DIE-ON-NEXT-COMMAND BYTE <>)  ;  "To avoid hair of faking non-local return"
+    (WILL-WIN? BYTE <>)  ;  "True if killed computer"
+    (FERROR-ACTIVE? BYTE <>)>
+```
+
+
+### DEFINITIONS
+```zil
+;"Define PACKAGE" 
+<REMOVE ANSWER> ;"Secure that ATOM not on any OBLIST"  
+<DEFINITIONS "FOO"> 
+<SETG ANSWER 42> 
+<END-DEFINITIONS> 
+
+<TYPE? <GETPROP FOO!-PACKAGE OBLIST> OBLIST>  ;  OBLIST
+<GASSIGNED? ANSWER>  ;  #FALSE
+<GASSIGNED? ANSWER!-FOO!-PACKAGE>  ;  T
+,ANSWER!-FOO!-PACKAGE  ;  42
+
+<REMOVE ANSWER> ;"Secure that ATOM not on any OBLIST"
+<INCLUDE "FOO">
+,ANSWER  ;  42
+```
+
+
+### DEFMAC
+```zil
+<DEFMAC INC (ATM "OPTIONAL" (N 1))
+    <FORM SET .ATM 
+        <FORM + <FORM LVAL .ATM> .N>>>
+<SET X 1>
+<INC X 2>  ;  3
+<EXPAND '<INC X 2>>  ;  <SET X <+ .X 2>>
+```
+
+
+### DELAY-DEFINITION
+```zil
+;"REPLACE can be defined after DEFAULT" 
+<DELAY-DEFINITION FOO-ROUTINE> 
+<DEFAULT-DEFINITION FOO-ROUTINE <DEFINE FOO () 123>> 
+<REPLACE-DEFINITION FOO-ROUTINE <DEFINE FOO () 456>>
+<FOO>  ;  456
+
+;"DELAY means that REPLACE is evaluated at right place" 
+<DELAY-DEFINITION BAR-ROUTINE> 
+<SETG BAR-RESULT 789> 
+<REPLACE-DEFINITION BAR-ROUTINE 
+<EVAL <FORM DEFINE BAR '() ,BAR-RESULT>>> 
+<SETG BAR-RESULT 123> 
+<DEFAULT-DEFINITION BAR-ROUTINE 
+<EVAL <FORM DEFINE BAR '() ,BAR-RESULT>>>
+<BAR>  ;  789 ("123 without DELAY")
+```
+
+
 ### DIR-SYNONYM
 ```zil
 <DIR-SYNONYM FORE F>
