@@ -262,6 +262,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:STRING ,
                                  zilf:TOP ,
                                  zilf:VALUE ,
+                                 <http://example.org/zilf/EMPTY?> ,
                                  <http://example.org/zilf/OR?> ,
                                  <http://example.org/zilf/VALID-TYPE?> ;
                    skos:topConceptOf zilf:ZILF_Scheme ;
@@ -1644,6 +1645,18 @@ zilf:ZWSTR rdf:type owl:NamedIndividual ,
 <PRINTB ,DSTBUF>  ;  \"hello\""""@en ;
            skos:historyNote "Zapf syntax: ZWSTR, Inform syntax: encode_text"@en ;
            skos:prefLabel "<ZWSTR src-table length offset dest-table>"@en .
+
+
+###  http://example.org/zilf/EMPTY?
+<http://example.org/zilf/EMPTY?> rdf:type owl:NamedIndividual ,
+                                          skos:Concept ;
+                                 skos:broader zilf:CoreFunctions ;
+                                 skos:inScheme zilf:ZILF_Scheme ;
+                                 skos:definition "MDL built-in predicate that returns true if structure contains no elements, otherwise false."@en ;
+                                 skos:editorialNote "structure must be an object that STRUCTURED? evaluates to true."@en ;
+                                 skos:example """<EMPTY? [1 2 3]>  ;  False
+<EMPTY? []>  ;  True"""@en ;
+                                 skos:prefLabel "<EMPTY? structure>"@en .
 
 
 ###  http://example.org/zilf/F?
