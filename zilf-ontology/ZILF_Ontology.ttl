@@ -239,6 +239,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:END-SEGMENT ,
                                  zilf:ENDBLOCK ,
                                  zilf:ENDLOAD ,
+                                 zilf:ENDPACKAGE ,
                                  zilf:EVAL ,
                                  zilf:GLOBAL ,
                                  zilf:OR ,
@@ -504,6 +505,16 @@ zilf:ENDLOAD rdf:type owl:NamedIndividual ,
              skos:definition "ZIL library function."@en ;
              skos:editorialNote "ZILF ignores this and always returns FALSE."@en ;
              skos:prefLabel "<ENDLOAD>"@en .
+
+
+###  http://example.org/zilf/ENDPACKAGE
+zilf:ENDPACKAGE rdf:type owl:NamedIndividual ,
+                         skos:Concept ;
+                skos:broader zilf:CoreFunctions ;
+                skos:inScheme zilf:ZILF_Scheme ;
+                skos:definition "MDL package system that is an alias to ENDBLOCK."@en ;
+                skos:editorialNote "See PACKAGE."@en ;
+                skos:prefLabel "<ENDPACKAGE>"@en .
 
 
 ###  http://example.org/zilf/ERASE
