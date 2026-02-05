@@ -125,6 +125,15 @@ MDL built-in predicate that returns true if structure contains no elements, othe
 
 ---
 
+### END-DEFINITIONS
+**Usage:** `<END-DEFINITIONS>`
+
+MDL package system that is an alias of ENDBLOCK.
+
+> **Note:** See DEFINITIONS.
+
+---
+
 ### END-SEGMENT
 **Usage:** `<END-SEGMENT>`
 
@@ -133,6 +142,40 @@ ZIL library function that terminates the current code and data group, returning 
 > **Note:** ZILF ignores this and always returns FALSE.
 
 **History:** Having been used in a few InfoCom projects, BEGIN-SEGMENT was notably used in The Abyss, an unreleased interactive fiction game written by Bob Bates for Infocom under historical source code for the game, entitled The Abyss Source Code Collection.
+
+---
+
+### ENDBLOCK
+**Usage:** `<ENDBLOCK>`
+
+MDL built-in function that  pops back, rebinds and returns the local ATOM OBLIST to the state it had before the call to BLOCK. ENDBLOCK without previous BLOCK (or PACKAGE, DEFINITIONS, etc) results in an error.
+
+---
+
+### ENDLOAD
+**Usage:** `<ENDLOAD>`
+
+ZIL library function.
+
+> **Note:** ZILF ignores this and always returns FALSE.
+
+---
+
+### ENDPACKAGE
+**Usage:** `<ENDPACKAGE>`
+
+MDL package system that is an alias to ENDBLOCK.
+
+> **Note:** See PACKAGE.
+
+---
+
+### ENDSECTION
+**Usage:** `<ENDSECTION>`
+
+MDL package system that is an alias to ENDBLOCK.
+
+> **Note:** See DEFINITIONS.
 
 ---
 

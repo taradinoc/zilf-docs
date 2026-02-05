@@ -240,6 +240,17 @@
 ```
 
 
+### ENDBLOCK
+```zil
+XYZZY!-MY-OBLIST 
+<SETG FIRST!- FOO> 
+<BLOCK (<GETPROP MY-OBLIST OBLIST> <ROOT>)> 
+<SETG SECOND!- FOO> 
+<ENDBLOCK> 
+<=? ,FIRST!- ,SECOND!->  ;  #FALSE
+```
+
+
 ### ERASE
 ```zil
 <ERASE 1>  ;  Clears from cursor to end of line
