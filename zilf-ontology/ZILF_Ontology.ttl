@@ -238,6 +238,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:END-DEFINITIONS ,
                                  zilf:END-SEGMENT ,
                                  zilf:ENDBLOCK ,
+                                 zilf:ENDLOAD ,
                                  zilf:EVAL ,
                                  zilf:GLOBAL ,
                                  zilf:OR ,
@@ -493,6 +494,16 @@ zilf:ENDBLOCK rdf:type owl:NamedIndividual ,
 <ENDBLOCK> 
 <=? ,FIRST!- ,SECOND!->  ;  #FALSE"""@en ;
               skos:prefLabel "<ENDBLOCK>"@en .
+
+
+###  http://example.org/zilf/ENDLOAD
+zilf:ENDLOAD rdf:type owl:NamedIndividual ,
+                      skos:Concept ;
+             skos:broader zilf:CoreFunctions ;
+             skos:inScheme zilf:ZILF_Scheme ;
+             skos:definition "ZIL library function."@en ;
+             skos:editorialNote "ZILF ignores this and always returns FALSE."@en ;
+             skos:prefLabel "<ENDLOAD>"@en .
 
 
 ###  http://example.org/zilf/ERASE
