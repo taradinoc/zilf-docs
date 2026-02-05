@@ -237,6 +237,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:DELAY-DEFINITION ,
                                  zilf:END-DEFINITIONS ,
                                  zilf:END-SEGMENT ,
+                                 zilf:ENDBLOCK ,
                                  zilf:EVAL ,
                                  zilf:GLOBAL ,
                                  zilf:OR ,
@@ -477,6 +478,21 @@ zilf:END-SEGMENT rdf:type owl:NamedIndividual ,
 <END-SEGMENT>"""@en ;
                  skos:historyNote "Having been used in a few InfoCom projects, BEGIN-SEGMENT was notably used in The Abyss, an unreleased interactive fiction game written by Bob Bates for Infocom under historical source code for the game, entitled The Abyss Source Code Collection."@en ;
                  skos:prefLabel "<END-SEGMENT>"@en .
+
+
+###  http://example.org/zilf/ENDBLOCK
+zilf:ENDBLOCK rdf:type owl:NamedIndividual ,
+                       skos:Concept ;
+              skos:broader zilf:CoreFunctions ;
+              skos:inScheme zilf:ZILF_Scheme ;
+              skos:definition "MDL built-in function that  pops back, rebinds and returns the local ATOM OBLIST to the state it had before the call to BLOCK. ENDBLOCK without previous BLOCK (or PACKAGE, DEFINITIONS, etc) results in an error."@en ;
+              skos:example """XYZZY!-MY-OBLIST 
+<SETG FIRST!- FOO> 
+<BLOCK (<GETPROP MY-OBLIST OBLIST> <ROOT>)> 
+<SETG SECOND!- FOO> 
+<ENDBLOCK> 
+<=? ,FIRST!- ,SECOND!->  ;  #FALSE"""@en ;
+              skos:prefLabel "<ENDBLOCK>"@en .
 
 
 ###  http://example.org/zilf/ERASE
