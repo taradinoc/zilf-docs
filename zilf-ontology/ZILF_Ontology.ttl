@@ -235,6 +235,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:DEFINITIONS ,
                                  zilf:DEFMAC ,
                                  zilf:DELAY-DEFINITION ,
+                                 zilf:END-DEFINITIONS ,
                                  zilf:END-SEGMENT ,
                                  zilf:EVAL ,
                                  zilf:GLOBAL ,
@@ -446,6 +447,16 @@ zilf:DIR-SYNONYM rdf:type owl:NamedIndividual ,
 <DIR-SYNONYM PORT P>
 <DIR-SYNONYM STARBOARD SB>"""@en ;
                  skos:prefLabel "<DIR-SYNONYM original synonyms ...>"@en .
+
+
+###  http://example.org/zilf/END-DEFINITIONS
+zilf:END-DEFINITIONS rdf:type owl:NamedIndividual ,
+                              skos:Concept ;
+                     skos:broader zilf:CoreFunctions ;
+                     skos:inScheme zilf:ZILF_Scheme ;
+                     skos:definition "MDL package system that is an alias of ENDBLOCK."@en ;
+                     skos:editorialNote "See DEFINITIONS."@en ;
+                     skos:prefLabel "<END-DEFINITIONS>"@en .
 
 
 ###  http://example.org/zilf/END-SEGMENT
