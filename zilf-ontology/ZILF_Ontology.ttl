@@ -232,6 +232,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:DEFAULTS-DEFINED ,
                                  zilf:DEFINE ,
                                  zilf:DEFINE-GLOBALS ,
+                                 zilf:DEFINE-SEGMENT ,
                                  zilf:DEFINITIONS ,
                                  zilf:DEFMAC ,
                                  zilf:DELAY-DEFINITION ,
@@ -367,6 +368,16 @@ See FUNNY-GLOBALS? for a more convenient way to bypass the Z-machine’s global 
     (WILL-WIN? BYTE <>)  ;  \"True if killed computer\"
     (FERROR-ACTIVE? BYTE <>)>"""@en ;
                     skos:prefLabel "<DEFINE-GLOBALS group-name (atom-or-adecl [{BYTE | WORD}] [initializer]) ...>"@en .
+
+
+###  http://example.org/zilf/DEFINE-SEGMENT
+zilf:DEFINE-SEGMENT rdf:type owl:NamedIndividual ,
+                             skos:Concept ;
+                    skos:broader zilf:CoreFunctions ;
+                    skos:inScheme zilf:ZILF_Scheme ;
+                    skos:definition "ZIL library function."@en ;
+                    skos:editorialNote "ZILF ignores this an always returns false."@en ;
+                    skos:prefLabel "<DEFINE-SEGMENT>"@en .
 
 
 ###  http://example.org/zilf/DEFINITIONS
