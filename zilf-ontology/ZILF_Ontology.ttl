@@ -233,6 +233,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:DEFINE ,
                                  zilf:DEFINE-GLOBALS ,
                                  zilf:DEFINE-SEGMENT ,
+                                 zilf:DEFINE20 ,
                                  zilf:DEFINITIONS ,
                                  zilf:DEFMAC ,
                                  zilf:DELAY-DEFINITION ,
@@ -378,6 +379,16 @@ zilf:DEFINE-SEGMENT rdf:type owl:NamedIndividual ,
                     skos:definition "ZIL library function."@en ;
                     skos:editorialNote "ZILF ignores this an always returns false."@en ;
                     skos:prefLabel "<DEFINE-SEGMENT>"@en .
+
+
+###  http://example.org/zilf/DEFINE20
+zilf:DEFINE20 rdf:type owl:NamedIndividual ,
+                       skos:Concept ;
+              skos:broader zilf:CoreFunctions ;
+              skos:inScheme zilf:ZILF_Scheme ;
+              skos:definition "ZIL library function that  is an alias for DEFINE except that it isn’t affected by MDL-ZIL mode: it always defines an MDL function."@en ;
+              skos:editorialNote "DEFINE20 (and SETG20) are used in \"MDL-ZIL\"-files, where routines are defined with DEFINE - 42 - instead of ROUTINE, global variables are created with SETG instead of GLOBAL, etc. Presumably that was a way to run the games in MDL during development to avoid recompiling them. SETG20 and DEFINE20 are aliases for the MDL versions of SETG and DEFINE."@en ;
+              skos:prefLabel "<DEFINE20 name [activation] arg-list [decl] expressions ...>"@en .
 
 
 ###  http://example.org/zilf/DEFINITIONS
