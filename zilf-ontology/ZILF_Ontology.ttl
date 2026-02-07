@@ -753,6 +753,19 @@ Outputs this error:
             skos:prefLabel "<GLOBAL atom default-value [decl] [size]>"@en .
 
 
+###  http://example.org/zilf/INC
+zilf:INC rdf:type owl:NamedIndividual ,
+                  skos:Concept ;
+         skos:broader zilf:ZCodeBuiltIns ;
+         skos:inScheme zilf:ZILF_Scheme ;
+         skos:definition "Z-code built-in function that increments name by 1, which is signed, such that -1 increments to 0."@en ;
+         skos:editorialNote "ZILF supports INC in all versions."@en ;
+         skos:example """<GLOBAL X 5>
+<INC ,X>  ;  X = 6"""@en ;
+         skos:historyNote "Zapf syntax: INC, Inform syntax: inc"@en ;
+         skos:prefLabel "<INC name>"@en .
+
+
 ###  http://example.org/zilf/ISTRING
 zilf:ISTRING rdf:type owl:NamedIndividual ,
                       skos:Concept ;
@@ -1746,6 +1759,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:GETB ,
                                  zilf:GETP ,
                                  zilf:GETPT ,
+                                 zilf:INC ,
                                  zilf:PICINF ,
                                  zilf:PICSET ,
                                  zilf:POP ,
