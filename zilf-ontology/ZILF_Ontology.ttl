@@ -475,6 +475,17 @@ zilf:DIR-SYNONYM rdf:type owl:NamedIndividual ,
                  skos:prefLabel "<DIR-SYNONYM original synonyms ...>"@en .
 
 
+###  http://example.org/zilf/DIRECTIONS
+zilf:DIRECTIONS rdf:type owl:NamedIndividual ,
+                         skos:Concept ;
+                skos:broader zilf:CoreFunctions ;
+                skos:inScheme zilf:ZILF_Scheme ;
+                skos:definition "ZIL parser library function that creates words in the vocabulary with the part-of-speech DIRECTION."@en ;
+                skos:editorialNote "DIRECTIONS are often defined in the parser and the order is usually tightly tied to the parser. Be careful if you change these. You can use DIR-SYNONYM if you, for example, want to add FORE, AFT, PORT and STARBOARD."@en ;
+                skos:example "<DIRECTIONS NORTH SOUTH EAST WEST NE NW SE SW IN OUT UP DOWN>"@en ;
+                skos:prefLabel "<DIRECTIONS atoms ...>"@en .
+
+
 ###  http://example.org/zilf/END-DEFINITIONS
 zilf:END-DEFINITIONS rdf:type owl:NamedIndividual ,
                               skos:Concept ;
@@ -986,6 +997,7 @@ zilf:ParserSystem rdf:type owl:NamedIndividual ,
                                 zilf:BIT-SYNONYM ,
                                 zilf:BUZZ ,
                                 zilf:DIR-SYNONYM ,
+                                zilf:DIRECTIONS ,
                                 zilf:PREP-SYNONYM ,
                                 zilf:SYNONYM ,
                                 zilf:SYNTAX ,
