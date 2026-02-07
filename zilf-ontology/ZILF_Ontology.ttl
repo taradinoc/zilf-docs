@@ -246,6 +246,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:EQVB ,
                                  zilf:ERROR ,
                                  zilf:EVAL ,
+                                 zilf:EVAL-IN-SEGMENT ,
                                  zilf:GLOBAL ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
@@ -622,6 +623,19 @@ zilf:EVAL rdf:type owl:NamedIndividual ,
 <WRONG .A> ; 1
 <RIGHT .A> ; 0"""@en ;
           skos:prefLabel "<EVAL value [environment]>"@en .
+
+
+###  http://example.org/zilf/EVAL-IN-SEGMENT
+zilf:EVAL-IN-SEGMENT rdf:type owl:NamedIndividual ,
+                              skos:Concept ;
+                     skos:broader zilf:CoreFunctions ;
+                     skos:inScheme zilf:ZILF_Scheme ;
+                     skos:definition "ZIL library function that calls EVAL on the value and returns its result."@en ;
+                     skos:editorialNote "When ZILF calls EVAL, it ignores dummy1 and the optional dummy2"@en ;
+                     skos:example """<SET F '<+ 1 2>> 
+.F  ;  <+ 1 2>
+<EVAL-IN-SEGMENT \"HINTS\" .F (1 2 3)>  ;  3"""@en ;
+                     skos:prefLabel "<EVAL-IN-SEGMENT dummy1 value[dummy2]>"@en .
 
 
 ###  http://example.org/zilf/FCLEAR
