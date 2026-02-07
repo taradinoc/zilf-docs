@@ -243,6 +243,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:ENDLOAD ,
                                  zilf:ENDPACKAGE ,
                                  zilf:ENDSECTION ,
+                                 zilf:EQVB ,
                                  zilf:EVAL ,
                                  zilf:GLOBAL ,
                                  zilf:OR ,
@@ -559,6 +560,21 @@ zilf:ENDSECTION rdf:type owl:NamedIndividual ,
                 skos:definition "MDL package system that is an alias to ENDBLOCK."@en ;
                 skos:editorialNote "See DEFINITIONS."@en ;
                 skos:prefLabel "<ENDSECTION>"@en .
+
+
+###  http://example.org/zilf/EQVB
+zilf:EQVB rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition "MDL built-in function that evaluates bitwise equivalence (inverse of exclusive “or”)."@en ;
+          skos:editorialNote "EQVB uses 32-bit."@en ;
+          skos:example """<XORB 250 245>  ;  00000000 00000000 00000000 11111010
+                                  ;  00000000 00000000 00000000 11110101
+                                  ;
+                                  ;  -----------------------------------
+                                  ;  11111111 11111111 11111111 11110000 = -16"""@en ;
+          skos:prefLabel "<EQVB numbers ...>"@en .
 
 
 ###  http://example.org/zilf/ERASE
