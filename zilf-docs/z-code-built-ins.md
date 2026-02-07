@@ -188,6 +188,28 @@ Z-code built-in that gets property address from object. Returns 0 (false) if pro
 
 ---
 
+### IN?
+**Usage:** `<IN? object1 object2>`
+
+Z-code built-in predicate that returns true if object1 is in object2 (object1 has object2 as parent),otherwise false.
+
+> **Note:** ZILF supports IN? in all versions.
+
+**History:** Zapf syntax: IN?, Inform syntax: jin
+
+---
+
+### INC
+**Usage:** `<INC name>`
+
+Z-code built-in function that increments name by 1, which is signed, such that -1 increments to 0.
+
+> **Note:** ZILF supports INC in all versions.
+
+**History:** Zapf syntax: INC, Inform syntax: inc
+
+---
+
 ### PICINF
 **Usage:** `<PICINF picture-number table>`
 

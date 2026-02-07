@@ -37,6 +37,22 @@ ZIL parser library function that creates one or more synonyms to the original di
 
 ---
 
+### DIRECTIONS
+**Usage:** `<DIRECTIONS atoms ...>`
+
+ZIL parser library function that creates words in the vocabulary with the part-of-speech DIRECTION.
+
+> **Note:** DIRECTIONS are often defined in the parser and the order is usually tightly tied to the parser. Be careful if you change these. You can use DIR-SYNONYM if you, for example, want to add FORE, AFT, PORT and STARBOARD.
+
+---
+
+### NEW-ADD-WORD
+**Usage:** `<NEW-ADD-WORD atom-or-string [type] [value] [flags]>`
+
+ZIL parser library function that is an alias to ADD-WORD.
+
+---
+
 ### PREP-SYNONYM
 **Usage:** `<PREP-SYNONYM original synonyms ...>`
 

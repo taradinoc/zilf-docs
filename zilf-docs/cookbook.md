@@ -219,6 +219,12 @@
 ```
 
 
+### DIRECTIONS
+```zil
+<DIRECTIONS NORTH SOUTH EAST WEST NE NW SE SW IN OUT UP DOWN>
+```
+
+
 ### EMPTY?
 ```zil
 <EMPTY? [1 2 3]>  ;  False
@@ -251,9 +257,27 @@ XYZZY!-MY-OBLIST
 ```
 
 
+### EQVB
+```zil
+<XORB 250 245>  
+;  00000000 00000000 00000000 11111010
+;  00000000 00000000 00000000 11110101
+;  -----------------------------------
+;  11111111 11111111 11111111 11110000 = -16
+```
+
+
 ### ERASE
 ```zil
 <ERASE 1>  ;  Clears from cursor to end of line
+```
+
+
+### ERROR
+```zil
+<SET A 616>
+<ERROR "MY TYPE OF ERROR." .A> 
+; [error MDL0001] <stdin>:1: ERROR: "MY TYPE OF ERROR." 616
 ```
 
 
@@ -267,6 +291,14 @@ XYZZY!-MY-OBLIST
 <DEFINE RIGHT ("BIND" E 'B "AUX" (A 1)) <EVAL .B .E>> 
 <WRONG .A> ; 1
 <RIGHT .A> ; 0
+```
+
+
+### EVAL-IN-SEGMENT
+```zil
+<SET F '<+ 1 2>> 
+.F  ;  <+ 1 2>
+<EVAL-IN-SEGMENT "HINTS" .F (1 2 3)>  ;  3
 ```
 
 
@@ -337,6 +369,30 @@ XYZZY!-MY-OBLIST
 ### GLOBAL
 ```zil
 <GLOBAL MYVAR 0>
+```
+
+
+### IN?
+```zil
+<OBJECT ANIMAL>
+<OBJECT CAT (LOC ANIMAL)>
+<IN? ,CAT ,ANIMAL>  ;  T
+<IN? ,ANIMAL ,CAT>  ;  <>
+```
+
+
+### INC
+```zil
+<GLOBAL X 5>
+<INC ,X>  ;  X = 6
+```
+
+
+### ISTRING
+```zil
+<ISTRING 4 !\A>  ;  "AAAA"
+<SET A 64>
+<ISTRING 4 '<ASCII <SET A <+ .A 1>>>>  ;  "ABCD"
 ```
 
 

@@ -482,7 +482,7 @@ zilf:DIR-SYNONYM rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/DIRECTIONS
 zilf:DIRECTIONS rdf:type owl:NamedIndividual ,
                          skos:Concept ;
-                skos:broader zilf:CoreFunctions ;
+                skos:broader zilf:ParserSystem ;
                 skos:inScheme zilf:ZILF_Scheme ;
                 skos:definition "ZIL parser library function that creates words in the vocabulary with the part-of-speech DIRECTION."@en ;
                 skos:editorialNote "DIRECTIONS are often defined in the parser and the order is usually tightly tied to the parser. Be careful if you change these. You can use DIR-SYNONYM if you, for example, want to add FORE, AFT, PORT and STARBOARD."@en ;
@@ -572,11 +572,11 @@ zilf:EQVB rdf:type owl:NamedIndividual ,
           skos:inScheme zilf:ZILF_Scheme ;
           skos:definition "MDL built-in function that evaluates bitwise equivalence (inverse of exclusive “or”)."@en ;
           skos:editorialNote "EQVB uses 32-bit."@en ;
-          skos:example """<XORB 250 245>  ;  00000000 00000000 00000000 11111010
-                                  ;  00000000 00000000 00000000 11110101
-                                  ;
-                                  ;  -----------------------------------
-                                  ;  11111111 11111111 11111111 11110000 = -16"""@en ;
+          skos:example """<XORB 250 245>  
+;  00000000 00000000 00000000 11111010
+;  00000000 00000000 00000000 11110101
+;  -----------------------------------
+;  11111111 11111111 11111111 11110000 = -16"""@en ;
           skos:prefLabel "<EQVB numbers ...>"@en .
 
 

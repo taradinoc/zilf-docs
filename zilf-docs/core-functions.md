@@ -85,6 +85,24 @@ See FUNNY-GLOBALS? for a more convenient way to bypass the Z-machine’s global 
 
 ---
 
+### DEFINE-SEGMENT
+**Usage:** `<DEFINE-SEGMENT>`
+
+ZIL library function.
+
+> **Note:** ZILF ignores this an always returns false.
+
+---
+
+### DEFINE20
+**Usage:** `<DEFINE20 name [activation] arg-list [decl] expressions ...>`
+
+ZIL library function that  is an alias for DEFINE except that it isn’t affected by MDL-ZIL mode: it always defines an MDL function.
+
+> **Note:** DEFINE20 (and SETG20) are used in "MDL-ZIL"-files, where routines are defined with DEFINE - 42 - instead of ROUTINE, global variables are created with SETG instead of GLOBAL, etc. Presumably that was a way to run the games in MDL during development to avoid recompiling them. SETG20 and DEFINE20 are aliases for the MDL versions of SETG and DEFINE.
+
+---
+
 ### DEFINITIONS
 **Usage:** `<DEFINITIONS package-name>`
 
@@ -179,12 +197,37 @@ MDL package system that is an alias to ENDBLOCK.
 
 ---
 
+### EQVB
+**Usage:** `<EQVB numbers ...>`
+
+MDL built-in function that evaluates bitwise equivalence (inverse of exclusive “or”).
+
+> **Note:** EQVB uses 32-bit.
+
+---
+
+### ERROR
+**Usage:** `<ERROR values ...>`
+
+MDL built-in function that raises an error ([error MDL0001]) and listing values as resources. The values are usually a text explaining the error, offending ATOM, routine where it occurred and last any other information.
+
+---
+
 ### EVAL
 **Usage:** `<EVAL value [environment]>`
 
 MDL built-in function that evaluates value (usually a FORM created by FORM or QUOTE).
 
 > **Note:** It is possible to supply an environment for EVAL. This tells EVAL from which environment. EVAL should take variable bindings. See The MDL Programming Language, chap. 9.7 for more about the environment.
+
+---
+
+### EVAL-IN-SEGMENT
+**Usage:** `<EVAL-IN-SEGMENT dummy1 value[dummy2]>`
+
+ZIL library function that calls EVAL on the value and returns its result.
+
+> **Note:** When ZILF calls EVAL, it ignores dummy1 and the optional dummy2
 
 ---
 
@@ -201,6 +244,15 @@ For example, the following:
 
 Outputs this error: 
 [error MDL0206] <stdin>:1: expected GVAL of BAR to match DECL FIX, but got "fdsf"
+
+---
+
+### ISTRING
+**Usage:** `<ISTRING count [init]>`
+
+MDL built-in function that returns a STRING with count items all set to init (character).
+
+> **Note:** ISTRING is "implicit" or "iterated".
 
 ---
 
