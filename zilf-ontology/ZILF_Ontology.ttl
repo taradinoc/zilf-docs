@@ -248,6 +248,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:EVAL ,
                                  zilf:EVAL-IN-SEGMENT ,
                                  zilf:GLOBAL ,
+                                 zilf:ISTRING ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
@@ -750,6 +751,19 @@ Outputs this error:
 [error MDL0206] <stdin>:1: expected GVAL of BAR to match DECL FIX, but got \"fdsf\""""@en ;
             skos:example "<GLOBAL MYVAR 0>"@en ;
             skos:prefLabel "<GLOBAL atom default-value [decl] [size]>"@en .
+
+
+###  http://example.org/zilf/ISTRING
+zilf:ISTRING rdf:type owl:NamedIndividual ,
+                      skos:Concept ;
+             skos:broader zilf:CoreFunctions ;
+             skos:inScheme zilf:ZILF_Scheme ;
+             skos:definition "MDL built-in function that returns a STRING with count items all set to init (character)."@en ;
+             skos:editorialNote "ISTRING is \"implicit\" or \"iterated\"."@en ;
+             skos:example """<ISTRING 4 !\\A>  ;  \"AAAA\"
+<SET A 64>
+<ISTRING 4 '<ASCII <SET A <+ .A 1>>>>  ;  \"ABCD\""""@en ;
+             skos:prefLabel "<ISTRING count [init]>"@en .
 
 
 ###  http://example.org/zilf/OBJECT
