@@ -766,6 +766,15 @@ zilf:ISTRING rdf:type owl:NamedIndividual ,
              skos:prefLabel "<ISTRING count [init]>"@en .
 
 
+###  http://example.org/zilf/NEW-ADD-WORD
+zilf:NEW-ADD-WORD rdf:type owl:NamedIndividual ,
+                           skos:Concept ;
+                  skos:broader zilf:ParserSystem ;
+                  skos:inScheme zilf:ZILF_Scheme ;
+                  skos:definition "ZIL parser library function that is an alias to ADD-WORD."@en ;
+                  skos:prefLabel "<NEW-ADD-WORD atom-or-string [type] [value] [flags]>"@en .
+
+
 ###  http://example.org/zilf/OBJECT
 zilf:OBJECT rdf:type owl:NamedIndividual .
 
@@ -1055,6 +1064,7 @@ zilf:ParserSystem rdf:type owl:NamedIndividual ,
                                 zilf:BUZZ ,
                                 zilf:DIR-SYNONYM ,
                                 zilf:DIRECTIONS ,
+                                zilf:NEW-ADD-WORD ,
                                 zilf:PREP-SYNONYM ,
                                 zilf:SYNONYM ,
                                 zilf:SYNTAX ,
