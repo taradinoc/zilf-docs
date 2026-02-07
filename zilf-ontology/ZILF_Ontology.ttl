@@ -1780,7 +1780,8 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:ZWSTR ,
                                  <http://example.org/zilf/F?> ,
                                  <http://example.org/zilf/FIRST?> ,
-                                 <http://example.org/zilf/FSET?> .
+                                 <http://example.org/zilf/FSET?> ,
+                                 <http://example.org/zilf/IN?> .
 
 
 ###  http://example.org/zilf/ZILF_Scheme
@@ -1854,6 +1855,21 @@ zilf:ZWSTR rdf:type owl:NamedIndividual ,
                                 skos:example "<FSET? ,TRAP-DOOR ,OPENBIT>  ;  True if OPENBIT is set"@en ;
                                 skos:historyNote "Zapf syntax: FSET?, Inform syntax: test_attr"@en ;
                                 skos:prefLabel "<FSET? object flag>"@en .
+
+
+###  http://example.org/zilf/IN?
+<http://example.org/zilf/IN?> rdf:type owl:NamedIndividual ,
+                                       skos:Concept ;
+                              skos:broader zilf:ZCodeBuiltIns ;
+                              skos:inScheme zilf:ZILF_Scheme ;
+                              skos:definition "Z-code built-in predicate that returns true if object1 is in object2 (object1 has object2 as parent),otherwise false."@en ;
+                              skos:editorialNote "ZILF supports IN? in all versions."@en ;
+                              skos:example """<OBJECT ANIMAL>
+<OBJECT CAT (LOC ANIMAL)>
+<IN? ,CAT ,ANIMAL>  ;  T
+<IN? ,ANIMAL ,CAT>  ;  <>"""@en ;
+                              skos:historyNote "Zapf syntax: IN?, Inform syntax: jin"@en ;
+                              skos:prefLabel "<IN? object1 object2>"@en .
 
 
 ###  http://example.org/zilf/OR?
