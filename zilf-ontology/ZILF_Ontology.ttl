@@ -244,6 +244,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:ENDPACKAGE ,
                                  zilf:ENDSECTION ,
                                  zilf:EQVB ,
+                                 zilf:ERROR ,
                                  zilf:EVAL ,
                                  zilf:GLOBAL ,
                                  zilf:OR ,
@@ -591,6 +592,18 @@ Version 6: if the value is 1, erase from the current cursor position to the end 
            skos:example "<ERASE 1>  ;  Clears from cursor to end of line"@en ;
            skos:historyNote "Zapf syntax: ERASE, Inform syntax: erase_line"@en ;
            skos:prefLabel "<ERASE value>"@en .
+
+
+###  http://example.org/zilf/ERROR
+zilf:ERROR rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:CoreFunctions ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "MDL built-in function that raises an error ([error MDL0001]) and listing values as resources. The values are usually a text explaining the error, offending ATOM, routine where it occurred and last any other information."@en ;
+           skos:example """<SET A 616>
+<ERROR \"MY TYPE OF ERROR.\" .A> 
+; [error MDL0001] <stdin>:1: ERROR: \"MY TYPE OF ERROR.\" 616"""@en ;
+           skos:prefLabel "<ERROR values ...>"@en .
 
 
 ###  http://example.org/zilf/EVAL
