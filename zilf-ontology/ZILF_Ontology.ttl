@@ -773,7 +773,7 @@ zilf:INPUT rdf:type owl:NamedIndividual ,
            skos:inScheme zilf:ZILF_Scheme ;
            skos:definition "Z-code built-in function that  reads a single character from the keyboard. Calls routine every time*0.1 s. If routine returns true input is aborted."@en ;
            skos:editorialNote "ZILF supports INPUT in versions 4-."@en ;
-           skos:example """<INPUT 1> --> Wait for keypress
+           skos:example """<INPUT 1>  ;  Wait for keypress
 
 <ROUTINE WAIT-TWO-SECONDS ()
     <INPUT 1 20 ABORT-WAIT>
@@ -835,7 +835,7 @@ zilf:LEX rdf:type owl:NamedIndividual ,
 <GLOBAL PARSEBUF <ITABLE 1 (LEXV) 0 0>>
 <OBJECT CAT (SYNONYM CAT)>
 <LEX ,TEXTBUF ,PARSEBUF>
- <PRINTB <GET ,PARSEBUF 1>>  ;  \"cat\""""@en ;
+<PRINTB <GET ,PARSEBUF 1>>  ;  \"cat\""""@en ;
          skos:historyNote "Zapf syntax: LEX, Inform syntax: tokenise"@en ;
          skos:prefLabel "<LEX text parse [dictionary] [flag]>"@en .
 

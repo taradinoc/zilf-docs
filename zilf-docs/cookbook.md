@@ -388,11 +388,63 @@ XYZZY!-MY-OBLIST
 ```
 
 
+### INPUT
+```zil
+<INPUT 1>  ;  Wait for keypress
+
+<ROUTINE WAIT-TWO-SECONDS ()
+    <INPUT 1 20 ABORT-WAIT>
+> 
+ 
+<ROUTINE ABORT-WAIT () <RETURN T>>
+ 
+;  Pause two seconds (if not interrupted by a keypress from the keyboard
+<WAIT-TWO-SECONDS>
+```
+
+
+### INTBL?
+```zil
+<T <INTBL? 3 <TABLE 1 2 3 4> 4>>  ;  T
+<T <INTBL? 6 <TABLE 1 2 3 4> 4>>  ;  #FALSE
+
+;  "Search byte-table with record length 3 (ver 5, 7-)"
+<T <INTBL? 8 <TABLE (BYTE) 2 0 1 4 0 1 8 0 1> 9 3>>  ;  T
+<T <INTBL? 1 <TABLE (BYTE) 2 0 1 4 0 1 8 0 1> 9 3>>  ;  <>
+
+;  "Search word-table with record length 3 (ver 5, 7-)"
+<T <INTBL? 8 <TABLE 2 0 1 4 0 1 8 0 1> 9 131>>  ;  T
+<T <INTBL? 1 <TABLE 2 0 1 4 0 1 8 0 1> 9 131>>  ;  <>
+```
+
+
+### IRESTORE
+```zil
+<IRESTORE>
+```
+
+
+### ISAVE
+```zil
+<ISAVE>
+```
+
+
 ### ISTRING
 ```zil
 <ISTRING 4 !\A>  ;  "AAAA"
 <SET A 64>
 <ISTRING 4 '<ASCII <SET A <+ .A 1>>>>  ;  "ABCD"
+```
+
+
+### LEX
+```zil
+<GLOBAL TEXTBUF <TABLE (BYTE) !\c !\a !\t>>
+<GLOBAL PARSEBUF <ITABLE 1 (LEXV) 0 0>>
+<OBJECT CAT (SYNONYM CAT)>
+<LEX ,TEXTBUF ,PARSEBUF>
+<PRINTB <GET ,PARSEBUF 1>>  ;  "cat"
 ```
 
 

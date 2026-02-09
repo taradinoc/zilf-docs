@@ -210,6 +210,64 @@ Z-code built-in function that increments name by 1, which is signed, such that -
 
 ---
 
+### INPUT
+**Usage:** `<INPUT 1 [time] [routine]>`
+
+Z-code built-in function that  reads a single character from the keyboard. Calls routine every time*0.1 s. If routine returns true input is aborted.
+
+> **Note:** ZILF supports INPUT in versions 4-.
+
+**History:** Zapf syntax: INPUT, Inform syntax: read_char
+
+---
+
+### INTBL?
+**Usage:** `<INTBL? value table length [rec-spec]>  ;  "Version 5, 7-"
+<INTBL? value table length>   ;  "Version 4, 6"`
+
+Z-code built-in predicate that that returns the address of value if value is in the table table of the length length, otherwise 0. 
+
+In version 5, 7 and 8 the rec-spec describes the field where bit 7 is set for words and clear for bytes, rest defines the length of the field.
+
+> **Note:** ZILF supports INTBL? in versions 4-.
+
+**History:** Zapf syntax: INTBL?, Inform syntax: scan_table
+
+---
+
+### IRESTORE
+**Usage:** `<IRESTORE>`
+
+Z-code built-in function that restores game state saved to memory by ISAVE (undo).
+
+> **Note:** ZILF supports IRESTORE in versions 5-.
+
+**History:** Zapf syntax: IRESTORE, Inform syntax: restore_undo
+
+---
+
+### ISAVE
+**Usage:** `<ISAVE>`
+
+Z-code built-in function that saves the game state to memory that later can be restored by IRESTORE (undo). Returns 0 if ISAVE fails, returns 1 if it is successful, and returns -1 if the interpreter does not handle undo.
+
+> **Note:** ZILF supports ISAVE in versions 5-.
+
+**History:** Zapf syntax: ISAVE, Inform syntax: save_undo
+
+---
+
+### LEX
+**Usage:** `<LEX text parse [dictionary] [flag]>`
+
+Z-code built-in function that parses the text into parse. See READ for more info about parsing. The game dictionary is used if not a dictionary table (LTABLE) is supplied. If the length of the dictionary is negative, the dictionary can be unsorted. If the flag is set (true), unrecognized words are not written to parse but their slot is left unmodified. This makes it possible to run LEX against different dictionaries serially. Also see READ.
+
+> **Note:** ZILF supports LEX in versions 4-.
+
+**History:** Zapf syntax: LEX, Inform syntax: tokenise
+
+---
+
 ### PICINF
 **Usage:** `<PICINF picture-number table>`
 
