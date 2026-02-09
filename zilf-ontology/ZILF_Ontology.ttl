@@ -787,6 +787,30 @@ zilf:INPUT rdf:type owl:NamedIndividual ,
            skos:prefLabel "<INPUT 1 [time] [routine]>"@en .
 
 
+###  http://example.org/zilf/IRESTORE
+zilf:IRESTORE rdf:type owl:NamedIndividual ,
+                       skos:Concept ;
+              skos:broader zilf:ZCodeBuiltIns ;
+              skos:inScheme zilf:ZILF_Scheme ;
+              skos:definition "Z-code built-in function that restores game state saved to memory by ISAVE (undo)."@en ;
+              skos:editorialNote "ZILF supports IRESTORE in versions 5-."@en ;
+              skos:example "<IRESTORE>"@en ;
+              skos:historyNote "Zapf syntax: IRESTORE, Inform syntax: restore_undo"@en ;
+              skos:prefLabel "<IRESTORE>"@en .
+
+
+###  http://example.org/zilf/ISAVE
+zilf:ISAVE rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:ZCodeBuiltIns ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Z-code built-in function that saves the game state to memory that later can be restored by IRESTORE (undo). Returns 0 if ISAVE fails, returns 1 if it is successful, and returns -1 if the interpreter does not handle undo."@en ;
+           skos:editorialNote "ZILF supports ISAVE in versions 5-."@en ;
+           skos:example "<ISAVE>"@en ;
+           skos:historyNote "Zapf syntax: ISAVE, Inform syntax: save_undo"@en ;
+           skos:prefLabel "<ISAVE>"@en .
+
+
 ###  http://example.org/zilf/ISTRING
 zilf:ISTRING rdf:type owl:NamedIndividual ,
                       skos:Concept ;
@@ -1782,6 +1806,8 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:GETPT ,
                                  zilf:INC ,
                                  zilf:INPUT ,
+                                 zilf:IRESTORE ,
+                                 zilf:ISAVE ,
                                  zilf:PICINF ,
                                  zilf:PICSET ,
                                  zilf:POP ,
