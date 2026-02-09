@@ -824,6 +824,22 @@ zilf:ISTRING rdf:type owl:NamedIndividual ,
              skos:prefLabel "<ISTRING count [init]>"@en .
 
 
+###  http://example.org/zilf/LEX
+zilf:LEX rdf:type owl:NamedIndividual ,
+                  skos:Concept ;
+         skos:broader zilf:ZCodeBuiltIns ;
+         skos:inScheme zilf:ZILF_Scheme ;
+         skos:definition "Z-code built-in function that parses the text into parse. See READ for more info about parsing. The game dictionary is used if not a dictionary table (LTABLE) is supplied. If the length of the dictionary is negative, the dictionary can be unsorted. If the flag is set (true), unrecognized words are not written to parse but their slot is left unmodified. This makes it possible to run LEX against different dictionaries serially. Also see READ."@en ;
+         skos:editorialNote "ZILF supports LEX in versions 4-."@en ;
+         skos:example """<GLOBAL TEXTBUF <TABLE (BYTE) !\\c !\\a !\\t>>
+<GLOBAL PARSEBUF <ITABLE 1 (LEXV) 0 0>>
+<OBJECT CAT (SYNONYM CAT)>
+<LEX ,TEXTBUF ,PARSEBUF>
+ <PRINTB <GET ,PARSEBUF 1>>  ;  \"cat\""""@en ;
+         skos:historyNote "Zapf syntax: LEX, Inform syntax: tokenise"@en ;
+         skos:prefLabel "<LEX text parse [dictionary] [flag]>"@en .
+
+
 ###  http://example.org/zilf/NEW-ADD-WORD
 zilf:NEW-ADD-WORD rdf:type owl:NamedIndividual ,
                            skos:Concept ;
@@ -1808,6 +1824,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:INPUT ,
                                  zilf:IRESTORE ,
                                  zilf:ISAVE ,
+                                 zilf:LEX ,
                                  zilf:PICINF ,
                                  zilf:PICSET ,
                                  zilf:POP ,
