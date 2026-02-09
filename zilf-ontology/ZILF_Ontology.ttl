@@ -766,6 +766,27 @@ zilf:INC rdf:type owl:NamedIndividual ,
          skos:prefLabel "<INC name>"@en .
 
 
+###  http://example.org/zilf/INPUT
+zilf:INPUT rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:ZCodeBuiltIns ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Z-code built-in function that  reads a single character from the keyboard. Calls routine every time*0.1 s. If routine returns true input is aborted."@en ;
+           skos:editorialNote "ZILF supports INPUT in versions 4-."@en ;
+           skos:example """<INPUT 1> --> Wait for keypress
+
+<ROUTINE WAIT-TWO-SECONDS ()
+    <INPUT 1 20 ABORT-WAIT>
+> 
+ 
+<ROUTINE ABORT-WAIT () <RETURN T>>
+ 
+;  Pause two seconds (if not interrupted by a keypress from the keyboard
+<WAIT-TWO-SECONDS>"""@en ;
+           skos:historyNote "Zapf syntax: INPUT, Inform syntax: read_char"@en ;
+           skos:prefLabel "<INPUT 1 [time] [routine]>"@en .
+
+
 ###  http://example.org/zilf/ISTRING
 zilf:ISTRING rdf:type owl:NamedIndividual ,
                       skos:Concept ;
@@ -1760,6 +1781,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:GETP ,
                                  zilf:GETPT ,
                                  zilf:INC ,
+                                 zilf:INPUT ,
                                  zilf:PICINF ,
                                  zilf:PICSET ,
                                  zilf:POP ,
