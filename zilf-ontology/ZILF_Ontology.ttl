@@ -885,6 +885,16 @@ zilf:LOWCORE-TABLE rdf:type owl:NamedIndividual ,
                    skos:prefLabel "<LOWCORE-TABLE field-spec length routine>"@en .
 
 
+###  http://example.org/zilf/LTABLE
+zilf:LTABLE rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "Z-code built-in function that Defines a table containing the specified values and with the LENGTH flag."@en ;
+            skos:editorialNote "See TABLE for more information about LENGTH and other flags."@en ;
+            skos:prefLabel "<LTABLE [(flags ...)] values ...>"@en .
+
+
 ###  http://example.org/zilf/NEW-ADD-WORD
 zilf:NEW-ADD-WORD rdf:type owl:NamedIndividual ,
                            skos:Concept ;
@@ -1873,6 +1883,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:LOC ,
                                  zilf:LOWCORE ,
                                  zilf:LOWCORE-TABLE ,
+                                 zilf:LTABLE ,
                                  zilf:PICINF ,
                                  zilf:PICSET ,
                                  zilf:POP ,
