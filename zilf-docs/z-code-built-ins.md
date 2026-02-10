@@ -268,6 +268,55 @@ Z-code built-in function that parses the text into parse. See READ for more info
 
 ---
 
+### LOC
+**Usage:** `<LOC object>`
+
+Z-code built-in function that returns parent to object.
+
+> **Note:** ZILF supports LOC in all versions.
+
+**History:** Zapf syntax: LOC, Inform syntax: get_parent
+
+---
+
+### LOWCORE
+**Usage:** `<LOWCORE field-spec [new-value]>`
+
+Z-code built-in function that reads and in some cases writes to the header information fields.
+
+> **Note:** TODO: Valid values for field-spec to be listed in a separate document to be linked from this note.
+
+---
+
+### LOWCORE-TABLE
+**Usage:** `<LOWCORE-TABLE field-spec length routine>`
+
+Z-code built-in function that reads the length number of bytes from field-spec and calls routine between each byte.
+
+> **Note:** TODO: Valid values for field-spec to be listed in a separate document to be linked from this note.
+
+---
+
+### LTABLE
+**Usage:** `<LTABLE [(flags ...)] values ...>`
+
+Z-code built-in function that Defines a table containing the specified values and with the LENGTH flag.
+
+> **Note:** See TABLE for more information about LENGTH and other flags.
+
+---
+
+### LVAL
+**Usage:** `<LVAL name>`
+
+**Alternative Usage:** `.name`
+
+Z-code built-in function that gets the value of local variable name.
+
+> **Note:** LVAL is more often used in its short for, which is .name.
+
+---
+
 ### PICINF
 **Usage:** `<PICINF picture-number table>`
 

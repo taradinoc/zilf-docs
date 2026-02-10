@@ -50,12 +50,23 @@ def append_concept_documentation(g, subj, lines):
     """Helper to append standard documentation fields to the line list."""
     name = subj.split('/')[-1]
     usage = get_literal(g, subj, SKOS.prefLabel)
+    # Fetch alternative label
+    alt_usage = get_literal(g, subj, SKOS.altLabel)
+    
     definition = get_literal(g, subj, SKOS.definition)
     note = get_literal(g, subj, SKOS.editorialNote)
     history = get_literal(g, subj, SKOS.historyNote)
     
     lines.append(f"\n### {name}")
-    if usage: lines.append(f"**Usage:** `{usage}`\n")
+    
+    # Standard Usage
+    if usage: 
+        lines.append(f"**Usage:** `{usage}`\n")
+    
+    # Alternative Usage
+    if alt_usage:
+        lines.append(f"**Alternative Usage:** `{alt_usage}`\n")
+
     if definition: lines.append(f"{definition}\n")
     if note: lines.append(f"> **Note:** {note}\n")
     if history: lines.append(f"**History:** {history}\n")

@@ -359,6 +359,8 @@ MDL built-in function that exits ZILF (interpreter mode) and returns to the oper
 ### QUOTE
 **Usage:** `<QUOTE value>`
 
+**Alternative Usage:** `'value`
+
 MDL built-in function that returns unevaluated value.
 
 ---

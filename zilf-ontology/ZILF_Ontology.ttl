@@ -900,8 +900,7 @@ zilf:LVAL rdf:type owl:NamedIndividual ,
                    skos:Concept ;
           skos:broader zilf:ZCodeBuiltIns ;
           skos:inScheme zilf:ZILF_Scheme ;
-          skos:altLabel """;  Alternate syntax
-.name"""@en ;
+          skos:altLabel ".name"@en ;
           skos:definition "Z-code built-in function that gets the value of local variable name."@en ;
           skos:editorialNote "LVAL is more often used in its short for, which is .name."@en ;
           skos:example """<SET X 5> 
@@ -1270,7 +1269,7 @@ zilf:QUOTE rdf:type owl:NamedIndividual ,
                     skos:Concept ;
            skos:broader zilf:CoreFunctions ;
            skos:inScheme zilf:ZILF_Scheme ;
-           skos:altLabel "'value  ;  \"Alternative syntax\""@en ;
+           skos:altLabel "'value"@en ;
            skos:definition "MDL built-in function that returns unevaluated value."@en ;
            skos:example """<SET F <QUOTE <+ 1 2>> ; Or <SET F '<+ 1 2>>
 .F  ;  <+ 1 2>

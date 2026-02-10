@@ -448,6 +448,43 @@ XYZZY!-MY-OBLIST
 ```
 
 
+### LOC
+```zil
+<OBJECT ANIMAL>
+<OBJECT CAT (LOC ANIMAL)>
+
+<=? <LOC ,CAT> ,ANIMAL>  ;  T
+<LOC ,ANIMAL>  ;  0
+```
+
+
+### LOWCORE
+```zil
+;  Monospace bit (bit 1) in flags 2 is set
+<LOWCORE FLAGS <BOR <LOWCORE FLAGS> 2>>
+
+;  Do the same as above
+<PUT 0 8 <BOR <GET 0 8> 2>>
+;  Now print the 11 lower bytes in releaseid
+<PRINTN <BAND <LOWCORE RELEASEID> *3777*>>
+```
+
+
+### LOWCORE-TABLE
+```zil
+;  Reads 6 bytes from SERIAL and print each byte as character 
+<LOWCORE-TABLE SERIAL 6 PRINTC>
+```
+
+
+### LVAL
+```zil
+<SET X 5> 
+<LVAL X>  ;  5
+.X  ;  5
+```
+
+
 ### OR
 ```zil
 <OR <=? 1 2> <=? 1 1>>  ;  True 
