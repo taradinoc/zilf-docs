@@ -840,6 +840,22 @@ zilf:LEX rdf:type owl:NamedIndividual ,
          skos:prefLabel "<LEX text parse [dictionary] [flag]>"@en .
 
 
+###  http://example.org/zilf/LOC
+zilf:LOC rdf:type owl:NamedIndividual ,
+                  skos:Concept ;
+         skos:broader zilf:ZCodeBuiltIns ;
+         skos:inScheme zilf:ZILF_Scheme ;
+         skos:definition "Z-code built-in function that returns parent to object."@en ;
+         skos:editorialNote "ZILF supports LOC in all versions."@en ;
+         skos:example """<OBJECT ANIMAL>
+<OBJECT CAT (LOC ANIMAL)>
+
+<=? <LOC ,CAT> ,ANIMAL>  ;  T
+<LOC ,ANIMAL>  ;  0"""@en ;
+         skos:historyNote "Zapf syntax: LOC, Inform syntax: get_parent"@en ;
+         skos:prefLabel "<LOC object>"@en .
+
+
 ###  http://example.org/zilf/NEW-ADD-WORD
 zilf:NEW-ADD-WORD rdf:type owl:NamedIndividual ,
                            skos:Concept ;
@@ -1825,6 +1841,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:IRESTORE ,
                                  zilf:ISAVE ,
                                  zilf:LEX ,
+                                 zilf:LOC ,
                                  zilf:PICINF ,
                                  zilf:PICSET ,
                                  zilf:POP ,
