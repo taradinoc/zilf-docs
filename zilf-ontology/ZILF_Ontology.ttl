@@ -856,6 +856,18 @@ zilf:LOC rdf:type owl:NamedIndividual ,
          skos:prefLabel "<LOC object>"@en .
 
 
+###  http://example.org/zilf/LOWCORE-TABLE
+zilf:LOWCORE-TABLE rdf:type owl:NamedIndividual ,
+                            skos:Concept ;
+                   skos:broader zilf:ZCodeBuiltIns ;
+                   skos:inScheme zilf:ZILF_Scheme ;
+                   skos:definition "Z-code built-in function that reads the length number of bytes from field-spec and calls routine between each byte."@en ;
+                   skos:editorialNote "TODO: Valid values for field-spec to be listed in a separate document to be linked from this note."@en ;
+                   skos:example """;  Reads 6 bytes from SERIAL and print each byte as character 
+<LOWCORE-TABLE SERIAL 6 PRINTC>"""@en ;
+                   skos:prefLabel "<LOWCORE-TABLE field-spec length routine>"@en .
+
+
 ###  http://example.org/zilf/NEW-ADD-WORD
 zilf:NEW-ADD-WORD rdf:type owl:NamedIndividual ,
                            skos:Concept ;
@@ -1842,6 +1854,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:ISAVE ,
                                  zilf:LEX ,
                                  zilf:LOC ,
+                                 zilf:LOWCORE-TABLE ,
                                  zilf:PICINF ,
                                  zilf:PICSET ,
                                  zilf:POP ,
