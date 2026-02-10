@@ -895,6 +895,21 @@ zilf:LTABLE rdf:type owl:NamedIndividual ,
             skos:prefLabel "<LTABLE [(flags ...)] values ...>"@en .
 
 
+###  http://example.org/zilf/LVAL
+zilf:LVAL rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:ZCodeBuiltIns ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:altLabel """;  Alternate syntax
+.name"""@en ;
+          skos:definition "Z-code built-in function that gets the value of local variable name."@en ;
+          skos:editorialNote "LVAL is more often used in its short for, which is .name."@en ;
+          skos:example """<SET X 5> 
+<LVAL X>  ;  5
+.X  ;  5"""@en ;
+          skos:prefLabel "<LVAL name>"@en .
+
+
 ###  http://example.org/zilf/NEW-ADD-WORD
 zilf:NEW-ADD-WORD rdf:type owl:NamedIndividual ,
                            skos:Concept ;
@@ -1884,6 +1899,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:LOWCORE ,
                                  zilf:LOWCORE-TABLE ,
                                  zilf:LTABLE ,
+                                 zilf:LVAL ,
                                  zilf:PICINF ,
                                  zilf:PICSET ,
                                  zilf:POP ,
