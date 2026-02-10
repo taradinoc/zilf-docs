@@ -856,6 +856,23 @@ zilf:LOC rdf:type owl:NamedIndividual ,
          skos:prefLabel "<LOC object>"@en .
 
 
+###  http://example.org/zilf/LOWCORE
+zilf:LOWCORE rdf:type owl:NamedIndividual ,
+                      skos:Concept ;
+             skos:broader zilf:ZCodeBuiltIns ;
+             skos:inScheme zilf:ZILF_Scheme ;
+             skos:definition "Z-code built-in function that reads and in some cases writes to the header information fields."@en ;
+             skos:editorialNote "TODO: Valid values for field-spec to be listed in a separate document to be linked from this note."@en ;
+             skos:example """;  Monospace bit (bit 1) in flags 2 is set
+<LOWCORE FLAGS <BOR <LOWCORE FLAGS> 2>>
+
+;  Do the same as above
+<PUT 0 8 <BOR <GET 0 8> 2>>
+;  Now print the 11 lower bytes in releaseid
+<PRINTN <BAND <LOWCORE RELEASEID> *3777*>>"""@en ;
+             skos:prefLabel "<LOWCORE field-spec [new-value]>"@en .
+
+
 ###  http://example.org/zilf/LOWCORE-TABLE
 zilf:LOWCORE-TABLE rdf:type owl:NamedIndividual ,
                             skos:Concept ;
@@ -1854,6 +1871,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:ISAVE ,
                                  zilf:LEX ,
                                  zilf:LOC ,
+                                 zilf:LOWCORE ,
                                  zilf:LOWCORE-TABLE ,
                                  zilf:PICINF ,
                                  zilf:PICSET ,
