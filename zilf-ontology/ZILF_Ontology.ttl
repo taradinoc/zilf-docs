@@ -909,6 +909,58 @@ zilf:LVAL rdf:type owl:NamedIndividual ,
           skos:prefLabel "<LVAL name>"@en .
 
 
+###  http://example.org/zilf/MAP-CONTENTS
+zilf:MAP-CONTENTS rdf:type owl:NamedIndividual ,
+                           skos:Concept ;
+                  skos:broader zilf:ZCodeBuiltIns ;
+                  skos:inScheme zilf:ZILF_Scheme ;
+                  skos:definition """Z-code built-in function that loops over all objects that have an object as parent (all children to object). For each iteration name is assigned the current child-object and next the child-object that will be name in the next iteration (0 if the current name is the last child).
+
+For each iteration the expressions are evaluated and, if supplied, the (END expressions...) is evaluated last after all iterations."""@en ;
+                  skos:example """<OBJECT SURVIVAL-KIT
+(DESC \"adventure survival kit\") (WEIGHT 10)>
+<OBJECT SWORD
+(IN SURVIVAL-KIT) (DESC \"sword\") (WEIGHT 10)>
+<OBJECT LAMP
+ (IN SURVIVAL-KIT) (DESC \"brass lamp\") (WEIGHT 5)>
+<OBJECT SPOON
+ (IN SURVIVAL-KIT) (DESC \"chrome spoon\") (WEIGHT 2)>
+
+<ROUTINE TEST-MAP-CONTENTS ()
+    <TELL \"Your \" D ,SURVIVAL-KIT \" contains:\" CR>
+    <MAP-CONTENTS (F ,SURVIVAL-KIT)
+        <TELL \"    a \" D .F CR>
+    >
+
+    <TELL \"Your \" D ,SURVIVAL-KIT \" contains:\" CR>
+    <MAP-CONTENTS (F N ,SURVIVAL-KIT)
+        <TELL \"    a \" D .F >
+        <COND (.N <TELL \" (next item is the \" D .N \")\">)>
+        <TELL CR>
+    >
+
+    <BIND ((W 0))
+        <SET W <GETP ,SURVIVAL-KIT ,P?WEIGHT>>
+        <MAP-CONTENTS (F ,SURVIVAL-KIT)
+            (END <TELL \"Total weight is = \" N .W CR>)
+            <SET W <+ .W <GETP .F ,P?WEIGHT>>>
+        >
+    >
+>
+
+<TEST-MAP-CONTENTS>
+;  Your adventure survival kit contains: 
+;      a sword
+;      a chrome spoon
+;      a brass lamp
+;  Your adventure survival kit contains:
+;          a sword (next item is the chrome spoon)
+;          a chrome spoon (next item is the brass lamp)
+;          a brass lamp
+;  Total weight is = 27"""@en ;
+                  skos:prefLabel "<MAP-CONTENTS (name [next] object) [(END expressions ...)] expressions ...>"@en .
+
+
 ###  http://example.org/zilf/NEW-ADD-WORD
 zilf:NEW-ADD-WORD rdf:type owl:NamedIndividual ,
                            skos:Concept ;
@@ -1899,6 +1951,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:LOWCORE-TABLE ,
                                  zilf:LTABLE ,
                                  zilf:LVAL ,
+                                 zilf:MAP-CONTENTS ,
                                  zilf:PICINF ,
                                  zilf:PICSET ,
                                  zilf:POP ,
