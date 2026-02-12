@@ -1025,6 +1025,21 @@ zilf:MENU rdf:type owl:NamedIndividual ,
           skos:prefLabel "<MENU number table>"@en .
 
 
+###  http://example.org/zilf/MOD
+zilf:MOD rdf:type owl:NamedIndividual ,
+                  skos:Concept ;
+         skos:broader zilf:ZCodeBuiltIns ;
+         skos:inScheme zilf:ZILF_Scheme ;
+         skos:definition "Z-code built-in function that Returns remainder of 16-bit signed division. number2 is not allowed to be 0 (\"Division by zero\")."@en ;
+         skos:editorialNote "ZILF supports MOD in all versions."@en ;
+         skos:example """<MOD 15 4>  ;  3
+<MOD -15 4>  ;  -3
+<MOD -15 -4>  ;  -3
+<MOD 15 -4>  ;  3"""@en ;
+         skos:historyNote "Zapf syntax: MOD, Inform syntax: mod"@en ;
+         skos:prefLabel "<MOD number1 number2>"@en .
+
+
 ###  http://example.org/zilf/NEW-ADD-WORD
 zilf:NEW-ADD-WORD rdf:type owl:NamedIndividual ,
                            skos:Concept ;
@@ -2019,6 +2034,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:MAP-DIRECTIONS ,
                                  zilf:MARGIN ,
                                  zilf:MENU ,
+                                 zilf:MOD ,
                                  zilf:PICINF ,
                                  zilf:PICSET ,
                                  zilf:POP ,
