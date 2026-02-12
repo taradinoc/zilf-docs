@@ -995,6 +995,18 @@ For each iteration the expressions are evaluated and, if supplied, the (END expr
                     skos:prefLabel "<MAP-DIRECTIONS (name pt room)  [(END expressions ...)] expressions ...>"@en .
 
 
+###  http://example.org/zilf/MARGIN
+zilf:MARGIN rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "Z-code built-in function that sets the left and right margin (in pixels) of the given window-number. If no window-number is specified, MARGIN sets margins in window-number 0."@en ;
+            skos:editorialNote "ZILF supports MARGIN in versions 6-."@en ;
+            skos:example "<MARGIN 1 1>  ;  set 1 pixel margin in window 0"@en ;
+            skos:historyNote "Zapf syntax: MARGIN, Inform syntax: set_margins"@en ;
+            skos:prefLabel "<MARGIN left right [window-number]>"@en .
+
+
 ###  http://example.org/zilf/NEW-ADD-WORD
 zilf:NEW-ADD-WORD rdf:type owl:NamedIndividual ,
                            skos:Concept ;
@@ -1987,6 +1999,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:LVAL ,
                                  zilf:MAP-CONTENTS ,
                                  zilf:MAP-DIRECTIONS ,
+                                 zilf:MARGIN ,
                                  zilf:PICINF ,
                                  zilf:PICSET ,
                                  zilf:POP ,
