@@ -485,6 +485,107 @@ XYZZY!-MY-OBLIST
 ```
 
 
+### MAP-CONTENTS
+```zil
+<OBJECT SURVIVAL-KIT
+(DESC "adventure survival kit") (WEIGHT 10)>
+<OBJECT SWORD
+(IN SURVIVAL-KIT) (DESC "sword") (WEIGHT 10)>
+<OBJECT LAMP
+ (IN SURVIVAL-KIT) (DESC "brass lamp") (WEIGHT 5)>
+<OBJECT SPOON
+ (IN SURVIVAL-KIT) (DESC "chrome spoon") (WEIGHT 2)>
+
+<ROUTINE TEST-MAP-CONTENTS ()
+    <TELL "Your " D ,SURVIVAL-KIT " contains:" CR>
+    <MAP-CONTENTS (F ,SURVIVAL-KIT)
+        <TELL "    a " D .F CR>
+    >
+
+    <TELL "Your " D ,SURVIVAL-KIT " contains:" CR>
+    <MAP-CONTENTS (F N ,SURVIVAL-KIT)
+        <TELL "    a " D .F >
+        <COND (.N <TELL " (next item is the " D .N ")">)>
+        <TELL CR>
+    >
+
+    <BIND ((W 0))
+        <SET W <GETP ,SURVIVAL-KIT ,P?WEIGHT>>
+        <MAP-CONTENTS (F ,SURVIVAL-KIT)
+            (END <TELL "Total weight is = " N .W CR>)
+            <SET W <+ .W <GETP .F ,P?WEIGHT>>>
+        >
+    >
+>
+
+<TEST-MAP-CONTENTS>
+;  Your adventure survival kit contains: 
+;      a sword
+;      a chrome spoon
+;      a brass lamp
+;  Your adventure survival kit contains:
+;          a sword (next item is the chrome spoon)
+;          a chrome spoon (next item is the brass lamp)
+;          a brass lamp
+;  Total weight is = 27
+```
+
+
+### MAP-DIRECTIONS
+```zil
+<DIRECTIONS NORTH SOUTH EAST WEST>
+ <OBJECT CENTER (DESC "center room")
+      (NORTH TO N-ROOM)
+      (WEST TO W-ROOM)>
+ <OBJECT N-ROOM (DESC "north room")>
+ <OBJECT W-ROOM (DESC "west room")>
+
+ <ROUTINE TEST-MAP-DIRECTIONS ()
+      <TELL "You're in the " D ,CENTER>
+  <TELL CR "Obvious exits:" CR>
+      <MAP-DIRECTIONS (D P ,CENTER)
+          (END <TELL "Room description done." CR>)
+          <COND (<EQUAL? .D ,P?NORTH> <TELL "    North">)
+                 (<EQUAL? .D ,P?SOUTH> <TELL "    South">)
+                 (<EQUAL? .D ,P?EAST> <TELL "    East">)
+                 (<EQUAL? .D ,P?WEST> <TELL "    West">)
+          >
+          <VERSION?
+              (ZIP <TELL " to the " D <GETB .P ,REXIT> CR>)
+              (ELSE <TELL " to the " D <GET .P ,REXIT> CR>)
+          >
+      >
+ >
+```
+
+
+### MARGIN
+```zil
+<MARGIN 1 1>  ;  set 1 pixel margin in window 0
+```
+
+
+### MENU
+```zil
+;  Example from Journey
+<GLOBAL MAC-SPECIAL-MENU 
+    <LTABLE <TABLE (STRING LENGTH) "Journey"> 
+        <TABLE (STRING LENGTH) "Essences"> 
+        <TABLE (STRING LENGTH) "No Defaults">>> 
+... 
+<MENU 3 ,MAC-SPECIAL-MENU>
+```
+
+
+### MOD
+```zil
+<MOD 15 4>  ;  3
+<MOD -15 4>  ;  -3
+<MOD -15 -4>  ;  -3
+<MOD 15 -4>  ;  3
+```
+
+
 ### OR
 ```zil
 <OR <=? 1 2> <=? 1 1>>  ;  True 

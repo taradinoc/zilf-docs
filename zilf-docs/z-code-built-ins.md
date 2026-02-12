@@ -317,6 +317,57 @@ Z-code built-in function that gets the value of local variable name.
 
 ---
 
+### MAP-CONTENTS
+**Usage:** `<MAP-CONTENTS (name [next] object) [(END expressions ...)] expressions ...>`
+
+Z-code built-in function that loops over all objects that have an object as parent (all children to object). For each iteration name is assigned the current child-object and next the child-object that will be name in the next iteration (0 if the current name is the last child).
+
+For each iteration the expressions are evaluated and, if supplied, the (END expressions...) is evaluated last after all iterations.
+
+---
+
+### MAP-DIRECTIONS
+**Usage:** `<MAP-DIRECTIONS (name pt room)  [(END expressions ...)] expressions ...>`
+
+Z-code built-in function that loops over all defined directions in a room. For each iteration name is assigned the current direction and pt is the property for this direction.
+
+For each iteration the expressions are evaluated and, if supplied, the (END expressions...) is evaluated last after all iterations.
+
+---
+
+### MARGIN
+**Usage:** `<MARGIN left right [window-number]>`
+
+Z-code built-in function that sets the left and right margin (in pixels) of the given window-number. If no window-number is specified, MARGIN sets margins in window-number 0.
+
+> **Note:** ZILF supports MARGIN in versions 6-.
+
+**History:** Zapf syntax: MARGIN, Inform syntax: set_margins
+
+---
+
+### MENU
+**Usage:** `<MENU number table>`
+
+Z-code built-in function that controls menu 3- (not menu 0-2, they are system menus). The table is a LTABLE of LTABLE. Item 1 being the menu name. Item 2- are the entries.
+
+> **Note:** ZILF supports MENU in versions 6-.
+
+**History:** Zapf syntax: MENU, Inform syntax: make_menu
+
+---
+
+### MOD
+**Usage:** `<MOD number1 number2>`
+
+Z-code built-in function that Returns remainder of 16-bit signed division. number2 is not allowed to be 0 ("Division by zero").
+
+> **Note:** ZILF supports MOD in all versions.
+
+**History:** Zapf syntax: MOD, Inform syntax: mod
+
+---
+
 ### PICINF
 **Usage:** `<PICINF picture-number table>`
 
