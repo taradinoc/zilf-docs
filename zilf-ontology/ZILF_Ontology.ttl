@@ -961,6 +961,40 @@ For each iteration the expressions are evaluated and, if supplied, the (END expr
                   skos:prefLabel "<MAP-CONTENTS (name [next] object) [(END expressions ...)] expressions ...>"@en .
 
 
+###  http://example.org/zilf/MAP-DIRECTIONS
+zilf:MAP-DIRECTIONS rdf:type owl:NamedIndividual ,
+                             skos:Concept ;
+                    skos:broader zilf:ZCodeBuiltIns ;
+                    skos:inScheme zilf:ZILF_Scheme ;
+                    skos:definition """Z-code built-in function that loops over all defined directions in a room. For each iteration name is assigned the current direction and pt is the property for this direction.
+
+For each iteration the expressions are evaluated and, if supplied, the (END expressions...) is evaluated last after all iterations."""@en ;
+                    skos:example """<DIRECTIONS NORTH SOUTH EAST WEST>
+ <OBJECT CENTER (DESC \"center room\")
+      (NORTH TO N-ROOM)
+      (WEST TO W-ROOM)>
+ <OBJECT N-ROOM (DESC \"north room\")>
+ <OBJECT W-ROOM (DESC \"west room\")>
+
+ <ROUTINE TEST-MAP-DIRECTIONS ()
+      <TELL \"You're in the \" D ,CENTER>
+  <TELL CR \"Obvious exits:\" CR>
+      <MAP-DIRECTIONS (D P ,CENTER)
+          (END <TELL \"Room description done.\" CR>)
+          <COND (<EQUAL? .D ,P?NORTH> <TELL \"    North\">)
+                 (<EQUAL? .D ,P?SOUTH> <TELL \"    South\">)
+                 (<EQUAL? .D ,P?EAST> <TELL \"    East\">)
+                 (<EQUAL? .D ,P?WEST> <TELL \"    West\">)
+          >
+          <VERSION?
+              (ZIP <TELL \" to the \" D <GETB .P ,REXIT> CR>)
+              (ELSE <TELL \" to the \" D <GET .P ,REXIT> CR>)
+          >
+      >
+ >"""@en ;
+                    skos:prefLabel "<MAP-DIRECTIONS (name pt room)  [(END expressions ...)] expressions ...>"@en .
+
+
 ###  http://example.org/zilf/NEW-ADD-WORD
 zilf:NEW-ADD-WORD rdf:type owl:NamedIndividual ,
                            skos:Concept ;
@@ -1952,6 +1986,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:LTABLE ,
                                  zilf:LVAL ,
                                  zilf:MAP-CONTENTS ,
+                                 zilf:MAP-DIRECTIONS ,
                                  zilf:PICINF ,
                                  zilf:PICSET ,
                                  zilf:POP ,
