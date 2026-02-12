@@ -1007,6 +1007,24 @@ zilf:MARGIN rdf:type owl:NamedIndividual ,
             skos:prefLabel "<MARGIN left right [window-number]>"@en .
 
 
+###  http://example.org/zilf/MENU
+zilf:MENU rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:ZCodeBuiltIns ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition "Z-code built-in function that controls menu 3- (not menu 0-2, they are system menus). The table is a LTABLE of LTABLE. Item 1 being the menu name. Item 2- are the entries."@en ;
+          skos:editorialNote "ZILF supports MENU in versions 6-."@en ;
+          skos:example """;  Example from Journey
+<GLOBAL MAC-SPECIAL-MENU 
+    <LTABLE <TABLE (STRING LENGTH) \"Journey\"> 
+        <TABLE (STRING LENGTH) \"Essences\"> 
+        <TABLE (STRING LENGTH) \"No Defaults\">>> 
+... 
+<MENU 3 ,MAC-SPECIAL-MENU>"""@en ;
+          skos:historyNote "Zapf syntax: MENU, Inform syntax: make_menu"@en ;
+          skos:prefLabel "<MENU number table>"@en .
+
+
 ###  http://example.org/zilf/NEW-ADD-WORD
 zilf:NEW-ADD-WORD rdf:type owl:NamedIndividual ,
                            skos:Concept ;
@@ -2000,6 +2018,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:MAP-CONTENTS ,
                                  zilf:MAP-DIRECTIONS ,
                                  zilf:MARGIN ,
+                                 zilf:MENU ,
                                  zilf:PICINF ,
                                  zilf:PICSET ,
                                  zilf:POP ,
