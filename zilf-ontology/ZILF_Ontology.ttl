@@ -143,6 +143,33 @@ zilf:BEGIN-SEGMENT rdf:type owl:NamedIndividual ,
                    skos:prefLabel "<BEGIN-SEGMENT value>"@en .
 
 
+###  http://example.org/zilf/BIND
+zilf:BIND rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition """MDL built-in function that defines a program block with its own set of bindings. BIND is similar to PROG and REPEAT but BIND doesn't create a default activation (like PROG and REPEAT) at the start of the block and doesn't have an automatic AGAIN at the end of the block (like REPEAT). If an activation is needed it must be specified. AGAIN and RETURN without specified activation inside a BIND-block will start over or return from the closest surrounding activation within the current function.
+
+The decl is used to specify the valid TYPE of the variables. In its simplest form decl is formatted like: #DECL ((X) FIX), meaning that X must be of the TYPE FIX. For more information on how to format the decl see GDECL. 
+
+Also see AGAIN, PROG, REPEAT and RETURN for more details how to control program flow."""@en ;
+          skos:example """<BIND ((X 1)) #DECL ((X) FIX)  
+<BIND ((X 2)) <PRIN1 .X>> <PRIN1 .X>>  ;  \"21\"
+
+<DEFINE TEST-BIND-AS-REPEAT () 
+    <PRINC \"START \"> 
+    <BIND ACT ((X 0)) 
+        <SET X <+ .X 1>> 
+        <PRIN1 .X> 
+        <COND (<=? .X 3> <RETURN T .ACT>)>  ;  \"--> exit block\"
+        <AGAIN .ACT>  ;  \"--> repeat\"
+    >
+    <PRINC \" END\">
+>
+<TEST-BIND-AS-REPEAT>  ;  \"START 123 END\""""@en ;
+          skos:prefLabel "<BIND [activation] (bindings ...) [decl] expressions ...>"@en .
+
+
 ###  http://example.org/zilf/BIT-SYNONYM
 zilf:BIT-SYNONYM rdf:type owl:NamedIndividual ,
                           skos:Concept ;
@@ -228,6 +255,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:ATOM ,
                                  zilf:AVALUE ,
                                  zilf:BEGIN-SEGMENT ,
+                                 zilf:BIND ,
                                  zilf:DEFAULT-DEFINITION ,
                                  zilf:DEFAULTS-DEFINED ,
                                  zilf:DEFINE ,
