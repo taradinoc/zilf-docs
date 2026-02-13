@@ -253,6 +253,20 @@ zilf:BUZZ rdf:type owl:NamedIndividual ,
           skos:prefLabel "<BUZZ atoms ...>"@en .
 
 
+###  http://example.org/zilf/BYTE
+zilf:BYTE rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:altLabel "<CHTYPE number BYTE>"@en ;
+          skos:definition "ZIL library function that changes number of TYPE to #BYTE."@en ;
+          skos:editorialNote "#BYTE number is alternative (MDL built-in) syntax."@en ;
+          skos:example """<BYTE 42>  ;  #BYTE 42
+#BYTE 42  ;  #BYTE 42
+<CHTYPE 42 BYTE>  ;  #BYTE 42"""@en ;
+          skos:prefLabel "<BYTE number>"@en .
+
+
 ###  http://example.org/zilf/BitOn
 zilf:BitOn rdf:type owl:NamedIndividual ,
                     skos:Concept ;
@@ -291,6 +305,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:BIND ,
                                  zilf:BLOAT ,
                                  zilf:BLOCK ,
+                                 zilf:BYTE ,
                                  zilf:DEFAULT-DEFINITION ,
                                  zilf:DEFAULTS-DEFINED ,
                                  zilf:DEFINE ,
