@@ -336,6 +336,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:STRING ,
                                  zilf:TOP ,
                                  zilf:VALUE ,
+                                 <http://example.org/zilf/BOUND?> ,
                                  <http://example.org/zilf/EMPTY?> ,
                                  <http://example.org/zilf/OR?> ,
                                  <http://example.org/zilf/VALID-TYPE?> ;
@@ -2160,6 +2161,23 @@ zilf:ZWSTR rdf:type owl:NamedIndividual ,
 <PRINTB ,DSTBUF>  ;  \"hello\""""@en ;
            skos:historyNote "Zapf syntax: ZWSTR, Inform syntax: encode_text"@en ;
            skos:prefLabel "<ZWSTR src-table length offset dest-table>"@en .
+
+
+###  http://example.org/zilf/BOUND?
+<http://example.org/zilf/BOUND?> rdf:type owl:NamedIndividual ,
+                                          skos:Concept ;
+                                 skos:broader zilf:CoreFunctions ;
+                                 skos:inScheme zilf:ZILF_Scheme ;
+                                 skos:definition """MDL bulit-in predicate that returns true if the atom ever had a local value in the environment.
+
+If no environment is supplied, the environment defaults to current scope. See EVAL for more about the environment."""@en ;
+                                 skos:example """<SET X 42>
+<ASSIGNED? X>  ;  True
+<GBOUND? X>  ;  True
+<GUNASSIGN X>
+<GASSIGNED? X>  ;  False
+<GBOUND? X>  ;  True"""@en ;
+                                 skos:prefLabel "<BOUND? atom [environment]>"@en .
 
 
 ###  http://example.org/zilf/EMPTY?
