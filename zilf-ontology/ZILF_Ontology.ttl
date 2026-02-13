@@ -181,6 +181,39 @@ zilf:BIT-SYNONYM rdf:type owl:NamedIndividual ,
                  skos:prefLabel "<BIT-SYNONYM first synonyms ...>"@en .
 
 
+###  http://example.org/zilf/BLOAT
+zilf:BLOAT rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:CoreFunctions ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "MDL built-in function that is used in MDL to temporarily expand available storage space to avoid unnecessary garbage collection when loading large files."@en ;
+           skos:editorialNote "ZILF ignores this and always returns FALSE."@en ;
+           skos:prefLabel "<BLOAT>"@en .
+
+
+###  http://example.org/zilf/BLOCK
+zilf:BLOCK rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:CoreFunctions ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "MDL built-in function that  pushes current binding of the local ATOM OBLIST and rebinds it with the LIST of oblist supplied as argument and returns the new <LVAL OBLIST>. Usually you want <ROOT> as the last oblist in LIST. <ENDBLOCK> then restores the local ATOM OBLIST to its previous value."@en ;
+           skos:example """<SETG FOO 111>
+<SET BAR 222>
+<DEFINE TEST-BLOCK () <PRINT \"OUTSIDE BLOCK\">>
+<BLOCK (<MOBLIST NEW-OBLIST> <ROOT>)>
+<SETG FOO 333>
+<SET BAR 444>
+<DEFINE TEST-BLOCK () <PRINT \"INSIDE BLOCK\">>
+<GVAL FOO>  ;  333
+<LVAL BAR>  ;  444 
+<TEST-BLOCK>  ;  \"INSIDE BLOCK\"
+<ENDBLOCK>
+<GVAL FOO>  ;  111
+<LVAL BAR>  ;  222
+<TEST-BLOCK>  ;  \"OUTSIDE BLOCK\""""@en ;
+           skos:prefLabel "<BLOCK (oblist ...)>"@en .
+
+
 ###  http://example.org/zilf/BTST
 zilf:BTST rdf:type owl:NamedIndividual ,
                    skos:Concept ;
@@ -256,6 +289,8 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:AVALUE ,
                                  zilf:BEGIN-SEGMENT ,
                                  zilf:BIND ,
+                                 zilf:BLOAT ,
+                                 zilf:BLOCK ,
                                  zilf:DEFAULT-DEFINITION ,
                                  zilf:DEFAULTS-DEFINED ,
                                  zilf:DEFINE ,
