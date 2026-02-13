@@ -67,10 +67,59 @@
 ```
 
 
+### BIND
+```zil
+<BIND ((X 1)) #DECL ((X) FIX)  
+<BIND ((X 2)) <PRIN1 .X>> <PRIN1 .X>>  ;  "21"
+
+<DEFINE TEST-BIND-AS-REPEAT () 
+    <PRINC "START "> 
+    <BIND ACT ((X 0)) 
+        <SET X <+ .X 1>> 
+        <PRIN1 .X> 
+        <COND (<=? .X 3> <RETURN T .ACT>)>  ;  "--> exit block"
+        <AGAIN .ACT>  ;  "--> repeat"
+    >
+    <PRINC " END">
+>
+<TEST-BIND-AS-REPEAT>  ;  "START 123 END"
+```
+
+
 ### BIT-SYNONYM
 ```zil
 <BIT-SYNONYM TAKEBIT GETBIT PICKBIT>
 <BIT-SYNONYM LIGHTBIT DAYBIT>
+```
+
+
+### BLOCK
+```zil
+<SETG FOO 111>
+<SET BAR 222>
+<DEFINE TEST-BLOCK () <PRINT "OUTSIDE BLOCK">>
+<BLOCK (<MOBLIST NEW-OBLIST> <ROOT>)>
+<SETG FOO 333>
+<SET BAR 444>
+<DEFINE TEST-BLOCK () <PRINT "INSIDE BLOCK">>
+<GVAL FOO>  ;  333
+<LVAL BAR>  ;  444 
+<TEST-BLOCK>  ;  "INSIDE BLOCK"
+<ENDBLOCK>
+<GVAL FOO>  ;  111
+<LVAL BAR>  ;  222
+<TEST-BLOCK>  ;  "OUTSIDE BLOCK"
+```
+
+
+### BOUND?
+```zil
+<SET X 42>
+<ASSIGNED? X>  ;  True
+<GBOUND? X>  ;  True
+<GUNASSIGN X>
+<GASSIGNED? X>  ;  False
+<GBOUND? X>  ;  True
 ```
 
 
@@ -93,6 +142,14 @@
 ```zil
 <BUZZ A AN AND ANY ALL EVERY EVERYTHING BUT EXCEPT OF ONE
               THE THEN UNDO OOPS \. \, \">
+```
+
+
+### BYTE
+```zil
+<BYTE 42>  ;  #BYTE 42
+#BYTE 42  ;  #BYTE 42
+<CHTYPE 42 BYTE>  ;  #BYTE 42
 ```
 
 

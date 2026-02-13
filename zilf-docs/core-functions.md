@@ -37,6 +37,53 @@ ZIL library function that groups code and data into segments of memory outside t
 
 ---
 
+### BIND
+**Usage:** `<BIND [activation] (bindings ...) [decl] expressions ...>`
+
+MDL built-in function that defines a program block with its own set of bindings. BIND is similar to PROG and REPEAT but BIND doesn't create a default activation (like PROG and REPEAT) at the start of the block and doesn't have an automatic AGAIN at the end of the block (like REPEAT). If an activation is needed it must be specified. AGAIN and RETURN without specified activation inside a BIND-block will start over or return from the closest surrounding activation within the current function.
+
+The decl is used to specify the valid TYPE of the variables. In its simplest form decl is formatted like: #DECL ((X) FIX), meaning that X must be of the TYPE FIX. For more information on how to format the decl see GDECL. 
+
+Also see AGAIN, PROG, REPEAT and RETURN for more details how to control program flow.
+
+---
+
+### BLOAT
+**Usage:** `<BLOAT>`
+
+MDL built-in function that is used in MDL to temporarily expand available storage space to avoid unnecessary garbage collection when loading large files.
+
+> **Note:** ZILF ignores this and always returns FALSE.
+
+---
+
+### BLOCK
+**Usage:** `<BLOCK (oblist ...)>`
+
+MDL built-in function that  pushes current binding of the local ATOM OBLIST and rebinds it with the LIST of oblist supplied as argument and returns the new <LVAL OBLIST>. Usually you want <ROOT> as the last oblist in LIST. <ENDBLOCK> then restores the local ATOM OBLIST to its previous value.
+
+---
+
+### BOUND?
+**Usage:** `<BOUND? atom [environment]>`
+
+MDL bulit-in predicate that returns true if the atom ever had a local value in the environment.
+
+If no environment is supplied, the environment defaults to current scope. See EVAL for more about the environment.
+
+---
+
+### BYTE
+**Usage:** `<BYTE number>`
+
+**Alternative Usage:** `<CHTYPE number BYTE>`
+
+ZIL library function that changes number of TYPE to #BYTE.
+
+> **Note:** #BYTE number is alternative (MDL built-in) syntax.
+
+---
+
 ### DEFAULT-DEFINITION
 **Usage:** `<DEFAULT-DEFINITION name body ...>`
 
