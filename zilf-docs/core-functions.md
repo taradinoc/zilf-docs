@@ -84,6 +84,47 @@ ZIL library function that changes number of TYPE to #BYTE.
 
 ---
 
+### CHECK-VERSION?
+**Usage:** `<CHECK-VERSION? version-spec>`
+
+ZIL library predicate that  returns TRUE if current setting of VERSION is version-spec. Valid values for version-spec are ZIP, EZIP, XZIP, YZIP and the values 3-8.
+
+---
+
+### CHECKPOINT
+**Usage:** `<CHECKPOINT>`
+
+ZIL library function.
+
+> **Note:** ZILF ignores this and always returns FALSE.
+
+---
+
+### CLOSE
+**Usage:** `<CLOSE channel>`
+
+MDL built-in function that closes the channel opened by OPEN and returns the channel.
+
+> **Note:** See READSTRING for and example of CLOSE.
+
+---
+
+### COMPILATION-FLAG-VALUE
+**Usage:** `<COMPILATION-FLAG-VALUE atom-or-string>`
+
+ZIL library function that returns the value of the COMPILATION-FLAG atom-or-string. If no atom-or-string is defined it returns FALSE.
+
+---
+
+### COMPILING?
+**Usage:** `<COMPILING?>`
+
+ZIL library function that is presumably  used in the MDL environment to determine if the game is compiled with ZILCH or running in the interpreter.
+
+> **Note:** ZILF ignores this and always returns TRUE.
+
+---
+
 ### DEFAULT-DEFINITION
 **Usage:** `<DEFAULT-DEFINITION name body ...>`
 
