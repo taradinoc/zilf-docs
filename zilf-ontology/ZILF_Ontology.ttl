@@ -374,6 +374,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:VALUE ,
                                  <http://example.org/zilf/BOUND?> ,
                                  <http://example.org/zilf/CHECK-VERSION?> ,
+                                 <http://example.org/zilf/COMPILING?> ,
                                  <http://example.org/zilf/EMPTY?> ,
                                  <http://example.org/zilf/OR?> ,
                                  <http://example.org/zilf/VALID-TYPE?> ;
@@ -2227,6 +2228,16 @@ If no environment is supplied, the environment defaults to current scope. See EV
 <CHECK-VERSION? ZIP>  ;  #FALSE
 <CHECK-VERSION? 5>  ;  T"""@en ;
                                          skos:prefLabel "<CHECK-VERSION? version-spec>"@en .
+
+
+###  http://example.org/zilf/COMPILING?
+<http://example.org/zilf/COMPILING?> rdf:type owl:NamedIndividual ,
+                                              skos:Concept ;
+                                     skos:broader zilf:CoreFunctions ;
+                                     skos:inScheme zilf:ZILF_Scheme ;
+                                     skos:definition "ZIL library function that is presumably  used in the MDL environment to determine if the game is compiled with ZILCH or running in the interpreter."@en ;
+                                     skos:editorialNote "ZILF ignores this and always returns TRUE."@en ;
+                                     skos:prefLabel "<COMPILING?>"@en .
 
 
 ###  http://example.org/zilf/EMPTY?
