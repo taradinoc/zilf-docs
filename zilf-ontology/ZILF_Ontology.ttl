@@ -352,6 +352,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:TOP ,
                                  zilf:VALUE ,
                                  <http://example.org/zilf/BOUND?> ,
+                                 <http://example.org/zilf/CHECK-VERSION?> ,
                                  <http://example.org/zilf/EMPTY?> ,
                                  <http://example.org/zilf/OR?> ,
                                  <http://example.org/zilf/VALID-TYPE?> ;
@@ -2193,6 +2194,18 @@ If no environment is supplied, the environment defaults to current scope. See EV
 <GASSIGNED? X>  ;  False
 <GBOUND? X>  ;  True"""@en ;
                                  skos:prefLabel "<BOUND? atom [environment]>"@en .
+
+
+###  http://example.org/zilf/CHECK-VERSION?
+<http://example.org/zilf/CHECK-VERSION?> rdf:type owl:NamedIndividual ,
+                                                  skos:Concept ;
+                                         skos:broader zilf:CoreFunctions ;
+                                         skos:inScheme zilf:ZILF_Scheme ;
+                                         skos:definition "ZIL library predicate that  returns TRUE if current setting of VERSION is version-spec. Valid values for version-spec are ZIP, EZIP, XZIP, YZIP and the values 3-8."@en ;
+                                         skos:example """<VERSION XZIP>
+<CHECK-VERSION? ZIP>  ;  #FALSE
+<CHECK-VERSION? 5>  ;  T"""@en ;
+                                         skos:prefLabel "<CHECK-VERSION? version-spec>"@en .
 
 
 ###  http://example.org/zilf/EMPTY?
