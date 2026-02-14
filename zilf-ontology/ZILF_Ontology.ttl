@@ -315,6 +315,18 @@ zilf:CLOSE rdf:type owl:NamedIndividual ,
            skos:prefLabel "<CLOSE channel>"@en .
 
 
+###  http://example.org/zilf/COMPILATION-FLAG-VALUE
+zilf:COMPILATION-FLAG-VALUE rdf:type owl:NamedIndividual ,
+                                     skos:Concept ;
+                            skos:broader zilf:CoreFunctions ;
+                            skos:inScheme zilf:ZILF_Scheme ;
+                            skos:definition "ZIL library function that returns the value of the COMPILATION-FLAG atom-or-string. If no atom-or-string is defined it returns FALSE."@en ;
+                            skos:example """<COMPILATION-FLAG MYFLAG 123>
+<COMPILATION-FLAG-VALUE MYFLAG>  ;  123
+<COMPILATION-FLAG-VALUE ASDFGHJKL>  ;  #FALSE"""@en ;
+                            skos:prefLabel "<COMPILATION-FLAG-VALUE atom-or-string>"@en .
+
+
 ###  http://example.org/zilf/CoreFunctions
 zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                             skos:Concept ;
@@ -327,6 +339,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:BLOCK ,
                                  zilf:BYTE ,
                                  zilf:CHECKPOINT ,
+                                 zilf:COMPILATION-FLAG-VALUE ,
                                  zilf:DEFAULT-DEFINITION ,
                                  zilf:DEFAULTS-DEFINED ,
                                  zilf:DEFINE ,
