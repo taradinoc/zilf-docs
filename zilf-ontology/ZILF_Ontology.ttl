@@ -305,6 +305,16 @@ zilf:CHECKPOINT rdf:type owl:NamedIndividual ,
                 skos:prefLabel "<CHECKPOINT>"@en .
 
 
+###  http://example.org/zilf/CLOSE
+zilf:CLOSE rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:CoreFunctions ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "MDL built-in function that closes the channel opened by OPEN and returns the channel."@en ;
+           skos:editorialNote "See READSTRING for and example of CLOSE."@en ;
+           skos:prefLabel "<CLOSE channel>"@en .
+
+
 ###  http://example.org/zilf/CoreFunctions
 zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                             skos:Concept ;
