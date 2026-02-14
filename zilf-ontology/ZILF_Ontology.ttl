@@ -295,6 +295,16 @@ zilf:CATCH rdf:type owl:NamedIndividual ,
            skos:prefLabel "<CATCH>"@en .
 
 
+###  http://example.org/zilf/CHECKPOINT
+zilf:CHECKPOINT rdf:type owl:NamedIndividual ,
+                         skos:Concept ;
+                skos:broader zilf:CoreFunctions ;
+                skos:inScheme zilf:ZILF_Scheme ;
+                skos:definition "ZIL library function."@en ;
+                skos:editorialNote "ZILF ignores this and always returns FALSE."@en ;
+                skos:prefLabel "<CHECKPOINT>"@en .
+
+
 ###  http://example.org/zilf/CoreFunctions
 zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                             skos:Concept ;
@@ -306,6 +316,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:BLOAT ,
                                  zilf:BLOCK ,
                                  zilf:BYTE ,
+                                 zilf:CHECKPOINT ,
                                  zilf:DEFAULT-DEFINITION ,
                                  zilf:DEFAULTS-DEFINED ,
                                  zilf:DEFINE ,
