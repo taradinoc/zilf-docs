@@ -424,6 +424,21 @@ zilf:COMPILATION-FLAG-VALUE rdf:type owl:NamedIndividual ,
                             skos:prefLabel "<COMPILATION-FLAG-VALUE atom-or-string>"@en .
 
 
+###  http://example.org/zilf/CONS
+zilf:CONS rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition "MDL built-in function that adds first to the front of list, without copying list, and returns the resulting LIST. References to list are not affected."@en ;
+          skos:editorialNote "CONS means \"construct\"."@en ;
+          skos:example """<CONS 1 (2 3)>  ;  (1 2 3)
+ <SET S1 (!\\B !\\C)>
+ <SET S2 <CONS !\\A .S1>>
+ <PUT .S1 2 !\\D>
+ .S2  ;  (!\\A !\\B !\\D)"""@en ;
+          skos:prefLabel "<CONS first list>"@en .
+
+
 ###  http://example.org/zilf/CoreFunctions
 zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                             skos:Concept ;
@@ -440,6 +455,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:COMPILATION-FLAG ,
                                  zilf:COMPILATION-FLAG-DEFAULT ,
                                  zilf:COMPILATION-FLAG-VALUE ,
+                                 zilf:CONS ,
                                  zilf:DEFAULT-DEFINITION ,
                                  zilf:DEFAULTS-DEFINED ,
                                  zilf:DEFINE ,
