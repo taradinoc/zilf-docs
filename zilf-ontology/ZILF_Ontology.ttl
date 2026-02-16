@@ -364,8 +364,7 @@ zyxwvutsrqponmlkjihgfedcba
     <PRINTB ,ENCODED-TEXT> <CRLF>
     <PRINT ,MYTEXT> <CRLF>
     <PRINTN <GET ,ENCODED-TEXT 0>> <CRLF>
-    <PRINTN <GET <* 4 ,MYTEXT> 0>> <CRLF> ;\"Multiply by 4 to get packed 
-                                                                                    address in v 5.\"
+    <PRINTN <GET <* 4 ,MYTEXT> 0>> <CRLF> ;\"Multiply by 4 to get packed address in v 5.\"
     <PRINTN <- <GET <* 4 ,MYTEXT> 0> <GET ,ENCODED-TEXT 0>>>
     <CRLF>>
 
