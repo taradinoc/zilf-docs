@@ -377,6 +377,23 @@ zilf:CLOSE rdf:type owl:NamedIndividual ,
            skos:prefLabel "<CLOSE channel>"@en .
 
 
+###  http://example.org/zilf/COMPILATION-FLAG
+zilf:COMPILATION-FLAG rdf:type owl:NamedIndividual ,
+                               skos:Concept ;
+                      skos:broader zilf:CoreFunctions ;
+                      skos:inScheme zilf:ZILF_Scheme ;
+                      skos:definition """ZIL library function that defines a COMPILATION-FLAG named atom-or-string initialized to value. If no value is supplied it defaults to TRUE. The name of the flag can either be an ATOM or a STRING whose text becomes the ATOM. 
+
+The flag can then be read by COMPILATION-FLAG-VALUE or used as a condition in 
+IFFLAG."""@en ;
+                      skos:editorialNote "A call to COMPILATION-FLAG with an already defined ATOM changes the value of the ATOM."@en ;
+                      skos:example """<COMPILATION-FLAG MYFLAG>
+<COMPILATION-FLAG-VALUE MYFLAG>  ;  T
+<COMPILATION-FLAG “MYFLAG” 123>
+<COMPILATION-FLAG-VALUE MYFLAG>  ;  123"""@en ;
+                      skos:prefLabel "<COMPILATION-FLAG atom-or-string [value]>"@en .
+
+
 ###  http://example.org/zilf/COMPILATION-FLAG-VALUE
 zilf:COMPILATION-FLAG-VALUE rdf:type owl:NamedIndividual ,
                                      skos:Concept ;
@@ -402,6 +419,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:BYTE ,
                                  zilf:CHECKPOINT ,
                                  zilf:CHRSET ,
+                                 zilf:COMPILATION-FLAG ,
                                  zilf:COMPILATION-FLAG-VALUE ,
                                  zilf:DEFAULT-DEFINITION ,
                                  zilf:DEFAULTS-DEFINED ,
