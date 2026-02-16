@@ -167,11 +167,75 @@
 ```
 
 
+### CHRSET
+```zil
+;"    1         2         3
+67890123456789012345678901
+zyxwvutsrqponmlkjihgfedcba
+ z=6   i=23  l=20
+1 00110 10111 10100"
+
+<VERSION 5>
+
+<CHRSET 0 "zyxwvutsrqponmlkjihgfedcba">
+<CONSTANT ENCODED-TEXT <TABLE #2 1001101011110100>>
+<CONSTANT MYTEXT "zil">
+
+<ROUTINE GO () <TEST-CHRSET>>
+
+<ROUTINE TEST-CHRSET ()
+    <PRINTB ,ENCODED-TEXT> <CRLF>
+    <PRINT ,MYTEXT> <CRLF>
+    <PRINTN <GET ,ENCODED-TEXT 0>> <CRLF>
+    <PRINTN <GET <* 4 ,MYTEXT> 0>> <CRLF> ;"Multiply by 4 to get packed 
+                                                                                    address in v 5."
+    <PRINTN <- <GET <* 4 ,MYTEXT> 0> <GET ,ENCODED-TEXT 0>>>
+    <CRLF>>
+
+;  Expected output
+;  zil
+;  zil
+;  -25868
+;  -25868
+;  0
+```
+
+
+### COMPILATION-FLAG
+```zil
+<COMPILATION-FLAG MYFLAG>
+<COMPILATION-FLAG-VALUE MYFLAG>  ;  T
+<COMPILATION-FLAG “MYFLAG” 123>
+<COMPILATION-FLAG-VALUE MYFLAG>  ;  123
+```
+
+
+### COMPILATION-FLAG-DEFAULT
+```zil
+<COMPILATION-FLAG-DEFAULT MYFLAG T>
+<COMPILATION-FLAG-VALUE MYFLAG>  ;  T 
+<COMPILATION-FLAG “MYFLAG” 123>
+<COMPILATION-FLAG-VALUE MYFLAG>  ;  123 
+<COMPILATION-FLAG-DEFAULT MYFLAG T>
+<COMPILATION-FLAG-VALUE MYFLAG>  ;  123
+```
+
+
 ### COMPILATION-FLAG-VALUE
 ```zil
 <COMPILATION-FLAG MYFLAG 123>
 <COMPILATION-FLAG-VALUE MYFLAG>  ;  123
 <COMPILATION-FLAG-VALUE ASDFGHJKL>  ;  #FALSE
+```
+
+
+### CONS
+```zil
+<CONS 1 (2 3)>  ;  (1 2 3)
+<SET S1 (!\B !\C)>
+<SET S2 <CONS !\A .S1>>
+<PUT .S1 2 !\D>
+.S2  ;  (!\A !\B !\D)
 ```
 
 

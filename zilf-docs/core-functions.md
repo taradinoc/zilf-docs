@@ -100,12 +100,78 @@ ZIL library function.
 
 ---
 
+### CHRSET
+**Usage:** `<CHRSET alphabet-number {string | character | number | byte} ...>`
+
+ZIL library function that can be used in version 5+ to replace one or more of the standard character alphabets. The ZSCII alphabet table is divided up in three blocks of 26 characters each, totaling 78 characters.
+
+The default layout is:
+
+ Z-char 6789abcdef0123456789abcdef
+
+current
+
+A0      abcdefghijklmnopqrstuvwxyz
+
+A1      ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+A2       ^0123456789.,!?_#'"/\-:()
+
+Text is then encoded into 2-byte words with 5-bits per character. The left-over bit is always 0 except on the last word where it is 1 to indicate that this is the last 2-byte word in the text.
+
+--first byte-------   --second byte---
+
+7    6 5 4 3 2  1 0   7 6 5  4 3 2 1 0
+
+bit  --first--  --second---  --third--
+
+Initially the A0 is the current alphabet. The characters 2, 3, 4 and 5 change alphabet according to this table:
+
+(Z-char N)    from A0      from A1      from A2
+
+(Z-char 2)      A1               A2               A0
+
+(Z-char 3)      A2               A0               A1
+
+(Z-char 4)      A1               A2               A0
+
+(Z-char 5)      A2               A0               A1
+
+Characters 2 and 3 change the alphabet for the next character (“shift”) and characters 4 and 5 change the alphabet permanently (“shift lock”).
+
+> **Note:** CHARSET changes one character in one alphabet or changes an alphabet altogether.
+
+---
+
 ### CLOSE
 **Usage:** `<CLOSE channel>`
 
 MDL built-in function that closes the channel opened by OPEN and returns the channel.
 
 > **Note:** See READSTRING for and example of CLOSE.
+
+---
+
+### COMPILATION-FLAG
+**Usage:** `<COMPILATION-FLAG atom-or-string [value]>`
+
+ZIL library function that defines a COMPILATION-FLAG named atom-or-string initialized to value. If no value is supplied it defaults to TRUE. The name of the flag can either be an ATOM or a STRING whose text becomes the ATOM. 
+
+The flag can then be read by COMPILATION-FLAG-VALUE or used as a condition in 
+IFFLAG.
+
+> **Note:** A call to COMPILATION-FLAG with an already defined ATOM changes the value of the ATOM.
+
+---
+
+### COMPILATION-FLAG-DEFAULT
+**Usage:** `<COMPILATION-FLAG-DEFAULT atom-or-string value>`
+
+ZIL library function that defines a COMPILATION-FLAG named atom-or-string initialized to value. If no value is supplied it defaults to TRUE. The name of the flag can either be an ATOM or a STRING whose text becomes the ATOM. 
+
+The flag can then be read by COMPILATION-FLAG-VALUE or used as a condition in IFFLAG.
+
+> **Note:** A call to COMPILATION-FLAG-DEFAULT with an already defined ATOM doesn't change the value of the ATOM.
 
 ---
 
@@ -122,6 +188,15 @@ ZIL library function that returns the value of the COMPILATION-FLAG atom-or-stri
 ZIL library function that is presumably  used in the MDL environment to determine if the game is compiled with ZILCH or running in the interpreter.
 
 > **Note:** ZILF ignores this and always returns TRUE.
+
+---
+
+### CONS
+**Usage:** `<CONS first list>`
+
+MDL built-in function that adds first to the front of list, without copying list, and returns the resulting LIST. References to list are not affected.
+
+> **Note:** CONS means "construct".
 
 ---
 
