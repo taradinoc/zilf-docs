@@ -449,6 +449,19 @@ zilf:CONS rdf:type owl:NamedIndividual ,
           skos:prefLabel "<CONS first list>"@en .
 
 
+###  http://example.org/zilf/CONSTANT
+zilf:CONSTANT rdf:type owl:NamedIndividual ,
+                       skos:Concept ;
+              skos:broader zilf:CoreFunctions ;
+              skos:inScheme zilf:ZILF_Scheme ;
+              skos:definition "ZIL library function that defines an atom with value that will never be changed. The atom can is accessed inside a ROUTINE with GVAL (or ,) just like a GLOBAL atom. Defining a CONSTANT instead of a GLOBAL when possible can be vital information the compiler can use for optimization."@en ;
+              skos:editorialNote "MSETG is an alias for CONSTANT."@en ;
+              skos:example """<CONSTANT MSG-CANT-DO-THAT \"You can't do that!\">
+...
+<TELL ,MSG-CANT-DO-THAT CR>"""@en ;
+              skos:prefLabel "<CONSTANT atom value>"@en .
+
+
 ###  http://example.org/zilf/CoreFunctions
 zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                             skos:Concept ;
@@ -466,6 +479,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:COMPILATION-FLAG-DEFAULT ,
                                  zilf:COMPILATION-FLAG-VALUE ,
                                  zilf:CONS ,
+                                 zilf:CONSTANT ,
                                  zilf:DEFAULT-DEFINITION ,
                                  zilf:DEFAULTS-DEFINED ,
                                  zilf:DEFINE ,
