@@ -462,6 +462,16 @@ zilf:CONSTANT rdf:type owl:NamedIndividual ,
               skos:prefLabel "<CONSTANT atom value>"@en .
 
 
+###  http://example.org/zilf/CRLF
+zilf:CRLF rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition "MDL built-in function that prints a carriage-return and a line-feed to channel (default for channel is <LVAL OUTCHAN>; the console). CRLF returns true."@en ;
+          skos:example "<CRLF>  ;  \"\\n\""@en ;
+          skos:prefLabel "<CRLF [channel]>"@en .
+
+
 ###  http://example.org/zilf/CoreFunctions
 zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                             skos:Concept ;
@@ -480,6 +490,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:COMPILATION-FLAG-VALUE ,
                                  zilf:CONS ,
                                  zilf:CONSTANT ,
+                                 zilf:CRLF ,
                                  zilf:DEFAULT-DEFINITION ,
                                  zilf:DEFAULTS-DEFINED ,
                                  zilf:DEFINE ,
