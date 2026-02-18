@@ -514,6 +514,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:EVAL-IN-SEGMENT ,
                                  zilf:EVALTYPE ,
                                  zilf:EXPAND ,
+                                 zilf:FILE-LENGTH ,
                                  zilf:GLOBAL ,
                                  zilf:ISTRING ,
                                  zilf:OR ,
@@ -987,6 +988,19 @@ zilf:FCLEAR rdf:type owl:NamedIndividual ,
             skos:example "<FCLEAR ,TRAP-DOOR ,OPENBIT>  ;  Marks the trap-door as closed"@en ;
             skos:historyNote "Zapf syntax: FCLEAR, Inform syntax: clear_attr"@en ;
             skos:prefLabel "<FCLEAR object flag>"@en .
+
+
+###  http://example.org/zilf/FILE-LENGTH
+zilf:FILE-LENGTH rdf:type owl:NamedIndividual ,
+                          skos:Concept ;
+                 skos:broader zilf:CoreFunctions ;
+                 skos:inScheme zilf:ZILF_Scheme ;
+                 skos:definition "MDL built-in function that returns the size, in bytes, of the file on channel. FILE-LENGTH returns FALSE if the file is closed."@en ;
+                 skos:example """;  \"ZILF ver 0.9\"
+<SET CH <OPEN \"READ\" \"../zillib/parser.zil\">>
+<FILE-LENGTH .CH>  ;  115629
+<CLOSE .CH>"""@en ;
+                 skos:prefLabel "<FILE-LENGTH channel>"@en .
 
 
 ###  http://example.org/zilf/FONT
