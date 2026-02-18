@@ -513,6 +513,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:EVAL ,
                                  zilf:EVAL-IN-SEGMENT ,
                                  zilf:EVALTYPE ,
+                                 zilf:EXPAND ,
                                  zilf:GLOBAL ,
                                  zilf:ISTRING ,
                                  zilf:OR ,
@@ -962,6 +963,18 @@ zilf:EVALTYPE rdf:type owl:NamedIndividual ,
 (SET 'A 5)
 A  ;  5"""@en ;
               skos:prefLabel "<EVALTYPE atom [handler]>"@en .
+
+
+###  http://example.org/zilf/EXPAND
+zilf:EXPAND rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "MDL built-in function that performs the first EVAL of the value. In case the value is a MACRO only the first EVAL is done."@en ;
+            skos:example """<DEFMAC INC2 (ATM \"OPTIONAL\" (N 1))
+    <PARSE \"<SET %.ATM <+ %.ATM %.N>>\">>
+<EXPAND '<INC2 X>>   --> <SET X <+ X 1>>"""@en ;
+            skos:prefLabel "<EXPAND value>"@en .
 
 
 ###  http://example.org/zilf/FCLEAR
