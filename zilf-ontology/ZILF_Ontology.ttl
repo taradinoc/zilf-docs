@@ -512,6 +512,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:ERROR ,
                                  zilf:EVAL ,
                                  zilf:EVAL-IN-SEGMENT ,
+                                 zilf:EVALTYPE ,
                                  zilf:GLOBAL ,
                                  zilf:ISTRING ,
                                  zilf:OR ,
@@ -940,6 +941,27 @@ zilf:EVAL-IN-SEGMENT rdf:type owl:NamedIndividual ,
 .F  ;  <+ 1 2>
 <EVAL-IN-SEGMENT \"HINTS\" .F (1 2 3)>  ;  3"""@en ;
                      skos:prefLabel "<EVAL-IN-SEGMENT dummy1 value[dummy2]>"@en .
+
+
+###  http://example.org/zilf/EVALTYPE
+zilf:EVALTYPE rdf:type owl:NamedIndividual ,
+                       skos:Concept ;
+              skos:broader zilf:CoreFunctions ;
+              skos:inScheme zilf:ZILF_Scheme ;
+              skos:definition "MDL built-in function that tells the TYPE atom how it should be evaluated by EVAL. If EVALTYPE is called without a handler then the currently active handler is returned. If there is no active handler, FALSE is returned."@en ;
+              skos:editorialNote "Note that it is possible to replace the handler with a new handler, even on the predefined TYPEs. See APPLYTYPE, NEWTYPE and PRINTTYPE."@en ;
+              skos:example """<NEWTYPE GRITCH LIST>
+<EVALTYPE GRITCH>  ;  #FALSE
+<EVALTYPE GRITCH LIST>  ;  \"Evaluate GRITCH as a LIST\"
+<EVALTYPE GRITCH>  ;  LIST
+#GRITCH (A <+ 1 2 3> !<SET A \"BC\">)
+;\"Make it like LISP!\"  ;  (A 6 !\\B !\\C)
+<EVALTYPE LIST FORM>  ;  \"Evaluate LISTs as FORMs!\"
+<EVALTYPE ATOM ,LVAL>  ;  \"Evaluate bare ATOM as LVAL!\"
+(+ 1 2)  ;  3
+(SET 'A 5)
+A  ;  5"""@en ;
+              skos:prefLabel "<EVALTYPE atom [handler]>"@en .
 
 
 ###  http://example.org/zilf/FCLEAR
