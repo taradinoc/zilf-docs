@@ -238,6 +238,101 @@ zyxwvutsrqponmlkjihgfedcba
 ```
 
 
+### CONSTANT
+```zil
+<CONSTANT MSG-CANT-DO-THAT "You can't do that!">
+...
+<TELL ,MSG-CANT-DO-THAT CR>
+```
+
+
+### CRLF
+```zil
+<CRLF>  ;  "\n"
+```
+
+
+### DECL-CHECK
+```zil
+<DECL-CHECK <>>
+<GDECL (FOO) FIX>
+<SETG FOO <>>  ;  Ok!
+<DECL-CHECK T>
+<SETG FOO <>>  ;  Error
+```
+
+
+### DECL?
+```zil
+;  Simple DECL
+<DECL? 1 FIX>  ;  T
+<DECL? "hi" STRING>  ;  T
+<DECL? FOO STRING>  ;  #FALSE
+
+;  OR DECL
+<DECL? 1 '<OR FIX FALSE>>  ;  T
+<DECL? "hi" '<OR VECTOR STRING>>  ;  T
+<DECL? FOO '<OR STRING FIX>>  ;  #FALSE
+
+;  Structure DECL
+<DECL? '(1) '<LIST FIX>  ;  T
+<DECL? '(1) '<LIST ATOM>>  ;  #FALSE
+<DECL? '<1> '<LIST FIX>>  ;  #FALSE
+<DECL? '<1> '<<OR FORM LIST> FIX>>  ;  T
+<DECL? '<1> '<<OR <PRIMTYPE LIST> <PRIMTYPE STRING>> FIX>>  ;  T
+<DECL? '(1) '<<PRIMTYPE LIST> FIX>>  ;  T
+<DECL? '<1> '<<PRIMTYPE LIST> FIX>>  ;  T
+
+;  NTH DECL
+<DECL? '["hi" 456 789 1011] '<VECTOR STRING [4 FIX]>>  ;  #FALSE
+<DECL? '["hi" 456 789 1011] '<VECTOR STRING [3 FIX]>>  ;  T
+<DECL? '["hi" 456 789 1011] '<VECTOR [3 FIX]>>  ;  #FALSE
+<DECL? '["hi" 456 789 1011] '<VECTOR STRING [2 FIX]>>  ;  T
+<DECL? '["hi" 456 789 1011] '<VECTOR STRING [2 FIX] FIX>>  ;  T
+<DECL? '["hi" 456 789 1011] '<VECTOR STRING [2 FIX] ATOM>>  ;  #FALSE
+<DECL? '(1 MONEY 2 SHOW 3 READY 4 GO) '<LIST [4 FIX ATOM]>>  ;  T
+<DECL? '(1 MONEY 2 SHOW 3 READY 4 GO) '<LIST [4 FIX]>>  ;  #FALSE
+<DECL? '(1 MONEY 2 SHOW 3 READY 4 GO)
+    '<LIST [3 FIX ATOM] FIX ATOM>>  ;  T
+<DECL? '(1 MONEY 2 SHOW 3 READY 4 GO) '<LIST [3 FIX ATOM]>>  ;  T
+
+;  REST DECL
+<DECL? '["hi" 456 789 1011] '<VECTOR STRING FIX [REST FIX]>>  ;  T
+<DECL? '(FOO BAR) '<LIST STRING [REST FIX]>>  ;  #FALSE
+<DECL? '(FOO BAR) '<LIST ATOM [REST FIX]>>  ;  #FALSE
+<DECL? '(FOO BAR) '<LIST ATOM ATOM [REST FIX]>>  ;  T
+
+;  OPT DECL
+<DECL? '(FOO BAR) '<LIST [OPT FIX FIX] [REST ATOM]>>  ;  T
+<DECL? '(1 FOO BAR) '<LIST [OPT FIX FIX] [REST ATOM]>>  ;  T
+<DECL? '(1 2 FOO BAR) '<LIST [OPT FIX] [REST ATOM]>>  ;  #FALSE
+<DECL? '(1 2 FOO BAR) '<LIST [OPT FIX FIX] [REST ATOM]>>  ;  T
+<DECL? '(1 2) '<LIST [OPT FIX FIX] [REST ATOM]>>  ;  T
+ 
+;  QUOTE DECL
+<DECL? FOO ''FOO>  ;  T
+<DECL? FOO ''BAR>  ;  #FALSE
+<DECL? '<OR FIX FALSE> ''<OR FIX FALSE>>  ;  T
+<DECL? 123 ''<OR FIX FALSE>>  ;  #FALSE
+
+;  Segment DECL
+<DECL? '(1 2 3) '<LIST FIX FIX>>  ;  T
+<DECL? '(1 2 3) '!<LIST FIX FIX>>  ;  #FALSE
+<DECL? '(1 2) '!<LIST FIX FIX>>  ;  T
+<DECL? '(1 2) '!<LIST [REST FIX FIX]>>  ;  T
+<DECL? '(1 2 3) '!<LIST [REST FIX FIX]>>  ;  #FALSE
+<DECL? '(1 2 3 4) '!<LIST [REST FIX FIX]>>  ;  T
+
+;  LVAL/GVAL DECL
+<DECL? '.X LVAL>  ;  T
+<DECL? '.X GVAL>  ;  #FALSE
+<DECL? ',X GVAL>  ;  T
+<DECL? ',X LVAL>  ;  #FALSE
+<DECL? '.X '<PRIMTYPE ATOM>>  ;  T
+<DECL? ',X '<PRIMTYPE ATOM>>  ;  T
+```
+
+
 ### DEFAULT-DEFINITION
 ```zil
 <ROUTINE MY-ROUTINE ()  

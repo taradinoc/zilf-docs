@@ -200,6 +200,36 @@ MDL built-in function that adds first to the front of list, without copying list
 
 ---
 
+### CONSTANT
+**Usage:** `<CONSTANT atom value>`
+
+ZIL library function that defines an atom with value that will never be changed. The atom can is accessed inside a ROUTINE with GVAL (or ,) just like a GLOBAL atom. Defining a CONSTANT instead of a GLOBAL when possible can be vital information the compiler can use for optimization.
+
+> **Note:** MSETG is an alias for CONSTANT.
+
+---
+
+### CRLF
+**Usage:** `<CRLF [channel]>`
+
+MDL built-in function that prints a carriage-return and a line-feed to channel (default for channel is <LVAL OUTCHAN>; the console). CRLF returns true.
+
+---
+
+### DECL-CHECK
+**Usage:** `<DECL-CHECK boolean>`
+
+MDL built-in function that turns off or on type declaration checking. It is initially on.
+
+---
+
+### DECL?
+**Usage:** `<DECL? value pattern>`
+
+MDL built-in predicate that returns TRUE if value checks against pattern, otherwise FALSE. For the format of the pattern, see GDECL.
+
+---
+
 ### DEFAULT-DEFINITION
 **Usage:** `<DEFAULT-DEFINITION name body ...>`
 
