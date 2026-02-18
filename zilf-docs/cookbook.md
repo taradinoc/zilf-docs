@@ -488,6 +488,21 @@ XYZZY!-MY-OBLIST
 ```
 
 
+### ENTRY
+```zil
+<REMOVE ANSWER>  ;  "Secure that ATOM not on any OBLIST"
+<PACKAGE "FOO">
+<SETG ANSWER 42>
+<1 .OBLIST>  ;  #OBLIST (("ANSWER" ANSWER)) 
+<2 .OBLIST>  ;  #OBLIST (("IFOO" IFOO))
+<ENTRY ANSWER>
+<1 .OBLIST>  ;  #OBLIST ()
+<2 .OBLIST>  ;  #OBLIST (("IFOO" IFOO) ("ANSWER" ANSWER))
+<ENDPACKAGE>
+,ANSWER  ;  42 (the meaning of life)
+```
+
+
 ### EQVB
 ```zil
 <XORB 250 245>  
@@ -533,6 +548,30 @@ XYZZY!-MY-OBLIST
 ```
 
 
+### EVALTYPE
+```zil
+<NEWTYPE GRITCH LIST>
+<EVALTYPE GRITCH>  ;  #FALSE
+<EVALTYPE GRITCH LIST>  ;  "Evaluate GRITCH as a LIST"
+<EVALTYPE GRITCH>  ;  LIST
+#GRITCH (A <+ 1 2 3> !<SET A "BC">)
+;"Make it like LISP!"  ;  (A 6 !\B !\C)
+<EVALTYPE LIST FORM>  ;  "Evaluate LISTs as FORMs!"
+<EVALTYPE ATOM ,LVAL>  ;  "Evaluate bare ATOM as LVAL!"
+(+ 1 2)  ;  3
+(SET 'A 5)
+A  ;  5
+```
+
+
+### EXPAND
+```zil
+<DEFMAC INC2 (ATM "OPTIONAL" (N 1))
+    <PARSE "<SET %.ATM <+ %.ATM %.N>>">>
+<EXPAND '<INC2 X>>   --> <SET X <+ X 1>>
+```
+
+
 ### F?
 ```zil
 <F? <=? 1 1>>  ;  False
@@ -543,6 +582,15 @@ XYZZY!-MY-OBLIST
 ### FCLEAR
 ```zil
 <FCLEAR ,TRAP-DOOR ,OPENBIT>  ;  Marks the trap-door as closed
+```
+
+
+### FILE-LENGTH
+```zil
+;  "ZILF ver 0.9"
+<SET CH <OPEN "READ" "../zillib/parser.zil">>
+<FILE-LENGTH .CH>  ;  115629
+<CLOSE .CH>
 ```
 
 

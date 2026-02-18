@@ -390,6 +390,15 @@ MDL package system that is an alias to ENDBLOCK.
 
 ---
 
+### ENTRY
+**Usage:** `<ENTRY atoms ...>`
+
+MDL package system that creates/moves one or more ATOMs to the external OBLIST in a PACKAGE. ENTRY is only valid inside a PACKAGE, if it's used outside an error is raised.
+
+> **Note:** See PACKAGE, RENTRY, USE, USE-WHEN.
+
+---
+
 ### EQVB
 **Usage:** `<EQVB numbers ...>`
 
@@ -421,6 +430,38 @@ MDL built-in function that evaluates value (usually a FORM created by FORM or QU
 ZIL library function that calls EVAL on the value and returns its result.
 
 > **Note:** When ZILF calls EVAL, it ignores dummy1 and the optional dummy2
+
+---
+
+### EVALTYPE
+**Usage:** `<EVALTYPE atom [handler]>`
+
+MDL built-in function that tells the TYPE atom how it should be evaluated by EVAL. If EVALTYPE is called without a handler then the currently active handler is returned. If there is no active handler, FALSE is returned.
+
+> **Note:** Note that it is possible to replace the handler with a new handler, even on the predefined TYPEs. See APPLYTYPE, NEWTYPE and PRINTTYPE.
+
+---
+
+### EXPAND
+**Usage:** `<EXPAND value>`
+
+MDL built-in function that performs the first EVAL of the value. In case the value is a MACRO only the first EVAL is done.
+
+---
+
+### FILE-LENGTH
+**Usage:** `<FILE-LENGTH channel>`
+
+MDL built-in function that returns the size, in bytes, of the file on channel. FILE-LENGTH returns FALSE if the file is closed.
+
+---
+
+### FLOAD
+**Usage:** `<FLOAD filename>`
+
+MDL built-in function.
+
+> **Note:** ZILF ignores all but the first argument and treats FLOAD as an alias to INSERT-FILE.
 
 ---
 
