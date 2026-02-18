@@ -540,6 +540,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  <http://example.org/zilf/BOUND?> ,
                                  <http://example.org/zilf/CHECK-VERSION?> ,
                                  <http://example.org/zilf/COMPILING?> ,
+                                 <http://example.org/zilf/DECL?> ,
                                  <http://example.org/zilf/EMPTY?> ,
                                  <http://example.org/zilf/OR?> ,
                                  <http://example.org/zilf/VALID-TYPE?> ;
@@ -2417,6 +2418,81 @@ If no environment is supplied, the environment defaults to current scope. See EV
                                      skos:definition "ZIL library function that is presumably  used in the MDL environment to determine if the game is compiled with ZILCH or running in the interpreter."@en ;
                                      skos:editorialNote "ZILF ignores this and always returns TRUE."@en ;
                                      skos:prefLabel "<COMPILING?>"@en .
+
+
+###  http://example.org/zilf/DECL?
+<http://example.org/zilf/DECL?> rdf:type owl:NamedIndividual ,
+                                         skos:Concept ;
+                                skos:broader zilf:CoreFunctions ;
+                                skos:inScheme zilf:ZILF_Scheme ;
+                                skos:definition "MDL built-in predicate that returns TRUE if value checks against pattern, otherwise FALSE. For the format of the pattern, see GDECL."@en ;
+                                skos:example """;  Simple DECL
+<DECL? 1 FIX>  ;  T
+<DECL? \"hi\" STRING>  ;  T
+<DECL? FOO STRING>  ;  #FALSE
+
+;  OR DECL
+<DECL? 1 '<OR FIX FALSE>>  ;  T
+<DECL? \"hi\" '<OR VECTOR STRING>>  ;  T
+<DECL? FOO '<OR STRING FIX>>  ;  #FALSE
+
+;  Structure DECL
+<DECL? '(1) '<LIST FIX>  ;  T
+<DECL? '(1) '<LIST ATOM>>  ;  #FALSE
+<DECL? '<1> '<LIST FIX>>  ;  #FALSE
+<DECL? '<1> '<<OR FORM LIST> FIX>>  ;  T
+<DECL? '<1> '<<OR <PRIMTYPE LIST> <PRIMTYPE STRING>> FIX>>  ;  T
+<DECL? '(1) '<<PRIMTYPE LIST> FIX>>  ;  T
+<DECL? '<1> '<<PRIMTYPE LIST> FIX>>  ;  T
+
+;  NTH DECL
+<DECL? '[\"hi\" 456 789 1011] '<VECTOR STRING [4 FIX]>>  ;  #FALSE
+<DECL? '[\"hi\" 456 789 1011] '<VECTOR STRING [3 FIX]>>  ;  T
+<DECL? '[\"hi\" 456 789 1011] '<VECTOR [3 FIX]>>  ;  #FALSE
+<DECL? '[\"hi\" 456 789 1011] '<VECTOR STRING [2 FIX]>>  ;  T
+<DECL? '[\"hi\" 456 789 1011] '<VECTOR STRING [2 FIX] FIX>>  ;  T
+<DECL? '[\"hi\" 456 789 1011] '<VECTOR STRING [2 FIX] ATOM>>  ;  #FALSE
+<DECL? '(1 MONEY 2 SHOW 3 READY 4 GO) '<LIST [4 FIX ATOM]>>  ;  T
+<DECL? '(1 MONEY 2 SHOW 3 READY 4 GO) '<LIST [4 FIX]>>  ;  #FALSE
+<DECL? '(1 MONEY 2 SHOW 3 READY 4 GO)
+    '<LIST [3 FIX ATOM] FIX ATOM>>  ;  T
+<DECL? '(1 MONEY 2 SHOW 3 READY 4 GO) '<LIST [3 FIX ATOM]>>  ;  T
+
+;  REST DECL
+<DECL? '[\"hi\" 456 789 1011] '<VECTOR STRING FIX [REST FIX]>>  ;  T
+<DECL? '(FOO BAR) '<LIST STRING [REST FIX]>>  ;  #FALSE
+<DECL? '(FOO BAR) '<LIST ATOM [REST FIX]>>  ;  #FALSE
+<DECL? '(FOO BAR) '<LIST ATOM ATOM [REST FIX]>>  ;  T
+
+;  OPT DECL
+<DECL? '(FOO BAR) '<LIST [OPT FIX FIX] [REST ATOM]>>  ;  T
+<DECL? '(1 FOO BAR) '<LIST [OPT FIX FIX] [REST ATOM]>>  ;  T
+<DECL? '(1 2 FOO BAR) '<LIST [OPT FIX] [REST ATOM]>>  ;  #FALSE
+<DECL? '(1 2 FOO BAR) '<LIST [OPT FIX FIX] [REST ATOM]>>  ;  T
+<DECL? '(1 2) '<LIST [OPT FIX FIX] [REST ATOM]>>  ;  T
+ 
+;  QUOTE DECL
+<DECL? FOO ''FOO>  ;  T
+<DECL? FOO ''BAR>  ;  #FALSE
+<DECL? '<OR FIX FALSE> ''<OR FIX FALSE>>  ;  T
+<DECL? 123 ''<OR FIX FALSE>>  ;  #FALSE
+
+;  Segment DECL
+<DECL? '(1 2 3) '<LIST FIX FIX>>  ;  T
+<DECL? '(1 2 3) '!<LIST FIX FIX>>  ;  #FALSE
+<DECL? '(1 2) '!<LIST FIX FIX>>  ;  T
+<DECL? '(1 2) '!<LIST [REST FIX FIX]>>  ;  T
+<DECL? '(1 2 3) '!<LIST [REST FIX FIX]>>  ;  #FALSE
+<DECL? '(1 2 3 4) '!<LIST [REST FIX FIX]>>  ;  T
+
+;  LVAL/GVAL DECL
+<DECL? '.X LVAL>  ;  T
+<DECL? '.X GVAL>  ;  #FALSE
+<DECL? ',X GVAL>  ;  T
+<DECL? ',X LVAL>  ;  #FALSE
+<DECL? '.X '<PRIMTYPE ATOM>>  ;  T
+<DECL? ',X '<PRIMTYPE ATOM>>  ;  T"""@en ;
+                                skos:prefLabel "<DECL? value pattern>"@en .
 
 
 ###  http://example.org/zilf/EMPTY?
