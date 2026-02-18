@@ -515,6 +515,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:EVALTYPE ,
                                  zilf:EXPAND ,
                                  zilf:FILE-LENGTH ,
+                                 zilf:FLOAD ,
                                  zilf:GLOBAL ,
                                  zilf:ISTRING ,
                                  zilf:OR ,
@@ -1001,6 +1002,16 @@ zilf:FILE-LENGTH rdf:type owl:NamedIndividual ,
 <FILE-LENGTH .CH>  ;  115629
 <CLOSE .CH>"""@en ;
                  skos:prefLabel "<FILE-LENGTH channel>"@en .
+
+
+###  http://example.org/zilf/FLOAD
+zilf:FLOAD rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:CoreFunctions ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "MDL built-in function."@en ;
+           skos:editorialNote "ZILF ignores all but the first argument and treats FLOAD as an alias to INSERT-FILE."@en ;
+           skos:prefLabel "<FLOAD filename>"@en .
 
 
 ###  http://example.org/zilf/FONT
