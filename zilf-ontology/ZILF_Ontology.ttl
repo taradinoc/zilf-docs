@@ -507,6 +507,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:ENDLOAD ,
                                  zilf:ENDPACKAGE ,
                                  zilf:ENDSECTION ,
+                                 zilf:ENTRY ,
                                  zilf:EQVB ,
                                  zilf:ERROR ,
                                  zilf:EVAL ,
@@ -845,6 +846,26 @@ zilf:ENDSECTION rdf:type owl:NamedIndividual ,
                 skos:definition "MDL package system that is an alias to ENDBLOCK."@en ;
                 skos:editorialNote "See DEFINITIONS."@en ;
                 skos:prefLabel "<ENDSECTION>"@en .
+
+
+###  http://example.org/zilf/ENTRY
+zilf:ENTRY rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:CoreFunctions ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "MDL package system that creates/moves one or more ATOMs to the external OBLIST in a PACKAGE. ENTRY is only valid inside a PACKAGE, if it's used outside an error is raised."@en ;
+           skos:editorialNote "See PACKAGE, RENTRY, USE, USE-WHEN."@en ;
+           skos:example """<REMOVE ANSWER>  ;  \"Secure that ATOM not on any OBLIST\"
+<PACKAGE \"FOO\">
+<SETG ANSWER 42>
+<1 .OBLIST>  ;  #OBLIST ((\"ANSWER\" ANSWER)) 
+<2 .OBLIST>  ;  #OBLIST ((\"IFOO\" IFOO))
+<ENTRY ANSWER>
+<1 .OBLIST>  ;  #OBLIST ()
+<2 .OBLIST>  ;  #OBLIST ((\"IFOO\" IFOO) (\"ANSWER\" ANSWER))
+<ENDPACKAGE>
+,ANSWER  ;  42 (the meaning of life)"""@en ;
+           skos:prefLabel "<ENTRY atoms ...>"@en .
 
 
 ###  http://example.org/zilf/EQVB
