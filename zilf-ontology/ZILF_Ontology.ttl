@@ -516,6 +516,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:EXPAND ,
                                  zilf:FILE-LENGTH ,
                                  zilf:FLOAD ,
+                                 zilf:FORM ,
                                  zilf:GLOBAL ,
                                  zilf:ISTRING ,
                                  zilf:OR ,
@@ -1029,6 +1030,19 @@ The following numbers map to font types.
           skos:example "<FONT 4>  ;  Sets fixed-pitch font. In versions 3-4, this is done by setting bit 1 of Flags 2 in header <PUT 0 8 <BOR <GET 0 8> 2>>"@en ;
           skos:historyNote "Zapf syntax: FONT, Inform syntax: set_font"@en ;
           skos:prefLabel "Version 5: <FONT number>, Version 6-: <FONT number [window-number]>"@en .
+
+
+###  http://example.org/zilf/FORM
+zilf:FORM rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition "MDL built-in function that creates a FORM without evaluating it. This is analogous to LIST and VECTOR but with \"<>\" instead of \"()\" or \"[]\". In many cases it is possible to use QUOTE to achieve the same result."@en ;
+          skos:example """<FORM + 1 2>  ;  <+ 1 2> 
+<DEFINE INC-FORM (A) 
+    <FORM SET .A <FORM + 1 <FORM LVAL .A>>>> 
+<INC-FORM X>  ;  <SET X <+ 1 .X>"""@en ;
+          skos:prefLabel "<FORM values ...>"@en .
 
 
 ###  http://example.org/zilf/FSET
