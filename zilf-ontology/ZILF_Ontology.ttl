@@ -550,6 +550,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  <http://example.org/zilf/EMPTY?> ,
                                  <http://example.org/zilf/FREQUENT-WORDS?> ,
                                  <http://example.org/zilf/FUNNY-GLOBALS?> ,
+                                 <http://example.org/zilf/G?> ,
                                  <http://example.org/zilf/OR?> ,
                                  <http://example.org/zilf/VALID-TYPE?> ;
                    skos:topConceptOf zilf:ZILF_Scheme ;
@@ -2660,6 +2661,16 @@ If no environment is supplied, the environment defaults to current scope. See EV
 If needed, ZILF will move the extra variables into a table (GLOBAL-VARS-TABLE) and generate table instructions to access them (PUT and GET, or in the case of BYTE globals created with DEFINE-GLOBALS, PUTB and GETB)."""@en ;
                                          skos:editorialNote "This translation is mostly transparent to game source code, but it can’t be used for global variables that are ever referenced indirectly by number. ZILF uses a simple heuristic to try to identify those variables and reserve “real” global variable slots for them."@en ;
                                          skos:prefLabel "<FUNNY-GLOBALS? [boolean]>"@en .
+
+
+###  http://example.org/zilf/G?
+<http://example.org/zilf/G?> rdf:type owl:NamedIndividual ,
+                                      skos:Concept ;
+                             skos:broader zilf:CoreFunctions ;
+                             skos:inScheme zilf:ZILF_Scheme ;
+                             skos:definition "MDL built-in predicate that returns true if value1 is greater than value2, otherwise the predicate returns false."@en ;
+                             skos:editorialNote "'G' means \"is greater than.\""@en ;
+                             skos:prefLabel "<G? value1 value2>"@en .
 
 
 ###  http://example.org/zilf/IN?
