@@ -548,6 +548,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  <http://example.org/zilf/COMPILING?> ,
                                  <http://example.org/zilf/DECL?> ,
                                  <http://example.org/zilf/EMPTY?> ,
+                                 <http://example.org/zilf/FREQUENT-WORDS?> ,
                                  <http://example.org/zilf/OR?> ,
                                  <http://example.org/zilf/VALID-TYPE?> ;
                    skos:topConceptOf zilf:ZILF_Scheme ;
@@ -2624,6 +2625,16 @@ If no environment is supplied, the environment defaults to current scope. See EV
                                  skos:example "<SET RM <FIRST? ,ROOMS>>  ;  Sets RM to first object in ROOMS. Also evaluates to true (all values not 0 is true)"@en ;
                                  skos:historyNote "Zapf syntax: FIRST?, Inform syntax: get_child"@en ;
                                  skos:prefLabel "<FIRST? object>"@en .
+
+
+###  http://example.org/zilf/FREQUENT-WORDS?
+<http://example.org/zilf/FREQUENT-WORDS?> rdf:type owl:NamedIndividual ,
+                                                   skos:Concept ;
+                                          skos:broader zilf:CoreFunctions ;
+                                          skos:inScheme zilf:ZILF_Scheme ;
+                                          skos:definition "ZIL library predicate."@en ;
+                                          skos:editorialNote "ZILF ignores this and always returns FALSE. Frequent words table is built by ZAPF instead."@en ;
+                                          skos:prefLabel "<FREQUENT-WORDS?>"@en .
 
 
 ###  http://example.org/zilf/FSET?
