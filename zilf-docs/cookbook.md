@@ -606,6 +606,15 @@ A  ;  5
 ```
 
 
+### FORM
+```zil
+<FORM + 1 2>  ;  <+ 1 2> 
+<DEFINE INC-FORM (A) 
+    <FORM SET .A <FORM + 1 <FORM LVAL .A>>>> 
+<INC-FORM X>  ;  <SET X <+ 1 .X>
+```
+
+
 ### FSET
 ```zil
 <FSET ,TRAP-DOOR ,OPENBIT> --> Marks the trap-door as open
@@ -615,6 +624,14 @@ A  ;  5
 ### FSET?
 ```zil
 <FSET? ,TRAP-DOOR ,OPENBIT>  ;  True if OPENBIT is set
+```
+
+
+### GASSIGNED?
+```zil
+<GASSIGNED? X>  ;  False 
+<SETG X 1> 
+<GASSIGNED? X>  ;  True
 ```
 
 

@@ -465,6 +465,49 @@ MDL built-in function.
 
 ---
 
+### FORM
+**Usage:** `<FORM values ...>`
+
+MDL built-in function that creates a FORM without evaluating it. This is analogous to LIST and VECTOR but with "<>" instead of "()" or "[]". In many cases it is possible to use QUOTE to achieve the same result.
+
+---
+
+### FREQUENT-WORDS?
+**Usage:** `<FREQUENT-WORDS?>`
+
+ZIL library predicate.
+
+> **Note:** ZILF ignores this and always returns FALSE. Frequent words table is built by ZAPF instead.
+
+---
+
+### FUNNY-GLOBALS?
+**Usage:** `<FUNNY-GLOBALS? [boolean]>`
+
+When enabled, this ZIL library predicate lets the game define more than the usual 240 global variables.
+
+If needed, ZILF will move the extra variables into a table (GLOBAL-VARS-TABLE) and generate table instructions to access them (PUT and GET, or in the case of BYTE globals created with DEFINE-GLOBALS, PUTB and GETB).
+
+> **Note:** This translation is mostly transparent to game source code, but it can’t be used for global variables that are ever referenced indirectly by number. ZILF uses a simple heuristic to try to identify those variables and reserve “real” global variable slots for them.
+
+---
+
+### G?
+**Usage:** `<G? value1 value2>`
+
+MDL built-in predicate that returns true if value1 is greater than value2, otherwise the predicate returns false.
+
+> **Note:** 'G' means "is greater than."
+
+---
+
+### GASSIGNED?
+**Usage:** `<GASSIGNED? Atom>`
+
+MDL built-in predicate that returns true if atom has a GVAL (global value).
+
+---
+
 ### GLOBAL
 **Usage:** `<GLOBAL atom default-value [decl] [size]>`
 
