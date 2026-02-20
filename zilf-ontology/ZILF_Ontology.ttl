@@ -2686,6 +2686,20 @@ If needed, ZILF will move the extra variables into a table (GLOBAL-VARS-TABLE) a
                                      skos:prefLabel "<GASSIGNED? Atom>"@en .
 
 
+###  http://example.org/zilf/GBOUND?
+<http://example.org/zilf/GBOUND?> rdf:type owl:NamedIndividual ,
+                                           skos:Concept ;
+                                  skos:inScheme zilf:ZILF_Scheme ;
+                                  skos:definition "MDL built-in predicate that returns true if the atom ever had a global value."@en ;
+                                  skos:example """<SETG X 42> 
+<GASSIGNED? X>  ;  True 
+<GBOUND? X>  ;  True 
+<GUNASSIGN X>
+<GASSIGNED? X>  ;  False 
+<GBOUND? X>  ;  True"""@en ;
+                                  skos:prefLabel "<GBOUND? atom>"@en .
+
+
 ###  http://example.org/zilf/IN?
 <http://example.org/zilf/IN?> rdf:type owl:NamedIndividual ,
                                        skos:Concept ;
