@@ -635,9 +635,35 @@ A  ;  5
 ```
 
 
+### GBOUND?
+```zil
+<SETG X 42> 
+<GASSIGNED? X>  ;  True 
+<GBOUND? X>  ;  True 
+<GUNASSIGN X>
+<GASSIGNED? X>  ;  False 
+<GBOUND? X>  ;  True
+```
+
+
+### GC
+```zil
+<GC>  ;  T
+<GC 0 T 5>  ;  T
+```
+
+
 ### GET
 ```zil
 <GET <TABLE 0 1 2 3> 2>  ;  2
+```
+
+
+### GET-DECL
+```zil
+<GET-DECL BOOLEAN>  ;  #FALSE
+<PUT-DECL BOOLEAN '<OR ATOM FALSE>>
+<GET-DECL BOOLEAN>  ;  <OR ATOM FALSE>
 ```
 
 
@@ -651,6 +677,19 @@ A  ;  5
 ```zil
 <OBJECT MYOBJ (MYPROP 123)>
 <GETP ,MYOBJ ,P?MYPROP>  ;  123
+```
+
+
+### GETPROP
+```zil
+<PUTPROP FOO BAR BAZ> 
+<GETPROP FOO BAR>  ;  BAZ  
+<GETPROP FOO BAZ>  ;  #FALSE 
+<GETPROP FOO BAZ "Value not found.">  ;  "Value not found." 
+<SET L (1 2 3)>
+<PUTPROP .L FOO 456>
+.L  ;  (1 2 3)
+<GETPROP .L FOO>  ;  456
 ```
 
 

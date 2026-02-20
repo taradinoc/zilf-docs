@@ -508,6 +508,49 @@ MDL built-in predicate that returns true if atom has a GVAL (global value).
 
 ---
 
+### GBOUND?
+**Usage:** `<GBOUND? atom>`
+
+MDL built-in predicate that returns true if the atom ever had a global value.
+
+---
+
+### GC
+**Usage:** `<GC>`
+
+MDL built-in function that causes garbage collection.
+
+> **Note:** In ZILF, GC ignores all arguments and always returns true. ZILF relies on the garbage collection in the NET framework and only implements this for compatibility.
+
+---
+
+### GC-MON
+**Usage:** `<GC-MON>`
+
+MDL built-in function.
+
+> **Note:** ZILF ignores this and always returns FALSE.
+
+---
+
+### GET-DECL
+**Usage:** `<GET-DECL item>`
+
+MDL built-in function that returns the pattern defined to the item. It returns FALSE if no item exists.
+
+> **Note:** See DECL?, GDECL and PUT-DECL for more on declaration patterns.
+
+---
+
+### GETPROP
+**Usage:** `<GETPROP item indicator [default-value]>`
+
+MDL built-in returns the property-value stored under indicator on item. If no value can be found GETPROP returns the default-value or FALSE if no default-value is given.
+
+> **Note:** See ASSOCIATIONS, AVALUE, INDICATOR, ITEM, NEXT and PUTPROP.
+
+---
+
 ### GLOBAL
 **Usage:** `<GLOBAL atom default-value [decl] [size]>`
 
