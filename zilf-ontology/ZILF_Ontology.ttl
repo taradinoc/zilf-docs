@@ -519,6 +519,8 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:FORM ,
                                  zilf:GC ,
                                  zilf:GC-MON ,
+                                 zilf:GET-DECL ,
+                                 zilf:GETPROP ,
                                  zilf:GLOBAL ,
                                  zilf:ISTRING ,
                                  zilf:OR ,
@@ -1100,6 +1102,19 @@ Also see BACK, GETB, PUT, PUTB and REST."""@en ;
          skos:prefLabel "<GET table offset>"@en .
 
 
+###  http://example.org/zilf/GET-DECL
+zilf:GET-DECL rdf:type owl:NamedIndividual ,
+                       skos:Concept ;
+              skos:broader zilf:CoreFunctions ;
+              skos:inScheme zilf:ZILF_Scheme ;
+              skos:definition "MDL built-in function that returns the pattern defined to the item. It returns FALSE if no item exists."@en ;
+              skos:editorialNote "See DECL?, GDECL and PUT-DECL for more on declaration patterns."@en ;
+              skos:example """<GET-DECL BOOLEAN>  ;  #FALSE
+<PUT-DECL BOOLEAN '<OR ATOM FALSE>>
+<GET-DECL BOOLEAN>  ;  <OR ATOM FALSE>"""@en ;
+              skos:prefLabel "<GET-DECL item>"@en .
+
+
 ###  http://example.org/zilf/GETB
 zilf:GETB rdf:type owl:NamedIndividual ,
                    skos:Concept ;
@@ -1125,6 +1140,24 @@ zilf:GETP rdf:type owl:NamedIndividual ,
 <GETP ,MYOBJ ,P?MYPROP>  ;  123"""@en ;
           skos:historyNote "Zapf syntax: GETP, Inform syntax: get_prop"@en ;
           skos:prefLabel "<GETP object property>"@en .
+
+
+###  http://example.org/zilf/GETPROP
+zilf:GETPROP rdf:type owl:NamedIndividual ,
+                      skos:Concept ;
+             skos:broader zilf:CoreFunctions ;
+             skos:inScheme zilf:ZILF_Scheme ;
+             skos:definition "MDL built-in returns the property-value stored under indicator on item. If no value can be found GETPROP returns the default-value or FALSE if no default-value is given."@en ;
+             skos:editorialNote "See ASSOCIATIONS, AVALUE, INDICATOR, ITEM, NEXT and PUTPROP."@en ;
+             skos:example """<PUTPROP FOO BAR BAZ> 
+<GETPROP FOO BAR>  ;  BAZ  
+<GETPROP FOO BAZ>  ;  #FALSE 
+<GETPROP FOO BAZ \"Value not found.\">  ;  \"Value not found.\" 
+<SET L (1 2 3)>
+<PUTPROP .L FOO 456>
+.L  ;  (1 2 3)
+<GETPROP .L FOO>  ;  456"""@en ;
+             skos:prefLabel "<GETPROP item indicator [default-value]>"@en .
 
 
 ###  http://example.org/zilf/GETPT
