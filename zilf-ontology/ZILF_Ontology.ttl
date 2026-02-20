@@ -518,6 +518,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:FLOAD ,
                                  zilf:FORM ,
                                  zilf:GC ,
+                                 zilf:GC-MON ,
                                  zilf:GLOBAL ,
                                  zilf:ISTRING ,
                                  zilf:OR ,
@@ -1073,6 +1074,16 @@ zilf:GC rdf:type owl:NamedIndividual ,
         skos:example """<GC>  ;  T
 <GC 0 T 5>  ;  T"""@en ;
         skos:prefLabel "<GC>"@en .
+
+
+###  http://example.org/zilf/GC-MON
+zilf:GC-MON rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "MDL built-in function."@en ;
+            skos:editorialNote "ZILF ignores this and always returns FALSE."@en ;
+            skos:prefLabel "<GC-MON>"@en .
 
 
 ###  http://example.org/zilf/GET
