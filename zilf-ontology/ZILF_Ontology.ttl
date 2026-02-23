@@ -525,6 +525,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:GROW ,
                                  zilf:GUNASSIGN ,
                                  zilf:GVAL ,
+                                 zilf:IFFLAG ,
                                  zilf:ISTRING ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
@@ -1238,6 +1239,24 @@ zilf:GVAL rdf:type owl:NamedIndividual ,
 <GVAL X>  ;  5 
 ,X  ;  5"""@en ;
           skos:prefLabel "<GVAL atom>"@en .
+
+
+###  http://example.org/zilf/IFFLAG
+zilf:IFFLAG rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition """ZIL library function that returns the result as soon as any body is evaluated. If no body is evaluated, the function returns FALSE. Each condition is either:
+
+* A STRING naming a compilation flag, to evaluate the corresponding body if the flag’s value is true. 
+* An ATOM whose PNAME names a compilation flag, to evaluate the corresponding body if the flag’s value is true.
+* A FORM, to evaluate the FORM after replacing any element ATOMs whose PNAMEs name compilation flags with the flag values, and then evaluate the corresponding body if the result is true.
+* Any other value, to evaluate the corresponding body immediately."""@en ;
+            skos:editorialNote "As a consequence of the evaluation conditions (rules), undefined compilation flags are effectively TRUE."@en ;
+            skos:example """<COMPILATION-FLAG MYFLAG <>>
+<IFFLAG (MYFLAG <SETG FOO \"NOT OFF\">) (T <SETG FOO \"OFF\">)>
+,FOO  ;  \"OFF\""""@en ;
+            skos:prefLabel "<IFFLAG (condition body ...) ...>"@en .
 
 
 ###  http://example.org/zilf/INC
