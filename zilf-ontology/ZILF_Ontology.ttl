@@ -526,6 +526,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:GUNASSIGN ,
                                  zilf:GVAL ,
                                  zilf:IFFLAG ,
+                                 zilf:ILIST ,
                                  zilf:ISTRING ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
@@ -1257,6 +1258,19 @@ zilf:IFFLAG rdf:type owl:NamedIndividual ,
 <IFFLAG (MYFLAG <SETG FOO \"NOT OFF\">) (T <SETG FOO \"OFF\">)>
 ,FOO  ;  \"OFF\""""@en ;
             skos:prefLabel "<IFFLAG (condition body ...) ...>"@en .
+
+
+###  http://example.org/zilf/ILIST
+zilf:ILIST rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:CoreFunctions ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "MDL built-in function that returns a LIST with count items all set to init."@en ;
+           skos:editorialNote "ILIST means \"implicit\" or \"iterated\" list."@en ;
+           skos:example """<ILIST 4 2>  ;  (2 2 2 2)
+<SET A 0>
+<ILIST 4 '<SET A <+ .A 1>>>  ;  (1 2 3 4)"""@en ;
+           skos:prefLabel "<ILIST count [init]>"@en .
 
 
 ###  http://example.org/zilf/INC
