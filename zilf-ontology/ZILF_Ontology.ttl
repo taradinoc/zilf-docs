@@ -523,6 +523,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:GETPROP ,
                                  zilf:GLOBAL ,
                                  zilf:GROW ,
+                                 zilf:GUNASSIGN ,
                                  zilf:ISTRING ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
@@ -1209,6 +1210,19 @@ zilf:GROW rdf:type owl:NamedIndividual ,
 <LVAL V2>  ;  [#FALSE () 1 4 3 #FALSE ()]
 <TOP .V1>  ;  [#FALSE () 1 4 3 #FALSE ()]"""@en ;
           skos:prefLabel "<GROW vector end beginning>"@en .
+
+
+###  http://example.org/zilf/GUNASSIGN
+zilf:GUNASSIGN rdf:type owl:NamedIndividual ,
+                        skos:Concept ;
+               skos:broader zilf:CoreFunctions ;
+               skos:inScheme zilf:ZILF_Scheme ;
+               skos:definition "MDL built-in function that unassigns global atom."@en ;
+               skos:example """<SETG X 1>
+<GASSIGNED? X>  ;  True
+<GUNASSIGN X>
+<GASSIGNED? X>  ;  False"""@en ;
+               skos:prefLabel "<GUNASSIGN atom>"@en .
 
 
 ###  http://example.org/zilf/INC
