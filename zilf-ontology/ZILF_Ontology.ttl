@@ -522,6 +522,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:GET-DECL ,
                                  zilf:GETPROP ,
                                  zilf:GLOBAL ,
+                                 zilf:GROW ,
                                  zilf:ISTRING ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
@@ -1190,6 +1191,24 @@ Outputs this error:
 [error MDL0206] <stdin>:1: expected GVAL of BAR to match DECL FIX, but got \"fdsf\""""@en ;
             skos:example "<GLOBAL MYVAR 0>"@en ;
             skos:prefLabel "<GLOBAL atom default-value [decl] [size]>"@en .
+
+
+###  http://example.org/zilf/GROW
+zilf:GROW rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition "MDL built-in function that expands the vector with end and/or beginning number of elements to respectively end of the vector.  Only non-negative values for end and beginning are valid. The new elements have FALSE as an initial value."@en ;
+          skos:editorialNote "If elements are added to the beginning of a vector all old references to that vector have to use TOP or BACK to access the new elements."@en ;
+          skos:example """<SET V1 [1 2 3]>
+<SET V2 <GROW .V1 1 1>>
+<LVAL V1>  ;  [1 2 3 #FALSE ()]
+<LVAL V2>  ;  [#FALSE () 1 2 3 #FALSE ()]
+<2 .V1 4>
+<LVAL V1>  ;  [1 4 3 #FALSE ()]
+<LVAL V2>  ;  [#FALSE () 1 4 3 #FALSE ()]
+<TOP .V1>  ;  [#FALSE () 1 4 3 #FALSE ()]"""@en ;
+          skos:prefLabel "<GROW vector end beginning>"@en .
 
 
 ###  http://example.org/zilf/INC
