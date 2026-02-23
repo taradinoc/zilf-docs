@@ -524,6 +524,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:GLOBAL ,
                                  zilf:GROW ,
                                  zilf:GUNASSIGN ,
+                                 zilf:GVAL ,
                                  zilf:ISTRING ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
@@ -1223,6 +1224,20 @@ zilf:GUNASSIGN rdf:type owl:NamedIndividual ,
 <GUNASSIGN X>
 <GASSIGNED? X>  ;  False"""@en ;
                skos:prefLabel "<GUNASSIGN atom>"@en .
+
+
+###  http://example.org/zilf/GVAL
+zilf:GVAL rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:altLabel ",atom"@en ;
+          skos:definition "MDL built-in function that gets the value of the global atom."@en ;
+          skos:editorialNote "Typically used in its alternate form \",atom\"."@en ;
+          skos:example """<SETG X 5>
+<GVAL X>  ;  5 
+,X  ;  5"""@en ;
+          skos:prefLabel "<GVAL atom>"@en .
 
 
 ###  http://example.org/zilf/INC
