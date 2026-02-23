@@ -707,6 +707,52 @@ A  ;  5
 ```
 
 
+### GROW
+```zil
+<SET V1 [1 2 3]>
+<SET V2 <GROW .V1 1 1>>
+<LVAL V1>  ;  [1 2 3 #FALSE ()]
+<LVAL V2>  ;  [#FALSE () 1 2 3 #FALSE ()]
+<2 .V1 4>
+<LVAL V1>  ;  [1 4 3 #FALSE ()]
+<LVAL V2>  ;  [#FALSE () 1 4 3 #FALSE ()]
+<TOP .V1>  ;  [#FALSE () 1 4 3 #FALSE ()]
+```
+
+
+### GUNASSIGN
+```zil
+<SETG X 1>
+<GASSIGNED? X>  ;  True
+<GUNASSIGN X>
+<GASSIGNED? X>  ;  False
+```
+
+
+### GVAL
+```zil
+<SETG X 5>
+<GVAL X>  ;  5 
+,X  ;  5
+```
+
+
+### IFFLAG
+```zil
+<COMPILATION-FLAG MYFLAG <>>
+<IFFLAG (MYFLAG <SETG FOO "NOT OFF">) (T <SETG FOO "OFF">)>
+,FOO  ;  "OFF"
+```
+
+
+### ILIST
+```zil
+<ILIST 4 2>  ;  (2 2 2 2)
+<SET A 0>
+<ILIST 4 '<SET A <+ .A 1>>>  ;  (1 2 3 4)
+```
+
+
 ### IN?
 ```zil
 <OBJECT ANIMAL>

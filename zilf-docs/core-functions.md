@@ -567,6 +567,56 @@ Outputs this error:
 
 ---
 
+### GROW
+**Usage:** `<GROW vector end beginning>`
+
+MDL built-in function that expands the vector with end and/or beginning number of elements to respectively end of the vector.  Only non-negative values for end and beginning are valid. The new elements have FALSE as an initial value.
+
+> **Note:** If elements are added to the beginning of a vector all old references to that vector have to use TOP or BACK to access the new elements.
+
+---
+
+### GUNASSIGN
+**Usage:** `<GUNASSIGN atom>`
+
+MDL built-in function that unassigns global atom.
+
+---
+
+### GVAL
+**Usage:** `<GVAL atom>`
+
+**Alternative Usage:** `,atom`
+
+MDL built-in function that gets the value of the global atom.
+
+> **Note:** Typically used in its alternate form ",atom".
+
+---
+
+### IFFLAG
+**Usage:** `<IFFLAG (condition body ...) ...>`
+
+ZIL library function that returns the result as soon as any body is evaluated. If no body is evaluated, the function returns FALSE. Each condition is either:
+
+* A STRING naming a compilation flag, to evaluate the corresponding body if the flag’s value is true. 
+* An ATOM whose PNAME names a compilation flag, to evaluate the corresponding body if the flag’s value is true.
+* A FORM, to evaluate the FORM after replacing any element ATOMs whose PNAMEs name compilation flags with the flag values, and then evaluate the corresponding body if the result is true.
+* Any other value, to evaluate the corresponding body immediately.
+
+> **Note:** As a consequence of the evaluation conditions (rules), undefined compilation flags are effectively TRUE.
+
+---
+
+### ILIST
+**Usage:** `<ILIST count [init]>`
+
+MDL built-in function that returns a LIST with count items all set to init.
+
+> **Note:** ILIST means "implicit" or "iterated" list.
+
+---
+
 ### ISTRING
 **Usage:** `<ISTRING count [init]>`
 
