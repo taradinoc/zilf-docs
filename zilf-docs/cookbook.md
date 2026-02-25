@@ -753,6 +753,17 @@ A  ;  5
 ```
 
 
+### IMAGE
+```zil
+<DEFINE FOO () 
+    <IMAGE 70> 
+    <IMAGE 79> 
+    <IMAGE 79> 
+    <CRLF>>
+<FOO>  ;  "FOO"
+```
+
+
 ### IN?
 ```zil
 <OBJECT ANIMAL>
@@ -766,6 +777,54 @@ A  ;  5
 ```zil
 <GLOBAL X 5>
 <INC ,X>  ;  X = 6
+```
+
+
+### INCLUDE
+```zil
+;"Searches for file "foofoo.zil" which contains the definition for  <DEFINITIONS "FOOFOO"> ..."
+<INCLUDE "FOOFOO">
+```
+
+
+### INCLUDE-WHEN
+```zil
+<DEFINITIONS "FOO">
+<SETG AAAA 1234>
+<END-DEFINITIONS>
+<GASSIGNED? AAAA>  ;  #FALSE
+<REMOVE AAAA>  ;  "Secure that ATOM not on any OBLIST"
+<INCLUDE-WHEN <=? 1 2> "FOO">
+<GASSIGNED? AAAA>  ;  #FALSE
+<REMOVE AAAA>  ;  "Secure that ATOM not on any OBLIST"
+<INCLUDE-WHEN <=? 1 1> "FOO">
+,AAAA  ;  1234
+```
+
+
+### INDENT-TO
+```zil
+<DEFINE PRINT-2-COL (LST) 
+    <REPEAT ((I 0)) 
+        <SET I <+ .I 1>> 
+        <COND (<G? .I <LENGTH .LST>> <RETURN>)> 
+        <COND (<1? <MOD .I 2>> 
+                            <INDENT-TO 3>  
+                            <PRINC <.I .LST>>) 
+                       (T  <INDENT-TO 15>  
+                           <PRINC <.I .LST>>  
+                           <CRLF>)>> 
+    <CRLF>> 
+<PRINT-2-COL ("Apple" "Banana" "Orange" "Lime")> 
+;  Apple       Banana 
+;  Orange  Lime
+```
+
+
+### INDEX
+```zil
+<SETG OFF3 <OFFSET 3 '<VECTOR> 'STRING>>
+<INDEX ,OFF3>  ;  3
 ```
 
 

@@ -617,6 +617,53 @@ MDL built-in function that returns a LIST with count items all set to init.
 
 ---
 
+### IMAGE
+**Usage:** `<IMAGE ch [channel]>`
+
+MDL built-in function that prints the actual raw character with number ch to channel. No extra characters are ever printed.
+
+> **Note:** IMAGE returns ch.
+
+---
+
+### INCLUDE
+**Usage:** `<INCLUDE package-name ...>`
+
+MDL package system that activates one or many package-names and makes its content available in the current OBLIST-path. In practice INCLUDE copies the OBLIST package-name and adds it last to the local OBLIST (<LVAL OBLIST>). This means that all ATOMs on the DEFINITIONS OBLIST becomes available in current environment. 
+
+If the package-name is not available in the current environment, INCLUDE tries to load “package-name.zil” from the current path.
+
+> **Note:** INCLUDE only works together with DEFINITIONS and if the definition of the package-name is missing from the environment or no file is found containing that definition is found, an error is raised. 
+
+See DEFINITIONS and INCLUDE-WHEN.
+
+---
+
+### INCLUDE-WHEN
+**Usage:** `<INCLUDE-WHEN condition package-name ...>`
+
+MDL package system that only activates the package-name if the condition evaluates to TRUE.
+
+> **Note:** INCLUDE-WHEN is mostly like INCLUDE.
+
+See DEFINITIONS and INCLUDE.
+
+---
+
+### INDENT-TO
+**Usage:** `<INDENT-TO position [channel]>`
+
+ZIL library function that places the cursor at the position on channel. Default value for the channel is .OUTCHAN (the console).
+
+---
+
+### INDEX
+**Usage:** `<INDEX offset>`
+
+MDL built-in function that returns the index-part of an OFFSET.
+
+---
+
 ### ISTRING
 **Usage:** `<ISTRING count [init]>`
 

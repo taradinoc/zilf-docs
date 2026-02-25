@@ -1339,7 +1339,7 @@ See DEFINITIONS and INCLUDE."""@en ;
 <REMOVE AAAA>  ;  \"Secure that ATOM not on any OBLIST\"
 <INCLUDE-WHEN <=? 1 2> \"FOO\">
 <GASSIGNED? AAAA>  ;  #FALSE
-<REMOVE AAAA> ;\"Secure that ATOM not on any OBLIST\"
+<REMOVE AAAA>  ;  \"Secure that ATOM not on any OBLIST\"
 <INCLUDE-WHEN <=? 1 1> \"FOO\">
 ,AAAA  ;  1234"""@en ;
                   skos:prefLabel "<INCLUDE-WHEN condition package-name ...>"@en .
