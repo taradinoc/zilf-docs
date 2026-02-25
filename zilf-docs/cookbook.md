@@ -828,6 +828,19 @@ A  ;  5
 ```
 
 
+### INDICATOR
+```zil
+<DEFINE LAST-ASOC ()
+    <REPEAT ((A <ASSOCIATIONS>))
+        <COND (<=? .A <>> <RETURN <>>)
+        (<=? <NEXT .A> <>> <RETURN .A>)>
+   <SET A <NEXT .A>>>>
+<PUTPROP NEW-ASOC TEXT "Hello, world!">
+<SET A <LAST-ASOC>>
+<INDICATOR .A>  ;  TEXT
+```
+
+
 ### INPUT
 ```zil
 <INPUT 1>  ;  Wait for keypress
@@ -840,6 +853,28 @@ A  ;  5
  
 ;  Pause two seconds (if not interrupted by a keypress from the keyboard
 <WAIT-TWO-SECONDS>
+```
+
+
+### INSERT
+```zil
+<INSERT "FOO-1" <MOBLIST OB>>  ;  FOO-1!-OB
+<INSERT <ATOM "FOO-2"> <MOBLIST OB>>  ;  FOO-2!-OB
+<INSERT <REMOVE "FOO-2" <MOBLIST OB>> <MOBLIST OB2>>  ;  FOO-2!-OB2
+<INSERT FOO-3 <MOBLIST OB>>  ;  Error (Interpreter already placed it on <1 .OBLIST>
+
+;  "Returns FOO from OB. Creates ATOM/OBLIST if needed."
+<OR <LOOKUP "FOO" <MOBLIST OB>> <INSERT "FOO" <MOBLIST OB>>  ;  FOO!-OB
+FOO!-OB  ;  FOO!-OB
+BAR!-OB  ;  BAR!-OB
+<MOBLIST OB>  ;  #OBLIST (("FOO" FOO!-OB) ("BAR" BAR!-OB))
+```
+
+
+### INSERT-FILE
+```zil
+<INSERT-FILE "rooms">  ;  Include "rooms.zil" from current directory 
+<INSERT-FILE "zillib/parser">  ;  Include "parser.zil" from subdir "zilllib"
 ```
 
 
@@ -875,6 +910,27 @@ A  ;  5
 <ISTRING 4 !\A>  ;  "AAAA"
 <SET A 64>
 <ISTRING 4 '<ASCII <SET A <+ .A 1>>>>  ;  "ABCD"
+```
+
+
+### ITEM
+```zil
+<DEFINE LAST-ASOC ()
+    <REPEAT ((A <ASSOCIATIONS>))
+        <COND (<=? .A <>> <RETURN <>>)
+        (<=? <NEXT .A> <>> <RETURN .A>)>
+    <SET A <NEXT .A>>>>
+<PUTPROP NEW-ASOC TEXT "Hello, world!">
+<SET A <LAST-ASOC>>
+<ITEM .A>  ;  NEW-ASOC
+```
+
+
+### IVECTOR
+```zil
+<IVECTOR 4 2>  ;  [2 2 2 2]
+<SET A 0>
+<IVECTOR 4 '<SET A <+ .A 1>>>  ;  [1 2 3 4]
 ```
 
 

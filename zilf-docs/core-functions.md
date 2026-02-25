@@ -664,12 +664,63 @@ MDL built-in function that returns the index-part of an OFFSET.
 
 ---
 
+### INDICATOR
+**Usage:** `<INDICATOR asoc>`
+
+MDL built-in function that returns the indicator part from an asoc entry, of TYPE ASOC, in the ASSOCIATION chain.
+
+> **Note:** See ASSOCIATIONS, AVALUE, GETPROP, ITEM, NEXT and PUTPROP.
+
+---
+
+### INSERT
+**Usage:** `<INSERT atom | pname oblist>`
+
+MDL built-in function that creates an ATOM with the pname and inserts it into oblist. INSERT returns the newly created ATOM (or raises an error if the ATOM already was on the oblist). First argument can also be an atom but this ATOM can not be on any OBLIST and therefore must be newly created by ATOM or recently REMOVE.
+ 
+INSERT requires that you specify oblist, if you want to create an ATOM on the standard OBLIST, usually <1 .OBLIST>, you can use <PARSE string> instead.
+
+> **Note:** Note that you also can use trailers to both create the ATOM and the OBLIST (or one of them). atom!-oblist inserts the atom on the oblist and if one of them or both don’t exist, they are created.
+
+---
+
+### INSERT-FILE
+**Usage:** `<INSERT-FILE filename>`
+
+ZIL library function that inserts a file with filename at this point. If extension is omitted, ".zil" is assumed.
+
+The filename can have an absolute or relative path. If no path is given, the compiler looks in the current library and the libraries specified to the compiler with the -ip switch.
+
+> **Note:** Note that path is specified like in Linux (forward slashes etc.) and uppercase/lowercase can be significant, depending on the host system.
+
+ZILF ignores all but the first argument.
+
+---
+
 ### ISTRING
 **Usage:** `<ISTRING count [init]>`
 
 MDL built-in function that returns a STRING with count items all set to init (character).
 
 > **Note:** ISTRING is "implicit" or "iterated".
+
+---
+
+### ITEM
+**Usage:** `<ITEM asoc>`
+
+MDL built-in function that returns the item part from an asoc entry, of TYPE ASOC, in the ASSOCIATION chain.
+
+> **Note:** See ASSOCIATIONS, AVALUE, GETPROP, INDICATOR, NEXT and PUTPROP.
+
+---
+
+### IVECTOR
+**Usage:** `<IVECTOR count [init]>`
+
+MDL built-in function that returns a VECTOR with count items all set to init.
+
+> **Note:** IVECTOR means "implicit" or "iterated" vector.
 
 ---
 
