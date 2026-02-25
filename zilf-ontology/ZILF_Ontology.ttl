@@ -527,6 +527,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:GVAL ,
                                  zilf:IFFLAG ,
                                  zilf:ILIST ,
+                                 zilf:IMAGE ,
                                  zilf:ISTRING ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
@@ -1271,6 +1272,22 @@ zilf:ILIST rdf:type owl:NamedIndividual ,
 <SET A 0>
 <ILIST 4 '<SET A <+ .A 1>>>  ;  (1 2 3 4)"""@en ;
            skos:prefLabel "<ILIST count [init]>"@en .
+
+
+###  http://example.org/zilf/IMAGE
+zilf:IMAGE rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:CoreFunctions ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "MDL built-in function that prints the actual raw character with number ch to channel. No extra characters are ever printed."@en ;
+           skos:editorialNote "IMAGE returns ch."@en ;
+           skos:example """<DEFINE FOO () 
+    <IMAGE 70> 
+    <IMAGE 79> 
+    <IMAGE 79> 
+    <CRLF>>
+<FOO>  ;  \"FOO\""""@en ;
+           skos:prefLabel "<IMAGE ch [channel]>"@en .
 
 
 ###  http://example.org/zilf/INC
