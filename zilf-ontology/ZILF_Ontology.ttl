@@ -531,6 +531,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:INCLUDE ,
                                  zilf:INCLUDE-WHEN ,
                                  zilf:INDENT-TO ,
+                                 zilf:INDEX ,
                                  zilf:ISTRING ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
@@ -1365,6 +1366,17 @@ zilf:INDENT-TO rdf:type owl:NamedIndividual ,
 ;  Apple       Banana 
 ;  Orange  Lime"""@en ;
                skos:prefLabel "<INDENT-TO position [channel]>"@en .
+
+
+###  http://example.org/zilf/INDEX
+zilf:INDEX rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:CoreFunctions ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "MDL built-in function that returns the index-part of an OFFSET."@en ;
+           skos:example """<SETG OFF3 <OFFSET 3 '<VECTOR> 'STRING>>
+<INDEX ,OFF3>  ;  3"""@en ;
+           skos:prefLabel "<INDEX offset>"@en .
 
 
 ###  http://example.org/zilf/INPUT
