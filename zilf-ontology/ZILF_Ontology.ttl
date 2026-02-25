@@ -529,6 +529,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:ILIST ,
                                  zilf:IMAGE ,
                                  zilf:INCLUDE ,
+                                 zilf:INCLUDE-WHEN ,
                                  zilf:ISTRING ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
@@ -1318,6 +1319,28 @@ See DEFINITIONS and INCLUDE-WHEN."""@en ;
              skos:example """;\"Searches for file \"foofoo.zil\" which contains the definition for  <DEFINITIONS \"FOOFOO\"> ...\"
 <INCLUDE \"FOOFOO\">"""@en ;
              skos:prefLabel "<INCLUDE package-name ...>"@en .
+
+
+###  http://example.org/zilf/INCLUDE-WHEN
+zilf:INCLUDE-WHEN rdf:type owl:NamedIndividual ,
+                           skos:Concept ;
+                  skos:broader zilf:CoreFunctions ;
+                  skos:inScheme zilf:ZILF_Scheme ;
+                  skos:definition "MDL package system that only activates the package-name if the condition evaluates to TRUE."@en ;
+                  skos:editorialNote """INCLUDE-WHEN is mostly like INCLUDE.
+
+See DEFINITIONS and INCLUDE."""@en ;
+                  skos:example """<DEFINITIONS \"FOO\">
+<SETG AAAA 1234>
+<END-DEFINITIONS>
+<GASSIGNED? AAAA>  ;  #FALSE
+<REMOVE AAAA>  ;  \"Secure that ATOM not on any OBLIST\"
+<INCLUDE-WHEN <=? 1 2> \"FOO\">
+<GASSIGNED? AAAA>  ;  #FALSE
+<REMOVE AAAA> ;\"Secure that ATOM not on any OBLIST\"
+<INCLUDE-WHEN <=? 1 1> \"FOO\">
+,AAAA  ;  1234"""@en ;
+                  skos:prefLabel "<INCLUDE-WHEN condition package-name ...>"@en .
 
 
 ###  http://example.org/zilf/INPUT
