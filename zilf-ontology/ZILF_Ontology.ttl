@@ -533,6 +533,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:INDENT-TO ,
                                  zilf:INDEX ,
                                  zilf:INDICATOR ,
+                                 zilf:INSERT ,
                                  zilf:ISTRING ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
@@ -1417,6 +1418,28 @@ zilf:INPUT rdf:type owl:NamedIndividual ,
 <WAIT-TWO-SECONDS>"""@en ;
            skos:historyNote "Zapf syntax: INPUT, Inform syntax: read_char"@en ;
            skos:prefLabel "<INPUT 1 [time] [routine]>"@en .
+
+
+###  http://example.org/zilf/INSERT
+zilf:INSERT rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition """MDL built-in function that creates an ATOM with the pname and inserts it into oblist. INSERT returns the newly created ATOM (or raises an error if the ATOM already was on the oblist). First argument can also be an atom but this ATOM can not be on any OBLIST and therefore must be newly created by ATOM or recently REMOVE.
+ 
+INSERT requires that you specify oblist, if you want to create an ATOM on the standard OBLIST, usually <1 .OBLIST>, you can use <PARSE string> instead."""@en ;
+            skos:editorialNote "Note that you also can use trailers to both create the ATOM and the OBLIST (or one of them). atom!-oblist inserts the atom on the oblist and if one of them or both don’t exist, they are created."@en ;
+            skos:example """<INSERT \"FOO-1\" <MOBLIST OB>>  ;  FOO-1!-OB
+<INSERT <ATOM \"FOO-2\"> <MOBLIST OB>>  ;  FOO-2!-OB
+<INSERT <REMOVE \"FOO-2\" <MOBLIST OB>> <MOBLIST OB2>>  ;  FOO-2!-OB2
+<INSERT FOO-3 <MOBLIST OB>>  ;  Error (Interpreter already placed it on <1 .OBLIST>
+
+;  \"Returns FOO from OB. Creates ATOM/OBLIST if needed.\"
+<OR <LOOKUP \"FOO\" <MOBLIST OB>> <INSERT \"FOO\" <MOBLIST OB>>  ;  FOO!-OB
+FOO!-OB  ;  FOO!-OB
+BAR!-OB  ;  BAR!-OB
+<MOBLIST OB>  ;  #OBLIST ((\"FOO\" FOO!-OB) (\"BAR\" BAR!-OB))"""@en ;
+            skos:prefLabel "<INSERT atom | pname oblist>"@en .
 
 
 ###  http://example.org/zilf/IRESTORE
