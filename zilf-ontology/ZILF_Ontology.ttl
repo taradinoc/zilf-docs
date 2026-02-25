@@ -532,6 +532,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:INCLUDE-WHEN ,
                                  zilf:INDENT-TO ,
                                  zilf:INDEX ,
+                                 zilf:INDICATOR ,
                                  zilf:ISTRING ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
@@ -1377,6 +1378,24 @@ zilf:INDEX rdf:type owl:NamedIndividual ,
            skos:example """<SETG OFF3 <OFFSET 3 '<VECTOR> 'STRING>>
 <INDEX ,OFF3>  ;  3"""@en ;
            skos:prefLabel "<INDEX offset>"@en .
+
+
+###  http://example.org/zilf/INDICATOR
+zilf:INDICATOR rdf:type owl:NamedIndividual ,
+                        skos:Concept ;
+               skos:broader zilf:CoreFunctions ;
+               skos:inScheme zilf:ZILF_Scheme ;
+               skos:definition "MDL built-in function that returns the indicator part from an asoc entry, of TYPE ASOC, in the ASSOCIATION chain."@en ;
+               skos:editorialNote "See ASSOCIATIONS, AVALUE, GETPROP, ITEM, NEXT and PUTPROP."@en ;
+               skos:example """<DEFINE LAST-ASOC ()
+    <REPEAT ((A <ASSOCIATIONS>))
+        <COND (<=? .A <>> <RETURN <>>)
+        (<=? <NEXT .A> <>> <RETURN .A>)>
+   <SET A <NEXT .A>>>>
+<PUTPROP NEW-ASOC TEXT \"Hello, world!\">
+<SET A <LAST-ASOC>>
+<INDICATOR .A>  ;  TEXT"""@en ;
+               skos:prefLabel "<INDICATOR asoc>"@en .
 
 
 ###  http://example.org/zilf/INPUT
