@@ -536,6 +536,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:INSERT ,
                                  zilf:INSERT-FILE ,
                                  zilf:ISTRING ,
+                                 zilf:ITEM ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
@@ -1494,6 +1495,24 @@ zilf:ISTRING rdf:type owl:NamedIndividual ,
 <SET A 64>
 <ISTRING 4 '<ASCII <SET A <+ .A 1>>>>  ;  \"ABCD\""""@en ;
              skos:prefLabel "<ISTRING count [init]>"@en .
+
+
+###  http://example.org/zilf/ITEM
+zilf:ITEM rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition "MDL built-in function that returns the item part from an asoc entry, of TYPE ASOC, in the ASSOCIATION chain."@en ;
+          skos:editorialNote "See ASSOCIATIONS, AVALUE, GETPROP, INDICATOR, NEXT and PUTPROP."@en ;
+          skos:example """<DEFINE LAST-ASOC ()
+    <REPEAT ((A <ASSOCIATIONS>))
+        <COND (<=? .A <>> <RETURN <>>)
+        (<=? <NEXT .A> <>> <RETURN .A>)>
+    <SET A <NEXT .A>>>>
+<PUTPROP NEW-ASOC TEXT \"Hello, world!\">
+<SET A <LAST-ASOC>>
+<ITEM .A>  ;  NEW-ASOC"""@en ;
+          skos:prefLabel "<ITEM asoc>"@en .
 
 
 ###  http://example.org/zilf/LEX
