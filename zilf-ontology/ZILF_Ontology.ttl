@@ -534,6 +534,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:INDEX ,
                                  zilf:INDICATOR ,
                                  zilf:INSERT ,
+                                 zilf:INSERT-FILE ,
                                  zilf:ISTRING ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
@@ -1440,6 +1441,22 @@ FOO!-OB  ;  FOO!-OB
 BAR!-OB  ;  BAR!-OB
 <MOBLIST OB>  ;  #OBLIST ((\"FOO\" FOO!-OB) (\"BAR\" BAR!-OB))"""@en ;
             skos:prefLabel "<INSERT atom | pname oblist>"@en .
+
+
+###  http://example.org/zilf/INSERT-FILE
+zilf:INSERT-FILE rdf:type owl:NamedIndividual ,
+                          skos:Concept ;
+                 skos:broader zilf:CoreFunctions ;
+                 skos:inScheme zilf:ZILF_Scheme ;
+                 skos:definition """ZIL library function that inserts a file with filename at this point. If extension is omitted, \".zil\" is assumed.
+
+The filename can have an absolute or relative path. If no path is given, the compiler looks in the current library and the libraries specified to the compiler with the -ip switch."""@en ;
+                 skos:editorialNote """Note that path is specified like in Linux (forward slashes etc.) and uppercase/lowercase can be significant, depending on the host system.
+
+ZILF ignores all but the first argument."""@en ;
+                 skos:example """<INSERT-FILE \"rooms\">  ;  Include \"rooms.zil\" from current directory 
+<INSERT-FILE \"zillib/parser\">  ;  Include \"parser.zil\" from subdir \"zilllib\""""@en ;
+                 skos:prefLabel "<INSERT-FILE filename>"@en .
 
 
 ###  http://example.org/zilf/IRESTORE
