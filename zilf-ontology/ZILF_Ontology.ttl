@@ -537,6 +537,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:INSERT-FILE ,
                                  zilf:ISTRING ,
                                  zilf:ITEM ,
+                                 zilf:IVECTOR ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
@@ -1513,6 +1514,19 @@ zilf:ITEM rdf:type owl:NamedIndividual ,
 <SET A <LAST-ASOC>>
 <ITEM .A>  ;  NEW-ASOC"""@en ;
           skos:prefLabel "<ITEM asoc>"@en .
+
+
+###  http://example.org/zilf/IVECTOR
+zilf:IVECTOR rdf:type owl:NamedIndividual ,
+                      skos:Concept ;
+             skos:broader zilf:CoreFunctions ;
+             skos:inScheme zilf:ZILF_Scheme ;
+             skos:definition "MDL built-in function that returns a VECTOR with count items all set to init."@en ;
+             skos:editorialNote "IVECTOR means \"implicit\" or \"iterated\" vector."@en ;
+             skos:example """<IVECTOR 4 2>  ;  [2 2 2 2]
+<SET A 0>
+<IVECTOR 4 '<SET A <+ .A 1>>>  ;  [1 2 3 4]"""@en ;
+             skos:prefLabel "<IVECTOR count [init]>"@en .
 
 
 ###  http://example.org/zilf/LEX
