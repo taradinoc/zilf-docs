@@ -530,6 +530,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:IMAGE ,
                                  zilf:INCLUDE ,
                                  zilf:INCLUDE-WHEN ,
+                                 zilf:INDENT-TO ,
                                  zilf:ISTRING ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
@@ -1341,6 +1342,29 @@ See DEFINITIONS and INCLUDE."""@en ;
 <INCLUDE-WHEN <=? 1 1> \"FOO\">
 ,AAAA  ;  1234"""@en ;
                   skos:prefLabel "<INCLUDE-WHEN condition package-name ...>"@en .
+
+
+###  http://example.org/zilf/INDENT-TO
+zilf:INDENT-TO rdf:type owl:NamedIndividual ,
+                        skos:Concept ;
+               skos:broader zilf:CoreFunctions ;
+               skos:inScheme zilf:ZILF_Scheme ;
+               skos:definition "ZIL library function that places the cursor at the position on channel. Default value for the channel is .OUTCHAN (the console)."@en ;
+               skos:example """<DEFINE PRINT-2-COL (LST) 
+    <REPEAT ((I 0)) 
+        <SET I <+ .I 1>> 
+        <COND (<G? .I <LENGTH .LST>> <RETURN>)> 
+        <COND (<1? <MOD .I 2>> 
+                            <INDENT-TO 3>  
+                            <PRINC <.I .LST>>) 
+                       (T  <INDENT-TO 15>  
+                           <PRINC <.I .LST>>  
+                           <CRLF>)>> 
+    <CRLF>> 
+<PRINT-2-COL (\"Apple\" \"Banana\" \"Orange\" \"Lime\")> 
+;  Apple       Banana 
+;  Orange  Lime"""@en ;
+               skos:prefLabel "<INDENT-TO position [channel]>"@en .
 
 
 ###  http://example.org/zilf/INPUT
