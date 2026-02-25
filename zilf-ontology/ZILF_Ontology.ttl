@@ -528,6 +528,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:IFFLAG ,
                                  zilf:ILIST ,
                                  zilf:IMAGE ,
+                                 zilf:INCLUDE ,
                                  zilf:ISTRING ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
@@ -1301,6 +1302,22 @@ zilf:INC rdf:type owl:NamedIndividual ,
 <INC ,X>  ;  X = 6"""@en ;
          skos:historyNote "Zapf syntax: INC, Inform syntax: inc"@en ;
          skos:prefLabel "<INC name>"@en .
+
+
+###  http://example.org/zilf/INCLUDE
+zilf:INCLUDE rdf:type owl:NamedIndividual ,
+                      skos:Concept ;
+             skos:broader zilf:CoreFunctions ;
+             skos:inScheme zilf:ZILF_Scheme ;
+             skos:definition """MDL package system that activates one or many package-names and makes its content available in the current OBLIST-path. In practice INCLUDE copies the OBLIST package-name and adds it last to the local OBLIST (<LVAL OBLIST>). This means that all ATOMs on the DEFINITIONS OBLIST becomes available in current environment. 
+
+If the package-name is not available in the current environment, INCLUDE tries to load “package-name.zil” from the current path."""@en ;
+             skos:editorialNote """INCLUDE only works together with DEFINITIONS and if the definition of the package-name is missing from the environment or no file is found containing that definition is found, an error is raised. 
+
+See DEFINITIONS and INCLUDE-WHEN."""@en ;
+             skos:example """;\"Searches for file \"foofoo.zil\" which contains the definition for  <DEFINITIONS \"FOOFOO\"> ...\"
+<INCLUDE \"FOOFOO\">"""@en ;
+             skos:prefLabel "<INCLUDE package-name ...>"@en .
 
 
 ###  http://example.org/zilf/INPUT
