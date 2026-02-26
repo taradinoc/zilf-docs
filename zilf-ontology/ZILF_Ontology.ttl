@@ -539,6 +539,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:ITEM ,
                                  zilf:IVECTOR ,
                                  zilf:LANGUAGE ,
+                                 zilf:LENGTH ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
@@ -1549,6 +1550,17 @@ The name may be GERMAN, or DEFAULT to stick with classic ZSCII. GERMAN is define
 *  Alphabet 2: 0123456789!?'-:()JÄÖÜß«» 
 *  Special characters:  ä(%a), ö(%o), ü(%u), ß(%s), Ä(%A), Ö(%O), Ü(%U), «(%<), »(%>)"""@en ;
               skos:prefLabel "<LANGUAGE name [escape-char] [change-chrset]>"@en .
+
+
+###  http://example.org/zilf/LENGTH
+zilf:LENGTH rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "MDL built-in function that returns the number of elements in structure. structure must be an object that STRUCTURED? evaluates to true."@en ;
+            skos:editorialNote "Note that TABLE is not a structure. Also see BACK, NTH, PUT, REST, SUBSTRUC and TOP."@en ;
+            skos:example "<LENGTH <LIST 1 2 3>>  ;  3"@en ;
+            skos:prefLabel "<LENGTH structure>"@en .
 
 
 ###  http://example.org/zilf/LEX
