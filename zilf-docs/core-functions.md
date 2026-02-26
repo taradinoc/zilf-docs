@@ -495,6 +495,8 @@ If needed, ZILF will move the extra variables into a table (GLOBAL-VARS-TABLE) a
 ### G?
 **Usage:** `<G? value1 value2>`
 
+**Alternative Usage:** `<G=? value1 value2>`
+
 MDL built-in predicate that returns true if value1 is greater than value2, otherwise the predicate returns false.
 
 > **Note:** 'G' means "is greater than."
@@ -721,6 +723,60 @@ MDL built-in function that returns the item part from an asoc entry, of TYPE ASO
 MDL built-in function that returns a VECTOR with count items all set to init.
 
 > **Note:** IVECTOR means "implicit" or "iterated" vector.
+
+---
+
+### L?
+**Usage:** `<L? value1 value2>`
+
+**Alternative Usage:** `<L=? value1 value2>`
+
+MDL built-in predicate that returns true if value1 is lower or equal than value2 otherwise false.
+
+> **Note:** L means less than.
+
+---
+
+### LANGUAGE
+**Usage:** `<LANGUAGE name [escape-char] [change-chrset]>`
+
+ZIL library setting that changes how text is encoded in two ways: it lets you write language-specific characters in ZIL source code by adding a prefix to ASCII characters, and it changes the Z-machine alphabet to encode them more efficiently. 
+
+If change-chrset is false, the Z-machine character set won’t be changed, so the language setting will only affect how source code is read.
+
+> **Note:** The escape-char is !\% by default, meaning that language-specific characters may be used in strings or atoms by adding a percent sign prefix (e.g. %s for ß).
+
+The name may be GERMAN, or DEFAULT to stick with classic ZSCII. GERMAN is defined as follows:
+
+*  Alphabet 0: abcdefghiklmnoprstuwzäöü., 
+*  Alphabet 1: ABCDEFGHIKLMNOPRSTUWZjqvxy 
+*  Alphabet 2: 0123456789!?'-:()JÄÖÜß«» 
+*  Special characters:  ä(%a), ö(%o), ü(%u), ß(%s), Ä(%A), Ö(%O), Ü(%U), «(%<), »(%>)
+
+---
+
+### LEGAL?
+**Usage:** `<LEGAL? value>`
+
+MDL built-in predicate  that returns TRUE if portion of the stack value occupies is still active, otherwise FALSE. Although LEGAL? works for all TYPEs, it’s only useful for those TYPEs that live on the stack, like TUPLE, activation and environment, all other types always return TRUE.
+
+---
+
+### LENGTH
+**Usage:** `<LENGTH structure>`
+
+MDL built-in function that returns the number of elements in structure. structure must be an object that STRUCTURED? evaluates to true.
+
+> **Note:** Note that TABLE is not a structure. Also see BACK, NTH, PUT, REST, SUBSTRUC and TOP.
+
+---
+
+### LENGTH?
+**Usage:** `<LENGTH? structure limit>`
+
+MDL built-in predicate that returns false if LENGTH of structure is greater than limit, otherwise true (it actually returns LENGTH of structure).
+
+> **Note:** LENGTH? answers the question: "is LENGTH of structure less or equal to limit?"
 
 ---
 

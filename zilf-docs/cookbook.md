@@ -934,6 +934,37 @@ BAR!-OB  ;  BAR!-OB
 ```
 
 
+### LEGAL?
+```zil
+;  "Activation"
+<DEFINE FOO ACT () <SETG ACT .ACT> <LEGAL? .ACT>>
+<FOO>  ;  T, "ACT legal inside function"
+<LEGAL? ,ACT>  ;  #FALSE, "ACT illegal outside function"
+
+;  "Environment"
+<DEFINE BAR () <BAZ>>
+<DEFINE BAZ ("BIND" ENV) <SETG ENV .ENV> <LEGAL? .ENV>>
+<BAR>  ;  T, "Sets ENV to BARs environment"
+<LEGAL? ,ENV>  ;  #FALSE, "BARs environment illegal"
+<BAZ>  ;  T, "Sets ENV to ROOT environment" 
+<LEGAL? ,ENV>  ;  T, "ROOTs environment always legal"
+```
+
+
+### LENGTH
+```zil
+<LENGTH <LIST 1 2 3>>  ;  3
+```
+
+
+### LENGTH?
+```zil
+<LENGTH? (1 2 3) 1>  ;  False
+<LENGTH? (1 2 3) 3>  ;  3
+<NOT <NOT <LENGTH? (1 2 3) 4>>>  ;  True
+```
+
+
 ### LEX
 ```zil
 <GLOBAL TEXTBUF <TABLE (BYTE) !\c !\a !\t>>
