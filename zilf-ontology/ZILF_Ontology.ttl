@@ -541,6 +541,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:LANGUAGE ,
                                  zilf:LENGTH ,
                                  zilf:LIST ,
+                                 zilf:LOOKUP ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
@@ -1609,6 +1610,19 @@ zilf:LOC rdf:type owl:NamedIndividual ,
 <LOC ,ANIMAL>  ;  0"""@en ;
          skos:historyNote "Zapf syntax: LOC, Inform syntax: get_parent"@en ;
          skos:prefLabel "<LOC object>"@en .
+
+
+###  http://example.org/zilf/LOOKUP
+zilf:LOOKUP rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "MDL built-in function that returns the ATOM with PNAME string from oblist. It returns FALSE if no ATOM is found."@en ;
+            skos:example """<LOOKUP \"FIX\" <ROOT>>  ;  FIX
+FOO!-MYOBLIST
+<LOOKUP \"FOO\" <ROOT>>  ;  #FALSE
+<LOOKUP \"FOO\" <MOBLIST MYOBLIST>>  ;  FOO!-MYOBLIST"""@en ;
+            skos:prefLabel "<LOOKUP string oblist>"@en .
 
 
 ###  http://example.org/zilf/LOWCORE
