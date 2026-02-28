@@ -975,6 +975,13 @@ BAR!-OB  ;  BAR!-OB
 ```
 
 
+### LIST
+```zil
+<LIST 1 2 "AB" !\C>  ;  (1 2 "AB" !\C)
+(1 2 "AB" !\C)  ;  (1 2 "AB" !\C)
+```
+
+
 ### LOC
 ```zil
 <OBJECT ANIMAL>
@@ -982,6 +989,41 @@ BAR!-OB  ;  BAR!-OB
 
 <=? <LOC ,CAT> ,ANIMAL>  ;  T
 <LOC ,ANIMAL>  ;  0
+```
+
+
+### LONG-WORDS?
+```zil
+;  For example, the table might be defined as equivalent to the following.
+
+<CONSTANT LONG-WORDS-TABLE
+    <CONSTANT LONG-WORDS-TABLE
+        ,W?HEMIDEMIS "hemidemisemiquaver"
+        ,W?SUPERCALI "supercalifragilisticexpialidocious">>
+
+;  For another example.
+<VERSION 5>
+<LONG-WORDS? T>
+<OBJECT FOO (SYNONYM HEMIDEMISEMI)>
+<VOC "SUPERCALIFRAG">
+<ROUTINE GO ()
+    <TELL "Table length = " N <GET ,LONG-WORD-TABLE 0> CR>
+    <TELL "W?SUPERCALIFRAG = " N ,W?SUPERCALIFRAG CR>
+    <TELL "WORD 1 = " N <GET ,LONG-WORD-TABLE 1> CR>
+    <TELL "WORD 2 = " <GET ,LONG-WORD-TABLE 2> CR>
+    <TELL "W?HEMIDEMISEMI = " N ,W?HEMIDEMISEMI CR>
+    <TELL "WORD 3 = " N <GET ,LONG-WORD-TABLE 3> CR>
+    <TELL "WORD 4 = " <GET ,LONG-WORD-TABLE 4> CR>
+>
+```
+
+
+### LOOKUP
+```zil
+<LOOKUP "FIX" <ROOT>>  ;  FIX
+FOO!-MYOBLIST
+<LOOKUP "FOO" <ROOT>>  ;  #FALSE
+<LOOKUP "FOO" <MOBLIST MYOBLIST>>  ;  FOO!-MYOBLIST
 ```
 
 
@@ -1001,6 +1043,23 @@ BAR!-OB  ;  BAR!-OB
 ```zil
 ;  Reads 6 bytes from SERIAL and print each byte as character 
 <LOWCORE-TABLE SERIAL 6 PRINTC>
+```
+
+
+### LPARSE
+```zil
+<LPARSE "1 FOO [3]">  ;  (1 FOO [3])
+<LPARSE " ">  ;  ()
+<SET A 0>
+<DEFINE NXT () <SET A <+ .A 1>>>
+<LPARSE "%<NXT> %<NXT> %<NXT>">  ;  (1 2 3)
+```
+
+
+### LSH
+```zil
+<LSH 4 1>  ;  8 
+<LSH 4 -2>  ;  1
 ```
 
 

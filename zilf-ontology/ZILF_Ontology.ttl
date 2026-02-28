@@ -3210,15 +3210,16 @@ In version 5, 7 and 8 the rec-spec describes the field where bit 7 is set for wo
                                       skos:broader zilf:CoreFunctions ;
                                       skos:inScheme zilf:ZILF_Scheme ;
                                       skos:definition "ZIL library predicate that  tells the compiler whether to generate the CONSTANT LONG-WORDS-TABLE. The boolean defaults to true if omitted."@en ;
-                                      skos:editorialNote """LONG-WORDS-TABLE contains an entry for each vocab word whose length exceeds the maximum word length for the selected Z-machine version (6 Z-characters for V3, or 9 Z-characters for V4+). The table is prefixed by the number of entries, and each entry consists of a word pointer followed by a string giving the printed form of the word.
-
-For example, the table might be defined as equivalent to the following.
+                                      skos:editorialNote "LONG-WORDS-TABLE contains an entry for each vocab word whose length exceeds the maximum word length for the selected Z-machine version (6 Z-characters for V3, or 9 Z-characters for V4+). The table is prefixed by the number of entries, and each entry consists of a word pointer followed by a string giving the printed form of the word."@en ;
+                                      skos:example """;  For example, the table might be defined as equivalent to the following.
 
 <CONSTANT LONG-WORDS-TABLE
     <CONSTANT LONG-WORDS-TABLE
         ,W?HEMIDEMIS \"hemidemisemiquaver\"
-        ,W?SUPERCALI \"supercalifragilisticexpialidocious\">>"""@en ;
-                                      skos:example """<VERSION 5>
+        ,W?SUPERCALI \"supercalifragilisticexpialidocious\">>
+
+;  For another example.
+<VERSION 5>
 <LONG-WORDS? T>
 <OBJECT FOO (SYNONYM HEMIDEMISEMI)>
 <VOC \"SUPERCALIFRAG\">

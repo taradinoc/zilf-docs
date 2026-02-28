@@ -780,6 +780,51 @@ MDL built-in predicate that returns false if LENGTH of structure is greater than
 
 ---
 
+### LIST
+**Usage:** `<LIST values ...>`
+
+**Alternative Usage:** `(values ...)`
+
+MDL built-in function that returns a list of containing values.
+
+> **Note:** A list is a collection of items where each item has a pointer to the next item in the collection. This makes it easy to add and insert items in lists but a list is always forward looking. See more about LIST structure in The MDL Programming Language, Appendix 1.
+
+---
+
+### LONG-WORDS?
+**Usage:** `<LONG-WORDS? [boolean]>`
+
+ZIL library predicate that  tells the compiler whether to generate the CONSTANT LONG-WORDS-TABLE. The boolean defaults to true if omitted.
+
+> **Note:** LONG-WORDS-TABLE contains an entry for each vocab word whose length exceeds the maximum word length for the selected Z-machine version (6 Z-characters for V3, or 9 Z-characters for V4+). The table is prefixed by the number of entries, and each entry consists of a word pointer followed by a string giving the printed form of the word.
+
+---
+
+### LOOKUP
+**Usage:** `<LOOKUP string oblist>`
+
+MDL built-in function that returns the ATOM with PNAME string from oblist. It returns FALSE if no ATOM is found.
+
+---
+
+### LPARSE
+**Usage:** `<LPARSE text [10] [lookup-oblist]>`
+
+MDL built-in function that  is just like PARSE with the exception that LPARSE returns a LIST of all the expressions in the text.
+
+> **Note:** LPARSE means "list parse." ZILF requires that the second argument is 10 if a lookup-oblist is given.
+
+---
+
+### LSH
+**Usage:** `<LSH number places>`
+
+MDL built-in function that is a bitwise shift, shifting number left when places is positive and right if it is negative. When right shifting, the sign is not preserved (0 is always shifted in). For example.
+
+1000 0000 0000 1010  -->  0100 0000 0000 0101
+
+---
+
 ### OR
 **Usage:** `<OR expressions...>`
 
