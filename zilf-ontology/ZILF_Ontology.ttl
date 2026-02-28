@@ -543,6 +543,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:LIST ,
                                  zilf:LOOKUP ,
                                  zilf:LPARSE ,
+                                 zilf:LSH ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
@@ -1668,6 +1669,19 @@ zilf:LPARSE rdf:type owl:NamedIndividual ,
 <DEFINE NXT () <SET A <+ .A 1>>>
 <LPARSE \"%<NXT> %<NXT> %<NXT>\">  ;  (1 2 3)"""@en ;
             skos:prefLabel "<LPARSE text [10] [lookup-oblist]>"@en .
+
+
+###  http://example.org/zilf/LSH
+zilf:LSH rdf:type owl:NamedIndividual ,
+                  skos:Concept ;
+         skos:broader zilf:CoreFunctions ;
+         skos:inScheme zilf:ZILF_Scheme ;
+         skos:definition """MDL built-in function that is a bitwise shift, shifting number left when places is positive and right if it is negative. When right shifting, the sign is not preserved (0 is always shifted in). For example.
+
+1000 0000 0000 1010  -->  0100 0000 0000 0101"""@en ;
+         skos:example """<LSH 4 1>  ;  8 
+<LSH 4 -2>  ;  1"""@en ;
+         skos:prefLabel "<LSH number places>"@en .
 
 
 ###  http://example.org/zilf/LTABLE
