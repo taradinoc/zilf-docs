@@ -542,6 +542,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:LENGTH ,
                                  zilf:LIST ,
                                  zilf:LOOKUP ,
+                                 zilf:LPARSE ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
@@ -1652,6 +1653,21 @@ zilf:LOWCORE-TABLE rdf:type owl:NamedIndividual ,
                    skos:example """;  Reads 6 bytes from SERIAL and print each byte as character 
 <LOWCORE-TABLE SERIAL 6 PRINTC>"""@en ;
                    skos:prefLabel "<LOWCORE-TABLE field-spec length routine>"@en .
+
+
+###  http://example.org/zilf/LPARSE
+zilf:LPARSE rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "MDL built-in function that  is just like PARSE with the exception that LPARSE returns a LIST of all the expressions in the text."@en ;
+            skos:editorialNote "LPARSE means \"list parse.\" ZILF requires that the second argument is 10 if a lookup-oblist is given."@en ;
+            skos:example """<LPARSE \"1 FOO [3]\">  ;  (1 FOO [3])
+<LPARSE \" \">  ;  ()
+<SET A 0>
+<DEFINE NXT () <SET A <+ .A 1>>>
+<LPARSE \"%<NXT> %<NXT> %<NXT>\">  ;  (1 2 3)"""@en ;
+            skos:prefLabel "<LPARSE text [10] [lookup-oblist]>"@en .
 
 
 ###  http://example.org/zilf/LTABLE
