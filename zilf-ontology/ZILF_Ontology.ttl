@@ -540,6 +540,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:IVECTOR ,
                                  zilf:LANGUAGE ,
                                  zilf:LENGTH ,
+                                 zilf:LIST ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
@@ -1578,6 +1579,19 @@ zilf:LEX rdf:type owl:NamedIndividual ,
 <PRINTB <GET ,PARSEBUF 1>>  ;  \"cat\""""@en ;
          skos:historyNote "Zapf syntax: LEX, Inform syntax: tokenise"@en ;
          skos:prefLabel "<LEX text parse [dictionary] [flag]>"@en .
+
+
+###  http://example.org/zilf/LIST
+zilf:LIST rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:altLabel "(values ...)"@en ;
+          skos:definition "MDL built-in function that returns a list of containing values."@en ;
+          skos:editorialNote "A list is a collection of items where each item has a pointer to the next item in the collection. This makes it easy to add and insert items in lists but a list is always forward looking. See more about LIST structure in The MDL Programming Language, Appendix 1."@en ;
+          skos:example """<LIST 1 2 \"AB\" !\\C>  ;  (1 2 \"AB\" !\\C)
+(1 2 \"AB\" !\\C)  ;  (1 2 \"AB\" !\\C)"""@en ;
+          skos:prefLabel "<LIST values ...>"@en .
 
 
 ###  http://example.org/zilf/LOC
