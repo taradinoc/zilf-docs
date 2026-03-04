@@ -545,6 +545,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:LPARSE ,
                                  zilf:LSH ,
                                  zilf:M-HPOS ,
+                                 zilf:MAKE-GVAL ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
@@ -1717,6 +1718,19 @@ zilf:M-HPOS rdf:type owl:NamedIndividual ,
             skos:definition "ZIL library function that returns the current horizontal cursor position on channel."@en ;
             skos:example "<PRINC \"Hello\"><M-HPOS .OUTCHAN>  ;  Hello5"@en ;
             skos:prefLabel "<M-HPOS channel>"@en .
+
+
+###  http://example.org/zilf/MAKE-GVAL
+zilf:MAKE-GVAL rdf:type owl:NamedIndividual ,
+                        skos:Concept ;
+               skos:broader zilf:CoreFunctions ;
+               skos:inScheme zilf:ZILF_Scheme ;
+               skos:definition "ZIL library function that returns the atom as GVAL (,atom)."@en ;
+               skos:example """<SET FOO BAR>
+<SETG BAR 123>
+<MAKE-GVAL .FOO>  ;  ,BAR
+<EVAL <MAKE-GVAL .FOO>>  ;  123"""@en ;
+               skos:prefLabel "<MAKE-GVAL atom>"@en .
 
 
 ###  http://example.org/zilf/MAP-CONTENTS
