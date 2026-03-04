@@ -553,6 +553,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:MAPSTOP ,
                                  zilf:MAX ,
                                  zilf:MEMBER ,
+                                 zilf:MEMQ ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
@@ -1960,6 +1961,21 @@ MEMBER returns false if the item is not found."""@en ;
 <MEMBER 2 (1 2 3 4)>  ;  (2 3 4)
 <MEMBER 0 (1 2 3 4)>  ;  #FALSE <>"""@en ;
             skos:prefLabel "<MEMBER item structure>"@en .
+
+
+###  http://example.org/zilf/MEMQ
+zilf:MEMQ rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition """MDL built-in function that iterates through structure and returns <REST structure i>, here i is the index of the first element in structure that is ==? with item.
+
+MEMQ returns false if the item is not found."""@en ;
+          skos:editorialNote "MEMQ means \"member quick.\""@en ;
+          skos:example """<MEMQ \"BC\" \"ABCD\">  ;  #FALSE <>
+<MEMQ 2 (1 2 3 4)>  ;  (2 3 4)
+<MEMQ 0 (1 2 3 4)>  ;  #FALSE <>"""@en ;
+          skos:prefLabel "<MEMQ item structure>"@en .
 
 
 ###  http://example.org/zilf/MENU
