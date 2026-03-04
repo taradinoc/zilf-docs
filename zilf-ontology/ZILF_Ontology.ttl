@@ -544,6 +544,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:LOOKUP ,
                                  zilf:LPARSE ,
                                  zilf:LSH ,
+                                 zilf:M-HPOS ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
@@ -1706,6 +1707,16 @@ zilf:LVAL rdf:type owl:NamedIndividual ,
 <LVAL X>  ;  5
 .X  ;  5"""@en ;
           skos:prefLabel "<LVAL name>"@en .
+
+
+###  http://example.org/zilf/M-HPOS
+zilf:M-HPOS rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "ZIL library function that returns the current horizontal cursor position on channel."@en ;
+            skos:example "<PRINC \"Hello\"><M-HPOS .OUTCHAN>  ;  Hello5"@en ;
+            skos:prefLabel "<M-HPOS channel>"@en .
 
 
 ###  http://example.org/zilf/MAP-CONTENTS
