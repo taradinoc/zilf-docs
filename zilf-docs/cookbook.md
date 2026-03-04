@@ -1071,6 +1071,21 @@ FOO!-MYOBLIST
 ```
 
 
+### M-HPOS
+```zil
+<PRINC "Hello"><M-HPOS .OUTCHAN>  ;  Hello5
+```
+
+
+### MAKE-GVAL
+```zil
+<SET FOO BAR>
+<SETG BAR 123>
+<MAKE-GVAL .FOO>  ;  ,BAR
+<EVAL <MAKE-GVAL .FOO>>  ;  123
+```
+
+
 ### MAP-CONTENTS
 ```zil
 <OBJECT SURVIVAL-KIT
@@ -1142,6 +1157,50 @@ FOO!-MYOBLIST
           >
       >
  >
+```
+
+
+### MAPF
+```zil
+<MAPF ,VECTOR ,+ (1 2 3) [10 11 12]>  ;  [11 13 15]
+<MAPF ,STRING 1
+    ["Zil" "is" "lots of" "fun"]>  ;  "Zilf"
+<MAPF ,VECTOR
+    <FUNCTION (N) <* .N .N>> (1 2 3)>  ;  [1 4 9]
+<DEFINE SETG-MANY ("TUPLE" TUP)
+    <MAPF <>
+    ,SETG
+    .TUP
+    <REST .TUP </ <LENGTH .TUP> 2>>>>
+<SETG-MANY VAR-1 VAR-2 VAR-3 100 55 616>
+,VAR-1  ;  100
+,VAR-2  ;  55
+,VAR-3  ;  616
+<DEFINE LNUM (N)
+  <MAPF ,LIST
+    <FUNCTION ()
+      <COND (<=? 0 <SET N <- .N 1>>> <MAPSTOP .N>)
+                     (ELSE .N)>>>>
+<LNUM 5>  ;  (4 3 2 1 0)
+```
+
+
+### MAPLEAVE
+```zil
+;  "Return first non-zero value in STRUC" 
+<DEFINE FIRST-N0 (STRUC) 
+  <MAPF <> <FUNCTION (X) 
+    <COND (<N==? .X 0> <MAPLEAVE .X>)>> .STRUC>> 
+<FIRST-N0 [0 0 0 "ZIL" 6 0]>  ;  "ZIL"
+```
+
+
+### MAPR
+```zil
+<SET FOO [1 2 3]> 
+;  "Triple value of struct" 
+<MAPR <> <FUNCTION (L) <1 .L <* <1 .L> 3>>> .FOO> 
+.FOO  ;  [3 6 9]
 ```
 
 

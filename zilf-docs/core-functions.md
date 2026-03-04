@@ -825,6 +825,58 @@ MDL built-in function that is a bitwise shift, shifting number left when places 
 
 ---
 
+### M-HPOS
+**Usage:** `<M-HPOS channel>`
+
+ZIL library function that returns the current horizontal cursor position on channel.
+
+---
+
+### MAKE-GVAL
+**Usage:** `<MAKE-GVAL atom>`
+
+ZIL library function that returns the atom as GVAL (,atom).
+
+---
+
+### MAPF
+**Usage:** `<MAPF finalf applicable structs ...>`
+
+MDL built-in function that  traverses over all structs one element at a time until one of the structs is out of elements and calls the function applicable with the elements. In other words, the first iteration takes the first element from each of the structs and calls applicable, the second iteration takes the second element from each of the structs and calls applicable, and so on until one of the structs doesn't have any more elements. The intermediate results from each call to applicable is stored in a TUPLE. 
+
+The finalf can either be a FUNCTION or <> (FALSE). If it is FALSE the TUPLE with the intermediate result  is thrown away, otherwise finalf is called with the TUPLE. 
+
+MAPF returns the result from finalf. If finalf is FALSE, MAPF returns the result from the last call to applicable. If applicable never was called (one of the structs was empty) MAPF returns FALSE.
+
+One special case is if only finalf and applicable are given. In this case applicable is called indefinitely with no arguments until a MAPLEAVE or MAPSTOP is invoked. finalf is called if MAPSTOP is used to leave the iteration.
+
+> **Note:** MAPF means "map first."
+
+---
+
+### MAPLEAVE
+**Usage:** `<MAPLEAVE [value]>`
+
+MDL built-in function that leaves the MAPF or the MAPR immediately and makes the MAPF or the MAPR return the value (TRUE by default). This means that an eventual finalf in the MAPF or the MAPR never will be invoked.
+
+---
+
+### MAPR
+**Usage:** `<MAPR finalf applicable structs ...>`
+
+MDL built-in function that works the same as MAPF but instead of sending one element at a time to applicable it sends the REST of the structs, starting with <REST struct 0>. In other words, the first iteration takes REST 0 from each of the structs and calls applicable, the second iteration takes REST 1 from each of the structs and calls applicable, and so on until one of the structs doesn't have any more elements. The intermediate results from each call to applicable is stored in a TUPLE. 
+
+The finalf can either be a FUNCTION or <> (FALSE). If it is FALSE the TUPLE with the 
+intermediate result  is thrown away, otherwise finalf is called with the TUPLE.  
+
+MAPR returns the result from finalf. If finalf is FALSE, MAPR returns the result from the last call to applicable. If applicable never was called (one of the structs was empty) MAPR returns FALSE. 
+
+One special case is if only finalf and applicable are given. In this case applicable is called indefinitely with no arguments until a MAPLEAVE or MAPSTOP is invoked. finalf is called if MAPSTOP is used to leave the iteration.
+
+> **Note:** MAPR means "map rest."
+
+---
+
 ### OR
 **Usage:** `<OR expressions...>`
 
