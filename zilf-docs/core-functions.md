@@ -877,6 +877,49 @@ One special case is if only finalf and applicable are given. In this case applic
 
 ---
 
+### MAPRET
+**Usage:** `<MAPRET [value] ...>`
+
+MDL built-in function that leaves the current iteration of the MAPF or the MAPR and adds the specified values to the TUPLE of arguments used when the finalf is called. If no values are specified nothing is added to the TUPLE in this iteration.
+
+> **Note:** Note that the MAPF or the MAPR continues to run through the iterations until one of the structs is out of elements.
+
+---
+
+### MAPSTOP
+**Usage:** `<MAPSTOP [value] ...>`
+
+MDL built-in function, which is similar to MAPRET, however, after it adds the values to the TUPLE of arguments, it directly calls finalf and aborts all remaining iterations.
+
+---
+
+### MAX
+**Usage:** `<MAX numbers ...>`
+
+MDL built-in function that returns the maximum number among numbers.
+
+---
+
+### MEMBER
+**Usage:** `<MEMBER item structure>`
+
+MDL built-in function that  iterates through structure and returns <REST structure i>, where i is the index of the first element in structure that is =? with item.
+
+MEMBER returns false if the item is not found.
+
+---
+
+### MEMQ
+**Usage:** `<MEMQ item structure>`
+
+MDL built-in function that iterates through structure and returns <REST structure i>, here i is the index of the first element in structure that is ==? with item.
+
+MEMQ returns false if the item is not found.
+
+> **Note:** MEMQ means "member quick."
+
+---
+
 ### OR
 **Usage:** `<OR expressions...>`
 

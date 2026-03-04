@@ -1204,9 +1204,51 @@ FOO!-MYOBLIST
 ```
 
 
+### MAPRET
+```zil
+<SET FOO (65 66 67 68)>
+<MAPF ,LIST
+    #FUNCTION ((L)
+    <MAPRET <ASCII .L>>) .FOO>  ;  (!\A !\B !\C !\D)
+```
+
+
+### MAPSTOP
+```zil
+<DEFINE FIRST-THREE (STRUC "AUX" (I 3))
+    <MAPF ,LIST
+    <FUNCTION (E)
+        <COND (<0? <SET I <- .I 1>>> <MAPSTOP .E>)>
+    .E> .STRUC>>
+<FIRST-THREE "ABCDEFG">  ;  (!\A !\B !\C)
+```
+
+
 ### MARGIN
 ```zil
 <MARGIN 1 1>  ;  set 1 pixel margin in window 0
+```
+
+
+### MAX
+```zil
+<MAX 2 3 4 1>  ;  4
+```
+
+
+### MEMBER
+```zil
+<MEMBER "BC" "ABCD">  ;  "BCD"
+<MEMBER 2 (1 2 3 4)>  ;  (2 3 4)
+<MEMBER 0 (1 2 3 4)>  ;  #FALSE <>
+```
+
+
+### MEMQ
+```zil
+<MEMQ "BC" "ABCD">  ;  #FALSE <>
+<MEMQ 2 (1 2 3 4)>  ;  (2 3 4)
+<MEMQ 0 (1 2 3 4)>  ;  #FALSE <>
 ```
 
 
