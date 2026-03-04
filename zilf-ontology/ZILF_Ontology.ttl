@@ -549,6 +549,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:MAPF ,
                                  zilf:MAPLEAVE ,
                                  zilf:MAPR ,
+                                 zilf:MAPRET ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
@@ -1891,6 +1892,20 @@ One special case is if only finalf and applicable are given. In this case applic
 <MAPR <> <FUNCTION (L) <1 .L <* <1 .L> 3>>> .FOO> 
 .FOO  ;  [3 6 9]"""@en ;
           skos:prefLabel "<MAPR finalf applicable structs ...>"@en .
+
+
+###  http://example.org/zilf/MAPRET
+zilf:MAPRET rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "MDL built-in function that leaves the current iteration of the MAPF or the MAPR and adds the specified values to the TUPLE of arguments used when the finalf is called. If no values are specified nothing is added to the TUPLE in this iteration."@en ;
+            skos:editorialNote "Note that the MAPF or the MAPR continues to run through the iterations until one of the structs is out of elements."@en ;
+            skos:example """<SET FOO (65 66 67 68)> 
+<MAPF ,LIST  
+    #FUNCTION ((L)  
+    <MAPRET <ASCII .L>>) .FOO>  ;  (!\\A !\\B !\\C !\\D)"""@en ;
+            skos:prefLabel "<MAPRET [value] ...>"@en .
 
 
 ###  http://example.org/zilf/MARGIN
