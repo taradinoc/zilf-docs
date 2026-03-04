@@ -547,6 +547,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:M-HPOS ,
                                  zilf:MAKE-GVAL ,
                                  zilf:MAPF ,
+                                 zilf:MAPLEAVE ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
@@ -1854,6 +1855,20 @@ One special case is if only finalf and applicable are given. In this case applic
                      (ELSE .N)>>>>
 <LNUM 5>  ;  (4 3 2 1 0)"""@en ;
           skos:prefLabel "<MAPF finalf applicable structs ...>"@en .
+
+
+###  http://example.org/zilf/MAPLEAVE
+zilf:MAPLEAVE rdf:type owl:NamedIndividual ,
+                       skos:Concept ;
+              skos:broader zilf:CoreFunctions ;
+              skos:inScheme zilf:ZILF_Scheme ;
+              skos:definition "MDL built-in function that leaves the MAPF or the MAPR immediately and makes the MAPF or the MAPR return the value (TRUE by default). This means that an eventual finalf in the MAPF or the MAPR never will be invoked."@en ;
+              skos:example """;  \"Return first non-zero value in STRUC\" 
+<DEFINE FIRST-N0 (STRUC) 
+  <MAPF <> <FUNCTION (X) 
+    <COND (<N==? .X 0> <MAPLEAVE .X>)>> .STRUC>> 
+<FIRST-N0 [0 0 0 \"ZIL\" 6 0]>  ;  \"ZIL\""""@en ;
+              skos:prefLabel "<MAPLEAVE [value]>"@en .
 
 
 ###  http://example.org/zilf/MARGIN
