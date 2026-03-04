@@ -546,6 +546,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:LSH ,
                                  zilf:M-HPOS ,
                                  zilf:MAKE-GVAL ,
+                                 zilf:MAPF ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
@@ -1817,6 +1818,42 @@ For each iteration the expressions are evaluated and, if supplied, the (END expr
       >
  >"""@en ;
                     skos:prefLabel "<MAP-DIRECTIONS (name pt room)  [(END expressions ...)] expressions ...>"@en .
+
+
+###  http://example.org/zilf/MAPF
+zilf:MAPF rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition """MDL built-in function that  traverses over all structs one element at a time until one of the structs is out of elements and calls the function applicable with the elements. In other words, the first iteration takes the first element from each of the structs and calls applicable, the second iteration takes the second element from each of the structs and calls applicable, and so on until one of the structs doesn't have any more elements. The intermediate results from each call to applicable is stored in a TUPLE. 
+
+The finalf can either be a FUNCTION or <> (FALSE). If it is FALSE the TUPLE with the intermediate result  is thrown away, otherwise finalf is called with the TUPLE. 
+
+MAPF returns the result from finalf. If finalf is FALSE, MAPF returns the result from the last call to applicable. If applicable never was called (one of the structs was empty) MAPF returns FALSE.
+
+One special case is if only finalf and applicable are given. In this case applicable is called indefinitely with no arguments until a MAPLEAVE or MAPSTOP is invoked. finalf is called if MAPSTOP is used to leave the iteration."""@en ;
+          skos:editorialNote "MAPF means \"map first.\""@en ;
+          skos:example """<MAPF ,VECTOR ,+ (1 2 3) [10 11 12]>  ;  [11 13 15]
+<MAPF ,STRING 1
+    [\"Zil\" \"is\" \"lots of\" \"fun\"]>  ;  \"Zilf\"
+<MAPF ,VECTOR
+    <FUNCTION (N) <* .N .N>> (1 2 3)>  ;  [1 4 9]
+<DEFINE SETG-MANY (\"TUPLE\" TUP)
+    <MAPF <>
+    ,SETG
+    .TUP
+    <REST .TUP </ <LENGTH .TUP> 2>>>>
+<SETG-MANY VAR-1 VAR-2 VAR-3 100 55 616>
+,VAR-1  ;  100
+,VAR-2  ;  55
+,VAR-3  ;  616
+<DEFINE LNUM (N)
+  <MAPF ,LIST
+    <FUNCTION ()
+      <COND (<=? 0 <SET N <- .N 1>>> <MAPSTOP .N>)
+                     (ELSE .N)>>>>
+<LNUM 5>  ;  (4 3 2 1 0)"""@en ;
+          skos:prefLabel "<MAPF finalf applicable structs ...>"@en .
 
 
 ###  http://example.org/zilf/MARGIN
