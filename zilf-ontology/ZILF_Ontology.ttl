@@ -551,6 +551,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:MAPR ,
                                  zilf:MAPRET ,
                                  zilf:MAPSTOP ,
+                                 zilf:MAX ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
@@ -1934,6 +1935,16 @@ zilf:MARGIN rdf:type owl:NamedIndividual ,
             skos:example "<MARGIN 1 1>  ;  set 1 pixel margin in window 0"@en ;
             skos:historyNote "Zapf syntax: MARGIN, Inform syntax: set_margins"@en ;
             skos:prefLabel "<MARGIN left right [window-number]>"@en .
+
+
+###  http://example.org/zilf/MAX
+zilf:MAX rdf:type owl:NamedIndividual ,
+                  skos:Concept ;
+         skos:broader zilf:CoreFunctions ;
+         skos:inScheme zilf:ZILF_Scheme ;
+         skos:definition "MDL built-in function that returns the maximum number among numbers."@en ;
+         skos:example "<MAX 2 3 4 1>  ;  4"@en ;
+         skos:prefLabel "<MAX numbers ...>"@en .
 
 
 ###  http://example.org/zilf/MENU
