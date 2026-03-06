@@ -556,6 +556,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:MEMQ ,
                                  zilf:MIN ,
                                  zilf:MOBLIST ,
+                                 zilf:MSETG ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
@@ -2033,6 +2034,19 @@ zilf:MOD rdf:type owl:NamedIndividual ,
 <MOD 15 -4>  ;  3"""@en ;
          skos:historyNote "Zapf syntax: MOD, Inform syntax: mod"@en ;
          skos:prefLabel "<MOD number1 number2>"@en .
+
+
+###  http://example.org/zilf/MSETG
+zilf:MSETG rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:CoreFunctions ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "ZIL library function that defines an atom with value that will never be changed. The atom can is accessed inside a ROUTINE with GVAL (or ,) just like a GLOBAL atom. Defining a MSETG (CONSTANT) instead of a GLOBAL when possible can be vital information the compiler can use for optimization."@en ;
+           skos:editorialNote "MSETG means \"manifest set global,\" which is an alias for CONSTANT."@en ;
+           skos:example """<MSETG MSG-CANT-DO-THAT \"You can't do that!\">
+...
+<TELL ,MSG-CANT-DO-THAT CR>"""@en ;
+           skos:prefLabel "<MSETG atom value>"@en .
 
 
 ###  http://example.org/zilf/NEW-ADD-WORD
