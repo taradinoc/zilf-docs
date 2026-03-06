@@ -554,6 +554,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:MAX ,
                                  zilf:MEMBER ,
                                  zilf:MEMQ ,
+                                 zilf:MIN ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
@@ -1994,6 +1995,16 @@ zilf:MENU rdf:type owl:NamedIndividual ,
 <MENU 3 ,MAC-SPECIAL-MENU>"""@en ;
           skos:historyNote "Zapf syntax: MENU, Inform syntax: make_menu"@en ;
           skos:prefLabel "<MENU number table>"@en .
+
+
+###  http://example.org/zilf/MIN
+zilf:MIN rdf:type owl:NamedIndividual ,
+                  skos:Concept ;
+         skos:broader zilf:CoreFunctions ;
+         skos:inScheme zilf:ZILF_Scheme ;
+         skos:definition "MDL built-in function that returns the minimum number among numbers."@en ;
+         skos:example "<MIN 2 3 4 1>  ;  1"@en ;
+         skos:prefLabel "<MIN numbers ...>"@en .
 
 
 ###  http://example.org/zilf/MOD
