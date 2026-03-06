@@ -559,6 +559,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:MSETG ,
                                  zilf:NEWTYPE ,
                                  zilf:NEXT ,
+                                 zilf:NOT ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
@@ -2102,6 +2103,19 @@ zilf:NEXT rdf:type owl:NamedIndividual ,
 <PUTPROP NEW-ASOC TEXT \"Hello, world!\">
 <FIND-ASOC NEW-ASOC>  ;  #ASOC (NEW-ASOC TEXT \"Hello, world!\")"""@en ;
           skos:prefLabel "<NEXT asoc>"@en .
+
+
+###  http://example.org/zilf/NOT
+zilf:NOT rdf:type owl:NamedIndividual ,
+                  skos:Concept ;
+         skos:broader zilf:CoreFunctions ;
+         skos:inScheme zilf:ZILF_Scheme ;
+         skos:definition "MDL built-in function that returns true if value is false (#FALSE <>), otherwise NOT returns false."@en ;
+         skos:editorialNote "This is a boolean (logical) \"not.\""@en ;
+         skos:example """<NOT <>>  ;  T
+<NOT T>  ;  #FALSE <>
+<NOT <=? 1 2>>  ;  T (Same as <N=? 1 2>"""@en ;
+         skos:prefLabel "<NOT value>"@en .
 
 
 ###  http://example.org/zilf/OBJECT
