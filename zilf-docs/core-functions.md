@@ -920,6 +920,51 @@ MEMQ returns false if the item is not found.
 
 ---
 
+### MIN
+**Usage:** `<MIN numbers ...>`
+
+MDL built-in function that returns the minimum number among numbers.
+
+---
+
+### MOBLIST
+**Usage:** `<MOBLIST name>`
+
+MDL built-in function that creates and returns a new empty OBLIST named name. If an OBLIST with the name already exists the existing one is returned instead.
+
+> **Note:** MOBLIST means "make oblist."
+
+---
+
+### MSETG
+**Usage:** `<MSETG atom value>`
+
+ZIL library function that defines an atom with value that will never be changed. The atom can is accessed inside a ROUTINE with GVAL (or ,) just like a GLOBAL atom. Defining a MSETG (CONSTANT) instead of a GLOBAL when possible can be vital information the compiler can use for optimization.
+
+> **Note:** MSETG means "manifest set global," which is an alias for CONSTANT.
+
+---
+
+### NEVER-ZAP-TO-SOURCE-DIRECTORY?
+**Usage:** `<NEVER-ZAP-TO-SOURCE-DIRECTORY?>`
+
+ZIL library predicate.
+
+> **Note:** ZILF ignores this and always returns FALSE.
+
+---
+
+### NEWTYPE
+**Usage:** `<NEWTYPE name primtype-atom [decl]>`
+
+MDL built-in function that creates a new TYPE with the name, name and the same PRIMTYPE as primtype-atom. It returns the new TYPE. The name must be unique (<VALID-TYPE? name> is FALSE> otherwise NEWTYPE results in an error.
+
+> **Note:** It is possible to specify a decl (see GDECL) for the new TYPE that is enforced when CHTYPE.
+
+See APPLYTYPE, EVALTYPE and PRINTTYPE.
+
+---
+
 ### OR
 **Usage:** `<OR expressions...>`
 

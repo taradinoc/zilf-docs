@@ -1264,12 +1264,52 @@ FOO!-MYOBLIST
 ```
 
 
+### MIN
+```zil
+<MIN 2 3 4 1>  ;  1
+```
+
+
+### MOBLIST
+```zil
+<INSERT "FOO" <MOBLIST NEW-OBLIST>>  ;  FOO!-NEW-OBLIST
+FOO!-NEW-OBLIST  ;  "This can also be done with trailer"
+```
+
+
 ### MOD
 ```zil
 <MOD 15 4>  ;  3
 <MOD -15 4>  ;  -3
 <MOD -15 -4>  ;  -3
 <MOD 15 -4>  ;  3
+```
+
+
+### MSETG
+```zil
+<MSETG MSG-CANT-DO-THAT "You can't do that!">
+...
+<TELL ,MSG-CANT-DO-THAT CR>
+```
+
+
+### NEWTYPE
+```zil
+<NEWTYPE GARGLE CHARACTER>
+<TYPEPRIM GARGLE>  ;  FIX
+<SET A <CHTYPE 65 GARGLE>>
+<TYPE .A>  ;  GARGLE
+<PRIMTYPE .A>  ;  FIX
+
+<NEWTYPE FIRSTNAME ATOM>
+<NEWTYPE LASTNAME FIRSTNAME>
+<=? ALFONSO #FIRSTNAME ALFONSO>  ;  #FALSE
+<=? #FIRSTNAME MADISON #LASTNAME MADISON>  ;  #FALSE
+<=? #LASTNAME MADISON #LASTNAME MADISON>  ;  T
+<NEWTYPE 2FIXLIST LIST '!<LIST FIX FIX>>
+#2FIXLIST (1 2)  ;  Ok
+#2FIXLIST (1 2 3)  ;  Error
 ```
 
 
