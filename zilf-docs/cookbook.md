@@ -3,14 +3,7 @@
 # ZILF Cookbook
 ---
 
-### ADJ-SYNONYM
-```zil
-<ADJ-SYNONYM HAPPY JOYFUL>
-<ADJ-SYNONYM INTELLIGENT SMART>
-<ADJ-SYNONYM BAD AWFUL>
-<ADJ-SYNONYM STRONG SOLID>
-```
-
+## Core Functions
 
 ### ASCII
 ```zil
@@ -36,20 +29,6 @@
 <PUTPROP NEW-ASOC TEXT "Hello, world!">
 <SET A <LAST-ASOC>>
 <AVALUE .A>  ;  "Hello, world!"
-```
-
-
-### BACK
-```zil
-<GLOBAL TBL1 <TABLE 1 2 3 4>>  ;  TBL1 = [1 2 3 4]
-<GLOBAL TBL2 <REST ,STRUCT1 4>>  ;  TBL2 = [3 4] Move 4 because WORD-table!
-<SETG TBL2 <BACK ,TBL2 2>>  ;  TBL2 = [2 3 4]
-```
-
-
-### BCOM
-```zil
-<BCOM #2 000011110001111>  ;  #2 1111000011110000
 ```
 
 
@@ -86,13 +65,6 @@
 ```
 
 
-### BIT-SYNONYM
-```zil
-<BIT-SYNONYM TAKEBIT GETBIT PICKBIT>
-<BIT-SYNONYM LIGHTBIT DAYBIT>
-```
-
-
 ### BLOCK
 ```zil
 <SETG FOO 111>
@@ -123,39 +95,11 @@
 ```
 
 
-### BTST
-```zil
-<BTST 64 64>  ;  TRUE
-<BTST 64 63>  ;  FALSE
-<BTST 97 33>  ;  TRUE
-```
-
-
-### BUFOUT
-```zil
-<BUFOUT <>>  ;  Turns off buffering(disables word-wrap)
-<BUFOUT T>  ;  Turns on buffering
-```
-
-
-### BUZZ
-```zil
-<BUZZ A AN AND ANY ALL EVERY EVERYTHING BUT EXCEPT OF ONE
-              THE THEN UNDO OOPS \. \, \">
-```
-
-
 ### BYTE
 ```zil
 <BYTE 42>  ;  #BYTE 42
 #BYTE 42  ;  #BYTE 42
 <CHTYPE 42 BYTE>  ;  #BYTE 42
-```
-
-
-### CATCH
-```zil
-<SETG CATCH-POINT <CATCH>>  ;  Saves the current stack fram in global variable.
 ```
 
 
@@ -441,21 +385,6 @@ zyxwvutsrqponmlkjihgfedcba
 ```
 
 
-### DIR-SYNONYM
-```zil
-<DIR-SYNONYM FORE F>
-<DIR-SYNONYM AFT A>
-<DIR-SYNONYM PORT P>
-<DIR-SYNONYM STARBOARD SB>
-```
-
-
-### DIRECTIONS
-```zil
-<DIRECTIONS NORTH SOUTH EAST WEST NE NW SE SW IN OUT UP DOWN>
-```
-
-
 ### EMPTY?
 ```zil
 <EMPTY? [1 2 3]>  ;  False
@@ -513,12 +442,6 @@ XYZZY!-MY-OBLIST
 ```
 
 
-### ERASE
-```zil
-<ERASE 1>  ;  Clears from cursor to end of line
-```
-
-
 ### ERROR
 ```zil
 <SET A 616>
@@ -572,19 +495,6 @@ A  ;  5
 ```
 
 
-### F?
-```zil
-<F? <=? 1 1>>  ;  False
-<F? <=? 1 2>>  ;  True
-```
-
-
-### FCLEAR
-```zil
-<FCLEAR ,TRAP-DOOR ,OPENBIT>  ;  Marks the trap-door as closed
-```
-
-
 ### FILE-LENGTH
 ```zil
 ;  "ZILF ver 0.9"
@@ -594,36 +504,12 @@ A  ;  5
 ```
 
 
-### FIRST?
-```zil
-<SET RM <FIRST? ,ROOMS>>  ;  Sets RM to first object in ROOMS. Also evaluates to true (all values not 0 is true)
-```
-
-
-### FONT
-```zil
-<FONT 4>  ;  Sets fixed-pitch font. In versions 3-4, this is done by setting bit 1 of Flags 2 in header <PUT 0 8 <BOR <GET 0 8> 2>>
-```
-
-
 ### FORM
 ```zil
 <FORM + 1 2>  ;  <+ 1 2> 
 <DEFINE INC-FORM (A) 
     <FORM SET .A <FORM + 1 <FORM LVAL .A>>>> 
 <INC-FORM X>  ;  <SET X <+ 1 .X>
-```
-
-
-### FSET
-```zil
-<FSET ,TRAP-DOOR ,OPENBIT> --> Marks the trap-door as open
-```
-
-
-### FSET?
-```zil
-<FSET? ,TRAP-DOOR ,OPENBIT>  ;  True if OPENBIT is set
 ```
 
 
@@ -653,30 +539,11 @@ A  ;  5
 ```
 
 
-### GET
-```zil
-<GET <TABLE 0 1 2 3> 2>  ;  2
-```
-
-
 ### GET-DECL
 ```zil
 <GET-DECL BOOLEAN>  ;  #FALSE
 <PUT-DECL BOOLEAN '<OR ATOM FALSE>>
 <GET-DECL BOOLEAN>  ;  <OR ATOM FALSE>
-```
-
-
-### GETB
-```zil
-<GETB <TABLE (BYTE) !\A !\B !\C !\D> 2>  ;  !\C
-```
-
-
-### GETP
-```zil
-<OBJECT MYOBJ (MYPROP 123)>
-<GETP ,MYOBJ ,P?MYPROP>  ;  123
 ```
 
 
@@ -690,14 +557,6 @@ A  ;  5
 <PUTPROP .L FOO 456>
 .L  ;  (1 2 3)
 <GETPROP .L FOO>  ;  456
-```
-
-
-### GETPT
-```zil
-<OBJECT MYOBJ (MYPROP 123)>
-<GET <GETPT ,MYOBJ ,P?MYPROP> 0>  ;  123
-<GETPT ,MYOBJ ,P?MYPROP2>  ;  0
 ```
 
 
@@ -764,22 +623,6 @@ A  ;  5
 ```
 
 
-### IN?
-```zil
-<OBJECT ANIMAL>
-<OBJECT CAT (LOC ANIMAL)>
-<IN? ,CAT ,ANIMAL>  ;  T
-<IN? ,ANIMAL ,CAT>  ;  <>
-```
-
-
-### INC
-```zil
-<GLOBAL X 5>
-<INC ,X>  ;  X = 6
-```
-
-
 ### INCLUDE
 ```zil
 ;"Searches for file "foofoo.zil" which contains the definition for  <DEFINITIONS "FOOFOO"> ..."
@@ -841,21 +684,6 @@ A  ;  5
 ```
 
 
-### INPUT
-```zil
-<INPUT 1>  ;  Wait for keypress
-
-<ROUTINE WAIT-TWO-SECONDS ()
-    <INPUT 1 20 ABORT-WAIT>
-> 
- 
-<ROUTINE ABORT-WAIT () <RETURN T>>
- 
-;  Pause two seconds (if not interrupted by a keypress from the keyboard
-<WAIT-TWO-SECONDS>
-```
-
-
 ### INSERT
 ```zil
 <INSERT "FOO-1" <MOBLIST OB>>  ;  FOO-1!-OB
@@ -875,33 +703,6 @@ BAR!-OB  ;  BAR!-OB
 ```zil
 <INSERT-FILE "rooms">  ;  Include "rooms.zil" from current directory 
 <INSERT-FILE "zillib/parser">  ;  Include "parser.zil" from subdir "zilllib"
-```
-
-
-### INTBL?
-```zil
-<T <INTBL? 3 <TABLE 1 2 3 4> 4>>  ;  T
-<T <INTBL? 6 <TABLE 1 2 3 4> 4>>  ;  #FALSE
-
-;  "Search byte-table with record length 3 (ver 5, 7-)"
-<T <INTBL? 8 <TABLE (BYTE) 2 0 1 4 0 1 8 0 1> 9 3>>  ;  T
-<T <INTBL? 1 <TABLE (BYTE) 2 0 1 4 0 1 8 0 1> 9 3>>  ;  <>
-
-;  "Search word-table with record length 3 (ver 5, 7-)"
-<T <INTBL? 8 <TABLE 2 0 1 4 0 1 8 0 1> 9 131>>  ;  T
-<T <INTBL? 1 <TABLE 2 0 1 4 0 1 8 0 1> 9 131>>  ;  <>
-```
-
-
-### IRESTORE
-```zil
-<IRESTORE>
-```
-
-
-### ISAVE
-```zil
-<ISAVE>
 ```
 
 
@@ -965,30 +766,10 @@ BAR!-OB  ;  BAR!-OB
 ```
 
 
-### LEX
-```zil
-<GLOBAL TEXTBUF <TABLE (BYTE) !\c !\a !\t>>
-<GLOBAL PARSEBUF <ITABLE 1 (LEXV) 0 0>>
-<OBJECT CAT (SYNONYM CAT)>
-<LEX ,TEXTBUF ,PARSEBUF>
-<PRINTB <GET ,PARSEBUF 1>>  ;  "cat"
-```
-
-
 ### LIST
 ```zil
 <LIST 1 2 "AB" !\C>  ;  (1 2 "AB" !\C)
 (1 2 "AB" !\C)  ;  (1 2 "AB" !\C)
-```
-
-
-### LOC
-```zil
-<OBJECT ANIMAL>
-<OBJECT CAT (LOC ANIMAL)>
-
-<=? <LOC ,CAT> ,ANIMAL>  ;  T
-<LOC ,ANIMAL>  ;  0
 ```
 
 
@@ -1027,6 +808,627 @@ FOO!-MYOBLIST
 ```
 
 
+### LPARSE
+```zil
+<LPARSE "1 FOO [3]">  ;  (1 FOO [3])
+<LPARSE " ">  ;  ()
+<SET A 0>
+<DEFINE NXT () <SET A <+ .A 1>>>
+<LPARSE "%<NXT> %<NXT> %<NXT>">  ;  (1 2 3)
+```
+
+
+### LSH
+```zil
+<LSH 4 1>  ;  8 
+<LSH 4 -2>  ;  1
+```
+
+
+### M-HPOS
+```zil
+<PRINC "Hello"><M-HPOS .OUTCHAN>  ;  Hello5
+```
+
+
+### MAKE-GVAL
+```zil
+<SET FOO BAR>
+<SETG BAR 123>
+<MAKE-GVAL .FOO>  ;  ,BAR
+<EVAL <MAKE-GVAL .FOO>>  ;  123
+```
+
+
+### MAPF
+```zil
+<MAPF ,VECTOR ,+ (1 2 3) [10 11 12]>  ;  [11 13 15]
+<MAPF ,STRING 1
+    ["Zil" "is" "lots of" "fun"]>  ;  "Zilf"
+<MAPF ,VECTOR
+    <FUNCTION (N) <* .N .N>> (1 2 3)>  ;  [1 4 9]
+<DEFINE SETG-MANY ("TUPLE" TUP)
+    <MAPF <>
+    ,SETG
+    .TUP
+    <REST .TUP </ <LENGTH .TUP> 2>>>>
+<SETG-MANY VAR-1 VAR-2 VAR-3 100 55 616>
+,VAR-1  ;  100
+,VAR-2  ;  55
+,VAR-3  ;  616
+<DEFINE LNUM (N)
+  <MAPF ,LIST
+    <FUNCTION ()
+      <COND (<=? 0 <SET N <- .N 1>>> <MAPSTOP .N>)
+                     (ELSE .N)>>>>
+<LNUM 5>  ;  (4 3 2 1 0)
+```
+
+
+### MAPLEAVE
+```zil
+;  "Return first non-zero value in STRUC" 
+<DEFINE FIRST-N0 (STRUC) 
+  <MAPF <> <FUNCTION (X) 
+    <COND (<N==? .X 0> <MAPLEAVE .X>)>> .STRUC>> 
+<FIRST-N0 [0 0 0 "ZIL" 6 0]>  ;  "ZIL"
+```
+
+
+### MAPR
+```zil
+<SET FOO [1 2 3]> 
+;  "Triple value of struct" 
+<MAPR <> <FUNCTION (L) <1 .L <* <1 .L> 3>>> .FOO> 
+.FOO  ;  [3 6 9]
+```
+
+
+### MAPRET
+```zil
+<SET FOO (65 66 67 68)>
+<MAPF ,LIST
+    #FUNCTION ((L)
+    <MAPRET <ASCII .L>>) .FOO>  ;  (!\A !\B !\C !\D)
+```
+
+
+### MAPSTOP
+```zil
+<DEFINE FIRST-THREE (STRUC "AUX" (I 3))
+    <MAPF ,LIST
+    <FUNCTION (E)
+        <COND (<0? <SET I <- .I 1>>> <MAPSTOP .E>)>
+    .E> .STRUC>>
+<FIRST-THREE "ABCDEFG">  ;  (!\A !\B !\C)
+```
+
+
+### MAX
+```zil
+<MAX 2 3 4 1>  ;  4
+```
+
+
+### MEMBER
+```zil
+<MEMBER "BC" "ABCD">  ;  "BCD"
+<MEMBER 2 (1 2 3 4)>  ;  (2 3 4)
+<MEMBER 0 (1 2 3 4)>  ;  #FALSE <>
+```
+
+
+### MEMQ
+```zil
+<MEMQ "BC" "ABCD">  ;  #FALSE <>
+<MEMQ 2 (1 2 3 4)>  ;  (2 3 4)
+<MEMQ 0 (1 2 3 4)>  ;  #FALSE <>
+```
+
+
+### MIN
+```zil
+<MIN 2 3 4 1>  ;  1
+```
+
+
+### MOBLIST
+```zil
+<INSERT "FOO" <MOBLIST NEW-OBLIST>>  ;  FOO!-NEW-OBLIST
+FOO!-NEW-OBLIST  ;  "This can also be done with trailer"
+```
+
+
+### MSETG
+```zil
+<MSETG MSG-CANT-DO-THAT "You can't do that!">
+...
+<TELL ,MSG-CANT-DO-THAT CR>
+```
+
+
+### NEWTYPE
+```zil
+<NEWTYPE GARGLE CHARACTER>
+<TYPEPRIM GARGLE>  ;  FIX
+<SET A <CHTYPE 65 GARGLE>>
+<TYPE .A>  ;  GARGLE
+<PRIMTYPE .A>  ;  FIX
+
+<NEWTYPE FIRSTNAME ATOM>
+<NEWTYPE LASTNAME FIRSTNAME>
+<=? ALFONSO #FIRSTNAME ALFONSO>  ;  #FALSE
+<=? #FIRSTNAME MADISON #LASTNAME MADISON>  ;  #FALSE
+<=? #LASTNAME MADISON #LASTNAME MADISON>  ;  T
+<NEWTYPE 2FIXLIST LIST '!<LIST FIX FIX>>
+#2FIXLIST (1 2)  ;  Ok
+#2FIXLIST (1 2 3)  ;  Error
+```
+
+
+### NEXT
+```zil
+<DEFINE FIND-ASOC (ITEM)
+  <REPEAT ((A <ASSOCIATIONS>))
+    <COND (<=? .A <>> <RETURN <>>)>
+    <COND (<==? .ITEM <ITEM .A>> <RETURN .A>)>
+  <SET A <NEXT .A>>>>
+<PUTPROP NEW-ASOC TEXT "Hello, world!">
+<FIND-ASOC NEW-ASOC>  ;  #ASOC (NEW-ASOC TEXT "Hello, world!")
+```
+
+
+### NOT
+```zil
+<NOT <>>  ;  T
+<NOT T>  ;  #FALSE <>
+<NOT <=? 1 2>>  ;  T (Same as <N=? 1 2>
+```
+
+
+### NTH
+```zil
+<NTH <VECTOR "AB" "CD" "EF"> 2>  ;  "CD"
+<2 <VECTOR "AB" "CD" "EF">>  ;  "CD"
+```
+
+
+### OBLIST?
+```zil
+<==? <OBLIST? STRING> <ROOT>>  ;  T   
+<OBLIST? <ATOM "SPANK-NEW-ATOM">>  ;  #FALSE
+<==? <OBLIST? FOO!-MY-OBLST> <MOBLIST MY-OBLST>>  ;  T
+```
+
+
+### OR
+```zil
+<OR <=? 1 2> <=? 1 1>>  ;  True 
+ <OR <=? 1 1> <SET X 2>> ;  X is never set to 2 because first predicate evaluates to true 
+ <SET X <OR 0 1 2 3>>  ;  X is set to 0 
+ <SET X <OR <> 1 2 3>>  ;  X is set to 1
+```
+
+
+### PNAME
+```zil
+<PNAME FOO> ; "FOO"
+<PNAME FOO!-NEW-OBLIST> ; "FOO"
+<UNPARSE FOO!-NEW-OBLIST> ; "FOO!-NEW-OBLIST"
+```
+
+
+### PRIMTYPE
+```zil
+<PRIMTYPE !\A>  ;  FIX
+<PRIMTYPE <+1 2>>  ;  FIX
+<PRIMTYPE "ABC">  ;  STRING
+```
+
+
+### PRIN1
+```zil
+<PRIN1 !\A>  ;  !\A
+<PRIN1 42>  ; 42
+<PRIN1 "Hello, world!">  ;  "Hello, world!"
+<PRIN1 (1 2 3)>  ;  (1 2 3)
+<PRIN1 <+ 1 2>>  ;  3
+```
+
+
+### PRINC
+```zil
+<PRINC !\A>  ;  !\A
+<PRINC 42>  ; 42
+<PRINC "Hello, world!">  ;  "Hello, world!"
+<PRINC (1 2 3)>  ;  (1 2 3)
+<PRINC <+ 1 2>>  ;  3
+```
+
+
+### PRINT
+```zil
+<PRINT !\A>  ;  !\A<space>
+<PRINT 42>  ; 42<space>
+<PRINT "Hello, world!">  ;  "Hello, world!"<space>
+<PRINT (1 2 3)>  ;  (1 2 3)<space>
+<PRINT <+ 1 2>>  ;  3<space>
+```
+
+
+### PTABLE
+```zil
+<PTABLE 1 2 3 4>
+```
+
+
+### PUTREST
+```zil
+<PUTREST (1 2 3) (A B)>  ;  (1 A B)
+
+<SET L1 [<SET L2 (1 2 3)>]>
+<PUTREST .L2 (A B)>
+.L1 ;  [(1 A B)]
+
+<SET L1 [1 2 3]>
+<SET L2 <PUTREST (!.L1) (A B)>>
+.L1  ;  [1 2 3]
+.L2  ;  (1 A B)
+
+<SET L1 (1 2 3 4 5 6 7 8 9)>
+<PUTREST <REST .L1 3> <REST .L1 7>>
+.L1  ;  (1 2 3 4 8 9)
+```
+
+
+### QUIT
+```zil
+<QUIT>
+```
+
+
+### QUOTE
+```zil
+<SET F <QUOTE <+ 1 2>> ; Or <SET F '<+ 1 2>>
+.F  ;  <+ 1 2>
+<EVAL .F>  ;  3
+'%<+ 1 2>  ;  3
+```
+
+
+### READSTRING
+```zil
+;"ZILF ver 0.9"
+<SET CH <OPEN "READ" "../zillib/parser.zil">> 
+<SET BUFFER <ISTRING 10>>
+<READSTRING .BUFFER .CH>  ;  10
+<LVAL BUFFER>  ;  "\"Library h"
+<READSTRING .BUFFER .CH 6>  ;  6
+<LVAL BUFFER>  ;  "eader\"ry h"
+<READSTRING .BUFFER .CH "ZIL">  ;  10
+<LVAL BUFFER>  ;  "\n\n<SETG "
+<CLOSE .CH>  ;  "\n = CR+LF"
+```
+
+
+### RENTRY
+```zil
+<REMOVE ANSWER>  ;  "Secure that ATOM not on any OBLIST"
+<PACKAGE "FOO"> 
+<SETG ANSWER 42> 
+<RENTRY ANSWER> 
+<ENDPACKAGE> 
+,ANSWER  ;  42 ;”Accessible without previous USE”
+```
+
+
+### REPEAT
+```zil
+<REPEAT ((X 1)) #DECL ((X) FIX)  
+    <REPEAT ((X 2)) <PRIN1 .X> <RETURN>>  
+    <PRIN1 .X> <RETURN>>  ;  "21"
+<DEFINE TEST-REPEAT () 
+    <PRINC "START "> 
+    <REPEAT ((X 0)) 
+        <SET X <+ .X 1>> 
+        <PRIN1 .X> 
+        <COND (<=? .X 3> <RETURN>)>  ;  "--> exit block" 
+    > 
+    <PRINC " END"> 
+> 
+    <TEST-REPEAT>  ;  "START 123 END"
+```
+
+
+### REPLACE-DEFINITION
+```zil
+<REPLACE-DEFINITION MY-ROUTINE 
+     <ROUTINE MY-ROUTINE ()  
+        <TELL "Replaced version of MY-ROUTINE" CR> 
+    > 
+> 
+<DEFAULT-DEFINITION MY-ROUTINE 
+    <ROUTINE MY-ROUTINE ()  
+        <TELL "Original version of MY-ROUTINE" CR> 
+    > 
+> 
+<MY-ROUTINE>  ;  "Replaced version of MY-ROUTINE"
+```
+
+
+### ROOT
+```zil
+<ROOT>
+```
+
+
+### ROUTINE
+```zil
+;"Move all child objects from object src to object dst" 
+    <ROUTINE MOVE-INVENTORY (SRC DST "AUX" X N) 
+        <SET X <FIRST? .SRC>> 
+        <REPEAT () 
+            <COND (.X 
+                <SET N <NEXT? .X>> 
+                <MOVE .X .DST> 
+                <SET X .N>) 
+            (T <RETURN>)>>>
+```
+
+
+### SET
+```zil
+MDL: <PROG (X) <SET X 5> <RETURN .X>>  ;  Returns 5 after setting X.
+Zapf: <SET MYVAR 42>  ;  Store 42 in local variable MYVAR
+```
+
+
+### SETG
+```zil
+MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR
+```
+
+
+### SETG20
+```zil
+<SETG20 MYVAR 42> ; Store 42 in global atom MYVAR
+```
+
+
+### SPNAME
+```zil
+<SPNAME atom>
+```
+
+
+### STRING
+```zil
+<STRING !\A <ASCII 66> "CD"> ; "ABCD"
+```
+
+
+### TIME
+```zil
+<TIME>
+```
+
+
+### TOP
+```zil
+<SETG STRUCT1 [1 2 3 4 5]>  ;  STRUCT1 = [1 2 3 4 5]
+<SETG STRUCT2 <REST ,STRUCT1 2>>  ;  STRUCT2 = [3 4 5]
+<TOP ,STRUCT2>  ;  STRUCT2 = [1 2 3 4 5]
+```
+
+
+### VALID-TYPE?
+```zil
+<VALID-TYPE? VECTOR>  ;  VECTOR
+<VALID-TYPE? FOO>  ;  #FALSE
+<NEWTYPE FOO FIX> 
+<VALID-TYPE? FOO>  ;  FOO
+```
+
+
+### VALUE
+```zil
+;  MDL
+<SETG X 3>
+<SET X 4>
+<VALUE X>  ;  4
+<UNASSIGN X>
+<VALUE X>  ;  3
+
+;  Zapf
+<VALUE X>  ;  Loads local or global variable X. Recommended to use LVAL or GVAL instead (.X or ,X)
+```
+
+
+## Z-Code Built-ins
+
+### BACK
+```zil
+<GLOBAL TBL1 <TABLE 1 2 3 4>>  ;  TBL1 = [1 2 3 4]
+<GLOBAL TBL2 <REST ,STRUCT1 4>>  ;  TBL2 = [3 4] Move 4 because WORD-table!
+<SETG TBL2 <BACK ,TBL2 2>>  ;  TBL2 = [2 3 4]
+```
+
+
+### BCOM
+```zil
+<BCOM #2 000011110001111>  ;  #2 1111000011110000
+```
+
+
+### BTST
+```zil
+<BTST 64 64>  ;  TRUE
+<BTST 64 63>  ;  FALSE
+<BTST 97 33>  ;  TRUE
+```
+
+
+### BUFOUT
+```zil
+<BUFOUT <>>  ;  Turns off buffering(disables word-wrap)
+<BUFOUT T>  ;  Turns on buffering
+```
+
+
+### CATCH
+```zil
+<SETG CATCH-POINT <CATCH>>  ;  Saves the current stack fram in global variable.
+```
+
+
+### ERASE
+```zil
+<ERASE 1>  ;  Clears from cursor to end of line
+```
+
+
+### F?
+```zil
+<F? <=? 1 1>>  ;  False
+<F? <=? 1 2>>  ;  True
+```
+
+
+### FCLEAR
+```zil
+<FCLEAR ,TRAP-DOOR ,OPENBIT>  ;  Marks the trap-door as closed
+```
+
+
+### FIRST?
+```zil
+<SET RM <FIRST? ,ROOMS>>  ;  Sets RM to first object in ROOMS. Also evaluates to true (all values not 0 is true)
+```
+
+
+### FONT
+```zil
+<FONT 4>  ;  Sets fixed-pitch font. In versions 3-4, this is done by setting bit 1 of Flags 2 in header <PUT 0 8 <BOR <GET 0 8> 2>>
+```
+
+
+### FSET
+```zil
+<FSET ,TRAP-DOOR ,OPENBIT> --> Marks the trap-door as open
+```
+
+
+### FSET?
+```zil
+<FSET? ,TRAP-DOOR ,OPENBIT>  ;  True if OPENBIT is set
+```
+
+
+### GET
+```zil
+<GET <TABLE 0 1 2 3> 2>  ;  2
+```
+
+
+### GETB
+```zil
+<GETB <TABLE (BYTE) !\A !\B !\C !\D> 2>  ;  !\C
+```
+
+
+### GETP
+```zil
+<OBJECT MYOBJ (MYPROP 123)>
+<GETP ,MYOBJ ,P?MYPROP>  ;  123
+```
+
+
+### GETPT
+```zil
+<OBJECT MYOBJ (MYPROP 123)>
+<GET <GETPT ,MYOBJ ,P?MYPROP> 0>  ;  123
+<GETPT ,MYOBJ ,P?MYPROP2>  ;  0
+```
+
+
+### IN?
+```zil
+<OBJECT ANIMAL>
+<OBJECT CAT (LOC ANIMAL)>
+<IN? ,CAT ,ANIMAL>  ;  T
+<IN? ,ANIMAL ,CAT>  ;  <>
+```
+
+
+### INC
+```zil
+<GLOBAL X 5>
+<INC ,X>  ;  X = 6
+```
+
+
+### INPUT
+```zil
+<INPUT 1>  ;  Wait for keypress
+
+<ROUTINE WAIT-TWO-SECONDS ()
+    <INPUT 1 20 ABORT-WAIT>
+> 
+ 
+<ROUTINE ABORT-WAIT () <RETURN T>>
+ 
+;  Pause two seconds (if not interrupted by a keypress from the keyboard
+<WAIT-TWO-SECONDS>
+```
+
+
+### INTBL?
+```zil
+<T <INTBL? 3 <TABLE 1 2 3 4> 4>>  ;  T
+<T <INTBL? 6 <TABLE 1 2 3 4> 4>>  ;  #FALSE
+
+;  "Search byte-table with record length 3 (ver 5, 7-)"
+<T <INTBL? 8 <TABLE (BYTE) 2 0 1 4 0 1 8 0 1> 9 3>>  ;  T
+<T <INTBL? 1 <TABLE (BYTE) 2 0 1 4 0 1 8 0 1> 9 3>>  ;  <>
+
+;  "Search word-table with record length 3 (ver 5, 7-)"
+<T <INTBL? 8 <TABLE 2 0 1 4 0 1 8 0 1> 9 131>>  ;  T
+<T <INTBL? 1 <TABLE 2 0 1 4 0 1 8 0 1> 9 131>>  ;  <>
+```
+
+
+### IRESTORE
+```zil
+<IRESTORE>
+```
+
+
+### ISAVE
+```zil
+<ISAVE>
+```
+
+
+### LEX
+```zil
+<GLOBAL TEXTBUF <TABLE (BYTE) !\c !\a !\t>>
+<GLOBAL PARSEBUF <ITABLE 1 (LEXV) 0 0>>
+<OBJECT CAT (SYNONYM CAT)>
+<LEX ,TEXTBUF ,PARSEBUF>
+<PRINTB <GET ,PARSEBUF 1>>  ;  "cat"
+```
+
+
+### LOC
+```zil
+<OBJECT ANIMAL>
+<OBJECT CAT (LOC ANIMAL)>
+
+<=? <LOC ,CAT> ,ANIMAL>  ;  T
+<LOC ,ANIMAL>  ;  0
+```
+
+
 ### LOWCORE
 ```zil
 ;  Monospace bit (bit 1) in flags 2 is set
@@ -1046,43 +1448,11 @@ FOO!-MYOBLIST
 ```
 
 
-### LPARSE
-```zil
-<LPARSE "1 FOO [3]">  ;  (1 FOO [3])
-<LPARSE " ">  ;  ()
-<SET A 0>
-<DEFINE NXT () <SET A <+ .A 1>>>
-<LPARSE "%<NXT> %<NXT> %<NXT>">  ;  (1 2 3)
-```
-
-
-### LSH
-```zil
-<LSH 4 1>  ;  8 
-<LSH 4 -2>  ;  1
-```
-
-
 ### LVAL
 ```zil
 <SET X 5> 
 <LVAL X>  ;  5
 .X  ;  5
-```
-
-
-### M-HPOS
-```zil
-<PRINC "Hello"><M-HPOS .OUTCHAN>  ;  Hello5
-```
-
-
-### MAKE-GVAL
-```zil
-<SET FOO BAR>
-<SETG BAR 123>
-<MAKE-GVAL .FOO>  ;  ,BAR
-<EVAL <MAKE-GVAL .FOO>>  ;  123
 ```
 
 
@@ -1160,95 +1530,9 @@ FOO!-MYOBLIST
 ```
 
 
-### MAPF
-```zil
-<MAPF ,VECTOR ,+ (1 2 3) [10 11 12]>  ;  [11 13 15]
-<MAPF ,STRING 1
-    ["Zil" "is" "lots of" "fun"]>  ;  "Zilf"
-<MAPF ,VECTOR
-    <FUNCTION (N) <* .N .N>> (1 2 3)>  ;  [1 4 9]
-<DEFINE SETG-MANY ("TUPLE" TUP)
-    <MAPF <>
-    ,SETG
-    .TUP
-    <REST .TUP </ <LENGTH .TUP> 2>>>>
-<SETG-MANY VAR-1 VAR-2 VAR-3 100 55 616>
-,VAR-1  ;  100
-,VAR-2  ;  55
-,VAR-3  ;  616
-<DEFINE LNUM (N)
-  <MAPF ,LIST
-    <FUNCTION ()
-      <COND (<=? 0 <SET N <- .N 1>>> <MAPSTOP .N>)
-                     (ELSE .N)>>>>
-<LNUM 5>  ;  (4 3 2 1 0)
-```
-
-
-### MAPLEAVE
-```zil
-;  "Return first non-zero value in STRUC" 
-<DEFINE FIRST-N0 (STRUC) 
-  <MAPF <> <FUNCTION (X) 
-    <COND (<N==? .X 0> <MAPLEAVE .X>)>> .STRUC>> 
-<FIRST-N0 [0 0 0 "ZIL" 6 0]>  ;  "ZIL"
-```
-
-
-### MAPR
-```zil
-<SET FOO [1 2 3]> 
-;  "Triple value of struct" 
-<MAPR <> <FUNCTION (L) <1 .L <* <1 .L> 3>>> .FOO> 
-.FOO  ;  [3 6 9]
-```
-
-
-### MAPRET
-```zil
-<SET FOO (65 66 67 68)>
-<MAPF ,LIST
-    #FUNCTION ((L)
-    <MAPRET <ASCII .L>>) .FOO>  ;  (!\A !\B !\C !\D)
-```
-
-
-### MAPSTOP
-```zil
-<DEFINE FIRST-THREE (STRUC "AUX" (I 3))
-    <MAPF ,LIST
-    <FUNCTION (E)
-        <COND (<0? <SET I <- .I 1>>> <MAPSTOP .E>)>
-    .E> .STRUC>>
-<FIRST-THREE "ABCDEFG">  ;  (!\A !\B !\C)
-```
-
-
 ### MARGIN
 ```zil
 <MARGIN 1 1>  ;  set 1 pixel margin in window 0
-```
-
-
-### MAX
-```zil
-<MAX 2 3 4 1>  ;  4
-```
-
-
-### MEMBER
-```zil
-<MEMBER "BC" "ABCD">  ;  "BCD"
-<MEMBER 2 (1 2 3 4)>  ;  (2 3 4)
-<MEMBER 0 (1 2 3 4)>  ;  #FALSE <>
-```
-
-
-### MEMQ
-```zil
-<MEMQ "BC" "ABCD">  ;  #FALSE <>
-<MEMQ 2 (1 2 3 4)>  ;  (2 3 4)
-<MEMQ 0 (1 2 3 4)>  ;  #FALSE <>
 ```
 
 
@@ -1264,61 +1548,12 @@ FOO!-MYOBLIST
 ```
 
 
-### MIN
-```zil
-<MIN 2 3 4 1>  ;  1
-```
-
-
-### MOBLIST
-```zil
-<INSERT "FOO" <MOBLIST NEW-OBLIST>>  ;  FOO!-NEW-OBLIST
-FOO!-NEW-OBLIST  ;  "This can also be done with trailer"
-```
-
-
 ### MOD
 ```zil
 <MOD 15 4>  ;  3
 <MOD -15 4>  ;  -3
 <MOD -15 -4>  ;  -3
 <MOD 15 -4>  ;  3
-```
-
-
-### MSETG
-```zil
-<MSETG MSG-CANT-DO-THAT "You can't do that!">
-...
-<TELL ,MSG-CANT-DO-THAT CR>
-```
-
-
-### NEWTYPE
-```zil
-<NEWTYPE GARGLE CHARACTER>
-<TYPEPRIM GARGLE>  ;  FIX
-<SET A <CHTYPE 65 GARGLE>>
-<TYPE .A>  ;  GARGLE
-<PRIMTYPE .A>  ;  FIX
-
-<NEWTYPE FIRSTNAME ATOM>
-<NEWTYPE LASTNAME FIRSTNAME>
-<=? ALFONSO #FIRSTNAME ALFONSO>  ;  #FALSE
-<=? #FIRSTNAME MADISON #LASTNAME MADISON>  ;  #FALSE
-<=? #LASTNAME MADISON #LASTNAME MADISON>  ;  T
-<NEWTYPE 2FIXLIST LIST '!<LIST FIX FIX>>
-#2FIXLIST (1 2)  ;  Ok
-#2FIXLIST (1 2 3)  ;  Error
-```
-
-
-### OR
-```zil
-<OR <=? 1 2> <=? 1 1>>  ;  True 
- <OR <=? 1 1> <SET X 2>> ;  X is never set to 2 because first predicate evaluates to true 
- <SET X <OR 0 1 2 3>>  ;  X is set to 0 
- <SET X <OR <> 1 2 3>>  ;  X is set to 1
 ```
 
 
@@ -1336,73 +1571,12 @@ FOO!-NEW-OBLIST  ;  "This can also be done with trailer"
 ```
 
 
-### PNAME
-```zil
-<PNAME FOO> ; "FOO"
-<PNAME FOO!-NEW-OBLIST> ; "FOO"
-<UNPARSE FOO!-NEW-OBLIST> ; "FOO!-NEW-OBLIST"
-```
-
-
 ### POP
 ```zil
 <PUSH .FOO>
 <SET FOO some-new-value>
 ;code
 <SET FOO <POP>>
-```
-
-
-### PREP-SYNONYM
-```zil
-<PREP-SYNONYM INTO IN>
-<PREP-SYNONYM UPON ON>
-<PREP-SYNONYM ACROSS OVER BEYOND>
-<PREP-SYNONYM ABOUT REGARDING CONCERNING>
-```
-
-
-### PRIMTYPE
-```zil
-<PRIMTYPE !\A>  ;  FIX
-<PRIMTYPE <+1 2>>  ;  FIX
-<PRIMTYPE "ABC">  ;  STRING
-```
-
-
-### PRIN1
-```zil
-<PRIN1 !\A>  ;  !\A
-<PRIN1 42>  ; 42
-<PRIN1 "Hello, world!">  ;  "Hello, world!"
-<PRIN1 (1 2 3)>  ;  (1 2 3)
-<PRIN1 <+ 1 2>>  ;  3
-```
-
-
-### PRINC
-```zil
-<PRINC !\A>  ;  !\A
-<PRINC 42>  ; 42
-<PRINC "Hello, world!">  ;  "Hello, world!"
-<PRINC (1 2 3)>  ;  (1 2 3)
-<PRINC <+ 1 2>>  ;  3
-```
-
-
-### PRINT
-```zil
-<PRINT !\A>  ;  !\A<space>
-<PRINT 42>  ; 42<space>
-<PRINT "Hello, world!">  ;  "Hello, world!"<space>
-<PRINT (1 2 3)>  ;  (1 2 3)<space>
-<PRINT <+ 1 2>>  ;  3<space>
-```
-
-
-### PTABLE
-```zil
-<PTABLE 1 2 3 4>
 ```
 
 
@@ -1439,43 +1613,9 @@ FOO!-NEW-OBLIST  ;  "This can also be done with trailer"
 ```
 
 
-### PUTREST
-```zil
-<PUTREST (1 2 3) (A B)>  ;  (1 A B)
-
-<SET L1 [<SET L2 (1 2 3)>]>
-<PUTREST .L2 (A B)>
-.L1 ;  [(1 A B)]
-
-<SET L1 [1 2 3]>
-<SET L2 <PUTREST (!.L1) (A B)>>
-.L1  ;  [1 2 3]
-.L2  ;  (1 A B)
-
-<SET L1 (1 2 3 4 5 6 7 8 9)>
-<PUTREST <REST .L1 3> <REST .L1 7>>
-.L1  ;  (1 2 3 4 8 9)
-```
-
-
-### PropAdjective
-```zil
-ADJECTIVE BRASS SMALL
-```
-
-
 ### QUIT
 ```zil
 <QUIT>
-```
-
-
-### QUOTE
-```zil
-<SET F <QUOTE <+ 1 2>> ; Or <SET F '<+ 1 2>>
-.F  ;  <+ 1 2>
-<EVAL .F>  ;  3
-'%<+ 1 2>  ;  3
 ```
 
 
@@ -1485,71 +1625,11 @@ ADJECTIVE BRASS SMALL
 ```
 
 
-### READSTRING
-```zil
-;"ZILF ver 0.9"
-<SET CH <OPEN "READ" "../zillib/parser.zil">> 
-<SET BUFFER <ISTRING 10>>
-<READSTRING .BUFFER .CH>  ;  10
-<LVAL BUFFER>  ;  "\"Library h"
-<READSTRING .BUFFER .CH 6>  ;  6
-<LVAL BUFFER>  ;  "eader\"ry h"
-<READSTRING .BUFFER .CH "ZIL">  ;  10
-<LVAL BUFFER>  ;  "\n\n<SETG "
-<CLOSE .CH>  ;  "\n = CR+LF"
-```
-
-
 ### REMOVE
 ```zil
 <OBJECT ANIMAL>
 <OBJECT CAT (LOC ANIMAL)>
 <REMOVE ,CAT)  ;  Detach CAT from ANIMAL
-```
-
-
-### RENTRY
-```zil
-<REMOVE ANSWER>  ;  "Secure that ATOM not on any OBLIST"
-<PACKAGE "FOO"> 
-<SETG ANSWER 42> 
-<RENTRY ANSWER> 
-<ENDPACKAGE> 
-,ANSWER  ;  42 ;”Accessible without previous USE”
-```
-
-
-### REPEAT
-```zil
-<REPEAT ((X 1)) #DECL ((X) FIX)  
-    <REPEAT ((X 2)) <PRIN1 .X> <RETURN>>  
-    <PRIN1 .X> <RETURN>>  ;  "21"
-<DEFINE TEST-REPEAT () 
-    <PRINC "START "> 
-    <REPEAT ((X 0)) 
-        <SET X <+ .X 1>> 
-        <PRIN1 .X> 
-        <COND (<=? .X 3> <RETURN>)>  ;  "--> exit block" 
-    > 
-    <PRINC " END"> 
-> 
-    <TEST-REPEAT>  ;  "START 123 END"
-```
-
-
-### REPLACE-DEFINITION
-```zil
-<REPLACE-DEFINITION MY-ROUTINE 
-     <ROUTINE MY-ROUTINE ()  
-        <TELL "Replaced version of MY-ROUTINE" CR> 
-    > 
-> 
-<DEFAULT-DEFINITION MY-ROUTINE 
-    <ROUTINE MY-ROUTINE ()  
-        <TELL "Original version of MY-ROUTINE" CR> 
-    > 
-> 
-<MY-ROUTINE>  ;  "Replaced version of MY-ROUTINE"
 ```
 
 
@@ -1562,26 +1642,6 @@ ADJECTIVE BRASS SMALL
 ### RFATAL
 ```zil
 <RFATAL>
-```
-
-
-### ROOT
-```zil
-<ROOT>
-```
-
-
-### ROUTINE
-```zil
-;"Move all child objects from object src to object dst" 
-    <ROUTINE MOVE-INVENTORY (SRC DST "AUX" X N) 
-        <SET X <FIRST? .SRC>> 
-        <REPEAT () 
-            <COND (.X 
-                <SET N <NEXT? .X>> 
-                <MOVE .X .DST> 
-                <SET X .N>) 
-            (T <RETURN>)>>>
 ```
 
 
@@ -1658,12 +1718,6 @@ MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR
 ```
 
 
-### SETG20
-```zil
-<SETG20 MYVAR 42> ; Store 42 in global atom MYVAR
-```
-
-
 ### SOUND
 ```zil
 ;  From Sherlock
@@ -1685,30 +1739,6 @@ MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR
 ```
 
 
-### SPNAME
-```zil
-<SPNAME atom>
-```
-
-
-### STRING
-```zil
-<STRING !\A <ASCII 66> "CD"> ; "ABCD"
-```
-
-
-### SYNONYM
-```zil
-<SYNONYM NORTH FORE>
-<SYNONYM SOUTH AFT>
-<SYNONYM WEST PORT>
-<SYNONYM EAST STARBOARD>
-
-<SYNTAX PUT OBJECT = V-INSERT>
-<VERB-SYNONYM PUT SLIDE DIP SOAK>
-```
-
-
 ### THROW
 ```zil
 <ROUTINE TEST-CATCH ("AUX" X)
@@ -1725,32 +1755,9 @@ MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR
 ```
 
 
-### TIME
-```zil
-<TIME>
-```
-
-
-### TOP
-```zil
-<SETG STRUCT1 [1 2 3 4 5]>  ;  STRUCT1 = [1 2 3 4 5]
-<SETG STRUCT2 <REST ,STRUCT1 2>>  ;  STRUCT2 = [3 4 5]
-<TOP ,STRUCT2>  ;  STRUCT2 = [1 2 3 4 5]
-```
-
-
 ### USL
 ```zil
 <USL>
-```
-
-
-### VALID-TYPE?
-```zil
-<VALID-TYPE? VECTOR>  ;  VECTOR
-<VALID-TYPE? FOO>  ;  #FALSE
-<NEWTYPE FOO FIX> 
-<VALID-TYPE? FOO>  ;  FOO
 ```
 
 
@@ -1765,15 +1772,6 @@ MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR
 
 ;  Zapf
 <VALUE X>  ;  Loads local or global variable X. Recommended to use LVAL or GVAL instead (.X or ,X)
-```
-
-
-### VERB-SYNONYM
-```zil
-<VERB-SYNONYM SAY TELL>
-<VERB-SYNONYM GO MOVE>
-<VERB-SYNONYM MAKE CREATE BUILD>
-<VERB-SYNONYM GET OBTAIN ACQUIRE>
 ```
 
 
@@ -1837,4 +1835,97 @@ MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR
 
 <ZWSTR ,SRCBUF 5 1 ,DSTBUF> 
 <PRINTB ,DSTBUF>  ;  "hello"
+```
+
+
+## Parser System
+
+### ADJ-SYNONYM
+```zil
+<ADJ-SYNONYM HAPPY JOYFUL>
+<ADJ-SYNONYM INTELLIGENT SMART>
+<ADJ-SYNONYM BAD AWFUL>
+<ADJ-SYNONYM STRONG SOLID>
+```
+
+
+### BIT-SYNONYM
+```zil
+<BIT-SYNONYM TAKEBIT GETBIT PICKBIT>
+<BIT-SYNONYM LIGHTBIT DAYBIT>
+```
+
+
+### BUZZ
+```zil
+<BUZZ A AN AND ANY ALL EVERY EVERYTHING BUT EXCEPT OF ONE
+              THE THEN UNDO OOPS \. \, \">
+```
+
+
+### DIR-SYNONYM
+```zil
+<DIR-SYNONYM FORE F>
+<DIR-SYNONYM AFT A>
+<DIR-SYNONYM PORT P>
+<DIR-SYNONYM STARBOARD SB>
+```
+
+
+### DIRECTIONS
+```zil
+<DIRECTIONS NORTH SOUTH EAST WEST NE NW SE SW IN OUT UP DOWN>
+```
+
+
+### PREP-SYNONYM
+```zil
+<PREP-SYNONYM INTO IN>
+<PREP-SYNONYM UPON ON>
+<PREP-SYNONYM ACROSS OVER BEYOND>
+<PREP-SYNONYM ABOUT REGARDING CONCERNING>
+```
+
+
+### SYNONYM
+```zil
+<SYNONYM NORTH FORE>
+<SYNONYM SOUTH AFT>
+<SYNONYM WEST PORT>
+<SYNONYM EAST STARBOARD>
+
+<SYNTAX PUT OBJECT = V-INSERT>
+<VERB-SYNONYM PUT SLIDE DIP SOAK>
+```
+
+
+### VERB-SYNONYM
+```zil
+<VERB-SYNONYM SAY TELL>
+<VERB-SYNONYM GO MOVE>
+<VERB-SYNONYM MAKE CREATE BUILD>
+<VERB-SYNONYM GET OBTAIN ACQUIRE>
+```
+
+
+## Object System
+
+### OBJECT
+```zil
+<OBJECT LAMP
+  (IN LIVING-ROOM)
+  (SYNONYM LAMP LANTERN LIGHT)
+  (ADJECTIVE BRASS)
+  (DESC "brass lantern")
+  (FLAGS TAKEBIT LIGHTBIT)
+  (ACTION LANTERN)
+  (FDESC "A battery-powered brass lantern is on the trophy case.")
+  (LDESC "There is a brass lantern (battery-powered) here.")
+  (SIZE 15)>
+```
+
+
+### PropAdjective
+```zil
+ADJECTIVE BRASS SMALL
 ```

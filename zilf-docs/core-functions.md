@@ -965,6 +965,44 @@ See APPLYTYPE, EVALTYPE and PRINTTYPE.
 
 ---
 
+### NEXT
+**Usage:** `<NEXT asoc>`
+
+MDL built-in function that returns the next asoc entry, of TYPE ASOC, in the ASSOCIATION chain. If there are no more entries then FALSE is returned.
+
+> **Note:** See ASSOCIATIONS, AVALUE, GETPROP, INDICATOR, ITEM and PUTPROP.
+
+---
+
+### NOT
+**Usage:** `<NOT value>`
+
+MDL built-in function that returns true if value is false (#FALSE <>), otherwise NOT returns false.
+
+> **Note:** This is a boolean (logical) "not."
+
+---
+
+### NTH
+**Usage:** `<NTH structure index>`
+
+**Alternative Usage:** `<index structure>`
+
+MDL built-in function that returns the element at index in structure. Valid values for index are between 1 and \<LENGTH structure\>. structure must be an object that STRUCTURED? evaluates to TRUE. NTH can also be abbreviated as <index structure>.
+
+> **Note:** Note that TABLE is not a structure.
+
+Also see BACK, LENGTH, PUT, REST, SUBSTRUC and TOP.
+
+---
+
+### OBLIST?
+**Usage:** `<OBLIST? atom>`
+
+MDL built-in predicate that returns the OBLIST that contains the atom. If the atom is not in any OBLIST it returns FALSE.
+
+---
+
 ### OR
 **Usage:** `<OR expressions...>`
 
