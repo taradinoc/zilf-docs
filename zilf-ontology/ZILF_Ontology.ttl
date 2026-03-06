@@ -558,6 +558,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:MOBLIST ,
                                  zilf:MSETG ,
                                  zilf:NEWTYPE ,
+                                 zilf:NEXT ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
@@ -2084,6 +2085,23 @@ See APPLYTYPE, EVALTYPE and PRINTTYPE."""@en ;
 #2FIXLIST (1 2)  ;  Ok
 #2FIXLIST (1 2 3)  ;  Error"""@en ;
              skos:prefLabel "<NEWTYPE name primtype-atom [decl]>"@en .
+
+
+###  http://example.org/zilf/NEXT
+zilf:NEXT rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition "MDL built-in function that returns the next asoc entry, of TYPE ASOC, in the ASSOCIATION chain. If there are no more entries then FALSE is returned."@en ;
+          skos:editorialNote "See ASSOCIATIONS, AVALUE, GETPROP, INDICATOR, ITEM and PUTPROP."@en ;
+          skos:example """<DEFINE FIND-ASOC (ITEM)
+  <REPEAT ((A <ASSOCIATIONS>))
+    <COND (<=? .A <>> <RETURN <>>)>
+    <COND (<==? .ITEM <ITEM .A>> <RETURN .A>)>
+  <SET A <NEXT .A>>>>
+<PUTPROP NEW-ASOC TEXT \"Hello, world!\">
+<FIND-ASOC NEW-ASOC>  ;  #ASOC (NEW-ASOC TEXT \"Hello, world!\")"""@en ;
+          skos:prefLabel "<NEXT asoc>"@en .
 
 
 ###  http://example.org/zilf/OBJECT
