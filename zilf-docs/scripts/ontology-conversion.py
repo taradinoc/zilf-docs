@@ -136,8 +136,7 @@ def generate_object_system(g):
 
     # 1. Base Object
     if (ZILF.OBJECT, RDF.type, None) in g:
-         lines.append("\n### OBJECT")
-         lines.append("The base entity definition.\n\n---")
+         append_concept_documentation(g, ZILF.OBJECT, lines)
 
     # 2. Properties
     lines.append("\n## Object Properties")
@@ -172,19 +171,61 @@ def generate_parser_system(g):
     write_file("parser-system.md", "\n".join(lines))
 
 def generate_cookbook(g):
-    """Generates cookbook.md by pulling all skos:example entries."""
+    """Generates cookbook.md by pulling all skos:example entries and grouping by category."""
     lines = ["[← Back to Main Index](./index.md)", "", "# ZILF Cookbook", "---"]
-    subjects_with_examples = sorted(list(set(g.subjects(SKOS.example, None))), key=lambda s: s.split('/')[-1])
+    
+    # Map the categories to their respective broader subjects in the ontology
+    categories = {
+        "Core Functions": list(g.subjects(SKOS.broader, ZILF.CoreFunctions)),
+        "Z-Code Built-ins": list(g.subjects(SKOS.broader, ZILF.ZCodeBuiltIns)),
+        "Parser System": list(g.subjects(SKOS.broader, ZILF.ParserSystem)),
+    }
+    
+    # Manually collect Object System subjects (OBJECT, Properties, Flags)
+    object_system_subjects = [ZILF.OBJECT]
+    object_system_subjects.extend(g.subjects(SKOS.broader, ZILF.ObjectProperties))
+    object_system_subjects.extend(g.subjects(SKOS.broader, ZILF.PropFlags))
+    categories["Object System"] = object_system_subjects
 
-    for subj in subjects_with_examples:
-        name = subj.split('/')[-1]
-        examples = get_literals(g, subj, SKOS.example)
-        if examples:
-            lines.append(f"\n### {name}")
-            for ex in examples:
-                lines.append(format_zil_code(ex))
-            lines.append("")
+    processed_subjects = set()
+    
+    # Iterate through mapped categories and pull examples
+    for cat_name, subjects in categories.items():
+        # Only keep subjects that actually have a skos:example defined
+        subjects_with_examples = [s for s in subjects if (s, SKOS.example, None) in g]
+        
+        if subjects_with_examples:
+            lines.append(f"\n## {cat_name}")
+            # Sort alphabetically within category
+            subjects_with_examples.sort(key=lambda s: s.split('/')[-1])
             
+            for subj in subjects_with_examples:
+                processed_subjects.add(subj)
+                name = subj.split('/')[-1]
+                examples = get_literals(g, subj, SKOS.example)
+                
+                if examples:
+                    lines.append(f"\n### {name}")
+                    for ex in examples:
+                        lines.append(format_zil_code(ex))
+                    lines.append("")
+                    
+    # Catch examples that don't fit into predefined categories
+    all_example_subjects = set(g.subjects(SKOS.example, None))
+    uncategorized = list(all_example_subjects - processed_subjects)
+    
+    if uncategorized:
+        lines.append("\n## Uncategorized Examples")
+        uncategorized.sort(key=lambda s: s.split('/')[-1])
+        for subj in uncategorized:
+            name = subj.split('/')[-1]
+            examples = get_literals(g, subj, SKOS.example)
+            if examples:
+                lines.append(f"\n### {name}")
+                for ex in examples:
+                    lines.append(format_zil_code(ex))
+                lines.append("")
+
     write_file("cookbook.md", "\n".join(lines))
 
 def main():
