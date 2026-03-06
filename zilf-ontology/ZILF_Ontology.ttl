@@ -555,6 +555,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:MEMBER ,
                                  zilf:MEMQ ,
                                  zilf:MIN ,
+                                 zilf:MOBLIST ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
@@ -2005,6 +2006,18 @@ zilf:MIN rdf:type owl:NamedIndividual ,
          skos:definition "MDL built-in function that returns the minimum number among numbers."@en ;
          skos:example "<MIN 2 3 4 1>  ;  1"@en ;
          skos:prefLabel "<MIN numbers ...>"@en .
+
+
+###  http://example.org/zilf/MOBLIST
+zilf:MOBLIST rdf:type owl:NamedIndividual ,
+                      skos:Concept ;
+             skos:broader zilf:CoreFunctions ;
+             skos:inScheme zilf:ZILF_Scheme ;
+             skos:definition "MDL built-in function that creates and returns a new empty OBLIST named name. If an OBLIST with the name already exists the existing one is returned instead."@en ;
+             skos:editorialNote "MOBLIST means \"make oblist.\""@en ;
+             skos:example """<INSERT \"FOO\" <MOBLIST NEW-OBLIST>>  ;  FOO!-NEW-OBLIST
+FOO!-NEW-OBLIST  ;  \"This can also be done with trailer\""""@en ;
+             skos:prefLabel "<MOBLIST name>"@en .
 
 
 ###  http://example.org/zilf/MOD
