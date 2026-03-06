@@ -557,6 +557,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:MIN ,
                                  zilf:MOBLIST ,
                                  zilf:MSETG ,
+                                 zilf:NEWTYPE ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
@@ -2059,6 +2060,32 @@ zilf:NEW-ADD-WORD rdf:type owl:NamedIndividual ,
                   skos:prefLabel "<NEW-ADD-WORD atom-or-string [type] [value] [flags]>"@en .
 
 
+###  http://example.org/zilf/NEWTYPE
+zilf:NEWTYPE rdf:type owl:NamedIndividual ,
+                      skos:Concept ;
+             skos:broader zilf:CoreFunctions ;
+             skos:inScheme zilf:ZILF_Scheme ;
+             skos:definition "MDL built-in function that creates a new TYPE with the name, name and the same PRIMTYPE as primtype-atom. It returns the new TYPE. The name must be unique (<VALID-TYPE? name> is FALSE> otherwise NEWTYPE results in an error."@en ;
+             skos:editorialNote """It is possible to specify a decl (see GDECL) for the new TYPE that is enforced when CHTYPE.
+
+See APPLYTYPE, EVALTYPE and PRINTTYPE."""@en ;
+             skos:example """<NEWTYPE GARGLE CHARACTER>
+<TYPEPRIM GARGLE>  ;  FIX
+<SET A <CHTYPE 65 GARGLE>>
+<TYPE .A>  ;  GARGLE
+<PRIMTYPE .A>  ;  FIX
+
+<NEWTYPE FIRSTNAME ATOM>
+<NEWTYPE LASTNAME FIRSTNAME>
+<=? ALFONSO #FIRSTNAME ALFONSO>  ;  #FALSE
+<=? #FIRSTNAME MADISON #LASTNAME MADISON>  ;  #FALSE
+<=? #LASTNAME MADISON #LASTNAME MADISON>  ;  T
+<NEWTYPE 2FIXLIST LIST '!<LIST FIX FIX>>
+#2FIXLIST (1 2)  ;  Ok
+#2FIXLIST (1 2 3)  ;  Error"""@en ;
+             skos:prefLabel "<NEWTYPE name primtype-atom [decl]>"@en .
+
+
 ###  http://example.org/zilf/OBJECT
 zilf:OBJECT rdf:type owl:NamedIndividual .
 
@@ -3451,7 +3478,7 @@ In version 5, 7 and 8 the rec-spec describes the field where bit 7 is set for wo
                                                                   skos:Concept ;
                                                          skos:broader zilf:CoreFunctions ;
                                                          skos:inScheme zilf:ZILF_Scheme ;
-                                                         skos:definition "ZIL library function."@en ;
+                                                         skos:definition "ZIL library predicate."@en ;
                                                          skos:editorialNote "ZILF ignores this and always returns FALSE."@en ;
                                                          skos:prefLabel "<NEVER-ZAP-TO-SOURCE-DIRECTORY?>"@en .
 
