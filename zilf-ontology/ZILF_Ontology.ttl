@@ -606,6 +606,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  <http://example.org/zilf/OBLIST?> ,
                                  <http://example.org/zilf/OR?> ,
                                  <http://example.org/zilf/ORDER-FLAGS?> ,
+                                 <http://example.org/zilf/ORDER-OBJECTS?> ,
                                  <http://example.org/zilf/VALID-TYPE?> ;
                    skos:topConceptOf zilf:ZILF_Scheme ;
                    skos:prefLabel "Core Functions"@en .
@@ -3662,6 +3663,30 @@ In version 5, 7 and 8 the rec-spec describes the field where bit 7 is set for wo
 
 The only ordering allowed is LAST, which causes the named flags to be added to the list of “flags requiring high numbers”, which are assigned the highest flag numbers so they may be distinguished from zero. Flags mentioned in the (FIND ...) clause of SYNTAX definitions are already added to this list by default."""@en ;
                                        skos:prefLabel "<ORDER-FLAGS? LAST objects ...>"@en .
+
+
+###  http://example.org/zilf/ORDER-OBJECTS?
+<http://example.org/zilf/ORDER-OBJECTS?> rdf:type owl:NamedIndividual ,
+                                                  skos:Concept ;
+                                         skos:broader zilf:CoreFunctions ;
+                                         skos:inScheme zilf:ZILF_Scheme ;
+                                         skos:definition """Belonging to the ZIL library, this controls the order in which object numbers are assigned to objects.
+
+By default, if ORDER-OBJECTS? is not used, object numbers are assigned in reverse mention order. That is, the first object defined is given the highest number, and any other objects mentioned in its definition are given the next highest numbers (in order), whether or not those objects are explicitly defined later.
+
+The atom is one of the following:
+
+*  DEFINED, to assign numbers to all explicitly defined objects in the order of their definitions (starting at 1), then to all other mentioned objects in the order of their mentions.
+
+*  ROOMS-FIRST, which is the same as DEFINED, except that numbers are assigned to rooms before non-rooms, so room numbers can be packed into a byte array (assuming there are less than 256 of them).
+
+*  ROOMS-LAST, which is the same as DEFINED, except that numbers are assigned to non-rooms before rooms.
+
+*  ROOMS-AND-LGS-FIRST, which is the same as ROOMS-FIRST, except that numbers are assigned to rooms and local globals before the remaining objects.
+
+For the purpose of object ordering, “rooms” include all objects defined with ROOM (instead of OBJECT) as well as all objects whose initial LOC is an object named ROOMS. “Local globals” includes all objects whose initial LOC is an object named LOCAL-GLOBALS."""@en ;
+                                         skos:editorialNote "Note that there are two ways the compiler can learn about an object: some objects are explicitly “defined” using ROOM or OBJECT, whereas the existence of others is merely implied when the objects are “mentioned” as part of another object’s definition (in a LOC or direction property)."@en ;
+                                         skos:prefLabel "<ORDER-OBJECTS? atom>"@en .
 
 
 ###  http://example.org/zilf/VALID-TYPE?
