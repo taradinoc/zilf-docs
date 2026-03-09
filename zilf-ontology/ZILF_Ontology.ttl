@@ -561,6 +561,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:NEXT ,
                                  zilf:NOT ,
                                  zilf:NTH ,
+                                 zilf:OFFSET ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
@@ -2180,6 +2181,31 @@ zilf:OBJECT rdf:type owl:NamedIndividual ;
   (LDESC \"There is a brass lantern (battery-powered) here.\")
   (SIZE 15)>"""@en ;
             skos:prefLabel "<OBJECT name (property values ...) ...>"@en .
+
+
+###  http://example.org/zilf/OFFSET
+zilf:OFFSET rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition """MDL built-in function that creates an OFFSET TYPE that is used with NTH and PUT to check that an element at index in the structure follows the specified pattern, structure-decl and value-decl.
+
+The index is an integer and the structure-decl follow the normal rules for a decl (see GDECL). Because the OFFSET only specifies the decl for one element in the structure it is possible to split the decl in two parts where structure-decl specifies the structure and value-decl is the decl for this specific element."""@en ;
+            skos:editorialNote """Note that in ZILF can OFFSET only be used with NTH and PUT in the form <index-or-offset structure> and <index-or-offset structure value> respectively. 
+
+GET-DECL and PUT-DECL can be used to examine and change the decl of the OFFSET and INDEX returns the index of an OFFSET."""@en ;
+            skos:example """<SETG OFF1 <OFFSET 1 '<VECTOR FIX>>>
+<SETG OFF2 <OFFSET 2 '<VECTOR FIX CHARACTER>>>
+<SETG OFF3 <OFFSET 3 '<VECTOR> 'STRING>>
+<GET-DECL ,OFF2>  ;  <VECTOR FIX CHARACTER>
+<SET V [1 !\\A \"BCD\"]>
+<OFF1 .V>  ;  1
+<OFF3 .V>  ;  \"BCD\"
+<OFF2 .V !\\B>  ;  [1 !\\B \"BCD\"]
+<OFF1 .V !\\A>  ;  ERROR
+<2 .V 65>
+<OFF2 .V>  ;  ERROR"""@en ;
+            skos:prefLabel "<OFFSET index structure-decl [value-decl]>"@en .
 
 
 ###  http://example.org/zilf/OR
