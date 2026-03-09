@@ -562,6 +562,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:NOT ,
                                  zilf:NTH ,
                                  zilf:OFFSET ,
+                                 zilf:OPEN ,
                                  zilf:OR ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
@@ -2206,6 +2207,21 @@ GET-DECL and PUT-DECL can be used to examine and change the decl of the OFFSET a
 <2 .V 65>
 <OFF2 .V>  ;  ERROR"""@en ;
             skos:prefLabel "<OFFSET index structure-decl [value-decl]>"@en .
+
+
+###  http://example.org/zilf/OPEN
+zilf:OPEN rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition "MDL built-in function that opens the file at path for input."@en ;
+          skos:editorialNote "The second argument must always be \"READ\" in ZILF and the path is specified like in Linux (forward slashes etc.) and uppercase/lowercase can be significant, depending on the host system."@en ;
+          skos:example """;\"ZILF ver 0.9\"
+ <SET CH <OPEN \"READ\" \"../zillib/parser.zil\">>
+ <SET BUFFER <ISTRING 1000>>
+ <READSTRING .BUFFER .CH \";\">  ;  124 ;\"READ until first ;\"
+ <CLOSE .CH>"""@en ;
+          skos:prefLabel "<OPEN \"READ\" path>"@en .
 
 
 ###  http://example.org/zilf/OR
