@@ -564,6 +564,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:OFFSET ,
                                  zilf:OPEN ,
                                  zilf:OR ,
+                                 zilf:ORB ,
                                  zilf:PICFILE ,
                                  zilf:PNAME ,
                                  zilf:PRIMTYPE ,
@@ -2236,6 +2237,17 @@ zilf:OR rdf:type owl:NamedIndividual ,
  <SET X <OR 0 1 2 3>>  ;  X is set to 0 
  <SET X <OR <> 1 2 3>>  ;  X is set to 1"""@en ;
         skos:prefLabel "<OR expressions...>"@en .
+
+
+###  http://example.org/zilf/ORB
+zilf:ORB rdf:type owl:NamedIndividual ,
+                  skos:Concept ;
+         skos:broader zilf:CoreFunctions ;
+         skos:inScheme zilf:ZILF_Scheme ;
+         skos:definition "MDL built-in function that performs a bitwise OR."@en ;
+         skos:example """<ORB 33 96>  ;  97
+<ORB 33 96 64>  ;  97"""@en ;
+         skos:prefLabel "<ORB numbers ...>"@en .
 
 
 ###  http://example.org/zilf/ObjectProperties
