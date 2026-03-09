@@ -1003,6 +1003,28 @@ MDL built-in predicate that returns the OBLIST that contains the atom. If the at
 
 ---
 
+### OFFSET
+**Usage:** `<OFFSET index structure-decl [value-decl]>`
+
+MDL built-in function that creates an OFFSET TYPE that is used with NTH and PUT to check that an element at index in the structure follows the specified pattern, structure-decl and value-decl.
+
+The index is an integer and the structure-decl follow the normal rules for a decl (see GDECL). Because the OFFSET only specifies the decl for one element in the structure it is possible to split the decl in two parts where structure-decl specifies the structure and value-decl is the decl for this specific element.
+
+> **Note:** Note that in ZILF can OFFSET only be used with NTH and PUT in the form <index-or-offset structure> and <index-or-offset structure value> respectively. 
+
+GET-DECL and PUT-DECL can be used to examine and change the decl of the OFFSET and INDEX returns the index of an OFFSET.
+
+---
+
+### OPEN
+**Usage:** `<OPEN "READ" path>`
+
+MDL built-in function that opens the file at path for input.
+
+> **Note:** The second argument must always be "READ" in ZILF and the path is specified like in Linux (forward slashes etc.) and uppercase/lowercase can be significant, depending on the host system.
+
+---
+
 ### OR
 **Usage:** `<OR expressions...>`
 
@@ -1019,6 +1041,45 @@ MDL built-in function that returns the same result as OR with the difference tha
 
 > **Note:** <OR? <=? 1 2> <=? 1 1>>  ; True 
  <OR? <=? 1 1> <SET X 2>> ;  X is set to 2 because all expressions are evaluated
+
+---
+
+### ORB
+**Usage:** `<ORB numbers ...>`
+
+MDL built-in function that performs a bitwise OR.
+
+---
+
+### ORDER-FLAGS?
+**Usage:** `<ORDER-FLAGS? LAST objects ...>`
+
+Belonging to the ZIL library, each of the objects is an atom naming a flag, as seen in the (FLAGS ...) clause of an OBJECTdefinition.
+
+The only ordering allowed is LAST, which causes the named flags to be added to the list of “flags requiring high numbers”, which are assigned the highest flag numbers so they may be distinguished from zero. Flags mentioned in the (FIND ...) clause of SYNTAX definitions are already added to this list by default.
+
+---
+
+### ORDER-OBJECTS?
+**Usage:** `<ORDER-OBJECTS? atom>`
+
+Belonging to the ZIL library, this controls the order in which object numbers are assigned to objects.
+
+By default, if ORDER-OBJECTS? is not used, object numbers are assigned in reverse mention order. That is, the first object defined is given the highest number, and any other objects mentioned in its definition are given the next highest numbers (in order), whether or not those objects are explicitly defined later.
+
+The atom is one of the following:
+
+*  DEFINED, to assign numbers to all explicitly defined objects in the order of their definitions (starting at 1), then to all other mentioned objects in the order of their mentions.
+
+*  ROOMS-FIRST, which is the same as DEFINED, except that numbers are assigned to rooms before non-rooms, so room numbers can be packed into a byte array (assuming there are less than 256 of them).
+
+*  ROOMS-LAST, which is the same as DEFINED, except that numbers are assigned to non-rooms before rooms.
+
+*  ROOMS-AND-LGS-FIRST, which is the same as ROOMS-FIRST, except that numbers are assigned to rooms and local globals before the remaining objects.
+
+For the purpose of object ordering, “rooms” include all objects defined with ROOM (instead of OBJECT) as well as all objects whose initial LOC is an object named ROOMS. “Local globals” includes all objects whose initial LOC is an object named LOCAL-GLOBALS.
+
+> **Note:** Note that there are two ways the compiler can learn about an object: some objects are explicitly “defined” using ROOM or OBJECT, whereas the existence of others is merely implied when the objects are “mentioned” as part of another object’s definition (in a LOC or direction property).
 
 ---
 

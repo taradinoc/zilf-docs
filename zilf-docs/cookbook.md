@@ -1001,12 +1001,45 @@ FOO!-NEW-OBLIST  ;  "This can also be done with trailer"
 ```
 
 
+### OFFSET
+```zil
+<SETG OFF1 <OFFSET 1 '<VECTOR FIX>>>
+<SETG OFF2 <OFFSET 2 '<VECTOR FIX CHARACTER>>>
+<SETG OFF3 <OFFSET 3 '<VECTOR> 'STRING>>
+<GET-DECL ,OFF2>  ;  <VECTOR FIX CHARACTER>
+<SET V [1 !\A "BCD"]>
+<OFF1 .V>  ;  1
+<OFF3 .V>  ;  "BCD"
+<OFF2 .V !\B>  ;  [1 !\B "BCD"]
+<OFF1 .V !\A>  ;  ERROR
+<2 .V 65>
+<OFF2 .V>  ;  ERROR
+```
+
+
+### OPEN
+```zil
+;"ZILF ver 0.9"
+ <SET CH <OPEN "READ" "../zillib/parser.zil">>
+ <SET BUFFER <ISTRING 1000>>
+ <READSTRING .BUFFER .CH ";">  ;  124 ;"READ until first ;"
+ <CLOSE .CH>
+```
+
+
 ### OR
 ```zil
 <OR <=? 1 2> <=? 1 1>>  ;  True 
  <OR <=? 1 1> <SET X 2>> ;  X is never set to 2 because first predicate evaluates to true 
  <SET X <OR 0 1 2 3>>  ;  X is set to 0 
  <SET X <OR <> 1 2 3>>  ;  X is set to 1
+```
+
+
+### ORB
+```zil
+<ORB 33 96>  ;  97
+<ORB 33 96 64>  ;  97
 ```
 
 

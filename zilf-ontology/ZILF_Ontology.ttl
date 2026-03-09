@@ -2219,7 +2219,7 @@ zilf:OPEN rdf:type owl:NamedIndividual ,
           skos:inScheme zilf:ZILF_Scheme ;
           skos:definition "MDL built-in function that opens the file at path for input."@en ;
           skos:editorialNote "The second argument must always be \"READ\" in ZILF and the path is specified like in Linux (forward slashes etc.) and uppercase/lowercase can be significant, depending on the host system."@en ;
-          skos:example """;\"ZILF ver 0.9\"
+          skos:example """;  \"ZILF ver 0.9\"
  <SET CH <OPEN \"READ\" \"../zillib/parser.zil\">>
  <SET BUFFER <ISTRING 1000>>
  <READSTRING .BUFFER .CH \";\">  ;  124 ;\"READ until first ;\"
