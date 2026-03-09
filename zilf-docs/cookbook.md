@@ -1019,7 +1019,7 @@ FOO!-NEW-OBLIST  ;  "This can also be done with trailer"
 
 ### OPEN
 ```zil
-;"ZILF ver 0.9"
+;  "ZILF ver 0.9"
  <SET CH <OPEN "READ" "../zillib/parser.zil">>
  <SET BUFFER <ISTRING 1000>>
  <READSTRING .BUFFER .CH ";">  ;  124 ;"READ until first ;"
