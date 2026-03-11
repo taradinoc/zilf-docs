@@ -574,6 +574,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:PRIN1 ,
                                  zilf:PRINC ,
                                  zilf:PRINT ,
+                                 zilf:PRINT-MANY ,
                                  zilf:PTABLE ,
                                  zilf:PUTREST ,
                                  zilf:QUIT ,
@@ -2507,6 +2508,18 @@ zilf:PRINT rdf:type owl:NamedIndividual ,
 <PRINT (1 2 3)>  ;  (1 2 3)<space>
 <PRINT <+ 1 2>>  ;  3<space>"""@en ;
            skos:prefLabel "<PRINT value [channel]>"@en .
+
+
+###  http://example.org/zilf/PRINT-MANY
+zilf:PRINT-MANY rdf:type owl:NamedIndividual ,
+                         skos:Concept ;
+                skos:broader zilf:CoreFunctions ;
+                skos:inScheme zilf:ZILF_Scheme ;
+                skos:definition "ZIL library function that prints multiple items to channel with the printer. The printer is usually PRINT, PRINC or PRIN1 but could actually be any FUNCTION that takes one argument. The printer is called repeatedly with one item at a time until the list of items is exhausted."@en ;
+                skos:editorialNote "If PRMANY-CRLF is given as an item, a CRLF is printed at that position."@en ;
+                skos:example """<PRINT-MANY .OUTCHAN PRINC \"Hello\" !\\! PRMANY-CRLF>  ;  Hello!\\n
+<PRINT-MANY .OUTCHAN PRIN1 \"string\" !\\c PRMANY-CRLF>  ;  \"string\"!\\c\\n"""@en ;
+                skos:prefLabel "<PRINT-MANY channel printer items ...>"@en .
 
 
 ###  http://example.org/zilf/PTABLE
