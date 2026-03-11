@@ -1043,6 +1043,63 @@ FOO!-NEW-OBLIST  ;  "This can also be done with trailer"
 ```
 
 
+### PACKAGE
+```zil
+;  "Define PACKAGE"
+<REMOVE ANSWER>  ;  "Secure that ATOM not on any OBLIST"
+<REMOVE DBL-ANSWER>
+<REMOVE ROOT-ANSWER>
+<REMOVE SECRET>
+<PACKAGE "FOO">
+<ENTRY ANSWER>
+<SETG ANSWER 42>
+<SETG SECRET 12345>
+<RENTRY ROOT-ANSWER>
+<SETG ROOT-ANSWER 21>
+<ENDPACKAGE>
+<TYPE? <GETPROP FOO!-PACKAGE OBLIST> OBLIST>  ;  OBLIST
+<TYPE? <GETPROP IFOO!-FOO!-PACKAGE OBLIST> OBLIST>  ;  OBLIST
+<GASSIGNED? ANSWER>  ;  #FALSE
+<GASSIGNED? ANSWER!-FOO!-PACKAGE>  ;  T
+<GASSIGNED? SECRET!-IFOO!-FOO!-PACKAGE>  ;  T
+,ANSWER!-FOO!-PACKAGE  ;  42
+,SECRET!-IFOO!-FOO!-PACKAGE  ;  12345
+,ROOT-ANSWER  ;  21
+
+;  "PACKAGEs can be defined additive"
+<PACKAGE "FOO">
+<SETG DBL-ANSWER <* ,ANSWER 2>>
+<ENTRY DBL-ANSWER>
+<ENDPACKAGE>
+,ANSWER!-FOO!-PACKAGE  ;  42
+,DBL-ANSWER!-FOO!-PACKAGE  ;  84
+
+;  "USE adds external OBLIST to local OBLIST-path"
+<REMOVE ANSWER>  ;  "Secure that ATOM not on any OBLIST"
+<LENGTH .OBLIST>  ;  2
+<USE "FOO">
+<LENGTH .OBLIST>  ;  3
+,ANSWER  ;  42
+<GASSIGNED? SECRET>  ;  #FALSE
+,SECRET!-IFOO  ;  12345
+```
+
+
+### PARSE
+```zil
+<PARSE "FOO">  ;  FOO
+<PARSE "+">  ;  + 
+<PARSE "+" 10 <GETPROP PACKAGE OBLIST>>  ;  +!-PACKAGE
+<PARSE "23">  ;  23
+<PARSE "(1 2 3)">  ;  (1 2 3)
+<PARSE "<+ 12 34>">  ;  <+ 12 34>
+<PARSE "%<+ 12 34>">  ;  46
+<PARSE "<+ .A .B>" 10 <MOBLIST OB>>  ;  <+!-OB <LVAL!-OB A!-OB> <LVAL!-OB B!-OB>>
+<PARSE " ">  ;  ERROR (No expression)
+<PARSE "1 2 3">  ;  1 (Only 1st expression)
+```
+
+
 ### PNAME
 ```zil
 <PNAME FOO> ; "FOO"
@@ -1086,6 +1143,13 @@ FOO!-NEW-OBLIST  ;  "This can also be done with trailer"
 <PRINT "Hello, world!">  ;  "Hello, world!"<space>
 <PRINT (1 2 3)>  ;  (1 2 3)<space>
 <PRINT <+ 1 2>>  ;  3<space>
+```
+
+
+### PRINT-MANY
+```zil
+<PRINT-MANY .OUTCHAN PRINC "Hello" !\! PRMANY-CRLF>  ;  Hello!\n
+<PRINT-MANY .OUTCHAN PRIN1 "string" !\c PRMANY-CRLF>  ;  "string"!\c\n
 ```
 
 

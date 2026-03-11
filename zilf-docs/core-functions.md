@@ -1083,12 +1083,68 @@ For the purpose of object ordering, “rooms” include all objects defined with
 
 ---
 
+### ORDER-TREE?
+**Usage:** `<ORDER-TREE? atom>`
+
+ZIL library function that controls the initial layout of the Z-machine object tree.
+
+The object tree is defined by three fields on each object, named in the Z-Machine Standards Document as “parent”, “child”, and “sibling”, which are read by the ZIL functions LOC, FIRST?, and NEXT?. Each object’s parent field is specified by the (LOC …) clause in the object definition, but the compiler has discretion to set the child and sibling fields as long as the tree remains well-formed.
+
+The atom must be REVERSE-DEFINED to force objects to be linked in the reverse order of their definitions. That is, the child of an object X is the last object in the source code whose definition contains (LOC X); the sibling of that child is the next to last object in the source code that contains (LOC X); and so on.
+
+By default, if ORDER-TREE? is not used, the order is the same as REVERSE-DEFINED except for the first defined child, which remains the first object linked. That is, the child of an object X is the first object in the source code whose definition contains (LOC X); the sibling of that child is the last object that contains (LOC X); the sibling of that child in turn is the next to last object that contains (LOC X); and so on.
+
+---
+
+### PACKAGE
+**Usage:** `<PACKAGE package-name>`
+
+MDL package system that defines a group of ATOMs (i.e. variables and functions) with the package-name for potential later inclusion (via USE or USE-WHEN) in the project. A PACKAGE is often used to functionally group together library functions that can have a usage over many projects.
+
+Internally an OBLIST named PACKAGE is used in conjunction with BLOCK and ENDBLOCK. When you define a PACKAGE the following is happening:
+
+1.  An external OBLIST, package-name, is created and added to the OBLIST PACKAGE (e.g. FOO!-PACKAGE).
+
+2.  An internal OBLIST, Ipackage-name, is created and added to the OBLIST package-name (e.g. IFOO!-FOO!-PACKAGE).
+
+3.  A BLOCK is started with the OBLISTs (in this order) Ipackage-name, package-name and <ROOT> (e.g. IFOO, FOO, <ROOT>).
+
+This means that every ATOM that is created inside the PACKAGE ends up on the internal OBLIST first. If ENTRY is used the ATOM is created/moved to the external OBLIST and finally RENTRY creates/moves the ATOM to the ROOT OBLIST.
+
+The PACKAGE definition is ended by END-PACKAGE (in fact an ENDBLOCK) which restores the OBLISTs to the state they had before the PACKAGE definition began.
+
+When you decide to use a package by USE or USE-WHEN the OBLIST package-name is copied and added last to the local OBLIST (<LVAL OBLIST>). This means that all ATOMs on the external package OBLIST becomes available in current environment.
+
+> **Note:** Note that a PACKAGE can be defined additive (i.e. multiple PACKAGE definitions with the same package-name is added together to one PACKAGE). ZILF has three packages predefined in <MOBLIST PACKAGE>; NEWSTRUC, ZIL and ZILCH. They are all empty and are only there for compatibility (all ATOMs in these packages are already in ZILF).
+
+See DEFINITIONS, ENDPACKAGE, ENTRY, RENTRY, USE and USE-WHEN.
+
+---
+
+### PARSE
+**Usage:** `<PARSE text [10] [lookup-oblist]>`
+
+MDL built-in function that takes a string, text, and returns the first MDL object encountered in it. If lookup-oblist is supplied, PARSE looks for potential ATOMs on this OBLIST. If no lookup-oblist is supplied, .OBLIST is used.
+
+> **Note:** ZILF requires that the second argument is 10 if a lookup-oblist is supplied.
+
+---
+
 ### PICFILE
 **Usage:** `<PICFILE>`
 
 ZIL library function that is a compiler directive used to associate a graphics resource file with a game, and Infocom's version of PICFILE translates to a ZAP .PICFILE directive.
 
 > **Note:** The current version of ZILF ignores PICFILE and always returns FALSE because modern interpreters do not support Infocom's graphics format. The next release of ZILF will bundle images into Blorb files (without ZAPF).
+
+---
+
+### PLTABLE
+**Usage:** `<PLTABLE [flags ...] values ...>`
+
+ZIL library function that defines a table containing the specified values and with the PURE and LENGTH flag (see TABLE about LENGTH, PURE and other flags).
+
+> **Note:** TABLE is a ZIL-specific structure that can be used both outside and inside ROUTINES.
 
 ---
 
@@ -1132,6 +1188,15 @@ MDL built-in function that returns the evaluated representation of value.
 MDL built-in function that returns the evaluated representation of value.
 
 > **Note:** PRINT is just like PRIN1, except that it first prints a CRLF, then the evaluated representation of value and lastly a space.
+
+---
+
+### PRINT-MANY
+**Usage:** `<PRINT-MANY channel printer items ...>`
+
+ZIL library function that prints multiple items to channel with the printer. The printer is usually PRINT, PRINC or PRIN1 but could actually be any FUNCTION that takes one argument. The printer is called repeatedly with one item at a time until the list of items is exhausted.
+
+> **Note:** If PRMANY-CRLF is given as an item, a CRLF is printed at that position.
 
 ---
 
