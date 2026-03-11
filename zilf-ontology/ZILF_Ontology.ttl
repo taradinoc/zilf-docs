@@ -568,6 +568,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:PACKAGE ,
                                  zilf:PARSE ,
                                  zilf:PICFILE ,
+                                 zilf:PLTABLE ,
                                  zilf:PNAME ,
                                  zilf:PRIMTYPE ,
                                  zilf:PRIN1 ,
@@ -2392,6 +2393,16 @@ zilf:PICSET rdf:type owl:NamedIndividual ,
 <PICSET ,B-PICSET-TBL>"""@en ;
             skos:historyNote "Zapf syntax: PICSET, Inform syntax: picture_table"@en ;
             skos:prefLabel "<PICSET table>"@en .
+
+
+###  http://example.org/zilf/PLTABLE
+zilf:PLTABLE rdf:type owl:NamedIndividual ,
+                      skos:Concept ;
+             skos:broader zilf:CoreFunctions ;
+             skos:inScheme zilf:ZILF_Scheme ;
+             skos:definition "ZIL library function that defines a table containing the specified values and with the PURE and LENGTH flag (see TABLE about LENGTH, PURE and other flags)."@en ;
+             skos:editorialNote "TABLE is a ZIL-specific structure that can be used both outside and inside ROUTINES."@en ;
+             skos:prefLabel "<PLTABLE [flags ...] values ...>"@en .
 
 
 ###  http://example.org/zilf/PNAME
