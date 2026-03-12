@@ -577,6 +577,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:PRINT-MANY ,
                                  zilf:PRINTTYPE ,
                                  zilf:PROG ,
+                                 zilf:PROPDEF ,
                                  zilf:PTABLE ,
                                  zilf:PUT-DECL ,
                                  zilf:PUT-PURE-HERE ,
@@ -2604,6 +2605,135 @@ The decl is used to specify the valid TYPE of the variables. In its simplest for
 >
     <TEST-PROG-AS-REPEAT>  ;  \"START 123 END\""""@en ;
           skos:prefLabel "<PROG [activation] (bindings ...) [decl] expressions ...>"@en .
+
+
+###  http://example.org/zilf/PROPDEF
+zilf:PROPDEF rdf:type owl:NamedIndividual ,
+                      skos:Concept ;
+             skos:broader zilf:CoreFunctions ;
+             skos:inScheme zilf:ZILF_Scheme ;
+             skos:definition """ZIL library function that defines a property, atom, with a default-value for OBJECTs (and ROOMs). The default-value is the value that GETP will return if the property is not defined for the given OBJECT.
+
+For the more complex properties it is possible to define a spec-pattern according to (atom|DIR [\"MANY\"|\"OPT\"] [phrase] var:type ... [form-len] [\"MANY\"] <fnc-size var>|(const value)| (ptr <fnc-size var>) ...) ...
+
+The spec-pattern consists of two parts divided by an equal sign. The left side is the pattern and the right side is the rules on how to store the property.
+
+*  atom|DIR is the property. DIR is a special case that is used for DIRECTIONS.
+
+*  \"MANY\" means that the pattern of var:type repeats itself. If \"MANY\" is defined on the left side of the equal sign there must be a matching on the right side.
+
+*  \"OPT\" means that the pattern after is optional.
+
+*  [phrase] can be tokens like IF, ELSE, TO.
+
+*  var:type is a variable name, var, and its type. Usually FIX, STRING or ROOM.
+
+*  form-len is the length (records) of the form. The form-len is optional and can also be given as <>.
+
+*  <fnc-size var> can be a call with var to either BYTE, WORD, STRING, OBJECT, ROOM, GLOBAL, NOUN, ADJ, or VOC. This stores var or derivative of var and adds to the vocabulary and/or creates a GVAL.
+
+*  (ptr <fnc-size var>) creates a GVAL, ptr, that contains the address-pointer relative to the property.
+
+*  (const value) creates a CONSTANT, name, containing value."""@en ;
+             skos:example """;  \"Ordinary property\"
+<PROPDEF HEIGHT 72>
+<OBJECT OBJ1>
+<OBJECT OBJ2 (HEIGHT 80)>
+
+;  \"Implies, inside routine\"
+<GETP ,OBJ1 ,P?HEIGHT>  ;  72
+<GETP ,OBJ2 ,P?HEIGHT>  ;  80
+
+;  \"Basic pattern\"
+<PROPDEF HEIGHT <>
+    (HEIGHT FEET:FIX FOOT INCHES:FIX = 2 <WORD .FEET>
+                                                                                <BYTE .INCHES>)
+    (HEIGHT FEET:FIX FT INCHES:FIX = 2 <WORD .FEET>
+                                                                          <BYTE .INCHES>)>
+<OBJECT GIANT (HEIGHT 10 FT 8)>
+
+;  \"Implies, inside routine\"
+<=? <GET <GETPT ,GIANT ,P?HEIGHT> 0> 10>
+<=? <GETB <GETPT ,GIANT ,P?HEIGHT> 2> 8>
+
+;  \"Basic pattern with OPT\"
+<PROPDEF HEIGHT <> (HEIGHT FEET:FIX FT \"OPT\" INCHES:FIX =
+    <WORD .FEET> <BYTE .INCHES>)>
+<OBJECT GIANT1 (HEIGHT 100 FT)>
+<OBJECT GIANT2 (HEIGHT 50 FT 11)>
+
+;  \"Implies, inside routine\"
+<=? <PTSIZE <GETPT ,GIANT1 ,P?HEIGHT>> 3>
+<=? <GET <GETPT ,GIANT1 ,P?HEIGHT> 0> 100>
+<=? <GETB <GETPT ,GIANT1 ,P?HEIGHT> 2> 0>
+<=? <PTSIZE <GETPT ,GIANT2 ,P?HEIGHT>> 3>
+<=? <GET <GETPT ,GIANT2 ,P?HEIGHT> 0> 50>
+<=? <GETB <GETPT ,GIANT2 ,P?HEIGHT> 2> 11>
+
+;\"Basic pattern with MANY\"
+<PROPDEF TRANSLATE <> (TRANSLATE \"MANY\" A:ATOM N:FIX =
+    \"MANY\" <VOC .A BUZZ> <WORD .N>)>
+<OBJECT NUMBERS (TRANSLATE ONE 1 TWO 2)>
+
+;\"Implies, inside routine\"
+<=? <PTSIZE <GETPT ,NUMBERS ,P?TRANSLATE>> 8>
+<=? <GET <GETPT ,NUMBERS ,P?TRANSLATE> 0> ,W?ONE>
+<=? <GET <GETPT ,NUMBERS ,P?TRANSLATE> 1> 1>
+<=? <GET <GETPT ,NUMBERS ,P?TRANSLATE> 2> ,W?TWO>
+<=? <GET <GETPT ,NUMBERS ,P?TRANSLATE> 3> 2>
+
+;  \"Pattern with constants\"
+<PROPDEF HEIGHT <> (HEIGHT FEET:FIX FT INCHES:FIX =
+    (HEIGHTSIZE 3) (H-FEET <WORD .FEET>)
+    (H-INCHES <BYTE .INCHES>))>
+<=? ,HEIGHTSIZE 3>
+<=? ,H-FEET 0>
+<=? ,H-INCHES 2>
+
+;  \"DIR sets pattern for all DIRECTIONS\"
+<PROPDEF DIRECTIONS <> (DIR GOES TO R:ROOM =
+    (MY-UEXIT 3) <WORD 0> (MY-REXIT <ROOM .R>))>
+<DIRECTIONS NORTH SOUTH>
+<OBJECT HOUSE (SOUTH GOES TO WOODS)>
+<OBJECT WOODS (NORTH GOES TO HOUSE)>
+
+;  \"Implies, inside routine\"
+<=? <PTSIZE <GETPT ,HOUSE ,P?SOUTH>> ,MY-UEXIT>
+<=? <GETB <GETPT ,HOUSE ,P?SOUTH> ,MY-REXIT> ,WOODS>
+
+;  \"DIR sets implicit DIRECTIONS\"
+<PROPDEF DIRECTIONS <> (DIR GOES TO R:ROOM =
+    (MY-UEXIT 3) <WORD 0> (MY-REXIT <ROOM .R>))>
+<DIRECTIONS NORTH SOUTH>
+<OBJECT HOUSE (EAST GOES TO WOODS)>
+<OBJECT WOODS (WEST GOES TO HOUSE)>
+
+;  \"Implies, inside routine\"
+<=? <PTSIZE <GETPT ,HOUSE ,P?EAST>> ,MY-UEXIT>
+<=? <GETB <GETPT ,HOUSE ,P?EAST> ,MY-REXIT> ,WOODS>
+<BAND <GETB ,W?EAST 4> ,PS?DIRECTION>
+
+;  \"VOC in pattern adds word to vocabulary\"
+<PROPDEF FOO <> (FOO A:ATOM = <VOC .A PREP>)>
+<OBJECT BAR (FOO FOO)>
+
+;  \"Implies, inside routine\"
+<=? <GETP ,BAR ,P?FOO> ,W?FOO>
+
+;  \"Complex PROPDEF (DIRECTIONS from Zork Zero)\"
+<PROPDEF DIRECTIONS <>
+    (DIR TO R:ROOM = (UEXIT 1) (REXIT <ROOM .R>))
+    (DIR S:STRING = (NEXIT 2) (NEXITSTR <STRING .S>))
+    (DIR SORRY S:STRING = (NEXIT 2) (NEXITSTR <STRING .S>))
+    (DIR PER F:FCN = (FEXIT 3)
+                                      (FEXITFCN <WORD .F>) <BYTE 0>)
+    (DIR TO R:ROOM IF F:GLOBAL \"OPT\" ELSE S:STRING =
+        (CEXIT 4) (REXIT <ROOM .R>) (CEXITFLAG <GLOBAL .F>)
+                                                                (CEXITSTR <STRING .S>))
+    (DIR TO R:ROOM IF O:OBJECT IS OPEN \"OPT\" ELSE S:STRING =
+        (DEXIT 5) (DEXITOBJ <OBJECT .O>)
+        (DEXITSTR <STRING .S>) (DEXITRM <ROOM .R>))>"""@en ;
+             skos:prefLabel "<PROPDEF atom default-value [spec-patterns ...]>"@en .
 
 
 ###  http://example.org/zilf/PTABLE
