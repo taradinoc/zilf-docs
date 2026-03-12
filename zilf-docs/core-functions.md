@@ -1200,12 +1200,63 @@ ZIL library function that prints multiple items to channel with the printer. The
 
 ---
 
+### PRINTTYPE
+**Usage:** `<PRINTTYPE atom [handler]>`
+
+MDL built-in function that tells the TYPE atom how it should be printed (PRIN1-style). If PRINTTYPE is called without a handler then the currently active handler is returned. If there is no active handler, FALSE is returned.
+
+> **Note:** Note that it is possible to replace the handler with a new handler, even on the predefined TYPEs.
+
+See APPLYTYPE, EVALTYPE and NEWTYPE.
+
+---
+
+### PROG
+**Usage:** `<PROG [activation] (bindings ...) [decl] expressions ...>`
+
+MDL built-in function that defines a program block with its own set of bindings. PROG is similar to BIND and REPEAT but unlike BIND it creates a default activation (like REPEAT) at the start of the block and doesn't have an automatic AGAIN at the end of the block (like REPEAT). It is possible to name an atom to the activation but it is not necessary. AGAIN and RETURN inside a PROG-block will start the block over or return from the block.
+
+The decl is used to specify the valid TYPE of the variables. In its simplest form decl is formatted like: #DECL ((X) FIX), meaning that X must be of the TYPE FIX. For more information on how to format the decl see GDECL.
+
+> **Note:** Also see AGAIN, BIND, REPEAT and RETURN for more details how to control program flow.
+
+---
+
 ### PTABLE
 **Usage:** `<PTABLE [(flags ...)] values ...>`
 
 ZIL library function that defines a table containing the specified values and with the PURE flag (see TABLE about PURE and other flags).
 
 > **Note:** TABLE is a ZIL-specific structure that can be used both outside and inside ROUTINES.
+
+---
+
+### PUT-DECL
+**Usage:** `<PUT-DECL item pattern>`
+
+MDL built-in function that  defines an alias, item, for a pattern. See DECL?, GDECL and GET-DECL for more on declaration patterns.
+
+---
+
+### PUT-PURE-HERE
+**Usage:** `<PUT-PURE-HERE>`
+
+ZIL library function.
+
+> **Note:** ZILF ignores this and always returns FALSE.
+
+---
+
+### PUTPROP
+**Usage:** `<PUTPROP item indicator [value]>`
+
+MDL built-in function that stores value as an association on the item under the indicator and returns the item. If no value is specified PUTPROP returns the value and then clears the association.
+
+> **Note:** In ZILF, there is a special indicator, PROPSPEC, that has a special meaning inside OBJECTs. A PROPSPEC property is defined: <PUTPROP item PROPSPEC [function]>
+
+When an item defined in this way is used in an OBJECT, the function is invoked during the compilation with the LIST (containing the item) as an argument. The return value from the function must be a LIST and it is stored as value under PROPSPEC on the item. If no function is specified the PROPSPEC for the item is cleared. See examples below. 
+
+See ASSOCIATIONS, AVALUE, GETPROP, INDICATOR, ITEM and NEXT.
 
 ---
 

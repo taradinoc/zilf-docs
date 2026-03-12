@@ -1153,9 +1153,112 @@ FOO!-NEW-OBLIST  ;  "This can also be done with trailer"
 ```
 
 
+### PRINTTYPE
+```zil
+<DEFINE ROMAN-PRINT (ROMAN "AUX" (RNUM <CHTYPE .ROMAN FIX>))
+<COND (<OR <L=? .RNUM 0> <G? .RNUM 3999>>
+     <PRINC <CHTYPE .NUMB TIME>>)
+    (T
+        <RCPRINT </ .RNUM 1000> '![!\M]>
+        <RCPRINT </ .RNUM 100>  '![!\C !\D !\M]>
+        <RCPRINT </ .RNUM 10>   '![!\X !\L !\C]>
+        <RCPRINT    .RNUM       '![!\I !\V !\X]>)>>
+<DEFINE RCPRINT (MODN V)
+<SET MODN <MOD .MODN 10>>
+<COND (<==? 0 .MODN>)
+        (<==? 1 .MODN> <PRINC <1 .V>>)
+        (<==? 2 .MODN> <PRINC <1 .V>> <PRINC <1 .V>>)
+        (<==? 3 .MODN> <PRINC <1 .V>> <PRINC <1 .V>>
+                                                                      <PRINC <1 .V>>)
+        (<==? 4 .MODN> <PRINC <1 .V>> <PRINC <2 .V>>)
+        (<==? 5 .MODN> <PRINC <2 .V>>)
+        (<==? 6 .MODN> <PRINC <2 .V>> <PRINC <1 .V>>)
+        (<==? 7 .MODN> <PRINC <2 .V>> <PRINC <1 .V>>
+                                                                      <PRINC <1 .V>>)
+        (<==? 8 .MODN> <PRINC <2 .V>> <PRINC <1 .V>>
+                                       <PRINC <1 .V>> <PRINC <1 .V>>) 
+        (<==? 9 .MODN> <PRINC <1 .V>> <PRINC <3 .V>>)>> 
+<NEWTYPE ROMAN FIX>
+<PRINTTYPE ROMAN ,ROMAN-PRINT>
+<==? <PRINTTYPE ROMAN> ,ROMAN-PRINT>
+ #ROMAN 1984  ;  MCMLXXXIV
+
+<NEWTYPE ROMAN2 FIX>
+<PRINTTYPE ROMAN2 ROMAN>  ;  "Copies active handler, if exists"
+#ROMAN2 2020  ;  MMXX
+
+<PRINTTYPE ROMAN FIX>
+<=? <PRINTTYPE ROMAN> <>>  ;  T
+#ROMAN 2020  ;  2020
+;  "Change in ROMAN doesn’t affect ROMAN2"
+
+#ROMAN2 2020  ;  MMXX
+<PRINTTYPE FIX ,ROMAN-PRINT>  ;  "Works on built-in too!"
+23  ;  XXIII
+<PRINTTYPE FORM <FUNCTION (F) <PRIN1 <CHTYPE .F LIST>>>>
+<FORM + 1 2>  ;  (+ I II)
+```
+
+
+### PROG
+```zil
+<PROG ((X 1)) #DECL ((X) FIX)  
+    <PROG ((X 2)) <PRIN1 .X>> <PRIN1 .X>>  ;  "21" 
+<DEFINE TEST-PROG-AS-REPEAT ()
+    <PRINC "START ">
+    <PROG ((X 0))
+        <SET X <+ .X 1>>
+        <PRIN1 .X>
+        <COND (<=? .X 3> <RETURN>)>  ;  "--> exit block"
+        <AGAIN>  ;  "--> repeat"
+    >
+    <PRINC " END">
+>
+    <TEST-PROG-AS-REPEAT>  ;  "START 123 END"
+```
+
+
 ### PTABLE
 ```zil
 <PTABLE 1 2 3 4>
+```
+
+
+### PUT-DECL
+```zil
+<DECL? T BOOLEAN>  ;  Error 
+<PUT-DECL BOOLEAN '<OR ATOM FALSE>>
+<DECL? T BOOLEAN>  ;  T
+<DECL? "Hi" BOOLEAN>  ;  #FALSE
+```
+
+
+### PUTPROP
+```zil
+<SET L (1 2 3)>
+<PUTPROP .L FOO "Hello">  ;  (1 2 3)
+<GETPROP .L FOO>  ;  "Hello"
+<PUTPROP .L FOO>  ;  "Hello"
+<GETPROP .L FOO>  ;  #FALSE
+
+;  "PROPSPEC, loop through all words and add to buzz"
+<VERSION XZIP>
+<OBJECT FOO
+    (ADJECTIVE SMALL CURIOUS)
+    (MYBUZZ "ABCD" "BAR" "BAZ")>
+<DEFINE MYBUZZ-PROP (L)
+    <SET L <REST .L>>  ;  "Ignore MYBUZZ in LIST"
+    <MAPF ,LIST <FUNCTION (W) <VOC .W BUZZ>> .L>>
+<PUTPROP MYBUZZ PROPSPEC MYBUZZ-PROP>
+<ROUTINE GO () <TEST-PROPSPEC>>
+<ROUTINE TEST-PROPSPEC ("AUX" W)
+    <TELL "Part-of-Speech, 4 = BUZZ" CR>
+    <SET W W?ABCD>
+    <TELL "ABCD = " N <GETB .W 6> CR>
+    <SET W W?BAR>
+    <TELL "BAR = " N <GETB .W 6> CR>
+    <SET W W?BAZ>
+    <TELL "BAZ = " N <GETB .W 6> CR>>
 ```
 
 
