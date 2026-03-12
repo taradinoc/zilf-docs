@@ -575,6 +575,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:PRINC ,
                                  zilf:PRINT ,
                                  zilf:PRINT-MANY ,
+                                 zilf:PRINTTYPE ,
                                  zilf:PTABLE ,
                                  zilf:PUTREST ,
                                  zilf:QUIT ,
@@ -2520,6 +2521,60 @@ zilf:PRINT-MANY rdf:type owl:NamedIndividual ,
                 skos:example """<PRINT-MANY .OUTCHAN PRINC \"Hello\" !\\! PRMANY-CRLF>  ;  Hello!\\n
 <PRINT-MANY .OUTCHAN PRIN1 \"string\" !\\c PRMANY-CRLF>  ;  \"string\"!\\c\\n"""@en ;
                 skos:prefLabel "<PRINT-MANY channel printer items ...>"@en .
+
+
+###  http://example.org/zilf/PRINTTYPE
+zilf:PRINTTYPE rdf:type owl:NamedIndividual ,
+                        skos:Concept ;
+               skos:broader zilf:CoreFunctions ;
+               skos:inScheme zilf:ZILF_Scheme ;
+               skos:definition "MDL built-in function that tells the TYPE atom how it should be printed (PRIN1-style). If PRINTTYPE is called without a handler then the currently active handler is returned. If there is no active handler, FALSE is returned."@en ;
+               skos:editorialNote """Note that it is possible to replace the handler with a new handler, even on the predefined TYPEs.
+
+See APPLYTYPE, EVALTYPE and NEWTYPE."""@en ;
+               skos:example """<DEFINE ROMAN-PRINT (ROMAN \"AUX\" (RNUM <CHTYPE .ROMAN FIX>))
+<COND (<OR <L=? .RNUM 0> <G? .RNUM 3999>>
+     <PRINC <CHTYPE .NUMB TIME>>)
+    (T
+        <RCPRINT </ .RNUM 1000> '![!\\M]>
+        <RCPRINT </ .RNUM 100>  '![!\\C !\\D !\\M]>
+        <RCPRINT </ .RNUM 10>   '![!\\X !\\L !\\C]>
+        <RCPRINT    .RNUM       '![!\\I !\\V !\\X]>)>>
+<DEFINE RCPRINT (MODN V)
+<SET MODN <MOD .MODN 10>>
+<COND (<==? 0 .MODN>)
+        (<==? 1 .MODN> <PRINC <1 .V>>)
+        (<==? 2 .MODN> <PRINC <1 .V>> <PRINC <1 .V>>)
+        (<==? 3 .MODN> <PRINC <1 .V>> <PRINC <1 .V>>
+                                                                      <PRINC <1 .V>>)
+        (<==? 4 .MODN> <PRINC <1 .V>> <PRINC <2 .V>>)
+        (<==? 5 .MODN> <PRINC <2 .V>>)
+        (<==? 6 .MODN> <PRINC <2 .V>> <PRINC <1 .V>>)
+        (<==? 7 .MODN> <PRINC <2 .V>> <PRINC <1 .V>>
+                                                                      <PRINC <1 .V>>)
+        (<==? 8 .MODN> <PRINC <2 .V>> <PRINC <1 .V>>
+                                       <PRINC <1 .V>> <PRINC <1 .V>>) 
+        (<==? 9 .MODN> <PRINC <1 .V>> <PRINC <3 .V>>)>> 
+<NEWTYPE ROMAN FIX>
+<PRINTTYPE ROMAN ,ROMAN-PRINT>
+<==? <PRINTTYPE ROMAN> ,ROMAN-PRINT>
+ #ROMAN 1984  ;  MCMLXXXIV
+
+<NEWTYPE ROMAN2 FIX>
+<PRINTTYPE ROMAN2 ROMAN>  ;  \"Copies active handler, if exists\"
+#ROMAN2 2020  ;  MMXX
+
+<PRINTTYPE ROMAN FIX>
+<=? <PRINTTYPE ROMAN> <>>  ;  T
+#ROMAN 2020  ;  2020
+;  \"Change in ROMAN doesn’t affect ROMAN2\"
+
+#ROMAN2 2020  ;  MMXX
+<PRINTTYPE FIX ,ROMAN-PRINT>  ;  \"Works on built-in too!\"
+23  ;  XXIII
+<PRINTTYPE FORM <FUNCTION (F) <PRIN1 <CHTYPE .F LIST>>>>
+<FORM + 1 2>  ;  (+ I II)"""@en ;
+               skos:prefLabel "<PRINTTYPE atom [handler]>"@en .
 
 
 ###  http://example.org/zilf/PTABLE
