@@ -590,6 +590,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:REPEAT ,
                                  zilf:REPLACE-DEFINITION ,
                                  zilf:REST ,
+                                 zilf:RETURN ,
                                  zilf:ROOT ,
                                  zilf:ROUTINE ,
                                  zilf:SET ,
@@ -3107,6 +3108,22 @@ Also see BACK, LENGTH, NTH, PUT, SUBSTRUC and TOP."""@en ;
 <SETG STRUCT2 <REST ,STRUCT1>>  ;  STRUCT2 = [2 3 4]
 <PUT ,STRUCT2 1 5>  ;  STRUCT1 = [1 5 3 4], STRUCT2 = [5 3 4]"""@en ;
           skos:prefLabel "<REST structure [count]>"@en .
+
+
+###  http://example.org/zilf/RETURN
+zilf:RETURN rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition """MDL built-in function that  returns value from program-block defined by activation. True is returned if no value is specified. If activation is not specified RETURN will exit the current defined program-block where an automatic activation was created (PROG and REPEAT creates automatic activations, BIND does not).
+
+In practice RETURN exits the current program-block and returns value  to the outer program-block defined by BIND (needs activation), PROG or REPEAT."""@en ;
+            skos:editorialNote "See AGAIN, BIND, PROG and REPEAT for more examples of using RETURN and details how to control program flow."@en ;
+            skos:example """<PROG () <RETURN>>  ;  T
+<PROG ACT ()
+    <PROG () <RETURN 42 .ACT>>
+<RETURN 43>> ;\"Never reached\"  -->  42"""@en ;
+            skos:prefLabel "<RETURN [value] [activation]>"@en .
 
 
 ###  http://example.org/zilf/RFALSE
