@@ -580,6 +580,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:PTABLE ,
                                  zilf:PUT-DECL ,
                                  zilf:PUT-PURE-HERE ,
+                                 zilf:PUTPROP ,
                                  zilf:PUTREST ,
                                  zilf:QUIT ,
                                  zilf:QUOTE ,
@@ -2704,6 +2705,44 @@ zilf:PUTP rdf:type owl:NamedIndividual ,
 <PUTP ,MYOBJ ,P?MYPROP 456>  ;  Stores 456 in property MYPROP on MYOBJ"""@en ;
           skos:historyNote "Zapf syntax: PUTP, Inform syntax: put_prop"@en ;
           skos:prefLabel "<PUTP object property value>"@en .
+
+
+###  http://example.org/zilf/PUTPROP
+zilf:PUTPROP rdf:type owl:NamedIndividual ,
+                      skos:Concept ;
+             skos:broader zilf:CoreFunctions ;
+             skos:inScheme zilf:ZILF_Scheme ;
+             skos:definition "MDL built-in function that stores value as an association on the item under the indicator and returns the item. If no value is specified PUTPROP returns the value and then clears the association."@en ;
+             skos:editorialNote """In ZILF, there is a special indicator, PROPSPEC, that has a special meaning inside OBJECTs. A PROPSPEC property is defined: <PUTPROP item PROPSPEC [function]>
+
+When an item defined in this way is used in an OBJECT, the function is invoked during the compilation with the LIST (containing the item) as an argument. The return value from the function must be a LIST and it is stored as value under PROPSPEC on the item. If no function is specified the PROPSPEC for the item is cleared. See examples below. 
+
+See ASSOCIATIONS, AVALUE, GETPROP, INDICATOR, ITEM and NEXT."""@en ;
+             skos:example """<SET L (1 2 3)>
+<PUTPROP .L FOO \"Hello\">  ;  (1 2 3)
+<GETPROP .L FOO>  ;  \"Hello\"
+<PUTPROP .L FOO>  ;  \"Hello\"
+<GETPROP .L FOO>  ;  #FALSE
+
+;  \"PROPSPEC, loop through all words and add to buzz\"
+<VERSION XZIP>
+<OBJECT FOO
+    (ADJECTIVE SMALL CURIOUS)
+    (MYBUZZ \"ABCD\" \"BAR\" \"BAZ\")>
+<DEFINE MYBUZZ-PROP (L)
+    <SET L <REST .L>>  ;  \"Ignore MYBUZZ in LIST\"
+    <MAPF ,LIST <FUNCTION (W) <VOC .W BUZZ>> .L>>
+<PUTPROP MYBUZZ PROPSPEC MYBUZZ-PROP>
+<ROUTINE GO () <TEST-PROPSPEC>>
+<ROUTINE TEST-PROPSPEC (\"AUX\" W)
+    <TELL \"Part-of-Speech, 4 = BUZZ\" CR>
+    <SET W W?ABCD>
+    <TELL \"ABCD = \" N <GETB .W 6> CR>
+    <SET W W?BAR>
+    <TELL \"BAR = \" N <GETB .W 6> CR>
+    <SET W W?BAZ>
+    <TELL \"BAZ = \" N <GETB .W 6> CR>>"""@en ;
+             skos:prefLabel "<PUTPROP item indicator [value]>"@en .
 
 
 ###  http://example.org/zilf/PUTREST
