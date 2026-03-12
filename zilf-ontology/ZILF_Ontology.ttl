@@ -579,6 +579,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:PROG ,
                                  zilf:PTABLE ,
                                  zilf:PUT-DECL ,
+                                 zilf:PUT-PURE-HERE ,
                                  zilf:PUTREST ,
                                  zilf:QUIT ,
                                  zilf:QUOTE ,
@@ -2666,6 +2667,16 @@ zilf:PUT-DECL rdf:type owl:NamedIndividual ,
 <DECL? T BOOLEAN>  ;  T
 <DECL? \"Hi\" BOOLEAN>  ;  #FALSE"""@en ;
               skos:prefLabel "<PUT-DECL item pattern>"@en .
+
+
+###  http://example.org/zilf/PUT-PURE-HERE
+zilf:PUT-PURE-HERE rdf:type owl:NamedIndividual ,
+                            skos:Concept ;
+                   skos:broader zilf:CoreFunctions ;
+                   skos:inScheme zilf:ZILF_Scheme ;
+                   skos:definition "ZIL library function."@en ;
+                   skos:editorialNote "ZILF ignores this and always returns FALSE."@en ;
+                   skos:prefLabel "<PUT-PURE-HERE>"@en .
 
 
 ###  http://example.org/zilf/PUTB
