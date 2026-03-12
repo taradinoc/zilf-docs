@@ -578,6 +578,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:PRINTTYPE ,
                                  zilf:PROG ,
                                  zilf:PTABLE ,
+                                 zilf:PUT-DECL ,
                                  zilf:PUTREST ,
                                  zilf:QUIT ,
                                  zilf:QUOTE ,
@@ -2652,6 +2653,19 @@ Also see BACK, GET, GETB, PUTB and REST."""@en ;
 <PUT 0 8 <BOR <GET 0 8> 2>>  ;  Sets bit 1 in Flags 2 in header (force monospace)"""@en ;
          skos:historyNote "Zapf syntax: PUT, Inform syntax: storew"@en ;
          skos:prefLabel "<PUT table offset value>"@en .
+
+
+###  http://example.org/zilf/PUT-DECL
+zilf:PUT-DECL rdf:type owl:NamedIndividual ,
+                       skos:Concept ;
+              skos:broader zilf:CoreFunctions ;
+              skos:inScheme zilf:ZILF_Scheme ;
+              skos:definition "MDL built-in function that  defines an alias, item, for a pattern. See DECL?, GDECL and GET-DECL for more on declaration patterns."@en ;
+              skos:example """<DECL? T BOOLEAN>  ;  Error 
+<PUT-DECL BOOLEAN '<OR ATOM FALSE>>
+<DECL? T BOOLEAN>  ;  T
+<DECL? \"Hi\" BOOLEAN>  ;  #FALSE"""@en ;
+              skos:prefLabel "<PUT-DECL item pattern>"@en .
 
 
 ###  http://example.org/zilf/PUTB
