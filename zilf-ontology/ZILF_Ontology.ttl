@@ -591,6 +591,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:REPLACE-DEFINITION ,
                                  zilf:REST ,
                                  zilf:RETURN ,
+                                 zilf:ROOM ,
                                  zilf:ROOT ,
                                  zilf:ROUTINE ,
                                  zilf:SET ,
@@ -3146,6 +3147,72 @@ zilf:RFATAL rdf:type owl:NamedIndividual ,
             skos:definition "Z-code built-in function that always exits routine and returns FATAL-VALUE (2). Note that this differs from RETURN that can both exit program blocks and routines."@en ;
             skos:example "<RFATAL>"@en ;
             skos:prefLabel "<RFATAL>"@en .
+
+
+###  http://example.org/zilf/ROOM
+zilf:ROOM rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition """ZIL library function that creates a room-object with the internal objectname, name. After the name follows LISTs of properties for the ROOM and the values for each property. Which properties that define up a ROOM is determined by the parser and it’s possible to add new properties with PROPDEF as long as the parser is modified to support the new property. Usually the below properties are understood by the parser and the properties IN (or LOC), DESC and FLAGS are required, the others are optional.
+
+*  IN or LOC is a required property. The value is always ROOMS for ROOM-objects.
+
+*  DESC is a required property. The short description text of the ROOM. This is the text that is, for example, printed in the statusbar.
+
+*  FLAGS is a required property. This lists all the flagbits that are set on this ROOM.
+
+*  LDESC is an optional property. The long description of the ROOM. This is the text that is printed, for example, the first time the player visits the ROOM.
+
+*  (dir ...) is an optional property.  List a direction, dir and where it leads. There is 5  
+   different types of EXITS:
+
+    *  UEXIT (“unconditional exit”). The syntax is (dir TO room-name). If  the player moves in this direction he is moved unconditionally to room-name.
+
+    *  NEXIT (“non-exit”). The syntax is (dir \"text-why-not\"). The text-why-not is printed when the player tries to move in this direction. Use this only if you want a different text than the standard message, typically something like \"You can’t move in that direction!\".
+
+    *  CEXIT (“conditional exit”). The syntax is (dir TO room-name IF gval [ELSE \"text-why-not\"]). This moves the player if the global value, gval, is TRUE. The ELSE-part is optional and the standard message is printed if it is not supplied.
+
+    *  DEXIT (“door-exit”). The syntax is (dir TO room-name IF door-name IS OPEN). This is a special case of CEXIT that moves the player to room-name if the door-name has the OPENBIT set.
+
+    *  FEXIT (“function-exit”). The syntax is (dir PER routine-name). This moves the player to the ROOM returned by the ROUTINE, routine-name. If the routine returns FALSE it is presumed that the routine has printed an appropriate message.
+
+*  GLOBAL is an optional property. This is a LIST of all the OBJECTs that is IN the LOCAL-GLOBALS that are accessible from this ROOM. This could, for example, be a door that is accessible from two different ROOMs.
+
+*  THINGS is an optional property. This creates one or more simple “pseudo-objects”. Each object has three parts: a LIST of adjectives (FALSE if none), a LIST of nouns and the name of the action-routine to call when this object is accessed. In early Infocom games this property was called PSEUDO and had a slightly different syntax.
+
+*  ACTION is an optional property. The syntax is (ACTION routine-name). This ROUTINE takes one argument, by convention call RARG (“room-argument”), and is called more than once during a turn with different values to RARG. 
+
+    *  M-BEG, the routine-name is called with this value to RARG before any OBJECTs or verb action-routines.  
+
+    *  M-END, the routine-name is called with this value to RARG after any OBJECTs or verb action-routines.
+
+    *  M-LOOK, the routine-name is called with this value to RARG when the player LOOKs.
+
+    *  M-ENTER, the routine-name is called with this value to RARG when the player enters the ROOM (before any room description)."""@en ;
+          skos:editorialNote """Note that ROOMs can just as easily be created with OBJECT as long as they are (IN ROOMS).
+
+See Learning ZIL, Steve E. Meretzky and ZIL Course, Marc S. Blank for more on properties, flagbits and how to write and design games."""@en ;
+          skos:example """<ROOM INSIDE-HOUSE
+    (DESC \"Inside House\")
+    (IN ROOMS)
+    (LDESC
+\"You are standing inside the rotting house. The house is
+  sparsely furnished, in fact not at all. On one wall is
+  positioned a sign. Beside the sign is a button, and an open
+  trap-door is placed on the floor. The exit is west
+  and there is a walk-in closet in the eastern wall.\")
+(UP \"You have yet to master the art of flying.\")
+(EAST TO CLOSET)
+(WEST TO OUTSIDE-HOUSE IF FRONT-DOOR-FLAG ELSE ,MSG-025)
+(DOWN PER TRAP-DOOR-F)
+(ACTION INSIDE-HOUSE-F)
+(FLAGS LIGHTBIT NDUNGEONBIT)
+(THINGS (<>) (BUTTON) LIGHTBUTTON-F
+                 (<>) (SIGN) HOUSE-SIGN-F
+                 (<>) (HOUSE FLOOR CLOSET KEYHOLE) STANDARD-F)
+(GLOBAL FRONT-DOOR)>"""@en ;
+          skos:prefLabel "<ROOM name (property value ...) ...>"@en .
 
 
 ###  http://example.org/zilf/ROOT
