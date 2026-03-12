@@ -1232,9 +1232,9 @@ FOO!-NEW-OBLIST  ;  "This can also be done with trailer"
 ;  "Basic pattern"
 <PROPDEF HEIGHT <>
     (HEIGHT FEET:FIX FOOT INCHES:FIX = 2 <WORD .FEET>
-                                                                                <BYTE .INCHES>)
+        <BYTE .INCHES>)
     (HEIGHT FEET:FIX FT INCHES:FIX = 2 <WORD .FEET>
-                                                                          <BYTE .INCHES>)>
+        <BYTE .INCHES>)>
 <OBJECT GIANT (HEIGHT 10 FT 8)>
 
 ;  "Implies, inside routine"
@@ -1311,10 +1311,10 @@ FOO!-NEW-OBLIST  ;  "This can also be done with trailer"
     (DIR S:STRING = (NEXIT 2) (NEXITSTR <STRING .S>))
     (DIR SORRY S:STRING = (NEXIT 2) (NEXITSTR <STRING .S>))
     (DIR PER F:FCN = (FEXIT 3)
-                                      (FEXITFCN <WORD .F>) <BYTE 0>)
+        (FEXITFCN <WORD .F>) <BYTE 0>)
     (DIR TO R:ROOM IF F:GLOBAL "OPT" ELSE S:STRING =
         (CEXIT 4) (REXIT <ROOM .R>) (CEXITFLAG <GLOBAL .F>)
-                                                                (CEXITSTR <STRING .S>))
+        (CEXITSTR <STRING .S>))
     (DIR TO R:ROOM IF O:OBJECT IS OPEN "OPT" ELSE S:STRING =
         (DEXIT 5) (DEXITOBJ <OBJECT .O>)
         (DEXITSTR <STRING .S>) (DEXITRM <ROOM .R>))>
