@@ -594,6 +594,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:ROOM ,
                                  zilf:ROOT ,
                                  zilf:ROUTINE ,
+                                 zilf:ROUTINE-FLAGS ,
                                  zilf:SET ,
                                  zilf:SETG ,
                                  zilf:SETG20 ,
@@ -3257,6 +3258,20 @@ Default values for \"OPT\" and \"AUX\" are defined by a two-element LIST whose f
                 <SET X .N>) 
             (T <RETURN>)>>>"""@en ;
              skos:prefLabel "<ROUTINE name [activation-atom] arg-list body ...>"@en .
+
+
+###  http://example.org/zilf/ROUTINE-FLAGS
+zilf:ROUTINE-FLAGS rdf:type owl:NamedIndividual ,
+                            skos:Concept ;
+                   skos:broader zilf:CoreFunctions ;
+                   skos:inScheme zilf:ZILF_Scheme ;
+                   skos:definition """ZIL library function that sets flags to control how ZILF should compile. To clear, call FILE-FLAGS without any flags.
+
+The flags are:
+
+*  CLEAN-STACK?  which tells the compiler to generate extra code to remove unneeded values from the stack. Without it, the compiler will generate smaller code in some cases, at the risk of potentially causing stack overflow at runtime."""@en ;
+                   skos:example "<FILE-FLAGS CLEAN-STACK?>"@en ;
+                   skos:prefLabel "<ROUTINE-FLAGS CLEAN-STACK?>"@en .
 
 
 ###  http://example.org/zilf/RSTACK
