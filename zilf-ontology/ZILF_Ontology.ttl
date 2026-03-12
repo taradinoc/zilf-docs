@@ -576,6 +576,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:PRINT ,
                                  zilf:PRINT-MANY ,
                                  zilf:PRINTTYPE ,
+                                 zilf:PROG ,
                                  zilf:PTABLE ,
                                  zilf:PUTREST ,
                                  zilf:QUIT ,
@@ -2575,6 +2576,31 @@ See APPLYTYPE, EVALTYPE and NEWTYPE."""@en ;
 <PRINTTYPE FORM <FUNCTION (F) <PRIN1 <CHTYPE .F LIST>>>>
 <FORM + 1 2>  ;  (+ I II)"""@en ;
                skos:prefLabel "<PRINTTYPE atom [handler]>"@en .
+
+
+###  http://example.org/zilf/PROG
+zilf:PROG rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition """MDL built-in function that defines a program block with its own set of bindings. PROG is similar to BIND and REPEAT but unlike BIND it creates a default activation (like REPEAT) at the start of the block and doesn't have an automatic AGAIN at the end of the block (like REPEAT). It is possible to name an atom to the activation but it is not necessary. AGAIN and RETURN inside a PROG-block will start the block over or return from the block.
+
+The decl is used to specify the valid TYPE of the variables. In its simplest form decl is formatted like: #DECL ((X) FIX), meaning that X must be of the TYPE FIX. For more information on how to format the decl see GDECL."""@en ;
+          skos:editorialNote "Also see AGAIN, BIND, REPEAT and RETURN for more details how to control program flow."@en ;
+          skos:example """<PROG ((X 1)) #DECL ((X) FIX)  
+    <PROG ((X 2)) <PRIN1 .X>> <PRIN1 .X>>  ;  \"21\" 
+<DEFINE TEST-PROG-AS-REPEAT ()
+    <PRINC \"START \">
+    <PROG ((X 0))
+        <SET X <+ .X 1>>
+        <PRIN1 .X>
+        <COND (<=? .X 3> <RETURN>)>  ;  \"--> exit block\"
+        <AGAIN>  ;  \"--> repeat\"
+    >
+    <PRINC \" END\">
+>
+    <TEST-PROG-AS-REPEAT>  ;  \"START 123 END\""""@en ;
+          skos:prefLabel "<PROG [activation] (bindings ...) [decl] expressions ...>"@en .
 
 
 ###  http://example.org/zilf/PTABLE
