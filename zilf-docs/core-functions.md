@@ -1222,6 +1222,35 @@ The decl is used to specify the valid TYPE of the variables. In its simplest for
 
 ---
 
+### PROPDEF
+**Usage:** `<PROPDEF atom default-value [spec-patterns ...]>`
+
+ZIL library function that defines a property, atom, with a default-value for OBJECTs (and ROOMs). The default-value is the value that GETP will return if the property is not defined for the given OBJECT.
+
+For the more complex properties it is possible to define a spec-pattern according to (atom|DIR ["MANY"|"OPT"] [phrase] var:type ... [form-len] ["MANY"] <fnc-size var>|(const value)| (ptr <fnc-size var>) ...) ...
+
+The spec-pattern consists of two parts divided by an equal sign. The left side is the pattern and the right side is the rules on how to store the property.
+
+*  atom|DIR is the property. DIR is a special case that is used for DIRECTIONS.
+
+*  "MANY" means that the pattern of var:type repeats itself. If "MANY" is defined on the left side of the equal sign there must be a matching on the right side.
+
+*  "OPT" means that the pattern after is optional.
+
+*  [phrase] can be tokens like IF, ELSE, TO.
+
+*  var:type is a variable name, var, and its type. Usually FIX, STRING or ROOM.
+
+*  form-len is the length (records) of the form. The form-len is optional and can also be given as <>.
+
+*  <fnc-size var> can be a call with var to either BYTE, WORD, STRING, OBJECT, ROOM, GLOBAL, NOUN, ADJ, or VOC. This stores var or derivative of var and adds to the vocabulary and/or creates a GVAL.
+
+*  (ptr <fnc-size var>) creates a GVAL, ptr, that contains the address-pointer relative to the property.
+
+*  (const value) creates a CONSTANT, name, containing value.
+
+---
+
 ### PTABLE
 **Usage:** `<PTABLE [(flags ...)] values ...>`
 
@@ -1331,6 +1360,76 @@ See DEFAULT-DEFINITION and REPLACE-DEFINITION.
 
 ---
 
+### REST
+**Usage:** `<REST structure [count]>`
+
+MDL built-in function that returns structure without its first count elements (count is default 1). Note that this is not a copy of the structure, it is pointing to the same structure with another starting element. 
+
+structure must be an object that STRUCTURED? evaluates to true.
+
+> **Note:** Note that TABLE is not a structure.
+
+Also see BACK, LENGTH, NTH, PUT, SUBSTRUC and TOP.
+
+---
+
+### RETURN
+**Usage:** `<RETURN [value] [activation]>`
+
+MDL built-in function that  returns value from program-block defined by activation. True is returned if no value is specified. If activation is not specified RETURN will exit the current defined program-block where an automatic activation was created (PROG and REPEAT creates automatic activations, BIND does not).
+
+In practice RETURN exits the current program-block and returns value  to the outer program-block defined by BIND (needs activation), PROG or REPEAT.
+
+> **Note:** See AGAIN, BIND, PROG and REPEAT for more examples of using RETURN and details how to control program flow.
+
+---
+
+### ROOM
+**Usage:** `<ROOM name (property value ...) ...>`
+
+ZIL library function that creates a room-object with the internal objectname, name. After the name follows LISTs of properties for the ROOM and the values for each property. Which properties that define up a ROOM is determined by the parser and it’s possible to add new properties with PROPDEF as long as the parser is modified to support the new property. Usually the below properties are understood by the parser and the properties IN (or LOC), DESC and FLAGS are required, the others are optional.
+
+*  IN or LOC is a required property. The value is always ROOMS for ROOM-objects.
+
+*  DESC is a required property. The short description text of the ROOM. This is the text that is, for example, printed in the statusbar.
+
+*  FLAGS is a required property. This lists all the flagbits that are set on this ROOM.
+
+*  LDESC is an optional property. The long description of the ROOM. This is the text that is printed, for example, the first time the player visits the ROOM.
+
+*  (dir ...) is an optional property.  List a direction, dir and where it leads. There is 5  
+   different types of EXITS:
+
+    *  UEXIT (“unconditional exit”). The syntax is (dir TO room-name). If  the player moves in this direction he is moved unconditionally to room-name.
+
+    *  NEXIT (“non-exit”). The syntax is (dir "text-why-not"). The text-why-not is printed when the player tries to move in this direction. Use this only if you want a different text than the standard message, typically something like "You can’t move in that direction!".
+
+    *  CEXIT (“conditional exit”). The syntax is (dir TO room-name IF gval [ELSE "text-why-not"]). This moves the player if the global value, gval, is TRUE. The ELSE-part is optional and the standard message is printed if it is not supplied.
+
+    *  DEXIT (“door-exit”). The syntax is (dir TO room-name IF door-name IS OPEN). This is a special case of CEXIT that moves the player to room-name if the door-name has the OPENBIT set.
+
+    *  FEXIT (“function-exit”). The syntax is (dir PER routine-name). This moves the player to the ROOM returned by the ROUTINE, routine-name. If the routine returns FALSE it is presumed that the routine has printed an appropriate message.
+
+*  GLOBAL is an optional property. This is a LIST of all the OBJECTs that is IN the LOCAL-GLOBALS that are accessible from this ROOM. This could, for example, be a door that is accessible from two different ROOMs.
+
+*  THINGS is an optional property. This creates one or more simple “pseudo-objects”. Each object has three parts: a LIST of adjectives (FALSE if none), a LIST of nouns and the name of the action-routine to call when this object is accessed. In early Infocom games this property was called PSEUDO and had a slightly different syntax.
+
+*  ACTION is an optional property. The syntax is (ACTION routine-name). This ROUTINE takes one argument, by convention call RARG (“room-argument”), and is called more than once during a turn with different values to RARG. 
+
+    *  M-BEG, the routine-name is called with this value to RARG before any OBJECTs or verb action-routines.  
+
+    *  M-END, the routine-name is called with this value to RARG after any OBJECTs or verb action-routines.
+
+    *  M-LOOK, the routine-name is called with this value to RARG when the player LOOKs.
+
+    *  M-ENTER, the routine-name is called with this value to RARG when the player enters the ROOM (before any room description).
+
+> **Note:** Note that ROOMs can just as easily be created with OBJECT as long as they are (IN ROOMS).
+
+See Learning ZIL, Steve E. Meretzky and ZIL Course, Marc S. Blank for more on properties, flagbits and how to write and design games.
+
+---
+
 ### ROOT
 **Usage:** `<ROOT>`
 
@@ -1360,6 +1459,17 @@ Arguments: The required arguments for this ROUTINE. The arguments are bound to l
 Default values for "OPT" and "AUX" are defined by a two-element LIST whose first element is the ATOM and the second element it is assigned to.
 
 <ROUTINE TEST ("AUX" (X 1) (Y 2)) <+ .X .Y>>  Means that the local variables X and Y are initially assigned 1 and 2. After the arg-list follows the ZIL-instructions that makes up the body of the ROUTINE.
+
+---
+
+### ROUTINE-FLAGS
+**Usage:** `<ROUTINE-FLAGS CLEAN-STACK?>`
+
+ZIL library function that sets flags to control how ZILF should compile. To clear, call FILE-FLAGS without any flags.
+
+The flags are:
+
+*  CLEAN-STACK?  which tells the compiler to generate extra code to remove unneeded values from the stack. Without it, the compiler will generate smaller code in some cases, at the risk of potentially causing stack overflow at runtime.
 
 ---
 

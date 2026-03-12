@@ -1218,6 +1218,109 @@ FOO!-NEW-OBLIST  ;  "This can also be done with trailer"
 ```
 
 
+### PROPDEF
+```zil
+;  "Ordinary property"
+<PROPDEF HEIGHT 72>
+<OBJECT OBJ1>
+<OBJECT OBJ2 (HEIGHT 80)>
+
+;  "Implies, inside routine"
+<GETP ,OBJ1 ,P?HEIGHT>  ;  72
+<GETP ,OBJ2 ,P?HEIGHT>  ;  80
+
+;  "Basic pattern"
+<PROPDEF HEIGHT <>
+    (HEIGHT FEET:FIX FOOT INCHES:FIX = 2 <WORD .FEET>
+                                                                                <BYTE .INCHES>)
+    (HEIGHT FEET:FIX FT INCHES:FIX = 2 <WORD .FEET>
+                                                                          <BYTE .INCHES>)>
+<OBJECT GIANT (HEIGHT 10 FT 8)>
+
+;  "Implies, inside routine"
+<=? <GET <GETPT ,GIANT ,P?HEIGHT> 0> 10>
+<=? <GETB <GETPT ,GIANT ,P?HEIGHT> 2> 8>
+
+;  "Basic pattern with OPT"
+<PROPDEF HEIGHT <> (HEIGHT FEET:FIX FT "OPT" INCHES:FIX =
+    <WORD .FEET> <BYTE .INCHES>)>
+<OBJECT GIANT1 (HEIGHT 100 FT)>
+<OBJECT GIANT2 (HEIGHT 50 FT 11)>
+
+;  "Implies, inside routine"
+<=? <PTSIZE <GETPT ,GIANT1 ,P?HEIGHT>> 3>
+<=? <GET <GETPT ,GIANT1 ,P?HEIGHT> 0> 100>
+<=? <GETB <GETPT ,GIANT1 ,P?HEIGHT> 2> 0>
+<=? <PTSIZE <GETPT ,GIANT2 ,P?HEIGHT>> 3>
+<=? <GET <GETPT ,GIANT2 ,P?HEIGHT> 0> 50>
+<=? <GETB <GETPT ,GIANT2 ,P?HEIGHT> 2> 11>
+
+;"Basic pattern with MANY"
+<PROPDEF TRANSLATE <> (TRANSLATE "MANY" A:ATOM N:FIX =
+    "MANY" <VOC .A BUZZ> <WORD .N>)>
+<OBJECT NUMBERS (TRANSLATE ONE 1 TWO 2)>
+
+;"Implies, inside routine"
+<=? <PTSIZE <GETPT ,NUMBERS ,P?TRANSLATE>> 8>
+<=? <GET <GETPT ,NUMBERS ,P?TRANSLATE> 0> ,W?ONE>
+<=? <GET <GETPT ,NUMBERS ,P?TRANSLATE> 1> 1>
+<=? <GET <GETPT ,NUMBERS ,P?TRANSLATE> 2> ,W?TWO>
+<=? <GET <GETPT ,NUMBERS ,P?TRANSLATE> 3> 2>
+
+;  "Pattern with constants"
+<PROPDEF HEIGHT <> (HEIGHT FEET:FIX FT INCHES:FIX =
+    (HEIGHTSIZE 3) (H-FEET <WORD .FEET>)
+    (H-INCHES <BYTE .INCHES>))>
+<=? ,HEIGHTSIZE 3>
+<=? ,H-FEET 0>
+<=? ,H-INCHES 2>
+
+;  "DIR sets pattern for all DIRECTIONS"
+<PROPDEF DIRECTIONS <> (DIR GOES TO R:ROOM =
+    (MY-UEXIT 3) <WORD 0> (MY-REXIT <ROOM .R>))>
+<DIRECTIONS NORTH SOUTH>
+<OBJECT HOUSE (SOUTH GOES TO WOODS)>
+<OBJECT WOODS (NORTH GOES TO HOUSE)>
+
+;  "Implies, inside routine"
+<=? <PTSIZE <GETPT ,HOUSE ,P?SOUTH>> ,MY-UEXIT>
+<=? <GETB <GETPT ,HOUSE ,P?SOUTH> ,MY-REXIT> ,WOODS>
+
+;  "DIR sets implicit DIRECTIONS"
+<PROPDEF DIRECTIONS <> (DIR GOES TO R:ROOM =
+    (MY-UEXIT 3) <WORD 0> (MY-REXIT <ROOM .R>))>
+<DIRECTIONS NORTH SOUTH>
+<OBJECT HOUSE (EAST GOES TO WOODS)>
+<OBJECT WOODS (WEST GOES TO HOUSE)>
+
+;  "Implies, inside routine"
+<=? <PTSIZE <GETPT ,HOUSE ,P?EAST>> ,MY-UEXIT>
+<=? <GETB <GETPT ,HOUSE ,P?EAST> ,MY-REXIT> ,WOODS>
+<BAND <GETB ,W?EAST 4> ,PS?DIRECTION>
+
+;  "VOC in pattern adds word to vocabulary"
+<PROPDEF FOO <> (FOO A:ATOM = <VOC .A PREP>)>
+<OBJECT BAR (FOO FOO)>
+
+;  "Implies, inside routine"
+<=? <GETP ,BAR ,P?FOO> ,W?FOO>
+
+;  "Complex PROPDEF (DIRECTIONS from Zork Zero)"
+<PROPDEF DIRECTIONS <>
+    (DIR TO R:ROOM = (UEXIT 1) (REXIT <ROOM .R>))
+    (DIR S:STRING = (NEXIT 2) (NEXITSTR <STRING .S>))
+    (DIR SORRY S:STRING = (NEXIT 2) (NEXITSTR <STRING .S>))
+    (DIR PER F:FCN = (FEXIT 3)
+                                      (FEXITFCN <WORD .F>) <BYTE 0>)
+    (DIR TO R:ROOM IF F:GLOBAL "OPT" ELSE S:STRING =
+        (CEXIT 4) (REXIT <ROOM .R>) (CEXITFLAG <GLOBAL .F>)
+                                                                (CEXITSTR <STRING .S>))
+    (DIR TO R:ROOM IF O:OBJECT IS OPEN "OPT" ELSE S:STRING =
+        (DEXIT 5) (DEXITOBJ <OBJECT .O>)
+        (DEXITSTR <STRING .S>) (DEXITRM <ROOM .R>))>
+```
+
+
 ### PTABLE
 ```zil
 <PTABLE 1 2 3 4>
@@ -1356,6 +1459,47 @@ FOO!-NEW-OBLIST  ;  "This can also be done with trailer"
 ```
 
 
+### REST
+```zil
+<SETG STRUCT1 [1 2 3 4]>  ;  STRUCT1 = [1 2 3 4]
+<SETG STRUCT2 <REST ,STRUCT1>>  ;  STRUCT2 = [2 3 4]
+<PUT ,STRUCT2 1 5>  ;  STRUCT1 = [1 5 3 4], STRUCT2 = [5 3 4]
+```
+
+
+### RETURN
+```zil
+<PROG () <RETURN>>  ;  T
+<PROG ACT ()
+    <PROG () <RETURN 42 .ACT>>
+<RETURN 43>> ;"Never reached"  -->  42
+```
+
+
+### ROOM
+```zil
+<ROOM INSIDE-HOUSE
+    (DESC "Inside House")
+    (IN ROOMS)
+    (LDESC
+"You are standing inside the rotting house. The house is
+  sparsely furnished, in fact not at all. On one wall is
+  positioned a sign. Beside the sign is a button, and an open
+  trap-door is placed on the floor. The exit is west
+  and there is a walk-in closet in the eastern wall.")
+(UP "You have yet to master the art of flying.")
+(EAST TO CLOSET)
+(WEST TO OUTSIDE-HOUSE IF FRONT-DOOR-FLAG ELSE ,MSG-025)
+(DOWN PER TRAP-DOOR-F)
+(ACTION INSIDE-HOUSE-F)
+(FLAGS LIGHTBIT NDUNGEONBIT)
+(THINGS (<>) (BUTTON) LIGHTBUTTON-F
+                 (<>) (SIGN) HOUSE-SIGN-F
+                 (<>) (HOUSE FLOOR CLOSET KEYHOLE) STANDARD-F)
+(GLOBAL FRONT-DOOR)>
+```
+
+
 ### ROOT
 ```zil
 <ROOT>
@@ -1373,6 +1517,12 @@ FOO!-NEW-OBLIST  ;  "This can also be done with trailer"
                 <MOVE .X .DST> 
                 <SET X .N>) 
             (T <RETURN>)>>>
+```
+
+
+### ROUTINE-FLAGS
+```zil
+<FILE-FLAGS CLEAN-STACK?>
 ```
 
 
