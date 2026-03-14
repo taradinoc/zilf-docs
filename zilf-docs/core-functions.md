@@ -1487,6 +1487,35 @@ Z-code built-in function that stores value in local variable name.
 
 ---
 
+### SET-DEFSTRUCT-FILE-DEFAULTS
+**Usage:** `<SET-DEFSTRUCT-FILE-DEFAULTS args ...>`
+
+MDL built-in function that is used to change the default behaviour of the struct-option and the field-option tokens in DEFSTRUCT.
+
+The newly defined defaults are only active in the same file as they were defined. If a file is loaded via, for example, FLOAD or INSERT-FILE the defaults are the built-in defaults inside these files.
+
+The tokens that can have changed default behaviour are:
+
+*  'CONSTRUCTOR replaces the default constructor (MAKE-).
+
+*  'INIT-ARGS replaces the init arguments to the base-type. This is empty by default.
+
+*  'NODECL, use 'NODECL, to get 'NODECL by default.
+
+*  ‘NOTYPE,  use 'NOTYPE, to get 'NOTYPE by default.
+
+*  'NTH, the default ATOM for this is NTH. Change to other with ('NTH MY-NTH).
+
+*  'PUT, the default ATOM for this is PUT. Change to other with ('PUT MY-PUT).
+
+*  'START-OFFSET, the default value is 1. Change with ('START-OFFSET value).
+
+> **Note:** If SET-DEFSTRUCT-FILE-DEFAULTS is called without any arguments the built-in default behaviour is restored.
+
+See DEFSTRUCT for more on user defined structures.
+
+---
+
 ### SETG
 **Usage:** `MDL: <SETG atom value>,
 Zapf: <SETG name value>`
@@ -1508,6 +1537,20 @@ ZIL library function that assigs a value to the global atom. If an atom is alrea
 
 ---
 
+### SORT
+**Usage:** `<SORT predicate vector [record-size] [key-offset] [vector [record-size]  ...]>`
+
+MDL built-in function that can sort a VECTOR (or TUPLE). The predicate can either be <> or a FUNCTION that takes two keys and returns TRUE if the two records are correctly sorted and FALSE if they are incorrectly sorted. For example ,G? will sort keys in ascending order and ,L? will sort keys in descending order. If the predicate is <> the keys must be of the same TYPE and the vector will be sorted in ascending order.
+
+The record-size is the length of each record (default value is 1) and the key-offset is the 
+offset in the record to the value to use as the sort key (default value is 0).
+
+If additional vectors are supplied all vectors can have their own record length but each vector must have the same number of records. Records in the additional vectors are interchanged based on how the main vector is sorted.
+
+SORT returns the first sorted vector.
+
+---
+
 ### SPNAME
 **Usage:** `<SPNAME atom>`
 
@@ -1523,6 +1566,63 @@ MDL built-in function for "shared printed name", which should return the same st
 MDL built-in function that returns a concatenated string of all values. values can be character or string.
 
 > **Note:** A string is a block of contiguous bytes where each byte holds a character. See more about STRING  structure in The MDL Programming Language, Appendix 1.
+
+---
+
+### STRUCTURED?
+**Usage:** `<STRUCTURED? value>`
+
+MDL bulit-in predicate that returns true if value is of a structured TYPE. The structured TYPEs are:
+
+*  CHANNEL
+
+*  DECL
+
+*  FALSE
+
+*  FORM
+
+*  FUNCTION
+
+*  LIST
+
+*  MACRO
+
+*  OBLIST
+
+*  SEGMENT
+
+*  SPLICE
+
+*  STRING
+
+*  VECTOR
+
+---
+
+### SUBSTRUC
+**Usage:** `<SUBSTRUC structure-from [rest] [amount] [structure-to]>`
+
+MDL built-in function that copies an amount number of elements, starting at rest, from structure-from. The result is copied into structure-to, if supplied, otherwise a new structure is returned.
+
+Default value for rest is 0 and default value for amount is LENGTH – rest (in other words, copies from rest to end of structure-from).
+
+structure-from must be of PRIMTYPE LIST, VECTOR or STRING and structure-to must be of the same PRIMTYPE as struture-from and have enough room for the SUBSTRUC to fit.
+
+Also see BACK, LENGTH, NTH, PUT, REST and TOP.
+
+---
+
+### SUPPRESS-WARNINGS?
+**Usage:** `<SUPPRESS-WARNINGS? all | none | codes ...>`
+
+ZILF compiler directive that tells the compiler how to treat warnings. NONE is the default.
+
+*  ALL suppresses all warnings.
+
+*  NONE doesn't suppress any warnings.
+
+*  codes suppresses listet warning codes.
 
 ---
 

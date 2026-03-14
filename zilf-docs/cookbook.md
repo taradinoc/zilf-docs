@@ -1533,6 +1533,16 @@ Zapf: <SET MYVAR 42>  ;  Store 42 in local variable MYVAR
 ```
 
 
+### SET-DEFSTRUCT-FILE-DEFAULTS
+```zil
+<SET-DEFSTRUCT-FILE-DEFAULTS ('NTH GETB) ('PUT PUTB)
+    ('START-OFFSET 0) 'NODECL ('INIT-ARGS (BYTE))>
+<DEFSTRUCT B-TBL TABLE (B-TBL-X FIX 65) (B-TBL-Y FIX 111)>
+<MAKE-B-TBL>  ;  #B-TBL %<TABLE (BYTE) 65 111>
+<B-TBL-Y <MAKE-B-TBL>>  ;  111
+```
+
+
 ### SETG
 ```zil
 MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR
@@ -1545,6 +1555,18 @@ MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR
 ```
 
 
+### SORT
+```zil
+<SORT <> [3 4 2 1]>  ;  [1 2 3 4]
+<SET V [1 MONEY 2 SHOW 3 READY 4 GO]>
+<SORT <> .V 2 1>  ;  [4 GO 1 MONEY 3 READY 2 SHOW]
+<SORT ,L? .V 2>  ;  [4 GO 3 READY 2 SHOW 1 MONEY]
+<SET V [1 MONEY 2 SHOW 3 READY 4 GO]>
+<SORT <> [5 1 6 3 7 2 8 4] 1 0 .V 1>
+.V  ;  [MONEY READY SHOW GO 1 2 3 4]
+```
+
+
 ### SPNAME
 ```zil
 <SPNAME atom>
@@ -1554,6 +1576,43 @@ MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR
 ### STRING
 ```zil
 <STRING !\A <ASCII 66> "CD"> ; "ABCD"
+```
+
+
+### STRUCTURED?
+```zil
+<STRUCTURED? <LIST 1 2 3>>  ;  T
+<STRUCTURED? <TABLE 1 2 3>>  ;  #FALSE
+```
+
+
+### SUBSTRUC
+```zil
+<SUBSTRUC "ABCD" 1 2>
+
+<SETG STR1 "EEEEEE">  ;  "BC"
+<SUBSTRUC "ABCD" 1 2 ,STR1>  ;  STR1 = "BCEEEEEE"
+```
+
+
+### SUPPRESS-WARNINGS?
+```zil
+;  "Examples must be compiled with -w, otherwise warnings is always suppressed."
+
+;  "Compiles with warnings"
+<SUPPRESS-WARNINGS? NONE>
+<GLOBAL X 5>
+<ROUTINE GO () <TELL N .X>>
+
+;  "Compiles with suppressed warnings"
+<SUPPRESS-WARNINGS? ALL>
+<GLOBAL X 5>
+<ROUTINE GO () <TELL N .X>>
+
+;  "Compiles with suppressed warnings"
+<SUPPRESS-WARNINGS? "ZIL0204">
+<GLOBAL X 5>
+<ROUTINE GO () <TELL N .X>>
 ```
 
 
