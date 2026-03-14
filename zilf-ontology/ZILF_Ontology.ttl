@@ -599,6 +599,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:SET-DEFSTRUCT-FILE-DEFAULTS ,
                                  zilf:SETG ,
                                  zilf:SETG20 ,
+                                 zilf:SORT ,
                                  zilf:SPNAME ,
                                  zilf:STRING ,
                                  zilf:TOP ,
@@ -3418,10 +3419,10 @@ The tokens that can have changed default behaviour are:
                                  skos:editorialNote """If SET-DEFSTRUCT-FILE-DEFAULTS is called without any arguments the built-in default behaviour is restored.
 
 See DEFSTRUCT for more on user defined structures."""@en ;
-                                 skos:example """<SET-DEFSTRUCT-FILE-DEFAULTS ('NTH GETB) ('PUT PUTB)  
-    ('START-OFFSET 0) 'NODECL ('INIT-ARGS (BYTE))> 
-<DEFSTRUCT B-TBL TABLE (B-TBL-X FIX 65) (B-TBL-Y FIX 111)> 
-<MAKE-B-TBL>  ;  #B-TBL %<TABLE (BYTE) 65 111> 
+                                 skos:example """<SET-DEFSTRUCT-FILE-DEFAULTS ('NTH GETB) ('PUT PUTB)
+    ('START-OFFSET 0) 'NODECL ('INIT-ARGS (BYTE))>
+<DEFSTRUCT B-TBL TABLE (B-TBL-X FIX 65) (B-TBL-Y FIX 111)>
+<MAKE-B-TBL>  ;  #B-TBL %<TABLE (BYTE) 65 111>
 <B-TBL-Y <MAKE-B-TBL>>  ;  111"""@en ;
                                  skos:prefLabel "<SET-DEFSTRUCT-FILE-DEFAULTS args ...>"@en .
 
@@ -3449,6 +3450,29 @@ zilf:SETG20 rdf:type owl:NamedIndividual ,
             skos:definition "ZIL library function that assigs a value to the global atom. If an atom is already assigned a value, it is changed. SETG20 is an alias for SETG."@en ;
             skos:example "<SETG20 MYVAR 42> ; Store 42 in global atom MYVAR"@en ;
             skos:prefLabel "<SETG20 atom value>"@en .
+
+
+###  http://example.org/zilf/SORT
+zilf:SORT rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition """MDL built-in function that can sort a VECTOR (or TUPLE). The predicate can either be <> or a FUNCTION that takes two keys and returns TRUE if the two records are correctly sorted and FALSE if they are incorrectly sorted. For example ,G? will sort keys in ascending order and ,L? will sort keys in descending order. If the predicate is <> the keys must be of the same TYPE and the vector will be sorted in ascending order.
+
+The record-size is the length of each record (default value is 1) and the key-offset is the 
+offset in the record to the value to use as the sort key (default value is 0).
+
+If additional vectors are supplied all vectors can have their own record length but each vector must have the same number of records. Records in the additional vectors are interchanged based on how the main vector is sorted.
+
+SORT returns the first sorted vector."""@en ;
+          skos:example """<SORT <> [3 4 2 1]>  ;  [1 2 3 4]
+<SET V [1 MONEY 2 SHOW 3 READY 4 GO]>
+<SORT <> .V 2 1>  ;  [4 GO 1 MONEY 3 READY 2 SHOW]
+<SORT ,L? .V 2>  ;  [4 GO 3 READY 2 SHOW 1 MONEY]
+<SET V [1 MONEY 2 SHOW 3 READY 4 GO]>
+<SORT <> [5 1 6 3 7 2 8 4] 1 0 .V 1>
+.V  ;  [MONEY READY SHOW GO 1 2 3 4]"""@en ;
+          skos:prefLabel "<SORT predicate vector [record-size] [key-offset] [vector [record-size]  ...]>"@en .
 
 
 ###  http://example.org/zilf/SOUND
