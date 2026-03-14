@@ -596,6 +596,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:ROUTINE ,
                                  zilf:ROUTINE-FLAGS ,
                                  zilf:SET ,
+                                 zilf:SET-DEFSTRUCT-FILE-DEFAULTS ,
                                  zilf:SETG ,
                                  zilf:SETG20 ,
                                  zilf:SPNAME ,
@@ -3388,6 +3389,41 @@ Zapf: <SET MYVAR 42>  ;  Store 42 in local variable MYVAR"""@en ;
          skos:historyNote "Zapf syntax: SET, Inform syntax: store"@en ;
          skos:prefLabel """MDL: <SET atom value [environment]>,
 Zapf: <SET name value>"""@en .
+
+
+###  http://example.org/zilf/SET-DEFSTRUCT-FILE-DEFAULTS
+zilf:SET-DEFSTRUCT-FILE-DEFAULTS rdf:type owl:NamedIndividual ,
+                                          skos:Concept ;
+                                 skos:broader zilf:CoreFunctions ;
+                                 skos:inScheme zilf:ZILF_Scheme ;
+                                 skos:definition """MDL built-in function that is used to change the default behaviour of the struct-option and the field-option tokens in DEFSTRUCT.
+
+The newly defined defaults are only active in the same file as they were defined. If a file is loaded via, for example, FLOAD or INSERT-FILE the defaults are the built-in defaults inside these files.
+
+The tokens that can have changed default behaviour are:
+
+*  'CONSTRUCTOR replaces the default constructor (MAKE-).
+
+*  'INIT-ARGS replaces the init arguments to the base-type. This is empty by default.
+
+*  'NODECL, use 'NODECL, to get 'NODECL by default.
+
+*  ‘NOTYPE,  use 'NOTYPE, to get 'NOTYPE by default.
+
+*  'NTH, the default ATOM for this is NTH. Change to other with ('NTH MY-NTH).
+
+*  'PUT, the default ATOM for this is PUT. Change to other with ('PUT MY-PUT).
+
+*  'START-OFFSET, the default value is 1. Change with ('START-OFFSET value)."""@en ;
+                                 skos:editorialNote """If SET-DEFSTRUCT-FILE-DEFAULTS is called without any arguments the built-in default behaviour is restored.
+
+See DEFSTRUCT for more on user defined structures."""@en ;
+                                 skos:example """<SET-DEFSTRUCT-FILE-DEFAULTS ('NTH GETB) ('PUT PUTB)  
+    ('START-OFFSET 0) 'NODECL ('INIT-ARGS (BYTE))> 
+<DEFSTRUCT B-TBL TABLE (B-TBL-X FIX 65) (B-TBL-Y FIX 111)> 
+<MAKE-B-TBL>  ;  #B-TBL %<TABLE (BYTE) 65 111> 
+<B-TBL-Y <MAKE-B-TBL>>  ;  111"""@en ;
+                                 skos:prefLabel "<SET-DEFSTRUCT-FILE-DEFAULTS args ...>"@en .
 
 
 ###  http://example.org/zilf/SETG
