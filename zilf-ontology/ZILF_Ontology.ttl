@@ -602,6 +602,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:SORT ,
                                  zilf:SPNAME ,
                                  zilf:STRING ,
+                                 zilf:SUBSTRUC ,
                                  zilf:TOP ,
                                  zilf:VALUE ,
                                  <http://example.org/zilf/BOUND?> ,
@@ -3540,6 +3541,25 @@ zilf:STRING rdf:type owl:NamedIndividual ,
             skos:editorialNote "A string is a block of contiguous bytes where each byte holds a character. See more about STRING  structure in The MDL Programming Language, Appendix 1."@en ;
             skos:example "<STRING !\\A <ASCII 66> \"CD\"> ; \"ABCD\""@en ;
             skos:prefLabel "<STRING values ...>"@en .
+
+
+###  http://example.org/zilf/SUBSTRUC
+zilf:SUBSTRUC rdf:type owl:NamedIndividual ,
+                       skos:Concept ;
+              skos:broader zilf:CoreFunctions ;
+              skos:inScheme zilf:ZILF_Scheme ;
+              skos:definition """MDL built-in function that copies an amount number of elements, starting at rest, from structure-from. The result is copied into structure-to, if supplied, otherwise a new structure is returned.
+
+Default value for rest is 0 and default value for amount is LENGTH – rest (in other words, copies from rest to end of structure-from).
+
+structure-from must be of PRIMTYPE LIST, VECTOR or STRING and structure-to must be of the same PRIMTYPE as struture-from and have enough room for the SUBSTRUC to fit.
+
+Also see BACK, LENGTH, NTH, PUT, REST and TOP."""@en ;
+              skos:example """<SUBSTRUC \"ABCD\" 1 2>
+
+<SETG STR1 \"EEEEEE\">  ;  \"BC\"
+<SUBSTRUC \"ABCD\" 1 2 ,STR1>  ;  STR1 = \"BCEEEEEE\""""@en ;
+              skos:prefLabel "<SUBSTRUC structure-from [rest] [amount] [structure-to]>"@en .
 
 
 ###  http://example.org/zilf/SYNONYM
