@@ -603,6 +603,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:SPNAME ,
                                  zilf:STRING ,
                                  zilf:SUBSTRUC ,
+                                 zilf:TELL-TOKENS ,
                                  zilf:TOP ,
                                  zilf:VALUE ,
                                  <http://example.org/zilf/BOUND?> ,
@@ -3585,6 +3586,27 @@ zilf:SYNTAX rdf:type owl:NamedIndividual ,
                      skos:Concept ;
             skos:broader zilf:ParserSystem ;
             skos:prefLabel "SYNTAX"@en .
+
+
+###  http://example.org/zilf/TELL-TOKENS
+zilf:TELL-TOKENS rdf:type owl:NamedIndividual ,
+                          skos:Concept ;
+                 skos:broader zilf:CoreFunctions ;
+                 skos:inScheme zilf:ZILF_Scheme ;
+                 skos:definition "ZIL library function that replaces current TELL-TOKENS with the specified list of pattern and form. These can then be used in TELL. See ADD-TELL-TOKEN for a description of pattern and form."@en ;
+                 skos:example """<TELL-TOKENS
+ (CR CRLF)  <CRLF>
+ (N NUM) *  <PRINTN .X>
+ (C CHAR CHR) * <PRINTC .X>
+ (D DESC) * <PRINTD .X>
+ (A AN) *  <PRINTA .X>
+ THE *  <THE-PRINT .X>
+ CTHE *  <CTHE-PRINT .X>
+ THEO   <THE-PRINT>
+ CTHEO  <CTHE-PRINT>
+ CTHEI  <CTHEI-PRINT>
+ THEI   <THEI-PRINT>>"""@en ;
+                 skos:prefLabel "<TELL-TOKENS {pattern form} ...>"@en .
 
 
 ###  http://example.org/zilf/THROW
