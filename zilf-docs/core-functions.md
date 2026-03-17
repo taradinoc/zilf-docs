@@ -1626,6 +1626,13 @@ ZILF compiler directive that tells the compiler how to treat warnings. NONE is t
 
 ---
 
+### TELL-TOKENS
+**Usage:** `<TELL-TOKENS {pattern form} ...>`
+
+ZIL library function that replaces current TELL-TOKENS with the specified list of pattern and form. These can then be used in TELL. See ADD-TELL-TOKEN for a description of pattern and form.
+
+---
+
 ### TIME
 **Usage:** `<TIME>`
 
@@ -1641,6 +1648,24 @@ MDL built-in function that is used for measuring CPU execution time, typically u
 MDL built-in function that returns array with all elements put back in  array. TOP only works on the structures VECTOR or STRING (arrays) and not on a LIST (a LIST is only pointing forward).
 
 > **Note:** The returned array is not a copy but pointing to the same array with another starting element. Also see BACK, NTH, PUT, REST and SUBSTRUC.
+
+---
+
+### TUPLE
+**Usage:** `<TUPLE values ...>`
+
+MDL built-in function that is just like a VECTOR with the only difference that a TUPLE should live on the control stack. The advantage of a TUPLE over a VECTOR is that a TUPLE doesn't need to be garbage collected, the disadvantage is that a TUPLE only lives during the execution of the function where it was declared. It is only valid to declare a TUPLE in the "AUX" or "OPTIONAL" part of a functions definition or as a "TUPLE" in a functions definition.
+
+> **Note:** In ZILF, TUPLE is treated as an alias to VECTOR. 
+
+A TUPLE defined in the "AUX" or "OPT" is just like a VECTOR. A "TUPLE" definition makes it possible to have a variable number of arguments to a FUNCTION.
+
+---
+
+### TYPE
+**Usage:** `<TYPE value>`
+
+MDL built-in function that evaluates to the type of value. See also ALLTYPES.
 
 ---
 

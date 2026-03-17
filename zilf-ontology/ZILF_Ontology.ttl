@@ -606,6 +606,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:TELL-TOKENS ,
                                  zilf:TOP ,
                                  zilf:TUPLE ,
+                                 zilf:TYPE ,
                                  zilf:VALUE ,
                                  <http://example.org/zilf/BOUND?> ,
                                  <http://example.org/zilf/CHECK-VERSION?> ,
@@ -3681,6 +3682,7 @@ A TUPLE defined in the \"AUX\" or \"OPT\" is just like a VECTOR. A \"TUPLE\" def
 ###  http://example.org/zilf/TYPE
 zilf:TYPE rdf:type owl:NamedIndividual ,
                    skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
           skos:inScheme zilf:ZILF_Scheme ;
           skos:definition "MDL built-in function that evaluates to the type of value. See also ALLTYPES."@en ;
           skos:example """<TYPE !\\A>  ;  CHARACTER

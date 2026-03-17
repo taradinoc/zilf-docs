@@ -1616,6 +1616,23 @@ MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR
 ```
 
 
+### TELL-TOKENS
+```zil
+<TELL-TOKENS
+(CR CRLF)  <CRLF>
+(N NUM) *  <PRINTN .X>
+(C CHAR CHR) * <PRINTC .X>
+(D DESC) * <PRINTD .X>
+(A AN) *  <PRINTA .X>
+THE *  <THE-PRINT .X>
+CTHE *  <CTHE-PRINT .X>
+THEO   <THE-PRINT>
+CTHEO  <CTHE-PRINT>
+CTHEI  <CTHEI-PRINT>
+THEI   <THEI-PRINT>>
+```
+
+
 ### TIME
 ```zil
 <TIME>
@@ -1627,6 +1644,29 @@ MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR
 <SETG STRUCT1 [1 2 3 4 5]>  ;  STRUCT1 = [1 2 3 4 5]
 <SETG STRUCT2 <REST ,STRUCT1 2>>  ;  STRUCT2 = [3 4 5]
 <TOP ,STRUCT2>  ;  STRUCT2 = [1 2 3 4 5]
+```
+
+
+### TUPLE
+```zil
+<DEFINE MY+ ("TUPLE" T)
+<REPEAT ((M 0))
+<COND (<EMPTY? .T> <RETURN .M>)>
+<SET M <+ .M <1 .T>>>
+<SET T <REST .T>>
+> 
+>
+<MY+ 1 2 3>  ;  6
+<MY+ 4 5>  ;  9
+<TYPE <TUPLE 1 2 3>>  ;  VECTOR (in ZILF!), TUPLE (in MDL)
+```
+
+
+### TYPE
+```zil
+<TYPE !\A>  ;  CHARACTER
+<TYPE <+1 2>>  ;  FIX
+<TYPE #BYTE 42>  ;  BYTE
 ```
 
 
