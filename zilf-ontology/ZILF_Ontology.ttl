@@ -605,6 +605,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:SUBSTRUC ,
                                  zilf:TELL-TOKENS ,
                                  zilf:TOP ,
+                                 zilf:TUPLE ,
                                  zilf:VALUE ,
                                  <http://example.org/zilf/BOUND?> ,
                                  <http://example.org/zilf/CHECK-VERSION?> ,
@@ -3595,17 +3596,17 @@ zilf:TELL-TOKENS rdf:type owl:NamedIndividual ,
                  skos:inScheme zilf:ZILF_Scheme ;
                  skos:definition "ZIL library function that replaces current TELL-TOKENS with the specified list of pattern and form. These can then be used in TELL. See ADD-TELL-TOKEN for a description of pattern and form."@en ;
                  skos:example """<TELL-TOKENS
- (CR CRLF)  <CRLF>
- (N NUM) *  <PRINTN .X>
- (C CHAR CHR) * <PRINTC .X>
- (D DESC) * <PRINTD .X>
- (A AN) *  <PRINTA .X>
- THE *  <THE-PRINT .X>
- CTHE *  <CTHE-PRINT .X>
- THEO   <THE-PRINT>
- CTHEO  <CTHE-PRINT>
- CTHEI  <CTHEI-PRINT>
- THEI   <THEI-PRINT>>"""@en ;
+(CR CRLF)  <CRLF>
+(N NUM) *  <PRINTN .X>
+(C CHAR CHR) * <PRINTC .X>
+(D DESC) * <PRINTD .X>
+(A AN) *  <PRINTA .X>
+THE *  <THE-PRINT .X>
+CTHE *  <CTHE-PRINT .X>
+THEO   <THE-PRINT>
+CTHEO  <CTHE-PRINT>
+CTHEI  <CTHEI-PRINT>
+THEI   <THEI-PRINT>>"""@en ;
                  skos:prefLabel "<TELL-TOKENS {pattern form} ...>"@en .
 
 
@@ -3653,6 +3654,28 @@ zilf:TOP rdf:type owl:NamedIndividual ,
 <SETG STRUCT2 <REST ,STRUCT1 2>>  ;  STRUCT2 = [3 4 5]
 <TOP ,STRUCT2>  ;  STRUCT2 = [1 2 3 4 5]"""@en ;
          skos:prefLabel "<TOP array>"@en .
+
+
+###  http://example.org/zilf/TUPLE
+zilf:TUPLE rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:CoreFunctions ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "MDL built-in function that is just like a VECTOR with the only difference that a TUPLE should live on the control stack. The advantage of a TUPLE over a VECTOR is that a TUPLE doesn't need to be garbage collected, the disadvantage is that a TUPLE only lives during the execution of the function where it was declared. It is only valid to declare a TUPLE in the \"AUX\" or \"OPTIONAL\" part of a functions definition or as a \"TUPLE\" in a functions definition."@en ;
+           skos:editorialNote """In ZILF, TUPLE is treated as an alias to VECTOR. 
+
+A TUPLE defined in the \"AUX\" or \"OPT\" is just like a VECTOR. A \"TUPLE\" definition makes it possible to have a variable number of arguments to a FUNCTION."""@en ;
+           skos:example """<DEFINE MY+ (\"TUPLE\" T)
+<REPEAT ((M 0))
+<COND (<EMPTY? .T> <RETURN .M>)>
+<SET M <+ .M <1 .T>>>
+<SET T <REST .T>>
+> 
+>
+<MY+ 1 2 3>  ;  6
+<MY+ 4 5>  ;  9
+<TYPE <TUPLE 1 2 3>>  ;  VECTOR (in ZILF!), TUPLE (in MDL)"""@en ;
+           skos:prefLabel "<TUPLE values ...>"@en .
 
 
 ###  http://example.org/zilf/USL
