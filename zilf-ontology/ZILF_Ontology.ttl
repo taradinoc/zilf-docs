@@ -603,6 +603,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:SPNAME ,
                                  zilf:STRING ,
                                  zilf:SUBSTRUC ,
+                                 zilf:TABLE ,
                                  zilf:TELL-TOKENS ,
                                  zilf:TOP ,
                                  zilf:TUPLE ,
@@ -3636,6 +3637,42 @@ Each occurrence of an action-routine-name together with an optional preaction-ro
 <SYNTAX WAKE OBJECT (FIND PERSONBIT) UP OBJECT
     (FIND KLUDGEBIT) = V-WAKE>"""@en ;
             skos:prefLabel "SYNTAX"@en .
+
+
+###  http://example.org/zilf/TABLE
+zilf:TABLE rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:CoreFunctions ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition """ZIL library function that defines a table containing the specified values. The following flags control the table format.
+
+*   WORD causes the elements to be 2-byte words. This is the default.
+
+*  BYTE causes the elements to be single bytes.
+
+*  LEXV  causes the elements to be 4-byte records. If default values are given to ITABLE with this flag, they will be split into groups of three: the first compiled as a word, the next two compiled as bytes. The table is also prefixed with a byte indicating the number of records, followed by a zero byte.
+
+*  STRING causes the elements to be single bytes and also changes the initializer format. This flag may not be used with ITABLE. When this flag is given, any values given as strings will be compiled as a series of individual ASCII characters, rather than as string addresses.
+
+The following flags alter the table without changing its basic format:
+
+*  LENGTH  causes a length marker to be written at the beginning of the table, indicating the number of elements that follow. The length marker is a byte if BYTE or STRING are also given; otherwise the length marker is a WORD. This flag is ignored if LEXV is given.
+
+*  PURE causes the table to be compiled into static memory (ROM).
+
+The flag LENGTH is implied in LTABLE and PLTABLE. The flag PURE is implied in PTABLE and PLTABLE."""@en ;
+           skos:editorialNote "TABLE is a ZIL-specific structure that can be used both outside and inside ROUTINES."@en ;
+           skos:example """<TABLE 1 2 3 4>
+
+|  Element 0 WORD | Element 1 WORD | Element 2 WORD | Element 3 WORD |
+| --- | --- | --- | --- |
+| 1 | 2 | 3 | 4 |
+
+<TABLE (BYTE LENGTH) 1 2 3 4>
+|  Element 0 BYTE | Element 1 BYTE | Element 2 BYTE | Element 3 BYTE | Element 4 BYTE |
+| --- | --- | --- | --- |
+| 4 | 1 | 2 | 3 | 4 |"""@en ;
+           skos:prefLabel "<TABLE [(flags ...)] values ...>"@en .
 
 
 ###  http://example.org/zilf/TELL-TOKENS
