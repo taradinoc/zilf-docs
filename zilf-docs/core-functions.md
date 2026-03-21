@@ -1626,6 +1626,31 @@ ZILF compiler directive that tells the compiler how to treat warnings. NONE is t
 
 ---
 
+### TABLE
+**Usage:** `<TABLE [(flags ...)] values ...>`
+
+ZIL library function that defines a table containing the specified values. The following flags control the table format.
+
+*   WORD causes the elements to be 2-byte words. This is the default.
+
+*  BYTE causes the elements to be single bytes.
+
+*  LEXV  causes the elements to be 4-byte records. If default values are given to ITABLE with this flag, they will be split into groups of three: the first compiled as a word, the next two compiled as bytes. The table is also prefixed with a byte indicating the number of records, followed by a zero byte.
+
+*  STRING causes the elements to be single bytes and also changes the initializer format. This flag may not be used with ITABLE. When this flag is given, any values given as strings will be compiled as a series of individual ASCII characters, rather than as string addresses.
+
+The following flags alter the table without changing its basic format:
+
+*  LENGTH  causes a length marker to be written at the beginning of the table, indicating the number of elements that follow. The length marker is a byte if BYTE or STRING are also given; otherwise the length marker is a WORD. This flag is ignored if LEXV is given.
+
+*  PURE causes the table to be compiled into static memory (ROM).
+
+The flag LENGTH is implied in LTABLE and PLTABLE. The flag PURE is implied in PTABLE and PLTABLE.
+
+> **Note:** TABLE is a ZIL-specific structure that can be used both outside and inside ROUTINES.
+
+---
+
 ### TELL-TOKENS
 **Usage:** `<TELL-TOKENS {pattern form} ...>`
 

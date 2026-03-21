@@ -1616,6 +1616,20 @@ MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR
 ```
 
 
+### TABLE
+```zil
+<TABLE 1 2 3 4>
+|  Element 0 WORD | Element 1 WORD | Element 2 WORD | Element 3 WORD |
+| --- | --- | --- | --- |
+| 1 | 2 | 3 | 4 |
+
+<TABLE (BYTE LENGTH) 1 2 3 4>
+|  Element 0 BYTE | Element 1 BYTE | Element 2 BYTE | Element 3 BYTE | Element 4 BYTE |
+| --- | --- | --- | --- |
+| 4 | 1 | 2 | 3 | 4 |
+```
+
+
 ### TELL-TOKENS
 ```zil
 <TELL-TOKENS

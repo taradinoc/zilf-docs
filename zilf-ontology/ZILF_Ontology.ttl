@@ -3663,7 +3663,6 @@ The following flags alter the table without changing its basic format:
 The flag LENGTH is implied in LTABLE and PLTABLE. The flag PURE is implied in PTABLE and PLTABLE."""@en ;
            skos:editorialNote "TABLE is a ZIL-specific structure that can be used both outside and inside ROUTINES."@en ;
            skos:example """<TABLE 1 2 3 4>
-
 |  Element 0 WORD | Element 1 WORD | Element 2 WORD | Element 3 WORD |
 | --- | --- | --- | --- |
 | 1 | 2 | 3 | 4 |
