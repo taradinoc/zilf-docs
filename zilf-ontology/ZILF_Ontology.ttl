@@ -631,6 +631,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  <http://example.org/zilf/ORDER-TREE?> ,
                                  <http://example.org/zilf/STRUCTURED?> ,
                                  <http://example.org/zilf/SUPPRESS-WARNINGS?> ,
+                                 <http://example.org/zilf/TYPE?> ,
                                  <http://example.org/zilf/VALID-TYPE?> ;
                    skos:topConceptOf zilf:ZILF_Scheme ;
                    skos:prefLabel "Core Functions"@en .
@@ -4494,6 +4495,18 @@ By default, if ORDER-TREE? is not used, the order is the same as REVERSE-DEFINED
 <GLOBAL X 5>
 <ROUTINE GO () <TELL N .X>>"""@en ;
                                              skos:prefLabel "<SUPPRESS-WARNINGS? all | none | codes ...>"@en .
+
+
+###  http://example.org/zilf/TYPE?
+<http://example.org/zilf/TYPE?> rdf:type owl:NamedIndividual ,
+                                         skos:Concept ;
+                                skos:broader zilf:CoreFunctions ;
+                                skos:inScheme zilf:ZILF_Scheme ;
+                                skos:definition "MDL built-in predicate that evaluates to type-i only if <==? type-i > is true. It is faster and gives more information than OR-ing tests for each TYPE. If the test fails for all type-i’s, TYPE? returns #FALSE ()."@en ;
+                                skos:example """<TYPE? !\\A CHARACTER FIX>  ;  CHARACTER
+<TYPE? <+1 2> CHARACTER FIX>  ;  FIX
+<TYPE? #BYTE 42 CHARACTER FIX>  ;  #FALSE ()"""@en ;
+                                skos:prefLabel "<TYPE? value type-1 ... type-N>"@en .
 
 
 ###  http://example.org/zilf/VALID-TYPE?
