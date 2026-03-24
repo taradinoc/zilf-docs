@@ -608,6 +608,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:TOP ,
                                  zilf:TUPLE ,
                                  zilf:TYPE ,
+                                 zilf:TYPEPRIM ,
                                  zilf:VALUE ,
                                  <http://example.org/zilf/BOUND?> ,
                                  <http://example.org/zilf/CHECK-VERSION?> ,
@@ -3774,6 +3775,18 @@ zilf:TYPE rdf:type owl:NamedIndividual ,
 <TYPE <+1 2>>  ;  FIX
 <TYPE #BYTE 42>  ;  BYTE"""@en ;
           skos:prefLabel "<TYPE value>"@en .
+
+
+###  http://example.org/zilf/TYPEPRIM
+zilf:TYPEPRIM rdf:type owl:NamedIndividual ,
+                       skos:Concept ;
+              skos:broader zilf:CoreFunctions ;
+              skos:inScheme zilf:ZILF_Scheme ;
+              skos:definition "MDL built-in function that evaluates to the primitive type of type. The primitive types are  ATOM, FIX, LIST, STRING, TABLE and VECTOR."@en ;
+              skos:example """<TYPEPRIM CHARACTER>  ;  FIX
+<TYPEPRIM FORM>  ;  LIST
+<TYPEPRIM BYTE>  ;  FIX"""@en ;
+              skos:prefLabel "<TYPEPRIM type>"@en .
 
 
 ###  http://example.org/zilf/USL
