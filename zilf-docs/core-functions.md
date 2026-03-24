@@ -1694,6 +1694,20 @@ MDL built-in function that evaluates to the type of value. See also ALLTYPES.
 
 ---
 
+### TYPE?
+**Usage:** `<TYPE? value type-1 ... type-N>`
+
+MDL built-in predicate that evaluates to type-i only if <==? type-i > is true. It is faster and gives more information than OR-ing tests for each TYPE. If the test fails for all type-i’s, TYPE? returns #FALSE ().
+
+---
+
+### TYPEPRIM
+**Usage:** `<TYPEPRIM type>`
+
+MDL built-in function that evaluates to the primitive type of type. The primitive types are  ATOM, FIX, LIST, STRING, TABLE and VECTOR.
+
+---
+
 ### VALID-TYPE?
 **Usage:** `<VALID-TYPE? atom>`
 
