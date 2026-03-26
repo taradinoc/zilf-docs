@@ -609,6 +609,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:TUPLE ,
                                  zilf:TYPE ,
                                  zilf:TYPEPRIM ,
+                                 zilf:UNASSIGN ,
                                  zilf:VALUE ,
                                  <http://example.org/zilf/BOUND?> ,
                                  <http://example.org/zilf/CHECK-VERSION?> ,
@@ -3787,6 +3788,20 @@ zilf:TYPEPRIM rdf:type owl:NamedIndividual ,
 <TYPEPRIM FORM>  ;  LIST
 <TYPEPRIM BYTE>  ;  FIX"""@en ;
               skos:prefLabel "<TYPEPRIM type>"@en .
+
+
+###  http://example.org/zilf/UNASSIGN
+zilf:UNASSIGN rdf:type owl:NamedIndividual ,
+                       skos:Concept ;
+              skos:broaderTransitive zilf:CoreFunctions ;
+              skos:inScheme zilf:ZILF_Scheme ;
+              skos:definition "MDL built-in function that unassigns the global atom."@en ;
+              skos:editorialNote "It is possible to supply an environment for the ASSIGNED? predicate. See EVAL for more about the environment."@en ;
+              skos:example """<SET X 1>
+<ASSIGNED? X>  ;  True
+<UNASSIGN X>
+<ASSIGNED? X>  ;  False"""@en ;
+              skos:prefLabel "<UNASSIGN atom [environment]>"@en .
 
 
 ###  http://example.org/zilf/USL
