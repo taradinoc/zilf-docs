@@ -1708,6 +1708,15 @@ MDL built-in function that evaluates to the primitive type of type. The primitiv
 
 ---
 
+### UNASSIGN
+**Usage:** `<UNASSIGN atom [environment]>`
+
+MDL built-in function that unassigns the global atom.
+
+> **Note:** It is possible to supply an environment for the ASSIGNED? predicate. See EVAL for more about the environment.
+
+---
+
 ### VALID-TYPE?
 **Usage:** `<VALID-TYPE? atom>`
 

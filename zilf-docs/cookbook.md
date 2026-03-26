@@ -1700,6 +1700,15 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### UNASSIGN
+```zil
+<SET X 1>
+<ASSIGNED? X>  ;  True
+<UNASSIGN X>
+<ASSIGNED? X>  ;  False
+```
+
+
 ### VALID-TYPE?
 ```zil
 <VALID-TYPE? VECTOR>  ;  VECTOR
