@@ -610,6 +610,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:TYPE ,
                                  zilf:TYPEPRIM ,
                                  zilf:UNASSIGN ,
+                                 zilf:UNPARSE ,
                                  zilf:VALUE ,
                                  <http://example.org/zilf/BOUND?> ,
                                  <http://example.org/zilf/CHECK-VERSION?> ,
@@ -3802,6 +3803,20 @@ zilf:UNASSIGN rdf:type owl:NamedIndividual ,
 <UNASSIGN X>
 <ASSIGNED? X>  ;  False"""@en ;
               skos:prefLabel "<UNASSIGN atom [environment]>"@en .
+
+
+###  http://example.org/zilf/UNPARSE
+zilf:UNPARSE rdf:type owl:NamedIndividual ,
+                      skos:Concept ;
+             skos:broader zilf:CoreFunctions ;
+             skos:inScheme zilf:ZILF_Scheme ;
+             skos:definition "MDL built-in function that returns a STRING representation of value. Unlike PNAME, UNPASE prints an ATOMs trailers if required."@en ;
+             skos:example """<UNPARSE 123>  ;  \"123\"
+<UNPARSE <+ 1 2>>  ;  \"3\"
+<UNPARSE FOO>  ;  \"FOO\"
+<UNPARSE <ATOM \"FOO\">>  ;  \"FOO!-#FALSE ()\"
+<PNAME <ATOM \"FOO\">>  ;  \"FOO\""""@en ;
+             skos:prefLabel "<UNPARSE value>"@en .
 
 
 ###  http://example.org/zilf/USL
