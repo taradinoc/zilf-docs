@@ -1709,6 +1709,16 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### UNPARSE
+```zil
+<UNPARSE 123>  ;  "123"
+<UNPARSE <+ 1 2>>  ;  "3"
+<UNPARSE FOO>  ;  "FOO"
+<UNPARSE <ATOM "FOO">>  ;  "FOO!-#FALSE ()"
+<PNAME <ATOM "FOO">>  ;  "FOO"
+```
+
+
 ### VALID-TYPE?
 ```zil
 <VALID-TYPE? VECTOR>  ;  VECTOR

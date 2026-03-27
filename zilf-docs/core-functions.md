@@ -1717,6 +1717,13 @@ MDL built-in function that unassigns the global atom.
 
 ---
 
+### UNPARSE
+**Usage:** `<UNPARSE value>`
+
+MDL built-in function that returns a STRING representation of value. Unlike PNAME, UNPASE prints an ATOMs trailers if required.
+
+---
+
 ### VALID-TYPE?
 **Usage:** `<VALID-TYPE? atom>`
 
