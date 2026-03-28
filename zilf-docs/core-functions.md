@@ -1724,6 +1724,20 @@ MDL built-in function that returns a STRING representation of value. Unlike PNAM
 
 ---
 
+### USE
+**Usage:** `<USE package-name ...>`
+
+MDL package system that  activates one or many package-names and makes its content available in the current OBLIST-path. In practice USE copies the OBLIST package-name and adds it last to the local OBLIST (<LVAL OBLIST>). This means that all ATOMs on the external package OBLIST becomes available in current environment. 
+
+If the package-name is not available in the current environment, USE tries to load 
+“package-name.zil” from the current path.
+
+> **Note:** USE only works together with PACKAGE and if the definition of the package-name is missing from the environment or no file is found containing that definition is found, an error is raised.
+
+See PACKAGE and USE-WHEN.
+
+---
+
 ### VALID-TYPE?
 **Usage:** `<VALID-TYPE? atom>`
 

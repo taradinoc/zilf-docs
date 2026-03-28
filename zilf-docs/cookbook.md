@@ -1719,6 +1719,12 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### USE
+```zil
+<USE "FOOFOO">  ;  "Searches for file "foofoo.zil" which contains the definition for <PACKAGE "FOOFOO"> ..."
+```
+
+
 ### VALID-TYPE?
 ```zil
 <VALID-TYPE? VECTOR>  ;  VECTOR
