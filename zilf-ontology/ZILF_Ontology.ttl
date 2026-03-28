@@ -611,6 +611,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:TYPEPRIM ,
                                  zilf:UNASSIGN ,
                                  zilf:UNPARSE ,
+                                 zilf:USE ,
                                  zilf:VALUE ,
                                  <http://example.org/zilf/BOUND?> ,
                                  <http://example.org/zilf/CHECK-VERSION?> ,
@@ -3817,6 +3818,22 @@ zilf:UNPARSE rdf:type owl:NamedIndividual ,
 <UNPARSE <ATOM \"FOO\">>  ;  \"FOO!-#FALSE ()\"
 <PNAME <ATOM \"FOO\">>  ;  \"FOO\""""@en ;
              skos:prefLabel "<UNPARSE value>"@en .
+
+
+###  http://example.org/zilf/USE
+zilf:USE rdf:type owl:NamedIndividual ,
+                  skos:Concept ;
+         skos:broader zilf:CoreFunctions ;
+         skos:inScheme zilf:ZILF_Scheme ;
+         skos:definition """MDL package system that  activates one or many package-names and makes its content available in the current OBLIST-path. In practice USE copies the OBLIST package-name and adds it last to the local OBLIST (<LVAL OBLIST>). This means that all ATOMs on the external package OBLIST becomes available in current environment. 
+
+If the package-name is not available in the current environment, USE tries to load 
+“package-name.zil” from the current path."""@en ;
+         skos:editorialNote """USE only works together with PACKAGE and if the definition of the package-name is missing from the environment or no file is found containing that definition is found, an error is raised.
+
+See PACKAGE and USE-WHEN."""@en ;
+         skos:example "<USE \"FOOFOO\">  ;  \"Searches for file \"foofoo.zil\" which contains the definition for <PACKAGE \"FOOFOO\"> ...\""@en ;
+         skos:prefLabel "<USE package-name ...>"@en .
 
 
 ###  http://example.org/zilf/USL
