@@ -1767,3 +1767,16 @@ Z-code built-in function that loads name/number. Note that this command is mostl
 **History:** Zapf syntax: VALUE, Inform syntax: load
 
 ---
+
+### VECTOR
+**Usage:** `<VECTOR values ...>`
+
+**Alternative Usage:** `[values ...]`
+
+MDL built-in function that  returns a VECTOR of containing values.
+
+A VECTOR is a collection of items that occupies a continuous block of memory. This makes it easy to traverse a VECTOR both forward and backward but costly to add or insert items in the VECTOR. See more about VECTOR structure in The MDL Programming Language, Appendix 1.
+
+> **Note:** Note that in MDL there is another type of vector, UVECTOR (uniform vector). In an UVECTOR every item is of the same TYPE which makes an UVECTOR more space efficient. ZILF does not support UVECTOR but treats short form definitions of an UVECTOR as a ordinary VECTOR  (![1 2 3!] --> [1 2 3]).
+
+---

@@ -1764,6 +1764,17 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### VECTOR
+```zil
+<VECTOR 1 2 "AB" !\C>  ;  [1 2 "AB" !\C]
+[1 2 "AB" !\C]  ;  [1 2 "AB" !\C]
+
+;  VECTOR (in ZILF)
+;  UVECTOR (in MDL)
+<TYPE ![1 2 3!]>
+```
+
+
 ## Z-Code Built-ins
 
 ### BACK
