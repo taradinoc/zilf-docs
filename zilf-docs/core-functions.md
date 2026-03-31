@@ -1738,6 +1738,15 @@ See PACKAGE and USE-WHEN.
 
 ---
 
+### USE-WHEN
+**Usage:** `<USE-WHEN condition package-name ...>`
+
+MDL package system that is exactly like USE but only activates the package-name if the condition evaluates to TRUE.
+
+> **Note:** See PACKAGE and USE.
+
+---
+
 ### VALID-TYPE?
 **Usage:** `<VALID-TYPE? atom>`
 

@@ -1725,6 +1725,22 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### USE-WHEN
+```zil
+<PACKAGE "FOO">
+<SETG AAAA 1234>
+<ENTRY AAAA>
+<ENDPACKAGE>
+<GASSIGNED? AAAA>  ;  #FALSE
+<REMOVE AAAA>  ;  "Secure that ATOM not on any OBLIST"
+<USE-WHEN <=? 1 2> "FOO">
+<GASSIGNED? AAAA>  ;  #FALSE
+<REMOVE AAAA>  ;  "Secure that ATOM not on any OBLIST"
+<USE-WHEN <=? 1 1> "FOO">
+,AAAA  ;  1234
+```
+
+
 ### VALID-TYPE?
 ```zil
 <VALID-TYPE? VECTOR>  ;  VECTOR
