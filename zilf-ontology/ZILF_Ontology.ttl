@@ -612,6 +612,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:UNASSIGN ,
                                  zilf:UNPARSE ,
                                  zilf:USE ,
+                                 zilf:USE-WHEN ,
                                  zilf:VALUE ,
                                  <http://example.org/zilf/BOUND?> ,
                                  <http://example.org/zilf/CHECK-VERSION?> ,
@@ -3834,6 +3835,27 @@ If the package-name is not available in the current environment, USE tries to lo
 See PACKAGE and USE-WHEN."""@en ;
          skos:example "<USE \"FOOFOO\">  ;  \"Searches for file \"foofoo.zil\" which contains the definition for <PACKAGE \"FOOFOO\"> ...\""@en ;
          skos:prefLabel "<USE package-name ...>"@en .
+
+
+###  http://example.org/zilf/USE-WHEN
+zilf:USE-WHEN rdf:type owl:NamedIndividual ,
+                       skos:Concept ;
+              skos:broader zilf:CoreFunctions ;
+              skos:inScheme zilf:ZILF_Scheme ;
+              skos:definition "MDL package system that is exactly like USE but only activates the package-name if the condition evaluates to TRUE."@en ;
+              skos:editorialNote "See PACKAGE and USE."@en ;
+              skos:example """<PACKAGE \"FOO\">
+<SETG AAAA 1234>
+<ENTRY AAAA>
+<ENDPACKAGE>
+<GASSIGNED? AAAA>  ;  #FALSE
+<REMOVE AAAA>  ;  \"Secure that ATOM not on any OBLIST\"
+<USE-WHEN <=? 1 2> \"FOO\">
+<GASSIGNED? AAAA>  ;  #FALSE
+<REMOVE AAAA>  ;  \"Secure that ATOM not on any OBLIST\"
+<USE-WHEN <=? 1 1> \"FOO\">
+,AAAA  ;  1234"""@en ;
+              skos:prefLabel "<USE-WHEN condition package-name ...>"@en .
 
 
 ###  http://example.org/zilf/USL
