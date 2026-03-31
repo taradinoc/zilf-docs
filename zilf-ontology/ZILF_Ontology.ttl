@@ -614,6 +614,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:USE ,
                                  zilf:USE-WHEN ,
                                  zilf:VALUE ,
+                                 zilf:VECTOR ,
                                  <http://example.org/zilf/BOUND?> ,
                                  <http://example.org/zilf/CHECK-VERSION?> ,
                                  <http://example.org/zilf/COMPILING?> ,
@@ -3892,6 +3893,25 @@ Z-code built-in function that loads name/number. Note that this command is mostl
            skos:historyNote "Zapf syntax: VALUE, Inform syntax: load"@en ;
            skos:prefLabel """MDL: <VALUE atom [environment]>, 
 Zapf: <VALUE name/number>"""@en .
+
+
+###  http://example.org/zilf/VECTOR
+zilf:VECTOR rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:altLabel "[values ...]"@en ;
+            skos:definition """MDL built-in function that  returns a VECTOR of containing values.
+
+A VECTOR is a collection of items that occupies a continuous block of memory. This makes it easy to traverse a VECTOR both forward and backward but costly to add or insert items in the VECTOR. See more about VECTOR structure in The MDL Programming Language, Appendix 1."""@en ;
+            skos:editorialNote "Note that in MDL there is another type of vector, UVECTOR (uniform vector). In an UVECTOR every item is of the same TYPE which makes an UVECTOR more space efficient. ZILF does not support UVECTOR but treats short form definitions of an UVECTOR as a ordinary VECTOR  (![1 2 3!] --> [1 2 3])."@en ;
+            skos:example """<VECTOR 1 2 \"AB\" !\\C>  ;  [1 2 \"AB\" !\\C]
+[1 2 \"AB\" !\\C]  ;  [1 2 \"AB\" !\\C]
+
+;  VECTOR (in ZILF)
+;  UVECTOR (in MDL)
+<TYPE ![1 2 3!]>"""@en ;
+            skos:prefLabel "<VECTOR values ...>"@en .
 
 
 ###  http://example.org/zilf/VERB-SYNONYM
