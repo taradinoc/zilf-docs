@@ -1780,3 +1780,30 @@ A VECTOR is a collection of items that occupies a continuous block of memory. Th
 > **Note:** Note that in MDL there is another type of vector, UVECTOR (uniform vector). In an UVECTOR every item is of the same TYPE which makes an UVECTOR more space efficient. ZILF does not support UVECTOR but treats short form definitions of an UVECTOR as a ordinary VECTOR  (![1 2 3!] --> [1 2 3]).
 
 ---
+
+### VERSION
+**Usage:** `<VERSION {ZIP | EZIP | XZIP | YZIP | number} [TIME]>`
+
+ZIL library function that tells the compiler which Z-machine version that this program is targeting.
+
+Version 3 or ZIP
+*  Version 3 (file extension *.z3). Almost all classical Infocom games are in this version. You are limited to 255 objects (rooms+items) and the game can't be bigger than 128K.
+
+Version 4 or EZIP
+*  Version 4 (file extension *.z4). Infocom's "plus" games – AMFV, Bureaucracy, Nord and Bert... and Trinity. This format supports 65535 objects and a game size up to 256K.
+
+Version 5 or XZIP
+*  Version 5 (file extension *.z5). Infocom's Beyond Zork, Border Zone, Sherlock and the Solid Gold versions of older games. This version adds things like UNDO, COLOR and timed input. This format supports 65535 objects and a game size up to 256K.
+
+Version 6 or YZIP
+*  Version 6 (file extension *.z6). Infocom's Arthur, Journey, Shogun and Zork Zero. This version primarily adds graphics. This version supports game size up to 512K.
+
+Version 7
+*  Version 7 (file extension *.z7). Post Infocom version. This version supports game size up to 512K. Rarely used version that is superseded by version 8.
+
+Version 8
+*  Version 8 (file extension *.z8). Post Infocom version. This version supports game size up to 512K.
+
+> **Note:** In version ZIP the status line is drawn by the interpreter and the argument TIME specifies that the status line should display hh:mm instead of score and moves. Global variable 2, usually SCORE, holds the hour-part and global variable 3, usually MOVES, holds the minute-part.
+
+---

@@ -1775,6 +1775,18 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### VERSION
+```zil
+<VERSION XZIP>  ;  "Target Z-machine version 5"
+<VERSION 8>  ;  "Target Z-machine version 8"
+<VERSION ZIP TIME>  ;  "Target Z-machine version 3 with hh:mm"
+<ROUTINE GO ()
+  <SETG SCORE 13>;"Game starting 13:30"
+  <SETG MOVES 30>
+>
+```
+
+
 ## Z-Code Built-ins
 
 ### BACK
