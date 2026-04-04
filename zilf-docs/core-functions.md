@@ -1811,9 +1811,9 @@ Version 8
 ### VERSION?
 **Usage:** `<VERSION? (version-spec body ...) ...>`
 
-ZIL library predicate that tells the compiler to use different code-blocks depending on the setting of VERSION.
+ZIL library predicate that tells the compiler to use different code-blocks depending on the setting of VERSION. 
 
-> **Note:** The version-spec can be:
+The version-spec can be:
 * 3 (ZIP) 
 * 4 (EZIP) 
 * 5 (XZIIP) 
