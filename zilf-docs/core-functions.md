@@ -1807,3 +1807,19 @@ Version 8
 > **Note:** In version ZIP the status line is drawn by the interpreter and the argument TIME specifies that the status line should display hh:mm instead of score and moves. Global variable 2, usually SCORE, holds the hour-part and global variable 3, usually MOVES, holds the minute-part.
 
 ---
+
+### VERSION?
+**Usage:** `<VERSION? (version-spec body ...) ...>`
+
+ZIL library predicate that tells the compiler to use different code-blocks depending on the setting of VERSION.
+
+> **Note:** The version-spec can be:
+* 3 (ZIP) 
+* 4 (EZIP) 
+* 5 (XZIIP) 
+* 6 (YZIP) 
+* 7 
+* 8 
+* ELSE/T
+
+---

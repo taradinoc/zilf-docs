@@ -4666,8 +4666,9 @@ By default, if ORDER-TREE? is not used, the order is the same as REVERSE-DEFINED
                                             skos:Concept ;
                                    skos:broader zilf:CoreFunctions ;
                                    skos:inScheme zilf:ZILF_Scheme ;
-                                   skos:definition "ZIL library predicate that tells the compiler to use different code-blocks depending on the setting of VERSION."@en ;
-                                   skos:editorialNote """The version-spec can be:
+                                   skos:definition """ZIL library predicate that tells the compiler to use different code-blocks depending on the setting of VERSION. 
+
+The version-spec can be:
 * 3 (ZIP) 
 * 4 (EZIP) 
 * 5 (XZIIP) 

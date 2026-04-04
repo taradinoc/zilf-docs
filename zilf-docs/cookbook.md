@@ -1787,6 +1787,16 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### VERSION?
+```zil
+<VERSION? 
+  (ZIP <ROUTINE RTN-ZIP () ...>) 
+  (XZIP <ROUTINE RTN-XZIP () ...>) 
+  (ELSE <ROUTINE RTN-OTHER () ...>) 
+ >
+```
+
+
 ## Z-Code Built-ins
 
 ### BACK
