@@ -4056,18 +4056,18 @@ The different part-of-speech and first definitions have all global values define
       <TELL \"BUZZ: Pos=\" N <GETB .P 6>
         \", V1=\" N <GETB .P 7>
         \", V2=\" N <GETB .P 8> CR>
-  <SET P W?VERB>
-    <TELL \"VERB: Pos=\" N <GETB .P 6>
-      \", V1=\" N <GETB .P 7>
-      \", V2=\" N <GETB .P 8> CR>
-  <SET P W?ADJECTIVE>
-    <TELL \"ADJECTIVE: Pos=\" N <GETB .P 6>
-      \", V1=\" N <GETB .P 7>
-      \", V2=\" N <GETB .P 8> CR>
-  <SET P W?PREP>
-    <TELL \"PREP: Pos=\" N <GETB .P 6>
-      \", V1=\" N <GETB .P 7>
-      \", V2=\" N <GETB .P 8> CR>>
+    <SET P W?VERB>
+      <TELL \"VERB: Pos=\" N <GETB .P 6>
+        \", V1=\" N <GETB .P 7>
+        \", V2=\" N <GETB .P 8> CR>
+    <SET P W?ADJECTIVE>
+      <TELL \"ADJECTIVE: Pos=\" N <GETB .P 6>
+        \", V1=\" N <GETB .P 7>
+        \", V2=\" N <GETB .P 8> CR>
+    <SET P W?PREP>
+      <TELL \"PREP: Pos=\" N <GETB .P 6>
+        \", V1=\" N <GETB .P 7>
+        \", V2=\" N <GETB .P 8> CR>>
 
 ; -->
 ;  FALSE: Pos=0, V1=0, V2=0

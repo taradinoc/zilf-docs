@@ -1823,3 +1823,61 @@ The version-spec can be:
 * ELSE/T
 
 ---
+
+### VOC
+**Usage:** `<VOC string [part-of-speech]>`
+
+ZIL parser library function that  inserts the string in the game vocabulary (dictionary). Normally there is no need to define the vocabulary with VOC, the vocabulary is automatically updated with words when you define ROOMs, OBJECTs, SYNTAX, etc.
+
+What follows below is a description of the vocabulary when you use the standard parser library. The vocabulary description for the new parser (<SETG NEW-PARSER? T>) is in ADD-WORD.
+
+The part-of-speech can be one of the following:
+
+part-of-speech, Value, Description
+<>, 0, None
+BUZZ, 4, Buzz-word
+PREP, 8, Preposition
+DIR, 16, Direction
+ADJ or ADJECTIVE, 32, Adjective
+VERB, 64, Verb
+NOUN or OBJECT, 128, Noun
+
+The vocabulary then occupies 7 or 9 bytes, depending on version, per entry distributed as follows.
+
+Version 3
+Bytes 0-3, Word up to 6 Z-characters (5 bit)
+Byte 4, PoS
+Byte 5, Value
+Byte 6, V2
+
+Version 4-
+Bytes 0-5, Word up to 9 Z-characters (5 bit)
+Byte 6, PoS
+Byte 7, V1
+Byte 8, V2
+
+For PoS, Byte 6 (or byte 4) contains the part-of-speech value (as above) plus if  the word is defined as a first part-of-speech in the first 2 bytes.
+
+- 0, None
+- 1, Verb first
+- 2, Adjective first
+- 3, Direction first
+
+For V1, Byte 7 (or byte 5) contains the words value (id). Each part-of-speech can have 255 (65535 for NOUNs) unique words (synonyms have the same value as parent).
+
+For V2, Byte 8 is used for NOUNs (V1 & V2 gives 2 bytes, 1-65535 OBJECTs).
+
+The different part-of-speech and first definitions have all global values defined as:
+
+- P1?OBJECT    0 
+- P1?VERB    1 
+- P1?ADJECTIVE   2 
+- P1?DIRECTION   3 
+- PS?BUZZ-WORD   4 
+- PS?PREPOSITION   8 
+- PS?DIRECTION  16 
+- PS?ADJECTIVE  32 
+- PS?VERB   64 
+- PS?OBJECT  128
+
+---

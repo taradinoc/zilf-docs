@@ -1797,6 +1797,52 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### VOC
+```zil
+<VERSION XZIP>
+<VOC "FALSE" <>>
+<VOC "NOUN" NOUN>
+<VOC "BUZZ" BUZZ>
+<VOC "VERB" VERB>
+<VOC "ADJECTIVE" ADJ>
+<VOC "PREP" PREP>
+  <ROUTINE GO () <TEST-VOC> <INPUT 1>>
+  <ROUTINE TEST-VOC ("AUX" P)
+    <SET P W?FALSE>
+      <TELL "FALSE: Pos=" N <GETB .P 6>
+        ", V1=" N <GETB .P 7>
+        ", V2=" N <GETB .P 8> CR>
+    <SET P W?NOUN>
+      <TELL "NOUN: Pos=" N <GETB .P 6>
+        ", V1=" N <GETB .P 7>
+        ", V2=" N <GETB .P 8> CR>
+    <SET P W?BUZZ>
+      <TELL "BUZZ: Pos=" N <GETB .P 6>
+        ", V1=" N <GETB .P 7>
+        ", V2=" N <GETB .P 8> CR>
+    <SET P W?VERB>
+      <TELL "VERB: Pos=" N <GETB .P 6>
+        ", V1=" N <GETB .P 7>
+        ", V2=" N <GETB .P 8> CR>
+    <SET P W?ADJECTIVE>
+      <TELL "ADJECTIVE: Pos=" N <GETB .P 6>
+        ", V1=" N <GETB .P 7>
+        ", V2=" N <GETB .P 8> CR>
+    <SET P W?PREP>
+      <TELL "PREP: Pos=" N <GETB .P 6>
+        ", V1=" N <GETB .P 7>
+        ", V2=" N <GETB .P 8> CR>>
+
+; -->
+;  FALSE: Pos=0, V1=0, V2=0
+;  NOUN: Pos=128, V1=1, V2=0
+;  BUZZ: Pos=4, V1=255, V2=0
+;  VERB: Pos=65, V1=255, V2=0
+;  ADJECTIVE: Pos=32, V1=0, V2=0
+;  PREP: Pos=8, V1=255, V2=0
+```
+
+
 ## Z-Code Built-ins
 
 ### BACK
