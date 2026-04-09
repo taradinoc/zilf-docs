@@ -616,6 +616,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:VALUE ,
                                  zilf:VECTOR ,
                                  zilf:VERSION ,
+                                 zilf:VOC ,
                                  <http://example.org/zilf/BOUND?> ,
                                  <http://example.org/zilf/CHECK-VERSION?> ,
                                  <http://example.org/zilf/COMPILING?> ,
@@ -3975,6 +3976,107 @@ Version 8
   <SETG MOVES 30>
 >"""@en ;
              skos:prefLabel "<VERSION {ZIP | EZIP | XZIP | YZIP | number} [TIME]>"@en .
+
+
+###  http://example.org/zilf/VOC
+zilf:VOC rdf:type owl:NamedIndividual ,
+                  skos:Concept ;
+         skos:broader zilf:CoreFunctions ;
+         skos:inScheme zilf:ZILF_Scheme ;
+         skos:definition """ZIL parser library function that  inserts the string in the game vocabulary (dictionary). Normally there is no need to define the vocabulary with VOC, the vocabulary is automatically updated with words when you define ROOMs, OBJECTs, SYNTAX, etc.
+
+What follows below is a description of the vocabulary when you use the standard parser library. The vocabulary description for the new parser (<SETG NEW-PARSER? T>) is in ADD-WORD.
+
+The part-of-speech can be one of the following:
+
+part-of-speech, Value, Description
+<>, 0, None
+BUZZ, 4, Buzz-word
+PREP, 8, Preposition
+DIR, 16, Direction
+ADJ or ADJECTIVE, 32, Adjective
+VERB, 64, Verb
+NOUN or OBJECT, 128, Noun
+
+The vocabulary then occupies 7 or 9 bytes, depending on version, per entry distributed as follows.
+
+Version 3
+Bytes 0-3, Word up to 6 Z-characters (5 bit)
+Byte 4, PoS
+Byte 5, Value
+Byte 6, V2
+
+Version 4-
+Bytes 0-5, Word up to 9 Z-characters (5 bit)
+Byte 6, PoS
+Byte 7, V1
+Byte 8, V2
+
+For PoS, Byte 6 (or byte 4) contains the part-of-speech value (as above) plus if  the word is defined as a first part-of-speech in the first 2 bytes.
+
+- 0, None
+- 1, Verb first
+- 2, Adjective first
+- 3, Direction first
+
+For V1, Byte 7 (or byte 5) contains the words value (id). Each part-of-speech can have 255 (65535 for NOUNs) unique words (synonyms have the same value as parent).
+
+For V2, Byte 8 is used for NOUNs (V1 & V2 gives 2 bytes, 1-65535 OBJECTs).
+
+The different part-of-speech and first definitions have all global values defined as:
+
+- P1?OBJECT    0 
+- P1?VERB    1 
+- P1?ADJECTIVE   2 
+- P1?DIRECTION   3 
+- PS?BUZZ-WORD   4 
+- PS?PREPOSITION   8 
+- PS?DIRECTION  16 
+- PS?ADJECTIVE  32 
+- PS?VERB   64 
+- PS?OBJECT  128"""@en ;
+         skos:example """<VERSION XZIP>
+<VOC \"FALSE\" <>>
+<VOC \"NOUN\" NOUN>
+<VOC \"BUZZ\" BUZZ>
+<VOC \"VERB\" VERB>
+<VOC \"ADJECTIVE\" ADJ>
+<VOC \"PREP\" PREP>
+  <ROUTINE GO () <TEST-VOC> <INPUT 1>>
+  <ROUTINE TEST-VOC (\"AUX\" P)
+    <SET P W?FALSE>
+      <TELL \"FALSE: Pos=\" N <GETB .P 6>
+        \", V1=\" N <GETB .P 7>
+        \", V2=\" N <GETB .P 8> CR>
+    <SET P W?NOUN>
+      <TELL \"NOUN: Pos=\" N <GETB .P 6>
+        \", V1=\" N <GETB .P 7>
+        \", V2=\" N <GETB .P 8> CR>
+    <SET P W?BUZZ>
+      <TELL \"BUZZ: Pos=\" N <GETB .P 6>
+        \", V1=\" N <GETB .P 7>
+        \", V2=\" N <GETB .P 8> CR>
+  <SET P W?VERB>
+    <TELL \"VERB: Pos=\" N <GETB .P 6>
+      \", V1=\" N <GETB .P 7>
+      \", V2=\" N <GETB .P 8> CR>
+  <SET P W?ADJECTIVE>
+    <TELL \"ADJECTIVE: Pos=\" N <GETB .P 6>
+      \", V1=\" N <GETB .P 7>
+      \", V2=\" N <GETB .P 8> CR>
+  <SET P W?PREP>
+    <TELL \"PREP: Pos=\" N <GETB .P 6>
+      \", V1=\" N <GETB .P 7>
+      \", V2=\" N <GETB .P 8> CR>>
+
+; -->
+;  FALSE: Pos=0, V1=0, V2=0
+;  NOUN: Pos=128, V1=1, V2=0
+;  BUZZ: Pos=4, V1=255, V2=0
+;  VERB: Pos=65, V1=255, V2=0
+;  ADJECTIVE: Pos=32, V1=0, V2=0
+;  PREP: Pos=8, V1=255, V2=0"""@en ;
+         skos:prefLabel "<VOC string [part-of-speech]>"@en .
 
 
 ###  http://example.org/zilf/WINGET
