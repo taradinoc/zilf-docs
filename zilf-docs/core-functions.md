@@ -1881,3 +1881,12 @@ The different part-of-speech and first definitions have all global values define
 - PS?OBJECT  128
 
 ---
+
+### WARN-AS-ERROR?
+**Usage:** `<WARN-AS-ERROR? value>`
+
+ZILF compiler directive that when set to TRUE, it tells the compiler to convert compiler warnings to errors.
+
+> **Note:** The default value is FALSE.
+
+---

@@ -1843,6 +1843,20 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### WARN-AS-ERROR?
+```zil
+;"Compiles with warning [ZIL0204]"
+<WARN-AS-ERROR? <>>
+<GLOBAL X 5>
+<ROUTINE GO () <TELL N .X>>
+
+;"Don’t compile with error [ZIL0204]"
+<WARN-AS-ERROR? T>
+<GLOBAL X 5>
+<ROUTINE GO () <TELL N .X>>
+```
+
+
 ## Z-Code Built-ins
 
 ### BACK
