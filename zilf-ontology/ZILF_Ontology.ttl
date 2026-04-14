@@ -617,6 +617,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:VECTOR ,
                                  zilf:VERSION ,
                                  zilf:VOC ,
+                                 zilf:XFLOAD ,
                                  <http://example.org/zilf/BOUND?> ,
                                  <http://example.org/zilf/CHECK-VERSION?> ,
                                  <http://example.org/zilf/COMPILING?> ,
@@ -4142,6 +4143,16 @@ zilf:WINSIZE rdf:type owl:NamedIndividual ,
 <WINSIZE 0 .WY .WX>"""@en ;
              skos:historyNote "Zapf syntax: WINSIZE, Inform syntax: window_size"@en ;
              skos:prefLabel "<WINSIZE window-number height width>"@en .
+
+
+###  http://example.org/zilf/XFLOAD
+zilf:XFLOAD rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "ZIL library function that inserts file with filename at this point. If extension is omitted, \".zil\" is assumed."@en ;
+            skos:example "ZILF ignores all but the first argument and treats XFLOAD as an alias to INSERT-FILE."@en ;
+            skos:prefLabel "<XFLOAD filename>"@en .
 
 
 ###  http://example.org/zilf/XPUSH
