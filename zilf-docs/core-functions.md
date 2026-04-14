@@ -1890,3 +1890,12 @@ ZILF compiler directive that when set to TRUE, it tells the compiler to convert 
 > **Note:** The default value is FALSE.
 
 ---
+
+### XFLOAD
+**Usage:** `<XFLOAD filename>`
+
+ZIL library function that inserts file with filename at this point. If extension is omitted, ".zil" is assumed.
+
+> **Note:** ZILF ignores all but the first argument and treats XFLOAD as an alias to INSERT-FILE.
+
+---
