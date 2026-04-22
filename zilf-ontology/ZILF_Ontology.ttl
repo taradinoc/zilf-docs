@@ -618,6 +618,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:VERSION ,
                                  zilf:VOC ,
                                  zilf:XFLOAD ,
+                                 zilf:XORB ,
                                  <http://example.org/zilf/BOUND?> ,
                                  <http://example.org/zilf/CHECK-VERSION?> ,
                                  <http://example.org/zilf/COMPILING?> ,
@@ -4154,6 +4155,16 @@ zilf:XFLOAD rdf:type owl:NamedIndividual ,
             skos:editorialNote "ZILF ignores all but the first argument and treats XFLOAD as an alias to INSERT-FILE."@en ;
             skos:example "" ;
             skos:prefLabel "<XFLOAD filename>"@en .
+
+
+###  http://example.org/zilf/XORB
+zilf:XORB rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition "MDL built-in function that is a bitwise exclusive OR."@en ;
+          skos:example "<XORB 250 245>  ;  11111010 XOR 11110101 = 00001111 (15)"@en ;
+          skos:prefLabel "<XORB numbers ...>"@en .
 
 
 ###  http://example.org/zilf/XPUSH
