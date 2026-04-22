@@ -1899,3 +1899,10 @@ ZIL library function that inserts file with filename at this point. If extension
 > **Note:** ZILF ignores all but the first argument and treats XFLOAD as an alias to INSERT-FILE.
 
 ---
+
+### XORB
+**Usage:** `<XORB numbers ...>`
+
+MDL built-in function that is a bitwise exclusive OR.
+
+---

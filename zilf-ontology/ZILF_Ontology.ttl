@@ -4153,7 +4153,6 @@ zilf:XFLOAD rdf:type owl:NamedIndividual ,
             skos:inScheme zilf:ZILF_Scheme ;
             skos:definition "ZIL library function that inserts file with filename at this point. If extension is omitted, \".zil\" is assumed."@en ;
             skos:editorialNote "ZILF ignores all but the first argument and treats XFLOAD as an alias to INSERT-FILE."@en ;
-            skos:example "" ;
             skos:prefLabel "<XFLOAD filename>"@en .
 
 

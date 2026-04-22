@@ -1857,6 +1857,12 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### XORB
+```zil
+<XORB 250 245>  ;  11111010 XOR 11110101 = 00001111 (15)
+```
+
+
 ## Z-Code Built-ins
 
 ### BACK
