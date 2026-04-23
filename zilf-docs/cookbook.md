@@ -1863,6 +1863,12 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### ZGET
+```zil
+<ZGET <TABLE 0 1 2 3> 2>  ;  2
+```
+
+
 ## Z-Code Built-ins
 
 ### BACK

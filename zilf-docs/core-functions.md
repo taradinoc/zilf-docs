@@ -1906,3 +1906,14 @@ ZIL library function that inserts file with filename at this point. If extension
 MDL built-in function that is a bitwise exclusive OR.
 
 ---
+
+### ZGET
+**Usage:** `<ZGET table index>`
+
+ZIL library function that returns WORD-record (2 bytes) stored at index. TABLE is a ZIL-specific structure that can be used both outside and inside ROUTINES.
+
+> **Note:** ZGET is equivalent to the Z-code built-in GET.
+
+Also see GETB, PUTB, ZPUT and ZREST.
+
+---
