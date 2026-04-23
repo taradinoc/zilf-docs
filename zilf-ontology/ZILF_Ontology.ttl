@@ -619,6 +619,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:VOC ,
                                  zilf:XFLOAD ,
                                  zilf:XORB ,
+                                 zilf:ZGET ,
                                  <http://example.org/zilf/BOUND?> ,
                                  <http://example.org/zilf/CHECK-VERSION?> ,
                                  <http://example.org/zilf/COMPILING?> ,
@@ -4248,6 +4249,19 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  <http://example.org/zilf/FSET?> ,
                                  <http://example.org/zilf/IN?> ,
                                  <http://example.org/zilf/INTBL?> .
+
+
+###  http://example.org/zilf/ZGET
+zilf:ZGET rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition "ZIL library function that returns WORD-record (2 bytes) stored at index. TABLE is a ZIL-specific structure that can be used both outside and inside ROUTINES."@en ;
+          skos:editorialNote """ZGET is equivalent to the Z-code built-in GET.
+
+Also see GETB, PUTB, ZPUT and ZREST."""@en ;
+          skos:example "<ZGET <TABLE 0 1 2 3> 2>  ;  2"@en ;
+          skos:prefLabel "<ZGET table index>"@en .
 
 
 ###  http://example.org/zilf/ZILF_Scheme
