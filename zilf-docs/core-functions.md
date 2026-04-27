@@ -1917,3 +1917,22 @@ ZIL library function that returns WORD-record (2 bytes) stored at index. TABLE i
 Also see GETB, PUTB, ZPUT and ZREST.
 
 ---
+
+### ZIP-OPTIONS
+**Usage:** `<ZIP-OPTIONS {BIG | COLOR | DISPLAY | MENU | MOUSE | SOUND | UNDO} ...>`
+
+ZIL library function that sets the corresponding bits in the header. This tells the Z-machine that runs the game, the interpreter, that the game intends to use these functions.
+
+`Option` (Version): Description
+
+* `BIG` (X):  ZILF ignores this.
+* `COLOR` (5-): Sets bit 6 of byte 16 (Flags 2) in header (see Appendix B).
+* `DISPLAY` (5-): Sets bit 3 of byte 16 (Flags 2) in header (see Appendix B).
+* `MENU` (6-): Sets bit 8 of byte 16 (Flags 2) in header (see Appendix B).
+* `MOUSE` (5-): Sets bit 5 of byte 16 (Flags 2) in header (see Appendix B).
+* `SOUND` (5-): Sets bit 7 of byte 16 (Flags 2) in header (see Appendix B).
+* `UNDO` (5-): Sets bit 4 of byte 16 (Flags 2) in header (see Appendix B).
+
+> **Note:** If it is unable to provide the requested functionality, the interpreter can clear the bits in return.
+
+---

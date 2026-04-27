@@ -1869,6 +1869,17 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### ZIP-OPTIONS
+```zil
+;  Example (From zillib/parser.zil in ZILF 0.9): 
+;  Use UNDO and COLOR if version is 5+
+<VERSION?
+  (ZIP)
+  (EZIP)
+  (ELSE <ZIP-OPTIONS UNDO COLOR>)>
+```
+
+
 ## Z-Code Built-ins
 
 ### BACK
