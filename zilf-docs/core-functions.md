@@ -1936,3 +1936,10 @@ ZIL library function that sets the corresponding bits in the header. This tells 
 > **Note:** If it is unable to provide the requested functionality, the interpreter can clear the bits in return.
 
 ---
+
+### ZPACKAGE
+**Usage:** `<ZPACKAGE package-name>`
+
+ZIL library function that is an alias for PACKAGE.
+
+---
