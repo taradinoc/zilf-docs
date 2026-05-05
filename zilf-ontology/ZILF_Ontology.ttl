@@ -621,6 +621,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:XORB ,
                                  zilf:ZGET ,
                                  zilf:ZIP-OPTIONS ,
+                                 zilf:ZPACKAGE ,
                                  <http://example.org/zilf/BOUND?> ,
                                  <http://example.org/zilf/CHECK-VERSION?> ,
                                  <http://example.org/zilf/COMPILING?> ,
@@ -4298,6 +4299,15 @@ zilf:ZIP-OPTIONS rdf:type owl:NamedIndividual ,
   (EZIP)
   (ELSE <ZIP-OPTIONS UNDO COLOR>)>"""@en ;
                  skos:prefLabel "<ZIP-OPTIONS {BIG | COLOR | DISPLAY | MENU | MOUSE | SOUND | UNDO} ...>"@en .
+
+
+###  http://example.org/zilf/ZPACKAGE
+zilf:ZPACKAGE rdf:type owl:NamedIndividual ,
+                       skos:Concept ;
+              skos:broader zilf:CoreFunctions ;
+              skos:inScheme zilf:ZILF_Scheme ;
+              skos:definition "ZIL library function that is an alias for PACKAGE."@en ;
+              skos:prefLabel "<ZPACKAGE package-name>"@en .
 
 
 ###  http://example.org/zilf/ZWSTR
