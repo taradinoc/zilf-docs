@@ -1880,6 +1880,12 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### ZPUT
+```zil
+<ZPUT ,MYTABLE 1 123>  ;  Stores 123 at position 1 in MYTABLE
+```
+
+
 ## Z-Code Built-ins
 
 ### BACK

@@ -1943,3 +1943,14 @@ ZIL library function that sets the corresponding bits in the header. This tells 
 ZIL library function that is an alias for PACKAGE.
 
 ---
+
+### ZPUT
+**Usage:** `<ZPUT table index new-value>`
+
+ZIL library function that puts a 16-bit WORD new-value in the table at word position index. The actual address is table-address+index*2.
+
+> **Note:** TABLE is a ZIL-specific structure that can be used both outside and inside ROUTINES. ZPUT is equivalent to the Z-code built-in PUT.
+
+Also see GETB, PUTB, ZGET and ZREST.
+
+---
