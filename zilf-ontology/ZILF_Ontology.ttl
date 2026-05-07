@@ -622,6 +622,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:ZGET ,
                                  zilf:ZIP-OPTIONS ,
                                  zilf:ZPACKAGE ,
+                                 zilf:ZPUT ,
                                  <http://example.org/zilf/BOUND?> ,
                                  <http://example.org/zilf/CHECK-VERSION?> ,
                                  <http://example.org/zilf/COMPILING?> ,
@@ -4308,6 +4309,19 @@ zilf:ZPACKAGE rdf:type owl:NamedIndividual ,
               skos:inScheme zilf:ZILF_Scheme ;
               skos:definition "ZIL library function that is an alias for PACKAGE."@en ;
               skos:prefLabel "<ZPACKAGE package-name>"@en .
+
+
+###  http://example.org/zilf/ZPUT
+zilf:ZPUT rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:CoreFunctions ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition "ZIL library function that puts a 16-bit WORD new-value in the table at word position index. The actual address is table-address+index*2."@en ;
+          skos:editorialNote """TABLE is a ZIL-specific structure that can be used both outside and inside ROUTINES. ZPUT is equivalent to the Z-code built-in PUT.
+
+Also see GETB, PUTB, ZGET and ZREST."""@en ;
+          skos:example "<ZPUT ,MYTABLE 1 123>  ;  Stores 123 at position 1 in MYTABLE"@en ;
+          skos:prefLabel "<ZPUT table index new-value>"@en .
 
 
 ###  http://example.org/zilf/ZWSTR
