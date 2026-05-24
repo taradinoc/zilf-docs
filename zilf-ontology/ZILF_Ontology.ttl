@@ -623,6 +623,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:ZIP-OPTIONS ,
                                  zilf:ZPACKAGE ,
                                  zilf:ZPUT ,
+                                 zilf:ZREST ,
                                  <http://example.org/zilf/BOUND?> ,
                                  <http://example.org/zilf/CHECK-VERSION?> ,
                                  <http://example.org/zilf/COMPILING?> ,
@@ -4322,6 +4323,24 @@ zilf:ZPUT rdf:type owl:NamedIndividual ,
 Also see GETB, PUTB, ZGET and ZREST."""@en ;
           skos:example "<ZPUT ,MYTABLE 1 123>  ;  Stores 123 at position 1 in MYTABLE"@en ;
           skos:prefLabel "<ZPUT table index new-value>"@en .
+
+
+###  http://example.org/zilf/ZREST
+zilf:ZREST rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:CoreFunctions ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "ZIL library function that returns table without its first bytes. TABLE is a ZIL-specific structure that can be used both outside and inside ROUTINES. ZREST is equivalent to the Z-code built-in REST."@en ;
+           skos:editorialNote """This is not a copy of the table, it is pointing to the same table with another starting address.
+
+Also see GETB, PUTB, ZGET and ZPUT."""@en ;
+           skos:example """<SETG TBL1 <TABLE 1 2 3 4>>  ;  TBL1 = [1 2 3 4]
+
+;  Move 2 because WORD-table!
+<SETG TBL2 <ZREST ,TBL1 2>>  ;  TBL2 = [2 3 4]
+
+<ZPUT ,TBL2 0 5>  ;  TBL1 = [1 5 3 4], TBL2 = [5 3 4]"""@en ;
+           skos:prefLabel "<ZREST table bytes>"@en .
 
 
 ###  http://example.org/zilf/ZWSTR
