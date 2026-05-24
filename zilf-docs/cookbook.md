@@ -1886,6 +1886,17 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### ZREST
+```zil
+<SETG TBL1 <TABLE 1 2 3 4>>  ;  TBL1 = [1 2 3 4]
+
+;  Move 2 because WORD-table!
+<SETG TBL2 <ZREST ,TBL1 2>>  ;  TBL2 = [2 3 4]
+
+<ZPUT ,TBL2 0 5>  ;  TBL1 = [1 5 3 4], TBL2 = [5 3 4]
+```
+
+
 ## Z-Code Built-ins
 
 ### BACK

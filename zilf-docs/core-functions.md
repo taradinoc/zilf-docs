@@ -1954,3 +1954,14 @@ ZIL library function that puts a 16-bit WORD new-value in the table at word posi
 Also see GETB, PUTB, ZGET and ZREST.
 
 ---
+
+### ZREST
+**Usage:** `<ZREST table bytes>`
+
+ZIL library function that returns table without its first bytes. TABLE is a ZIL-specific structure that can be used both outside and inside ROUTINES. ZREST is equivalent to the Z-code built-in REST.
+
+> **Note:** This is not a copy of the table, it is pointing to the same table with another starting address.
+
+Also see GETB, PUTB, ZGET and ZPUT.
+
+---
