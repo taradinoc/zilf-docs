@@ -3333,7 +3333,7 @@ Examples:
 
 Defines a table of count elements filled with default values: either zeros or, if the default list is specified, the specified list of values repeated until the table is full.
 
-The optional specifier may be the atoms NONE, BYTE, or WORD. BYTE and WORD change the type of the table and also turn on the length marker (element 0 in the table contains the length of the table), This can also be done with the flags (see TABLE about flags).
+The optional specifier may be the atoms NONE, BYTE, or WORD. BYTE and WORD turn on the length marker (element 0 in the table contains the length of the table) and also set its form. This can also be done with the flags (see TABLE about flags).
 
 Examples:
 
@@ -3371,8 +3371,11 @@ Syntax                          Resulting byte array
 
 	\<ITABLE 3 (BYTE) 1\>             \[1 1 1\] 3x\#BYTE
 
-	\<ITABLE 3 (LENGTH BYTE) 1\> or   \[3 1 1 1 1\]  
-	\<ITABLE BYTE 3 1\>               \#BYTE \+ 3x\#BYTE       
+	\<ITABLE 3 (LENGTH BYTE) 1\>      \[3 1 1 1\]  
+	                                  \#BYTE \+ 3x\#BYTE       
+
+    \<ITABLE BYTE 3 1\>               \[3 0 1 0 1 0 1]
+	                                  \#BYTE \+ 3x\#WORD
 
 	\<ITABLE 3 (LEXV) 1 2 3\>         \[0 1 2 3 0 1 2 3 0 1 2 3\]  
                                      3x(\#WORD \#BYTE \#BYTE)
