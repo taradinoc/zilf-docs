@@ -1965,3 +1965,10 @@ ZIL library function that returns table without its first bytes. TABLE is a ZIL-
 Also see GETB, PUTB, ZGET and ZPUT.
 
 ---
+
+### ZSECTION
+**Usage:** `<ZSECTION package-name>`
+
+ZIL library function that is an alias for DEFINITIONS.
+
+---
