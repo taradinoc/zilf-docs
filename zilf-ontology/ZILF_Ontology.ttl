@@ -624,6 +624,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:ZPACKAGE ,
                                  zilf:ZPUT ,
                                  zilf:ZREST ,
+                                 zilf:ZSECTION ,
                                  <http://example.org/zilf/BOUND?> ,
                                  <http://example.org/zilf/CHECK-VERSION?> ,
                                  <http://example.org/zilf/COMPILING?> ,
@@ -4341,6 +4342,15 @@ Also see GETB, PUTB, ZGET and ZPUT."""@en ;
 
 <ZPUT ,TBL2 0 5>  ;  TBL1 = [1 5 3 4], TBL2 = [5 3 4]"""@en ;
            skos:prefLabel "<ZREST table bytes>"@en .
+
+
+###  http://example.org/zilf/ZSECTION
+zilf:ZSECTION rdf:type owl:NamedIndividual ,
+                       skos:Concept ;
+              skos:broader zilf:CoreFunctions ;
+              skos:inScheme zilf:ZILF_Scheme ;
+              skos:definition "ZIL library function that is an alias for DEFINITIONS."@en ;
+              skos:prefLabel "<ZSECTION package-name>"@en .
 
 
 ###  http://example.org/zilf/ZWSTR
