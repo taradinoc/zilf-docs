@@ -1897,6 +1897,12 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### ZSTART
+```zil
+<ZSTART MAIN>  ;  Starts with ROUTINE MAIN instead of GO
+```
+
+
 ## Z-Code Built-ins
 
 ### BACK
