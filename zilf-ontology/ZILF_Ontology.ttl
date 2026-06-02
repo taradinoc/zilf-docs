@@ -625,6 +625,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:ZPUT ,
                                  zilf:ZREST ,
                                  zilf:ZSECTION ,
+                                 zilf:ZSTART ,
                                  <http://example.org/zilf/BOUND?> ,
                                  <http://example.org/zilf/CHECK-VERSION?> ,
                                  <http://example.org/zilf/COMPILING?> ,
@@ -4351,6 +4352,16 @@ zilf:ZSECTION rdf:type owl:NamedIndividual ,
               skos:inScheme zilf:ZILF_Scheme ;
               skos:definition "ZIL library function that is an alias for DEFINITIONS."@en ;
               skos:prefLabel "<ZSECTION package-name>"@en .
+
+
+###  http://example.org/zilf/ZSTART
+zilf:ZSTART rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:CoreFunctions ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "The default starting ROUTINE for a compiled ZIL program is the ROUTINE GO. ZSTART can move the ZIL entry point to another ROUTINE."@en ;
+            skos:editorialNote "ZSTART is a ZIL library function."@en ;
+            skos:prefLabel "<ZSTART atom>"@en .
 
 
 ###  http://example.org/zilf/ZWSTR
