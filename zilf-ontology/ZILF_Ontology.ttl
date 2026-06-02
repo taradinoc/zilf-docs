@@ -4361,6 +4361,7 @@ zilf:ZSTART rdf:type owl:NamedIndividual ,
             skos:inScheme zilf:ZILF_Scheme ;
             skos:definition "The default starting ROUTINE for a compiled ZIL program is the ROUTINE GO. ZSTART can move the ZIL entry point to another ROUTINE."@en ;
             skos:editorialNote "ZSTART is a ZIL library function."@en ;
+            skos:example "<ZSTART MAIN>  ;  Starts with ROUTINE MAIN instead of GO"@en ;
             skos:prefLabel "<ZSTART atom>"@en .
 
 
