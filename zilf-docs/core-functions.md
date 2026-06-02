@@ -1972,3 +1972,12 @@ Also see GETB, PUTB, ZGET and ZPUT.
 ZIL library function that is an alias for DEFINITIONS.
 
 ---
+
+### ZSTART
+**Usage:** `<ZSTART atom>`
+
+The default starting ROUTINE for a compiled ZIL program is the ROUTINE GO. ZSTART can move the ZIL entry point to another ROUTINE.
+
+> **Note:** ZSTART is a ZIL library function.
+
+---
