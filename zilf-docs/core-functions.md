@@ -1981,3 +1981,21 @@ The default starting ROUTINE for a compiled ZIL program is the ROUTINE GO. ZSTAR
 > **Note:** ZSTART is a ZIL library function.
 
 ---
+
+### ZSTR-OFF
+**Usage:** `<ZSTR-OFF>`
+
+ZIL library function.
+
+> **Note:** ZILF ignores this and always returns FALSE.
+
+---
+
+### ZSTR-ON
+**Usage:** `<ZSTR-ON>`
+
+ZIL library function.
+
+> **Note:** ZILF ignores this and always returns FALSE.
+
+---
