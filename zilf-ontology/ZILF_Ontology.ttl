@@ -626,6 +626,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:ZREST ,
                                  zilf:ZSECTION ,
                                  zilf:ZSTART ,
+                                 zilf:ZSTR-OFF ,
                                  <http://example.org/zilf/BOUND?> ,
                                  <http://example.org/zilf/CHECK-VERSION?> ,
                                  <http://example.org/zilf/COMPILING?> ,
@@ -4363,6 +4364,16 @@ zilf:ZSTART rdf:type owl:NamedIndividual ,
             skos:editorialNote "ZSTART is a ZIL library function."@en ;
             skos:example "<ZSTART MAIN>  ;  Starts with ROUTINE MAIN instead of GO"@en ;
             skos:prefLabel "<ZSTART atom>"@en .
+
+
+###  http://example.org/zilf/ZSTR-OFF
+zilf:ZSTR-OFF rdf:type owl:NamedIndividual ,
+                       skos:Concept ;
+              skos:broader zilf:CoreFunctions ;
+              skos:inScheme zilf:ZILF_Scheme ;
+              skos:definition "ZIL library function."@en ;
+              skos:editorialNote "ZILF ignores this and always returns FALSE."@en ;
+              skos:prefLabel "<ZSTR-OFF>"@en .
 
 
 ###  http://example.org/zilf/ZWSTR
