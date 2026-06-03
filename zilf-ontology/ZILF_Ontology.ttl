@@ -627,6 +627,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:ZSECTION ,
                                  zilf:ZSTART ,
                                  zilf:ZSTR-OFF ,
+                                 zilf:ZSTR-ON ,
                                  <http://example.org/zilf/BOUND?> ,
                                  <http://example.org/zilf/CHECK-VERSION?> ,
                                  <http://example.org/zilf/COMPILING?> ,
@@ -4374,6 +4375,16 @@ zilf:ZSTR-OFF rdf:type owl:NamedIndividual ,
               skos:definition "ZIL library function."@en ;
               skos:editorialNote "ZILF ignores this and always returns FALSE."@en ;
               skos:prefLabel "<ZSTR-OFF>"@en .
+
+
+###  http://example.org/zilf/ZSTR-ON
+zilf:ZSTR-ON rdf:type owl:NamedIndividual ,
+                      skos:Concept ;
+             skos:broader zilf:CoreFunctions ;
+             skos:inScheme zilf:ZILF_Scheme ;
+             skos:definition "ZIL library function."@en ;
+             skos:editorialNote "ZILF ignores this and always returns FALSE."@en ;
+             skos:prefLabel "<ZSTR-ON>"@en .
 
 
 ###  http://example.org/zilf/ZWSTR
