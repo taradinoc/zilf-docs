@@ -2006,3 +2006,10 @@ ZIL library function.
 ZIL library function that is an alias for PACKAGE.
 
 ---
+
+### ZZSECTION
+**Usage:** `<ZZSECTION package-name>`
+
+ZIL library function that is an alias for DEFINITIONS.
+
+---
