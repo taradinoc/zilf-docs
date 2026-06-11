@@ -629,6 +629,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:ZSTR-OFF ,
                                  zilf:ZSTR-ON ,
                                  zilf:ZZPACKAGE ,
+                                 zilf:ZZSECTION ,
                                  <http://example.org/zilf/BOUND?> ,
                                  <http://example.org/zilf/CHECK-VERSION?> ,
                                  <http://example.org/zilf/COMPILING?> ,
@@ -4411,6 +4412,15 @@ zilf:ZZPACKAGE rdf:type owl:NamedIndividual ,
                skos:inScheme zilf:ZILF_Scheme ;
                skos:definition "ZIL library function that is an alias for PACKAGE."@en ;
                skos:prefLabel "<ZZPACKAGE package-name>"@en .
+
+
+###  http://example.org/zilf/ZZSECTION
+zilf:ZZSECTION rdf:type owl:NamedIndividual ,
+                        skos:Concept ;
+               skos:broader zilf:CoreFunctions ;
+               skos:inScheme zilf:ZILF_Scheme ;
+               skos:definition "ZIL library function that is an alias for DEFINITIONS."@en ;
+               skos:prefLabel "<ZZSECTION package-name>"@en .
 
 
 ###  http://example.org/zilf/BOUND?
