@@ -1999,3 +1999,10 @@ ZIL library function.
 > **Note:** ZILF ignores this and always returns FALSE.
 
 ---
+
+### ZZPACKAGE
+**Usage:** `<ZZPACKAGE package-name>`
+
+ZIL library function that is an alias for PACKAGE.
+
+---
