@@ -60,6 +60,7 @@ zilf:ADJ-SYNONYM rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/APPLY
 zilf:APPLY rdf:type owl:NamedIndividual ,
                     skos:Concept ;
+           skos:broader zilf:ZCodeBuiltIns ;
            skos:inScheme zilf:ZILF_Scheme ;
            skos:definition "Call the routine with values. <APPLY routine values ...> is equivalent to <routine values ...>, but APPLY is often used when the routine to be called is resolved during run-time (dispatch-table)."@en ;
            skos:example """<GLOBAL MYROUTINES <LTABLE ROUTINE1 ROUTINE2>>
@@ -4207,7 +4208,8 @@ zilf:XPUSH rdf:type owl:NamedIndividual ,
 zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                             skos:Concept ;
                    skos:inScheme zilf:ZILF_Scheme ;
-                   skos:narrower zilf:BACK ,
+                   skos:narrower zilf:APPLY ,
+                                 zilf:BACK ,
                                  zilf:BCOM ,
                                  zilf:BTST ,
                                  zilf:BUFOUT ,
