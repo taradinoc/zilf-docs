@@ -10,6 +10,23 @@ Call the routine with values. <APPLY routine values ...> is equivalent to <routi
 
 ---
 
+### ASH
+**Usage:** `<ASH number places>`
+
+**Alternative Usage:** `<ASHIFT number places>`
+
+Arithmetic shift. Shift number left when places is positive and right if it is negative. When right shift the sign is preserved (if bit 15 is 1 a 1 is shifted in, otherwise a 0 is shifted in).
+
+1000 0000 0000 1010 --> 1100 0000 0000 0101
+
+> **Note:** ZILF supports ASH, ASHIFT in versions 5-.
+
+Also see LSH.
+
+**History:** Zapf syntax: ASHIFT, Inform syntax: art_shift
+
+---
+
 ### BACK
 **Usage:** `<BACK table [bytes]>`
 

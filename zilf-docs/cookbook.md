@@ -1915,6 +1915,13 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### ASH
+```zil
+<ASH 4 1>  ;  8
+<ASH 4 -2>  ;  1
+```
+
+
 ### BACK
 ```zil
 <GLOBAL TBL1 <TABLE 1 2 3 4>>  ;  TBL1 = [1 2 3 4]
