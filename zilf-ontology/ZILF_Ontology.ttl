@@ -57,6 +57,19 @@ zilf:ADJ-SYNONYM rdf:type owl:NamedIndividual ,
                  skos:prefLabel "<ADJ-SYNONYM original synonyms ...>"@en .
 
 
+###  http://example.org/zilf/APPLY
+zilf:APPLY rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Call the routine with values. <APPLY routine values ...> is equivalent to <routine values ...>, but APPLY is often used when the routine to be called is resolved during run-time (dispatch-table)."@en ;
+           skos:example """<GLOBAL MYROUTINES <LTABLE ROUTINE1 ROUTINE2>>
+...
+<APPLY <GET ,MYROUTINES 1> .X>  ;  <ROUTINE1 .X>
+<APPLY <GET ,MYROUTINES 2> .X>  ;  <ROUTINE2 .X>
+<APPLY <GETP .OBJECT ,P?ACTION>>  ;  Call ACTION-routine on OBJECT"""@en ;
+           skos:prefLabel "<APPLY routine values...>"@en .
+
+
 ###  http://example.org/zilf/ASCII
 zilf:ASCII rdf:type owl:NamedIndividual ,
                     skos:Concept ;
