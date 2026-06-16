@@ -82,6 +82,24 @@ zilf:ASCII rdf:type owl:NamedIndividual ,
            skos:prefLabel "<ASCII {number | character}>"@en .
 
 
+###  http://example.org/zilf/ASH
+zilf:ASH rdf:type owl:NamedIndividual ,
+                  skos:Concept ;
+         skos:broader zilf:ZCodeBuiltIns ;
+         skos:inScheme zilf:ZILF_Scheme ;
+         skos:altLabel "<ASHIFT number places>"@en ;
+         skos:definition """Arithmetic shift. Shift number left when places is positive and right if it is negative. When right shift the sign is preserved (if bit 15 is 1 a 1 is shifted in, otherwise a 0 is shifted in).
+
+1000 0000 0000 1010 --> 1100 0000 0000 0101"""@en ;
+         skos:editorialNote """ZILF supports ASH, ASHIFT in versions 5-.
+
+Also see LSH."""@en ;
+         skos:example """<ASH 4 1>  ;  8
+<ASH 4 -2>  ;  1"""@en ;
+         skos:historyNote "Zapf syntax: ASHIFT, Inform syntax: art_shift"@en ;
+         skos:prefLabel "<ASH number places>"@en .
+
+
 ###  http://example.org/zilf/ATOM
 zilf:ATOM rdf:type owl:NamedIndividual ,
                    skos:Concept ;
@@ -4209,6 +4227,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                             skos:Concept ;
                    skos:inScheme zilf:ZILF_Scheme ;
                    skos:narrower zilf:APPLY ,
+                                 zilf:ASH ,
                                  zilf:BACK ,
                                  zilf:BCOM ,
                                  zilf:BTST ,
