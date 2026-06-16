@@ -1905,6 +1905,16 @@ THEI   <THEI-PRINT>>
 
 ## Z-Code Built-ins
 
+### APPLY
+```zil
+<GLOBAL MYROUTINES <LTABLE ROUTINE1 ROUTINE2>>
+...
+<APPLY <GET ,MYROUTINES 1> .X>  ;  <ROUTINE1 .X>
+<APPLY <GET ,MYROUTINES 2> .X>  ;  <ROUTINE2 .X>
+<APPLY <GETP .OBJECT ,P?ACTION>>  ;  Call ACTION-routine on OBJECT
+```
+
+
 ### BACK
 ```zil
 <GLOBAL TBL1 <TABLE 1 2 3 4>>  ;  TBL1 = [1 2 3 4]

@@ -3,6 +3,13 @@
 # Z-Code Built-ins
 ---
 
+### APPLY
+**Usage:** `<APPLY routine values...>`
+
+Call the routine with values. <APPLY routine values ...> is equivalent to <routine values ...>, but APPLY is often used when the routine to be called is resolved during run-time (dispatch-table).
+
+---
+
 ### BACK
 **Usage:** `<BACK table [bytes]>`
 
