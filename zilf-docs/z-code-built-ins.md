@@ -27,6 +27,17 @@ Also see LSH.
 
 ---
 
+### ASSIGNED?
+**Usage:** `<ASSIGNED? Name>`
+
+Z-code built in predicate that can test if an optimate argument named `name` is supplied in call to routine.
+
+> **Note:** ZILF supports ASSIGNED? in versions 5-.
+
+**History:** Zapf syntax: ASSIGNED?, Inform syntax: check_arg_count
+
+---
+
 ### BACK
 **Usage:** `<BACK table [bytes]>`
 

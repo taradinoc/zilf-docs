@@ -1922,6 +1922,22 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### ASSIGNED?
+```zil
+<ROUTINE TEST("OPT" X)
+<COND (<ASSIGNED? X>
+  <TELL "X is assigned." CR>
+)
+(ELSE
+  <TELL "X is not assigned." CR>
+)>
+>
+
+<TEST>  ;  X is not assigned.
+<TEST 1>  ; X is assigned.
+```
+
+
 ### BACK
 ```zil
 <GLOBAL TBL1 <TABLE 1 2 3 4>>  ;  TBL1 = [1 2 3 4]
