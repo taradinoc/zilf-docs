@@ -47,6 +47,17 @@ Note that this is not a copy of the table, it is pointing to the same table with
 
 ---
 
+### BAND
+**Usage:** `<BAND numbers ...>`
+
+**Alternative Usage:** `<ANDB numbers ...>`
+
+Bitwise AND function.
+
+> **Note:** ZILF supports BAND in all versions.
+
+---
+
 ### BCOM
 **Usage:** `<BCOM value>`
 
