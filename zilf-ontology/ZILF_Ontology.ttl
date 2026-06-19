@@ -143,6 +143,19 @@ Note that this is not a copy of the table, it is pointing to the same table with
           skos:prefLabel "<BACK table [bytes]>"@en .
 
 
+###  http://example.org/zilf/BAND
+zilf:BAND rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:ZCodeBuiltIns ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:altLabel "<ANDB numbers ...>"@en ;
+          skos:definition "Bitwise AND function."@en ;
+          skos:editorialNote "ZILF supports BAND in all versions."@en ;
+          skos:example """<BAND 33 96>  ;  32
+<BAND 33 96 64>  ;  0"""@en ;
+          skos:prefLabel "<BAND numbers ...>"@en .
+
+
 ###  http://example.org/zilf/BCOM
 zilf:BCOM rdf:type owl:NamedIndividual ,
                    skos:Concept ;
@@ -4229,6 +4242,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                    skos:narrower zilf:APPLY ,
                                  zilf:ASH ,
                                  zilf:BACK ,
+                                 zilf:BAND ,
                                  zilf:BCOM ,
                                  zilf:BTST ,
                                  zilf:BUFOUT ,
