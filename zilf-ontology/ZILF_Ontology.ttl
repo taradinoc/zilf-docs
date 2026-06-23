@@ -198,6 +198,7 @@ zilf:BIND rdf:type owl:NamedIndividual ,
 The decl is used to specify the valid TYPE of the variables. In its simplest form decl is formatted like: #DECL ((X) FIX), meaning that X must be of the TYPE FIX. For more information on how to format the decl see GDECL. 
 
 Also see AGAIN, PROG, REPEAT and RETURN for more details how to control program flow."""@en ;
+          skos:editorialNote "" ;
           skos:example """<BIND ((X 1)) #DECL ((X) FIX)  
 <BIND ((X 2)) <PRIN1 .X>> <PRIN1 .X>>  ;  \"21\"
 
@@ -212,6 +213,7 @@ Also see AGAIN, PROG, REPEAT and RETURN for more details how to control program 
     <PRINC \" END\">
 >
 <TEST-BIND-AS-REPEAT>  ;  \"START 123 END\""""@en ;
+          skos:historyNote "" ;
           skos:prefLabel "<BIND [activation] (bindings ...) [decl] expressions ...>"@en .
 
 
@@ -257,6 +259,20 @@ zilf:BLOCK rdf:type owl:NamedIndividual ,
 <LVAL BAR>  ;  222
 <TEST-BLOCK>  ;  \"OUTSIDE BLOCK\""""@en ;
            skos:prefLabel "<BLOCK (oblist ...)>"@en .
+
+
+###  http://example.org/zilf/BOR
+zilf:BOR rdf:type owl:NamedIndividual ,
+                  skos:Concept ;
+         skos:broader zilf:ZCodeBuiltIns ;
+         skos:inScheme zilf:ZILF_Scheme ;
+         skos:altLabel "<ORB numbers ...>"@en ;
+         skos:definition "Z-code built-in function that is a bitwise OR."@en ;
+         skos:editorialNote "ZILF supports BOR in all versions."@en ;
+         skos:example """<BOR 33 96>  ;  97
+<BOR 33 96 64>  ;  97"""@en ;
+         skos:historyNote "Zapf syntax: BOR, Inform syntax: or"@en ;
+         skos:prefLabel "<BOR numbers ...>"@en .
 
 
 ###  http://example.org/zilf/BTST
@@ -4244,6 +4260,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:BACK ,
                                  zilf:BAND ,
                                  zilf:BCOM ,
+                                 zilf:BOR ,
                                  zilf:BTST ,
                                  zilf:BUFOUT ,
                                  zilf:CATCH ,
