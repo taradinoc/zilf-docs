@@ -115,6 +115,22 @@ Used in conjunction with THROW, this Z-code built-in function returns the curren
 
 ---
 
+### CHECKU
+**Usage:** `<CHECKU character>`
+
+Checks if a given unicode character can be printed and/or received from the keyboard. Return is in bit 0 and 1 so the return result is either 0, 1, 2 or 3.
+
+* 0 = character can not be printed and not received from keyboard
+* 1 = character can be printed but not received from keyboard
+* 2 = character can not be printed but received from keyboard
+* 3 = character can both be printed and received from keyboard
+
+> **Note:** ZILF supports CHECKU in versions 5-.
+
+**History:** Zapf syntax: CHECKU, Inform syntax: check_unicode
+
+---
+
 ### ERASE
 **Usage:** `<ERASE value>`
 
