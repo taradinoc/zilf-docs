@@ -366,6 +366,23 @@ zilf:CHECKPOINT rdf:type owl:NamedIndividual ,
                 skos:prefLabel "<CHECKPOINT>"@en .
 
 
+###  http://example.org/zilf/CHECKU
+zilf:CHECKU rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition """Checks if a given unicode character can be printed and/or received from the keyboard. Return is in bit 0 and 1 so the return result is either 0, 1, 2 or 3.
+
+* 0 = character can not be printed and not received from keyboard
+* 1 = character can be printed but not received from keyboard
+* 2 = character can not be printed but received from keyboard
+* 3 = character can both be printed and received from keyboard"""@en ;
+            skos:editorialNote "ZILF supports CHECKU in versions 5-."@en ;
+            skos:example "<CHECKU 65> ;  3"@en ;
+            skos:historyNote "Zapf syntax: CHECKU, Inform syntax: check_unicode"@en ;
+            skos:prefLabel "<CHECKU character>"@en .
+
+
 ###  http://example.org/zilf/CHRSET
 zilf:CHRSET rdf:type owl:NamedIndividual ,
                      skos:Concept ;
@@ -4264,6 +4281,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:BTST ,
                                  zilf:BUFOUT ,
                                  zilf:CATCH ,
+                                 zilf:CHECKU ,
                                  zilf:ERASE ,
                                  zilf:FCLEAR ,
                                  zilf:FONT ,
