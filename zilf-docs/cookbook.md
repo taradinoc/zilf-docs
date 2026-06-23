@@ -1959,6 +1959,13 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### BOR
+```zil
+<BOR 33 96>  ;  97
+<BOR 33 96 64>  ;  97
+```
+
+
 ### BTST
 ```zil
 <BTST 64 64>  ;  TRUE
