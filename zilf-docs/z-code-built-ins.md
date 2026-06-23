@@ -69,6 +69,19 @@ Z-code built-in function that is a bitwise NOT, reversing all bits in the WORD v
 
 ---
 
+### BOR
+**Usage:** `<BOR numbers ...>`
+
+**Alternative Usage:** `<ORB numbers ...>`
+
+Z-code built-in function that is a bitwise OR.
+
+> **Note:** ZILF supports BOR in all versions.
+
+**History:** Zapf syntax: BOR, Inform syntax: or
+
+---
+
 ### BTST
 **Usage:** `<BTST value1 value2>`
 
