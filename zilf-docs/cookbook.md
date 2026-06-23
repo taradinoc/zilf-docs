@@ -1987,6 +1987,12 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### CHECKU
+```zil
+<CHECKU 65> ;  3
+```
+
+
 ### ERASE
 ```zil
 <ERASE 1>  ;  Clears from cursor to end of line
