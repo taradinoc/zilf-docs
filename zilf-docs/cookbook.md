@@ -1993,6 +1993,12 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### CLEAR
+```zil
+<CLEAR 0>  ;  Clears window 0 (the "main"-window)
+```
+
+
 ### ERASE
 ```zil
 <ERASE 1>  ;  Clears from cursor to end of line
