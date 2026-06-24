@@ -455,6 +455,18 @@ zyxwvutsrqponmlkjihgfedcba
             skos:prefLabel "<CHRSET alphabet-number {string | character | number | byte} ...>"@en .
 
 
+###  http://example.org/zilf/CLEAR
+zilf:CLEAR rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:ZCodeBuiltIns ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Clears window with given window-number. If window-number is -1 it unsplit all windows and then clears the resulting window. If window-number is -2 it clears all windows without unsplitting."@en ;
+           skos:editorialNote "ZILF supports CLEAR in versions 4-."@en ;
+           skos:example "<CLEAR 0>  ;  Clears window 0 (the \"main\"-window)"@en ;
+           skos:historyNote "Zapf syntax: CLEAR, Inform syntax: erase_window"@en ;
+           skos:prefLabel "<CLEAR window-number>"@en .
+
+
 ###  http://example.org/zilf/CLOSE
 zilf:CLOSE rdf:type owl:NamedIndividual ,
                     skos:Concept ;
@@ -4282,6 +4294,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:BUFOUT ,
                                  zilf:CATCH ,
                                  zilf:CHECKU ,
+                                 zilf:CLEAR ,
                                  zilf:ERASE ,
                                  zilf:FCLEAR ,
                                  zilf:FONT ,
