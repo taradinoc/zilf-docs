@@ -131,6 +131,17 @@ Checks if a given unicode character can be printed and/or received from the keyb
 
 ---
 
+### CLEAR
+**Usage:** `<CLEAR window-number>`
+
+Clears window with given window-number. If window-number is -1 it unsplit all windows and then clears the resulting window. If window-number is -2 it clears all windows without unsplitting.
+
+> **Note:** ZILF supports CLEAR in versions 4-.
+
+**History:** Zapf syntax: CLEAR, Inform syntax: erase_window
+
+---
+
 ### ERASE
 **Usage:** `<ERASE value>`
 
