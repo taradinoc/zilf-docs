@@ -1999,6 +1999,12 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### COLOR
+```zil
+<COLOR 2 9>  ;  Set black text against white background
+```
+
+
 ### ERASE
 ```zil
 <ERASE 1>  ;  Clears from cursor to end of line
