@@ -142,6 +142,30 @@ Clears window with given window-number. If window-number is -1 it unsplit all wi
 
 ---
 
+### COLOR
+**Usage:** `<COLOR fg-color bg-color>  ;  "Version 5"`
+
+**Alternative Usage:** `<COLOR fg-color bg-color [window-number]>  ;  "Versions: 6-"`
+
+Print text in given fg-color and bg-color from this point on (flushing out text in buffer in old colors first). Version 6 supports a third argument, window-number. The colors available (if interpreter supports it) are:
+
+* 0 = Current color
+* 1 = Default color
+* 2 = Black
+* 3 = Red
+* 4 = Green
+* 5 = Yellow
+* 6 = Blue
+* 7 = Magenta
+* 8 = Cyan
+* 9 = White
+
+> **Note:** ZILF supports COLOR in versions 5-.
+
+**History:** Zapf syntax: COLOR, Inform syntax: set_colour
+
+---
+
 ### ERASE
 **Usage:** `<ERASE value>`
 
