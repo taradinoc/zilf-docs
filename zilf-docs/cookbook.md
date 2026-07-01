@@ -2005,6 +2005,58 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### COND
+```zil
+;  SWITCH style
+<COND
+  (<=? .SWITCH 1>
+    <TELL "Variable SWITCH = 1" CR>)
+  (<=? .SWITCH 2>
+    <TELL "Variable SWITCH = 2" CR>)
+  (<=? .SWITCH 3>
+    <TELL "Variable SWITCH = 3" CR>)
+  (T
+    <TELL "Variable SWITCH not in (1 2 3)" CR>)
+>
+
+;  IF-THEN-ELSE style
+
+<COND (<AND <=? 1 1> <=? 2 2>>
+  <TELL "THEN <...>" CR>
+)
+  (ELSE  ;  "Or T"
+  <TELL "ELSE <...>" CR>
+)>
+
+;  COND evaluates each condition in turn and executes the expressions directly after the first condition that evaluates to true. ELSE is an alias for T so if the first condition is false the second is always true and is executed.
+
+;  Note that only one of the (conditions expressions …)is executed, the conditions after a condition that evaluates to true is skipped.
+
+<COND
+  (T
+    <TELL "Variable SWITCH not in (1 2 3)" CR>)
+  (<=? .SWITCH 1>
+    <TELL "Variable SWITCH = 1" CR>)
+  (<=? .SWITCH 2>
+    <TELL "Variable SWITCH = 2" CR>)
+  (<=? .SWITCH 3>
+    <TELL "Variable SWITCH = 3" CR>)
+>
+
+;  In this case conditions for 1, 2 & 3 is never executed and should result in a compiler warning.
+<COND
+  (T
+    <TELL "Variable SWITCH not in (1 2 3)" CR>)
+  (<=? .SWITCH 1>
+    <TELL "Variable SWITCH = 1" CR>)
+  (<=? .SWITCH 2>
+    <TELL "Variable SWITCH = 2" CR>)
+  (<=? .SWITCH 3>
+    <TELL "Variable SWITCH = 3" CR>)
+>
+```
+
+
 ### ERASE
 ```zil
 <ERASE 1>  ;  Clears from cursor to end of line

@@ -166,6 +166,15 @@ Print text in given fg-color and bg-color from this point on (flushing out text 
 
 ---
 
+### COND
+**Usage:** `<COND (condition expressions...)...>`
+
+Test condition (predicate) and if condition evaluates to true expressions are executed.
+
+IF-THEN style: <COND (<AND <=? 1 1> <=? 2 2>> <TELL "IF-THEN <...>">)>
+
+---
+
 ### ERASE
 **Usage:** `<ERASE value>`
 
