@@ -2057,6 +2057,18 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### COPYT
+```zil
+<GLOBAL TABLE1 <TABLE 1 2 3>> 
+<GLOBAL TABLE2 <TABLE 0 0 0>> 
+<ROUTINE TEST-COPYT() 
+  <COPYT ,TABLE1 ,TABLE2 6> 
+  <GET ,TABLE2 2> 
+> 
+<TEST-COPYT>  ;  3
+```
+
+
 ### ERASE
 ```zil
 <ERASE 1>  ;  Clears from cursor to end of line
