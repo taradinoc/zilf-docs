@@ -634,6 +634,24 @@ zilf:CONSTANT rdf:type owl:NamedIndividual ,
               skos:prefLabel "<CONSTANT atom value>"@en .
 
 
+###  http://example.org/zilf/COPYT
+zilf:COPYT rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:ZCodeBuiltIns ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Copies length number of bytes from src-table to dest-table. The tables are allowed to overlap. If length is positive then the copy is done without corrupting the src-table. If length is negative the copy is always forward from src-table to dest-table (the absolute length number of bytes) even if this corrupts src-table."@en ;
+           skos:editorialNote "ZILF supports COPYT in versions 5-."@en ;
+           skos:example """<GLOBAL TABLE1 <TABLE 1 2 3>> 
+<GLOBAL TABLE2 <TABLE 0 0 0>> 
+<ROUTINE TEST-COPYT() 
+  <COPYT ,TABLE1 ,TABLE2 6> 
+  <GET ,TABLE2 2> 
+> 
+<TEST-COPYT>  ;  3"""@en ;
+           skos:historyNote "Zapf syntax: COPYT, Inform syntax: copy_table"@en ;
+           skos:prefLabel "<COPYT src-table dest-table length>"@en .
+
+
 ###  http://example.org/zilf/CRLF
 zilf:CRLF rdf:type owl:NamedIndividual ,
                    skos:Concept ;
@@ -4379,6 +4397,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:CLEAR ,
                                  zilf:COLOR ,
                                  zilf:COND ,
+                                 zilf:COPYT ,
                                  zilf:ERASE ,
                                  zilf:FCLEAR ,
                                  zilf:FONT ,
