@@ -175,6 +175,17 @@ IF-THEN style: <COND (<AND <=? 1 1> <=? 2 2>> <TELL "IF-THEN <...>">)>
 
 ---
 
+### COPYT
+**Usage:** `<COPYT src-table dest-table length>`
+
+Copies length number of bytes from src-table to dest-table. The tables are allowed to overlap. If length is positive then the copy is done without corrupting the src-table. If length is negative the copy is always forward from src-table to dest-table (the absolute length number of bytes) even if this corrupts src-table.
+
+> **Note:** ZILF supports COPYT in versions 5-.
+
+**History:** Zapf syntax: COPYT, Inform syntax: copy_table
+
+---
+
 ### ERASE
 **Usage:** `<ERASE value>`
 
