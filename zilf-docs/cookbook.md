@@ -2069,6 +2069,17 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### CURGET
+```zil
+<GLOBAL CURTABLE <TABLE 0 0>>
+<ROUTINE TEST-CURGET ()
+  <CURGET ,CURTABLE>
+>
+
+<TEST-CURGET>  ;  Puts current row and column in CURTABLE
+```
+
+
 ### ERASE
 ```zil
 <ERASE 1>  ;  Clears from cursor to end of line

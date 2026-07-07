@@ -186,6 +186,17 @@ Copies length number of bytes from src-table to dest-table. The tables are allow
 
 ---
 
+### CURGET
+**Usage:** `<CURGET table>`
+
+CURGET puts the current cursor row in record 0 and current cursor column in record 1 of the supplied table.Both row and column are WORD (16-bit).
+
+> **Note:** ZILF supports CURGET in versions 4-.
+
+**History:** Zapf syntax: CURGET, Inform syntax: get_cursor
+
+---
+
 ### ERASE
 **Usage:** `<ERASE value>`
 
