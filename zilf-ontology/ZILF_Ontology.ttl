@@ -664,6 +664,23 @@ zilf:CRLF rdf:type owl:NamedIndividual ,
           skos:prefLabel "<CRLF [channel]>"@en .
 
 
+###  http://example.org/zilf/CURGET
+zilf:CURGET rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "CURGET puts the current cursor row in record 0 and current cursor column in record 1 of the supplied table.Both row and column are WORD (16-bit)."@en ;
+            skos:editorialNote "ZILF supports CURGET in versions 4-."@en ;
+            skos:example """<GLOBAL CURTABLE <TABLE 0 0>>
+<ROUTINE TEST-CURGET ()
+  <CURGET ,CURTABLE>
+>
+
+<TEST-CURGET>  ;  Puts current row and column in CURTABLE"""@en ;
+            skos:historyNote "Zapf syntax: CURGET, Inform syntax: get_cursor"@en ;
+            skos:prefLabel "<CURGET table>"@en .
+
+
 ###  http://example.org/zilf/CoreFunctions
 zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                             skos:Concept ;
@@ -4400,6 +4417,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:COLOR ,
                                  zilf:COND ,
                                  zilf:COPYT ,
+                                 zilf:CURGET ,
                                  zilf:ERASE ,
                                  zilf:FCLEAR ,
                                  zilf:FONT ,
