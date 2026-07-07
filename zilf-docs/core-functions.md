@@ -214,6 +214,10 @@ ZIL library function that defines an atom with value that will never be changed.
 
 MDL built-in function that prints a carriage-return and a line-feed to channel (default for channel is <LVAL OUTCHAN>; the console). CRLF returns true.
 
+> **Note:** ZILF supports CRLF in all versions.
+
+**History:** Zapf syntax: CRLF, Inform syntax: new_line
+
 ---
 
 ### DECL-CHECK

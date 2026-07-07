@@ -192,7 +192,7 @@ zyxwvutsrqponmlkjihgfedcba
 
 ### CRLF
 ```zil
-<CRLF>  ;  "\n"
+<CRLF>  ;  "Moves cursor to position 1 on new line"
 ```
 
 
