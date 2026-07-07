@@ -658,7 +658,9 @@ zilf:CRLF rdf:type owl:NamedIndividual ,
           skos:broader zilf:CoreFunctions ;
           skos:inScheme zilf:ZILF_Scheme ;
           skos:definition "MDL built-in function that prints a carriage-return and a line-feed to channel (default for channel is <LVAL OUTCHAN>; the console). CRLF returns true."@en ;
-          skos:example "<CRLF>  ;  \"\\n\""@en ;
+          skos:editorialNote "ZILF supports CRLF in all versions."@en ;
+          skos:example "<CRLF>  ;  \"Moves cursor to position 1 on new line\""@en ;
+          skos:historyNote "Zapf syntax: CRLF, Inform syntax: new_line"@en ;
           skos:prefLabel "<CRLF [channel]>"@en .
 
 
