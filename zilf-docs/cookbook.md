@@ -2080,6 +2080,12 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### CURSET
+```zil
+<CURSET 1 1>  ;  Move cursor to upper left corner in current window
+```
+
+
 ### ERASE
 ```zil
 <ERASE 1>  ;  Clears from cursor to end of line
