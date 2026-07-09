@@ -197,6 +197,19 @@ CURGET puts the current cursor row in record 0 and current cursor column in reco
 
 ---
 
+### CURSET
+**Usage:** `<CURSET row column>  ;  "Versions: 4-5"`
+
+**Alternative Usage:** `<CURSET row column [window-number]>  ;  "Versions: 6-"`
+
+CURSET moves the cursor to row and column in the current window (or supplied window-number).
+
+> **Note:** ZILF supports CURSET in versions 4-.
+
+**History:** In versions 4-5 it is only possible to move the cursor in the upper window (window-number = 1). In versions 6-, if row is -1 then the cursor is turned off (-2 turns it back on).
+
+---
+
 ### ERASE
 **Usage:** `<ERASE value>`
 
