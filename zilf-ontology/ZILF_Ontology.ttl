@@ -681,6 +681,19 @@ zilf:CURGET rdf:type owl:NamedIndividual ,
             skos:prefLabel "<CURGET table>"@en .
 
 
+###  http://example.org/zilf/CURSET
+zilf:CURSET rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:altLabel "<CURSET row column [window-number]>  ;  \"Versions: 6-\""@en ;
+            skos:definition "CURSET moves the cursor to row and column in the current window (or supplied window-number)."@en ;
+            skos:editorialNote "ZILF supports CURSET in versions 4-."@en ;
+            skos:example "<CURSET 1 1>  ;  Move cursor to upper left corner in current window"@en ;
+            skos:historyNote "In versions 4-5 it is only possible to move the cursor in the upper window (window-number = 1). In versions 6-, if row is -1 then the cursor is turned off (-2 turns it back on)." ;
+            skos:prefLabel "<CURSET row column>  ;  \"Versions: 4-5\""@en .
+
+
 ###  http://example.org/zilf/CoreFunctions
 zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                             skos:Concept ;
@@ -4418,6 +4431,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:COND ,
                                  zilf:COPYT ,
                                  zilf:CURGET ,
+                                 zilf:CURSET ,
                                  zilf:ERASE ,
                                  zilf:FCLEAR ,
                                  zilf:FONT ,
