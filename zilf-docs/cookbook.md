@@ -2086,6 +2086,12 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### DCLEAR
+```zil
+<DCLEAR 1 1 1>  ;  Clears picture 1
+```
+
+
 ### ERASE
 ```zil
 <ERASE 1>  ;  Clears from cursor to end of line
