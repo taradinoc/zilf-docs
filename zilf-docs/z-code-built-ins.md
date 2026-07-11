@@ -210,6 +210,17 @@ CURSET moves the cursor to row and column in the current window (or supplied win
 
 ---
 
+### DCLEAR
+**Usage:** `<DCLEAR picture-number [row] [column]>`
+
+Clears (draw background color) area covered by picture-number, starting at row and column. Also see DISPLAY.
+
+> **Note:** ZILF supports DCLEAR in versions 6-.
+
+**History:** Zapf syntax: DCLEAR, Inform syntax: erase_picture
+
+---
+
 ### ERASE
 **Usage:** `<ERASE value>`
 
