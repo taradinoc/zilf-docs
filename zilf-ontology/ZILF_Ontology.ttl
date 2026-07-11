@@ -882,6 +882,18 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                    skos:prefLabel "Core Functions"@en .
 
 
+###  http://example.org/zilf/DCLEAR
+zilf:DCLEAR rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "Clears (draw background color) area covered by picture-number, starting at row and column. Also see DISPLAY."@en ;
+            skos:editorialNote "ZILF supports DCLEAR in versions 6-."@en ;
+            skos:example "<DCLEAR 1 1 1>  ;  Clears picture 1"@en ;
+            skos:historyNote "Zapf syntax: DCLEAR, Inform syntax: erase_picture"@en ;
+            skos:prefLabel "<DCLEAR picture-number [row] [column]>"@en .
+
+
 ###  http://example.org/zilf/DECL-CHECK
 zilf:DECL-CHECK rdf:type owl:NamedIndividual ,
                          skos:Concept ;
@@ -4432,6 +4444,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:COPYT ,
                                  zilf:CURGET ,
                                  zilf:CURSET ,
+                                 zilf:DCLEAR ,
                                  zilf:ERASE ,
                                  zilf:FCLEAR ,
                                  zilf:FONT ,
