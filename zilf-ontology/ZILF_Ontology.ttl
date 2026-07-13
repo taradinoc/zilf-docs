@@ -894,6 +894,19 @@ zilf:DCLEAR rdf:type owl:NamedIndividual ,
             skos:prefLabel "<DCLEAR picture-number [row] [column]>"@en .
 
 
+###  http://example.org/zilf/DEC
+zilf:DEC rdf:type owl:NamedIndividual ,
+                  skos:Concept ;
+         skos:inScheme zilf:ZILF_Scheme ;
+         skos:definition "Decrease variable (signed) name with 1."@en ;
+         skos:editorialNote "ZILF supports DEC in all versions."@en ;
+         skos:example """<ROUTINE TEST-DEC (X) <DEC .X>>
+<TEST-DEC 45>  ;  44
+<TEST-DEC 0>  ;  -1"""@en ;
+         skos:historyNote "Zapf syntax: DEC, Inform syntax: dec"@en ;
+         skos:prefLabel "<DEC name>"@en .
+
+
 ###  http://example.org/zilf/DECL-CHECK
 zilf:DECL-CHECK rdf:type owl:NamedIndividual ,
                          skos:Concept ;
