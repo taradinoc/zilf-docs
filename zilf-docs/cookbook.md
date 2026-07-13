@@ -2092,6 +2092,14 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### DEC
+```zil
+<ROUTINE TEST-DEC (X) <DEC .X>>
+<TEST-DEC 45>  ;  44
+<TEST-DEC 0>  ;  -1
+```
+
+
 ### ERASE
 ```zil
 <ERASE 1>  ;  Clears from cursor to end of line
