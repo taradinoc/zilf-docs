@@ -221,6 +221,17 @@ Clears (draw background color) area covered by picture-number, starting at row a
 
 ---
 
+### DEC
+**Usage:** `<DEC name>`
+
+Decrease variable (signed) name with 1.
+
+> **Note:** ZILF supports DEC in all versions.
+
+**History:** Zapf syntax: DEC, Inform syntax: dec
+
+---
+
 ### ERASE
 **Usage:** `<ERASE value>`
 
