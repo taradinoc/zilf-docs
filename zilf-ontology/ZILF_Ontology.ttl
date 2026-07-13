@@ -897,6 +897,7 @@ zilf:DCLEAR rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/DEC
 zilf:DEC rdf:type owl:NamedIndividual ,
                   skos:Concept ;
+         skos:broader zilf:ZCodeBuiltIns ;
          skos:inScheme zilf:ZILF_Scheme ;
          skos:definition "Decrease variable (signed) name with 1."@en ;
          skos:editorialNote "ZILF supports DEC in all versions."@en ;
@@ -4458,6 +4459,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:CURGET ,
                                  zilf:CURSET ,
                                  zilf:DCLEAR ,
+                                 zilf:DEC ,
                                  zilf:ERASE ,
                                  zilf:FCLEAR ,
                                  zilf:FONT ,
