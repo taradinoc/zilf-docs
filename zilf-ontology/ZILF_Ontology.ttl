@@ -1132,6 +1132,21 @@ zilf:DIRECTIONS rdf:type owl:NamedIndividual ,
                 skos:prefLabel "<DIRECTIONS atoms ...>"@en .
 
 
+###  http://example.org/zilf/DIRIN
+zilf:DIRIN rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:ZCodeBuiltIns ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition """Select input stream. Only stream-number 0 and 1 are valid.
+
+* 0 = Keyboard 
+* 1 = File on host"""@en ;
+           skos:editorialNote "ZILF supports DIRIN in all versions."@en ;
+           skos:example "<DIRIN 0>  ;  True and select input stream keyboard"@en ;
+           skos:historyNote "Zapf syntax: DIRIN, Inform syntax: input_stream"@en ;
+           skos:prefLabel "<DIRIN stream-number>"@en .
+
+
 ###  http://example.org/zilf/END-DEFINITIONS
 zilf:END-DEFINITIONS rdf:type owl:NamedIndividual ,
                               skos:Concept ;
@@ -4460,6 +4475,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:CURSET ,
                                  zilf:DCLEAR ,
                                  zilf:DEC ,
+                                 zilf:DIRIN ,
                                  zilf:ERASE ,
                                  zilf:FCLEAR ,
                                  zilf:FONT ,
