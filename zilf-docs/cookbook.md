@@ -2100,6 +2100,12 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### DIRIN
+```zil
+<DIRIN 0>  ;  True and select input stream keyboard
+```
+
+
 ### ERASE
 ```zil
 <ERASE 1>  ;  Clears from cursor to end of line
