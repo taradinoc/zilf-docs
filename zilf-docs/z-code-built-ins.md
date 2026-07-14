@@ -232,6 +232,20 @@ Decrease variable (signed) name with 1.
 
 ---
 
+### DIRIN
+**Usage:** `<DIRIN stream-number>`
+
+Select input stream. Only stream-number 0 and 1 are valid.
+
+* 0 = Keyboard 
+* 1 = File on host
+
+> **Note:** ZILF supports DIRIN in all versions.
+
+**History:** Zapf syntax: DIRIN, Inform syntax: input_stream
+
+---
+
 ### ERASE
 **Usage:** `<ERASE value>`
 
