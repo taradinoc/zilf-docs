@@ -1169,6 +1169,18 @@ Later versions can format output text to width (number of characters if width is
             skos:prefLabel "<DIROUT stream-number [table]>  ;  Versions -5"@en .
 
 
+###  http://example.org/zilf/DISPLAY
+zilf:DISPLAY rdf:type owl:NamedIndividual ,
+                      skos:Concept ;
+             skos:broader zilf:ZCodeBuiltIns ;
+             skos:inScheme zilf:ZILF_Scheme ;
+             skos:definition "Draw picture-number at coordinates row and column. If row and column are omitted the current cursor position is used."@en ;
+             skos:editorialNote "ZILF supports DISPLAY in versions 6-."@en ;
+             skos:example "<DISPLAY 1>  ;  Draws picture 1 at current cursor position"@en ;
+             skos:historyNote "Zapf syntax: DISPLAY, Inform syntax: draw_picture"@en ;
+             skos:prefLabel "<DISPLAY picture-number [row] [column]>"@en .
+
+
 ###  http://example.org/zilf/END-DEFINITIONS
 zilf:END-DEFINITIONS rdf:type owl:NamedIndividual ,
                               skos:Concept ;
@@ -4499,6 +4511,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:DEC ,
                                  zilf:DIRIN ,
                                  zilf:DIROUT ,
+                                 zilf:DISPLAY ,
                                  zilf:ERASE ,
                                  zilf:FCLEAR ,
                                  zilf:FONT ,
