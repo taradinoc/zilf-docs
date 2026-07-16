@@ -246,6 +246,26 @@ Select input stream. Only stream-number 0 and 1 are valid.
 
 ---
 
+### DIROUT
+**Usage:** `<DIROUT stream-number [table]>  ;  Versions -5`
+
+**Alternative Usage:** `<DIROUT stream-number [table] [width]>  ;  Versions 6-`
+
+Directs output to one or more output streams (multiple streams can be active simultaneously). Turn on stream with positive stream-number and turn off stream with negative stream-number.
+
+If stream 3 is active a table must be supplied. WORD 0 in table holds number of printed characters and byte 2 onward holds the characters printed. DIROUT can overrun table if not enough space is allocated.
+
+Later versions can format output text to width (number of characters if width is positive or number of pixels if width is negative).
+
+* 1 = Screen 
+* 2 = File on host (transcript) 
+* 3 = Table 
+* 4 = File of commands on host
+
+**History:** Zapf syntax: DIROUT, Inform syntax: output_stream
+
+---
+
 ### ERASE
 **Usage:** `<ERASE value>`
 
