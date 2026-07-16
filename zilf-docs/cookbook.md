@@ -2113,6 +2113,12 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### DISPLAY
+```zil
+<DISPLAY 1>  ;  Draws picture 1 at current cursor position
+```
+
+
 ### ERASE
 ```zil
 <ERASE 1>  ;  Clears from cursor to end of line
