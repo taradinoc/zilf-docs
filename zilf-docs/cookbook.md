@@ -2106,6 +2106,13 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### DIROUT
+```zil
+<DIROUT 3>  ;  Turns on output to file 
+<DIROUT -3>  ;  Turns off output to file
+```
+
+
 ### ERASE
 ```zil
 <ERASE 1>  ;  Clears from cursor to end of line
