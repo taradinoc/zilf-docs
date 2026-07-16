@@ -266,6 +266,17 @@ Later versions can format output text to width (number of characters if width is
 
 ---
 
+### DISPLAY
+**Usage:** `<DISPLAY picture-number [row] [column]>`
+
+Draw picture-number at coordinates row and column. If row and column are omitted the current cursor position is used.
+
+> **Note:** ZILF supports DISPLAY in versions 6-.
+
+**History:** Zapf syntax: DISPLAY, Inform syntax: draw_picture
+
+---
+
 ### ERASE
 **Usage:** `<ERASE value>`
 
