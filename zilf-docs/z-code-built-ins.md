@@ -277,6 +277,17 @@ Draw picture-number at coordinates row and column. If row and column are omitted
 
 ---
 
+### DLESS?
+**Usage:** `<DLESS? name value>`
+
+Predicate. Decrease variable (signed) name with 1 and returns true if variable name is lower than value, otherwise returns false.
+
+> **Note:** ZILF supports DLESS? in all versions.
+
+**History:** Zapf syntax: DLESS?, Inform syntax: dec_chk
+
+---
+
 ### ERASE
 **Usage:** `<ERASE value>`
 
