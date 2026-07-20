@@ -4568,6 +4568,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:XPUSH ,
                                  zilf:ZWSTR ,
                                  <http://example.org/zilf/ASSIGNED?> ,
+                                 <http://example.org/zilf/DLESS?> ,
                                  <http://example.org/zilf/F?> ,
                                  <http://example.org/zilf/FIRST?> ,
                                  <http://example.org/zilf/FSET?> ,
@@ -4871,6 +4872,24 @@ If no environment is supplied, the environment defaults to current scope. See EV
 <DECL? '.X '<PRIMTYPE ATOM>>  ;  T
 <DECL? ',X '<PRIMTYPE ATOM>>  ;  T"""@en ;
                                 skos:prefLabel "<DECL? value pattern>"@en .
+
+
+###  http://example.org/zilf/DLESS?
+<http://example.org/zilf/DLESS?> rdf:type owl:NamedIndividual ,
+                                          skos:Concept ;
+                                 skos:broader zilf:ZCodeBuiltIns ;
+                                 skos:inScheme zilf:ZILF_Scheme ;
+                                 skos:definition "Predicate. Decrease variable (signed) name with 1 and returns true if variable name is lower than value, otherwise returns false."@en ;
+                                 skos:editorialNote "ZILF supports DLESS? in all versions."@en ;
+                                 skos:example """<ROUTINE TEST-DLESS? (X)  
+  <PRINTN <DLESS? X 100>> 
+  <CRLF>  
+  <PRINTN .X> 
+> 
+
+<TEST-DLESS? 101>  ;  \"0\\n100\""""@en ;
+                                 skos:historyNote "Zapf syntax: DLESS?, Inform syntax: dec_chk"@en ;
+                                 skos:prefLabel "<DLESS? name value>"@en .
 
 
 ###  http://example.org/zilf/EMPTY?
