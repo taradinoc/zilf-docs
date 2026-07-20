@@ -2119,6 +2119,18 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### DLESS?
+```zil
+<ROUTINE TEST-DLESS? (X)  
+  <PRINTN <DLESS? X 100>> 
+  <CRLF>  
+  <PRINTN .X> 
+> 
+
+<TEST-DLESS? 101>  ;  "0\n100"
+```
+
+
 ### ERASE
 ```zil
 <ERASE 1>  ;  Clears from cursor to end of line
