@@ -2174,6 +2174,12 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### FSTACK
+```zil
+<PUSH 123> <PUSH 0> <PUSH 0> <PUSH 0> <FSTACK 3> <POP>  ;  123
+```
+
+
 ### GET
 ```zil
 <GET <TABLE 0 1 2 3> 2>  ;  2
