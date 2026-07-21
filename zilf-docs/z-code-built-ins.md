@@ -372,6 +372,17 @@ Z-code built-in predicate that tests if the flag is set on the object.
 
 ---
 
+### FSTACK
+**Usage:** `<FSTACK number [stack]>`
+
+Removes number of items from system stack or given stack (table).
+
+> **Note:** ZILF supports FSTACK in versions 6-.
+
+**History:** Zapf syntax: FSTACK, Inform syntax: pop / pop_stack
+
+---
+
 ### GET
 **Usage:** `<GET table offset>`
 
