@@ -1460,6 +1460,18 @@ zilf:FSET rdf:type owl:NamedIndividual ,
           skos:prefLabel "<FSET object flag>"@en .
 
 
+###  http://example.org/zilf/FSTACK
+zilf:FSTACK rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "Removes number of items from system stack or given stack (table)."@en ;
+            skos:editorialNote "ZILF supports FSTACK in versions 6-."@en ;
+            skos:example "<PUSH 123> <PUSH 0> <PUSH 0> <PUSH 0> <FSTACK 3> <POP>  ;  123"@en ;
+            skos:historyNote "Zapf syntax: FSTACK, Inform syntax: pop / pop_stack"@en ;
+            skos:prefLabel "<FSTACK number [stack]>"@en .
+
+
 ###  http://example.org/zilf/GC
 zilf:GC rdf:type owl:NamedIndividual ,
                  skos:Concept ;
@@ -4516,6 +4528,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:FCLEAR ,
                                  zilf:FONT ,
                                  zilf:FSET ,
+                                 zilf:FSTACK ,
                                  zilf:GET ,
                                  zilf:GETB ,
                                  zilf:GETP ,
