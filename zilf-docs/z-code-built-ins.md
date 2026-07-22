@@ -431,6 +431,19 @@ Z-code built-in that gets property address from object. Returns 0 (false) if pro
 
 ---
 
+### GRTR?
+**Usage:** `<GRTR? Value1 value2>`
+
+**Alternative Usage:** `<G? value1 value2>`
+
+Predicate. Returns true if value1 is greater than value2, otherwise false.
+
+> **Note:** ZILF supports GRTR? in all versions.
+
+**History:** Zapf syntax: GRTR?, Inform syntax: jg
+
+---
+
 ### IN?
 **Usage:** `<IN? object1 object2>`
 
