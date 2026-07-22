@@ -2207,6 +2207,13 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### GRTR?
+```zil
+<GRTR? 5 4>  ;  T
+<GRTR? 4 5>  ;  <>
+```
+
+
 ### IN?
 ```zil
 <OBJECT ANIMAL>
