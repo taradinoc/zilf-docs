@@ -1643,6 +1643,24 @@ zilf:GVAL rdf:type owl:NamedIndividual ,
           skos:prefLabel "<GVAL atom>"@en .
 
 
+###  http://example.org/zilf/HLIGHT
+zilf:HLIGHT rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition """Set text to style. It is possible to combine styles.
+
+* 0 = Normal 
+* 1 = Inverse 
+* 2 = Bold 
+* 4 = Italic 
+* 8 = Monospace"""@en ;
+            skos:editorialNote "ZILF supports HLIGHT in versions 4-."@en ;
+            skos:example "<HLIGHT 2>  ;  Set font to bold"@en ;
+            skos:historyNote "Zapf syntax: HLIGHT, Inform syntax: set_text_style"@en ;
+            skos:prefLabel "<HLIGHT style>"@en .
+
+
 ###  http://example.org/zilf/IFFLAG
 zilf:IFFLAG rdf:type owl:NamedIndividual ,
                      skos:Concept ;
@@ -4533,6 +4551,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:GETB ,
                                  zilf:GETP ,
                                  zilf:GETPT ,
+                                 zilf:HLIGHT ,
                                  zilf:INC ,
                                  zilf:INPUT ,
                                  zilf:IRESTORE ,
