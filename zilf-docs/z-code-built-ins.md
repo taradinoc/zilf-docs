@@ -444,6 +444,23 @@ Predicate. Returns true if value1 is greater than value2, otherwise false.
 
 ---
 
+### HLIGHT
+**Usage:** `<HLIGHT style>`
+
+Set text to style. It is possible to combine styles.
+
+* 0 = Normal 
+* 1 = Inverse 
+* 2 = Bold 
+* 4 = Italic 
+* 8 = Monospace
+
+> **Note:** ZILF supports HLIGHT in versions 4-.
+
+**History:** Zapf syntax: HLIGHT, Inform syntax: set_text_style
+
+---
+
 ### IN?
 **Usage:** `<IN? object1 object2>`
 
