@@ -2214,6 +2214,12 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### HLIGHT
+```zil
+<HLIGHT 2>  ;  Set font to bold
+```
+
+
 ### IN?
 ```zil
 <OBJECT ANIMAL>
