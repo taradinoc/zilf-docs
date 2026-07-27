@@ -461,6 +461,17 @@ Set text to style. It is possible to combine styles.
 
 ---
 
+### IGRTR?
+**Usage:** `<IGRTR? name value>`
+
+Predicate. Increase variable (signed) name with 1 and returns true if variable name is greater than value, otherwise returns false.
+
+> **Note:** ZILF supports IGRTR? in all versions.
+
+**History:** Zapf syntax: IGRTR?, Inform syntax: inc_chk
+
+---
+
 ### IN?
 **Usage:** `<IN? object1 object2>`
 
