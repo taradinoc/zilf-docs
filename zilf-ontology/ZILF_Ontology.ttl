@@ -4605,6 +4605,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  <http://example.org/zilf/FIRST?> ,
                                  <http://example.org/zilf/FSET?> ,
                                  <http://example.org/zilf/GRTR?> ,
+                                 <http://example.org/zilf/IGRTR?> ,
                                  <http://example.org/zilf/IN?> ,
                                  <http://example.org/zilf/INTBL?> .
 
@@ -5045,6 +5046,25 @@ If needed, ZILF will move the extra variables into a table (GLOBAL-VARS-TABLE) a
 <GRTR? 4 5>  ;  <>"""@en ;
                                 skos:historyNote "Zapf syntax: GRTR?, Inform syntax: jg"@en ;
                                 skos:prefLabel "<GRTR? Value1 value2>"@en .
+
+
+###  http://example.org/zilf/IGRTR?
+<http://example.org/zilf/IGRTR?> rdf:type owl:NamedIndividual ,
+                                          skos:Concept ;
+                                 skos:broader zilf:ZCodeBuiltIns ;
+                                 skos:inScheme zilf:ZILF_Scheme ;
+                                 skos:definition "Predicate. Increase variable (signed) name with 1 and returns true if variable name is greater than value, otherwise returns false."@en ;
+                                 skos:editorialNote "ZILF supports IGRTR? in all versions."@en ;
+                                 skos:example """<ROUTINE TEST-IGRTR? (X)
+  <PRINTN <IGRTR? X 100>>
+  <CRLF>
+  <PRINTN .X>
+>
+
+<TEST-IGRTR? 100>  ;  \"1\\n101\"
+<TEST-IGRTR? 99>  ;  \"0\\n100\""""@en ;
+                                 skos:historyNote "Zapf syntax: IGRTR?, Inform syntax: inc_chk"@en ;
+                                 skos:prefLabel "<IGRTR? name value>"@en .
 
 
 ###  http://example.org/zilf/IN?
