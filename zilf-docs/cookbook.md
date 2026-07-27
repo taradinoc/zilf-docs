@@ -2220,6 +2220,19 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### IGRTR?
+```zil
+<ROUTINE TEST-IGRTR? (X)
+  <PRINTN <IGRTR? X 100>>
+  <CRLF>
+  <PRINTN .X>
+>
+
+<TEST-IGRTR? 100>  ;  "1\n101"
+<TEST-IGRTR? 99>  ;  "0\n100"
+```
+
+
 ### IN?
 ```zil
 <OBJECT ANIMAL>
