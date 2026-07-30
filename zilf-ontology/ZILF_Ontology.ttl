@@ -1907,6 +1907,22 @@ zilf:ISTRING rdf:type owl:NamedIndividual ,
              skos:prefLabel "<ISTRING count [init]>"@en .
 
 
+###  http://example.org/zilf/ITABLE
+zilf:ITABLE rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition """Defines a table of count elements filled with default values: either zeros or, if the default list is specified, the specified list of values repeated until the table is full.
+
+The optional specifier may be the atoms NONE, BYTE, or WORD. BYTE and WORD change the type of the table and also turn on the length marker (element 0 in the table contains the length of the table), This can also be done with the flags (see TABLE about flags)."""@en ;
+            skos:example """<ITABLE 4 0>  ;  Element 0 WORD (0), Element 1 WORD (0), Element 2 WORD (0) , Element 3 WORD (0)
+
+<ITABLE (BYTE LENGTH) 4 0>  ;  Element 0 BYTE (4), Element 1 BYTE (0), Element 2 BYTE (0) , Element 3 BYTE (0), Element 4 BYTE (0)
+
+<ITABLE BYTE 4 0>  ;  Element 0 BYTE (4), Element 1 BYTE (0), Element 2 BYTE (0) , Element 3 BYTE (0), Element 4 BYTE (0)"""@en ;
+            skos:prefLabel "<ITABLE [specifier] count [(flags...)] defaults ...>"@en .
+
+
 ###  http://example.org/zilf/ITEM
 zilf:ITEM rdf:type owl:NamedIndividual ,
                    skos:Concept ;
@@ -4556,6 +4572,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:INPUT ,
                                  zilf:IRESTORE ,
                                  zilf:ISAVE ,
+                                 zilf:ITABLE ,
                                  zilf:LEX ,
                                  zilf:LOC ,
                                  zilf:LOWCORE ,
