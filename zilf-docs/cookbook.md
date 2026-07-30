@@ -2291,6 +2291,16 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### ITABLE
+```zil
+<ITABLE 4 0>  ;  Element 0 WORD (0), Element 1 WORD (0), Element 2 WORD (0) , Element 3 WORD (0)
+
+<ITABLE (BYTE LENGTH) 4 0>  ;  Element 0 BYTE (4), Element 1 BYTE (0), Element 2 BYTE (0) , Element 3 BYTE (0), Element 4 BYTE (0)
+
+<ITABLE BYTE 4 0>  ;  Element 0 BYTE (4), Element 1 BYTE (0), Element 2 BYTE (0) , Element 3 BYTE (0), Element 4 BYTE (0)
+```
+
+
 ### LEX
 ```zil
 <GLOBAL TEXTBUF <TABLE (BYTE) !\c !\a !\t>>
