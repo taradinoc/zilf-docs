@@ -541,6 +541,15 @@ Z-code built-in function that saves the game state to memory that later can be r
 
 ---
 
+### ITABLE
+**Usage:** `<ITABLE [specifier] count [(flags...)] defaults ...>`
+
+Defines a table of count elements filled with default values: either zeros or, if the default list is specified, the specified list of values repeated until the table is full.
+
+The optional specifier may be the atoms NONE, BYTE, or WORD. BYTE and WORD change the type of the table and also turn on the length marker (element 0 in the table contains the length of the table), This can also be done with the flags (see TABLE about flags).
+
+---
+
 ### LEX
 **Usage:** `<LEX text parse [dictionary] [flag]>`
 
