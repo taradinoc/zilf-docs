@@ -5178,7 +5178,7 @@ In version 5, 7 and 8 the rec-spec describes the field where bit 7 is set for wo
                                 skos:definition "Predicate. Returns true if value1 is less than value2, otherwise false."@en ;
                                 skos:editorialNote "ZILF supports LESS? in all versions."@en ;
                                 skos:example """<LESS? 5 4>  ;  <>
-<L? 4 5>  ;  T"""@en ;
+<LESS? 4 5>  ;  T"""@en ;
                                 skos:historyNote "Zapf syntax: LESS?, Inform syntax: jl"@en ;
                                 skos:prefLabel "<LESS? Value1 value2>"@en .
 
