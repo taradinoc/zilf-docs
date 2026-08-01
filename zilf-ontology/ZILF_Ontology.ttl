@@ -4624,7 +4624,8 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  <http://example.org/zilf/GRTR?> ,
                                  <http://example.org/zilf/IGRTR?> ,
                                  <http://example.org/zilf/IN?> ,
-                                 <http://example.org/zilf/INTBL?> .
+                                 <http://example.org/zilf/INTBL?> ,
+                                 <http://example.org/zilf/LESS?> .
 
 
 ###  http://example.org/zilf/ZGET
@@ -5166,6 +5167,20 @@ In version 5, 7 and 8 the rec-spec describes the field where bit 7 is set for wo
 <LENGTH? (1 2 3) 3>  ;  3
 <NOT <NOT <LENGTH? (1 2 3) 4>>>  ;  True"""@en ;
                                   skos:prefLabel "<LENGTH? structure limit>"@en .
+
+
+###  http://example.org/zilf/LESS?
+<http://example.org/zilf/LESS?> rdf:type owl:NamedIndividual ,
+                                         skos:Concept ;
+                                skos:broader zilf:ZCodeBuiltIns ;
+                                skos:inScheme zilf:ZILF_Scheme ;
+                                skos:altLabel "<L? value1 value2>"@en ;
+                                skos:definition "Predicate. Returns true if value1 is less than value2, otherwise false."@en ;
+                                skos:editorialNote "ZILF supports LESS? in all versions."@en ;
+                                skos:example """<LESS? 5 4>  ;  <>
+<L? 4 5>  ;  T"""@en ;
+                                skos:historyNote "Zapf syntax: LESS?, Inform syntax: jl"@en ;
+                                skos:prefLabel "<LESS? Value1 value2>"@en .
 
 
 ###  http://example.org/zilf/LONG-WORDS?
