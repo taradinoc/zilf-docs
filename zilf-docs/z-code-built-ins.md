@@ -550,6 +550,19 @@ The optional specifier may be the atoms NONE, BYTE, or WORD. BYTE and WORD chang
 
 ---
 
+### LESS?
+**Usage:** `<LESS? Value1 value2>`
+
+**Alternative Usage:** `<L? value1 value2>`
+
+Predicate. Returns true if value1 is less than value2, otherwise false.
+
+> **Note:** ZILF supports LESS? in all versions.
+
+**History:** Zapf syntax: LESS?, Inform syntax: jl
+
+---
+
 ### LEX
 **Usage:** `<LEX text parse [dictionary] [flag]>`
 
