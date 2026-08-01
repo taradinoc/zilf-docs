@@ -2301,6 +2301,13 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### LESS?
+```zil
+<LESS? 5 4>  ;  <>
+<LESS? 4 5>  ;  T
+```
+
+
 ### LEX
 ```zil
 <GLOBAL TEXTBUF <TABLE (BYTE) !\c !\a !\t>>
