@@ -3826,6 +3826,24 @@ zilf:SETG20 rdf:type owl:NamedIndividual ,
             skos:prefLabel "<SETG20 atom value>"@en .
 
 
+###  http://example.org/zilf/SHIFT
+zilf:SHIFT rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:ZCodeBuiltIns ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:altLabel "<LSH number places>"@en ;
+           skos:definition """Bitwise shift. Shift number left when places is positive and right if it is negative. When right shifting the sign is not preserved (0 is always shifted in).
+
+1000 0000 0000 1010  -->  0100 0000 0000 0101
+
+Also see ASH."""@en ;
+           skos:editorialNote "ZILF supports SHIFT in versions 5-."@en ;
+           skos:example """<LSH 4 1>  ;  8
+<LSH 4 -2>  ;  1"""@en ;
+           skos:historyNote "Zapf syntax: SHIFT, Inform syntax: log_shift"@en ;
+           skos:prefLabel "<SHIFT number places>"@en .
+
+
 ###  http://example.org/zilf/SORT
 zilf:SORT rdf:type owl:NamedIndividual ,
                    skos:Concept ;
@@ -4604,6 +4622,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:SCROLL ,
                                  zilf:SET ,
                                  zilf:SETG ,
+                                 zilf:SHIFT ,
                                  zilf:SOUND ,
                                  zilf:SPLIT ,
                                  zilf:THROW ,
