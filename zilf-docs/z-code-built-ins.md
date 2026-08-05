@@ -909,6 +909,23 @@ Z-code built-in function that Store value in global variable name. The name vari
 
 ---
 
+### SHIFT
+**Usage:** `<SHIFT number places>`
+
+**Alternative Usage:** `<LSH number places>`
+
+Bitwise shift. Shift number left when places is positive and right if it is negative. When right shifting the sign is not preserved (0 is always shifted in).
+
+1000 0000 0000 1010  -->  0100 0000 0000 0101
+
+Also see ASH.
+
+> **Note:** ZILF supports SHIFT in versions 5-.
+
+**History:** Zapf syntax: SHIFT, Inform syntax: log_shift
+
+---
+
 ### SOUND
 **Usage:** `<SOUND number [effect] [volume]>  ;  "Versions 3-4",
 <SOUND number [effect] [volrep] [routine]>  ;  "Versions 5-"`
