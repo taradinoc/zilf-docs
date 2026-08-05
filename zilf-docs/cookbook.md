@@ -2617,6 +2617,13 @@ MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR
 ```
 
 
+### SHIFT
+```zil
+<LSH 4 1>  ;  8
+<LSH 4 -2>  ;  1
+```
+
+
 ### SOUND
 ```zil
 ;  From Sherlock
