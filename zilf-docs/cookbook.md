@@ -2456,6 +2456,16 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### MOUSE-INFO
+```zil
+; Example (from Journey)
+
+<GLOBAL MOUSE-INFO-TBL <TABLE 0 0 0 0>>
+...
+<MOUSE-INFO ,MOUSE-INFO-TBL>
+```
+
+
 ### PICINF
 ```zil
 <GLOBAL MYPIC <ITABLE 2048 0>>
