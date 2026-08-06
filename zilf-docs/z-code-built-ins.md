@@ -674,6 +674,22 @@ Z-code built-in function that Returns remainder of 16-bit signed division. numbe
 
 ---
 
+### MOUSE-INFO
+**Usage:** `<MOUSE-INFO table>`
+
+Reads mouse information into table. The table is 4 WORDS (2 bytes) long.
+
+* 0 is Y coordinate
+* 1 is X coordinate
+* 2 is Button bits (host dependent)
+* 3 is Menu (number * 256 + entry)
+
+> **Note:** ZILF supports MOUSE-INFO in versions 6-.
+
+**History:** Zapf syntax: MOUSE-INFO, Inform syntax: read_mouse
+
+---
+
 ### PICINF
 **Usage:** `<PICINF picture-number table>`
 
