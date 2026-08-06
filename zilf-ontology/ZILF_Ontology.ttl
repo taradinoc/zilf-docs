@@ -2438,6 +2438,27 @@ zilf:MOD rdf:type owl:NamedIndividual ,
          skos:prefLabel "<MOD number1 number2>"@en .
 
 
+###  http://example.org/zilf/MOUSE-INFO
+zilf:MOUSE-INFO rdf:type owl:NamedIndividual ,
+                         skos:Concept ;
+                skos:broader zilf:ZCodeBuiltIns ;
+                skos:inScheme zilf:ZILF_Scheme ;
+                skos:definition """Reads mouse information into table. The table is 4 WORDS (2 bytes) long.
+
+* 0 is Y coordinate
+* 1 is X coordinate
+* 2 is Button bits (host dependent)
+* 3 is Menu (number * 256 + entry)"""@en ;
+                skos:editorialNote "ZILF supports MOUSE-INFO in versions 6-."@en ;
+                skos:example """; Example (from Journey)
+
+<GLOBAL MOUSE-INFO-TBL <TABLE 0 0 0 0>>
+...
+<MOUSE-INFO ,MOUSE-INFO-TBL>"""@en ;
+                skos:historyNote "Zapf syntax: MOUSE-INFO, Inform syntax:read_mouse"@en ;
+                skos:prefLabel "<MOUSE-INFO table>"@en .
+
+
 ###  http://example.org/zilf/MSETG
 zilf:MSETG rdf:type owl:NamedIndividual ,
                     skos:Concept ;
@@ -4602,6 +4623,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:MARGIN ,
                                  zilf:MENU ,
                                  zilf:MOD ,
+                                 zilf:MOUSE-INFO ,
                                  zilf:PICINF ,
                                  zilf:PICSET ,
                                  zilf:POP ,
