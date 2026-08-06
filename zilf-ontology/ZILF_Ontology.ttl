@@ -2455,7 +2455,7 @@ zilf:MOUSE-INFO rdf:type owl:NamedIndividual ,
 <GLOBAL MOUSE-INFO-TBL <TABLE 0 0 0 0>>
 ...
 <MOUSE-INFO ,MOUSE-INFO-TBL>"""@en ;
-                skos:historyNote "Zapf syntax: MOUSE-INFO, Inform syntax:read_mouse"@en ;
+                skos:historyNote "Zapf syntax: MOUSE-INFO, Inform syntax: read_mouse"@en ;
                 skos:prefLabel "<MOUSE-INFO table>"@en .
 
 
