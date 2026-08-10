@@ -2466,6 +2466,12 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### MOUSE-LIMIT
+```zil
+<MOUSE-LIMIT 1>  ;  Mouse constrained to window 1
+```
+
+
 ### PICINF
 ```zil
 <GLOBAL MYPIC <ITABLE 2048 0>>
