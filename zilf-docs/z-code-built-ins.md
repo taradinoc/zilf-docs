@@ -690,6 +690,17 @@ Reads mouse information into table. The table is 4 WORDS (2 bytes) long.
 
 ---
 
+### MOUSE-LIMIT
+**Usage:** `<MOUSE-LIMIT window-number>`
+
+Restricts mouse movement to window-number. If window-number is -1 all restrictions are removed. 1 is the default window-number.
+
+> **Note:** ZILF supports MOUSE-LIMIT in versions 6-.
+
+**History:** Zapf syntax: MOUSE-LIMIT, Inform syntax: mouse_window
+
+---
+
 ### PICINF
 **Usage:** `<PICINF picture-number table>`
 
