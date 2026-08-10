@@ -2459,6 +2459,18 @@ zilf:MOUSE-INFO rdf:type owl:NamedIndividual ,
                 skos:prefLabel "<MOUSE-INFO table>"@en .
 
 
+###  http://example.org/zilf/MOUSE-LIMIT
+zilf:MOUSE-LIMIT rdf:type owl:NamedIndividual ,
+                          skos:Concept ;
+                 skos:broader zilf:ZCodeBuiltIns ;
+                 skos:inScheme zilf:ZILF_Scheme ;
+                 skos:definition "Restricts mouse movement to window-number. If window-number is -1 all restrictions are removed. 1 is the default window-number."@en ;
+                 skos:editorialNote "ZILF supports MOUSE-LIMIT in versions 6-."@en ;
+                 skos:example "<MOUSE-LIMIT 1>  ;  Mouse constrained to window 1"@en ;
+                 skos:historyNote "Zapf syntax: MOUSE-LIMIT, Inform syntax: mouse_window"@en ;
+                 skos:prefLabel "<MOUSE-LIMIT window-number>"@en .
+
+
 ###  http://example.org/zilf/MSETG
 zilf:MSETG rdf:type owl:NamedIndividual ,
                     skos:Concept ;
@@ -4624,6 +4636,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:MENU ,
                                  zilf:MOD ,
                                  zilf:MOUSE-INFO ,
+                                 zilf:MOUSE-LIMIT ,
                                  zilf:PICINF ,
                                  zilf:PICSET ,
                                  zilf:POP ,
