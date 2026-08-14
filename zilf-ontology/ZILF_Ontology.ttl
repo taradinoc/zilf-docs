@@ -2471,6 +2471,21 @@ zilf:MOUSE-LIMIT rdf:type owl:NamedIndividual ,
                  skos:prefLabel "<MOUSE-LIMIT window-number>"@en .
 
 
+###  http://example.org/zilf/MOVE
+zilf:MOVE rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:ZCodeBuiltIns ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition "Move object1 to be the first child of object2. Children of object1 move with it."@en ;
+          skos:editorialNote "ZILF supports MOVE in all versions."@en ;
+          skos:example """<OBJECT ANIMAL>
+<OBJECT CAT>
+<MOVE ,CAT ,ANIMAL>
+<IN? ,CAT ,ANIMAL>  ;  T"""@en ;
+          skos:historyNote "Zapf syntax: MOVE, Inform syntax: insert_obj"@en ;
+          skos:prefLabel "<MOVE object1 object2>"@en .
+
+
 ###  http://example.org/zilf/MSETG
 zilf:MSETG rdf:type owl:NamedIndividual ,
                     skos:Concept ;
@@ -4637,6 +4652,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:MOD ,
                                  zilf:MOUSE-INFO ,
                                  zilf:MOUSE-LIMIT ,
+                                 zilf:MOVE ,
                                  zilf:PICINF ,
                                  zilf:PICSET ,
                                  zilf:POP ,
