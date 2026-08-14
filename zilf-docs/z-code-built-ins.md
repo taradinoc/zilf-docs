@@ -701,6 +701,17 @@ Restricts mouse movement to window-number. If window-number is -1 all restrictio
 
 ---
 
+### MOVE
+**Usage:** `<MOVE object1 object2>`
+
+Move object1 to be the first child of object2. Children of object1 move with it.
+
+> **Note:** ZILF supports MOVE in all versions.
+
+**History:** Zapf syntax: MOVE, Inform syntax: insert_obj
+
+---
+
 ### PICINF
 **Usage:** `<PICINF picture-number table>`
 
