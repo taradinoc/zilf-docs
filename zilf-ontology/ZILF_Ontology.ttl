@@ -5294,6 +5294,22 @@ In version 5, 7 and 8 the rec-spec describes the field where bit 7 is set for wo
                                                          skos:prefLabel "<NEVER-ZAP-TO-SOURCE-DIRECTORY?>"@en .
 
 
+###  http://example.org/zilf/NEXT?
+<http://example.org/zilf/NEXT?> rdf:type owl:NamedIndividual ,
+                                         skos:Concept ;
+                                skos:inScheme zilf:ZILF_Scheme ;
+                                skos:definition "Returns object after object in object-list (sibling). Returns 0 (false) if no object exists."@en ;
+                                skos:editorialNote "ZILF supports NEXT? in all versions."@en ;
+                                skos:example """<OBJECT ANIMAL>
+<OBJECT CAT>
+<OBJECT DOG>
+<MOVE ,CAT ,ANIMAL>
+<MOVE ,DOG ,ANIMAL>
+<=? <NEXT? ,DOG> ,CAT>  ;  T"""@en ;
+                                skos:historyNote "Zapf syntax: NEXT?, Inform syntax: get_sibling"@en ;
+                                skos:prefLabel "<NEXT? object>"@en .
+
+
 ###  http://example.org/zilf/OBLIST?
 <http://example.org/zilf/OBLIST?> rdf:type owl:NamedIndividual ,
                                            skos:Concept ;
