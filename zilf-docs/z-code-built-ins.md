@@ -712,6 +712,17 @@ Move object1 to be the first child of object2. Children of object1 move with it.
 
 ---
 
+### NEXT?
+**Usage:** `<NEXT? object>`
+
+Returns object after object in object-list (sibling). Returns 0 (false) if no object exists.
+
+> **Note:** ZILF supports NEXT? in all versions.
+
+**History:** Zapf syntax: NEXT?, Inform syntax: get_sibling
+
+---
+
 ### PICINF
 **Usage:** `<PICINF picture-number table>`
 
