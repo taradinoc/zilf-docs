@@ -2481,6 +2481,17 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### NEXT?
+```zil
+<OBJECT ANIMAL>
+<OBJECT CAT>
+<OBJECT DOG>
+<MOVE ,CAT ,ANIMAL>
+<MOVE ,DOG ,ANIMAL>
+<=? <NEXT? ,DOG> ,CAT>  ;  T
+```
+
+
 ### PICINF
 ```zil
 <GLOBAL MYPIC <ITABLE 2048 0>>
