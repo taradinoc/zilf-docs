@@ -2492,6 +2492,16 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### NEXTP
+```zil
+<OBJECT MYOBJ (FOO 123) (BAR 456)>
+
+<=? <NEXTP ,MYOBJ 0> P?FOO>  ;  T
+<=? <NEXTP ,MYOBJ P?FOO> P?BAR>  ;  T
+<NEXTP ,MYOBJ P?BAR>  ;  0 (false)
+```
+
+
 ### PICINF
 ```zil
 <GLOBAL MYPIC <ITABLE 2048 0>>
