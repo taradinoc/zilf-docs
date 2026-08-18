@@ -2551,6 +2551,22 @@ zilf:NEXT rdf:type owl:NamedIndividual ,
           skos:prefLabel "<NEXT asoc>"@en .
 
 
+###  http://example.org/zilf/NEXTP
+zilf:NEXTP rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:ZCodeBuiltIns ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Returns the property that comes after property on the object. Returns 0 if there are no more properties after property. If property is 0 then NEXTP returns first property on object."@en ;
+           skos:editorialNote "ZILF supports NEXTP in all versions."@en ;
+           skos:example """<OBJECT MYOBJ (FOO 123) (BAR 456)>
+
+<=? <NEXTP ,MYOBJ 0> P?FOO>  ;  T
+<=? <NEXTP ,MYOBJ P?FOO> P?BAR>  ;  T
+<NEXTP ,MYOBJ P?BAR>  ;  0 (false)"""@en ;
+           skos:historyNote "Zapf syntax: NEXTP, Inform syntax: get_next_prop"@en ;
+           skos:prefLabel "<NEXTP object property>"@en .
+
+
 ###  http://example.org/zilf/NOT
 zilf:NOT rdf:type owl:NamedIndividual ,
                   skos:Concept ;
@@ -4653,6 +4669,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:MOUSE-INFO ,
                                  zilf:MOUSE-LIMIT ,
                                  zilf:MOVE ,
+                                 zilf:NEXTP ,
                                  zilf:PICINF ,
                                  zilf:PICSET ,
                                  zilf:POP ,
