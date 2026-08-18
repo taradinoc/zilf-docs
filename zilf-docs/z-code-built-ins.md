@@ -723,6 +723,17 @@ Returns object after object in object-list (sibling). Returns 0 (false) if no ob
 
 ---
 
+### NEXTP
+**Usage:** `<NEXTP object property>`
+
+Returns the property that comes after property on the object. Returns 0 if there are no more properties after property. If property is 0 then NEXTP returns first property on object.
+
+> **Note:** ZILF supports NEXTP in all versions.
+
+**History:** Zapf syntax: NEXTP, Inform syntax: get_next_prop
+
+---
+
 ### PICINF
 **Usage:** `<PICINF picture-number table>`
 
