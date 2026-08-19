@@ -734,6 +734,17 @@ Returns the property that comes after property on the object. Returns 0 if there
 
 ---
 
+### ORIGINAL?
+**Usage:** `<ORIGINAL?>`
+
+Predicate that tests if the game disc is an original. Almost all modern interpreters always return true.
+
+> **Note:** ZILF supports ORIGINAL? in versions 5-.
+
+**History:** Zapf syntax: ORIGINAL?, Inform syntax: piracy
+
+---
+
 ### PICINF
 **Usage:** `<PICINF picture-number table>`
 
