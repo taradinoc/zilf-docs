@@ -4713,7 +4713,8 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  <http://example.org/zilf/IN?> ,
                                  <http://example.org/zilf/INTBL?> ,
                                  <http://example.org/zilf/LESS?> ,
-                                 <http://example.org/zilf/NEXT?> .
+                                 <http://example.org/zilf/NEXT?> ,
+                                 <http://example.org/zilf/ORIGINAL?> .
 
 
 ###  http://example.org/zilf/ZGET
@@ -5400,6 +5401,17 @@ The atom must be REVERSE-DEFINED to force objects to be linked in the reverse or
 
 By default, if ORDER-TREE? is not used, the order is the same as REVERSE-DEFINED except for the first defined child, which remains the first object linked. That is, the child of an object X is the first object in the source code whose definition contains (LOC X); the sibling of that child is the last object that contains (LOC X); the sibling of that child in turn is the next to last object that contains (LOC X); and so on."""@en ;
                                       skos:prefLabel "<ORDER-TREE? atom>"@en .
+
+
+###  http://example.org/zilf/ORIGINAL?
+<http://example.org/zilf/ORIGINAL?> rdf:type owl:NamedIndividual ,
+                                             skos:Concept ;
+                                    skos:broader zilf:ZCodeBuiltIns ;
+                                    skos:inScheme zilf:ZILF_Scheme ;
+                                    skos:definition "Predicate that tests if the game disc is an original. Almost all modern interpreters always return true."@en ;
+                                    skos:editorialNote "ZILF supports ORIGINAL? in versions 5-."@en ;
+                                    skos:historyNote "Zapf syntax: ORIGINAL?, Inform syntax: piracy"@en ;
+                                    skos:prefLabel "<ORIGINAL?>"@en .
 
 
 ###  http://example.org/zilf/STRUCTURED?
