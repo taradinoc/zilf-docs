@@ -2525,6 +2525,14 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### PRINTB
+```zil
+<OBJECT MYOBJECT (SYNONYM HELLO)>
+
+<PRINTB <GETP ,MYOBJECT ,P?SYNONYM>>  ;  "hello"
+```
+
+
 ### PTSIZE
 ```zil
 <OBJECT MYOBJECT (FOO 1 2 3)>
