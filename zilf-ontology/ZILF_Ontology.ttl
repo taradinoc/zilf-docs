@@ -2972,6 +2972,20 @@ zilf:PRINT-MANY rdf:type owl:NamedIndividual ,
                 skos:prefLabel "<PRINT-MANY channel printer items ...>"@en .
 
 
+###  http://example.org/zilf/PRINTB
+zilf:PRINTB rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "Prints the unpacked-string from the dynamic or static memory (referenced by an unpacked address) that is pointed to by string. String can be a direct address, a local or global variable, or come from the stack."@en ;
+            skos:editorialNote "ZILF supports PRINTB in all versions."@en ;
+            skos:example """<OBJECT MYOBJECT (SYNONYM HELLO)>
+
+<PRINTB <GETP ,MYOBJECT ,P?SYNONYM>>  ;  \"hello\""""@en ;
+            skos:historyNote "Zapf syntax: PRINTB, Inform syntax: print_addr"@en ;
+            skos:prefLabel "<PRINTB string>"@en .
+
+
 ###  http://example.org/zilf/PRINTTYPE
 zilf:PRINTTYPE rdf:type owl:NamedIndividual ,
                         skos:Concept ;
@@ -4673,6 +4687,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:PICINF ,
                                  zilf:PICSET ,
                                  zilf:POP ,
+                                 zilf:PRINTB ,
                                  zilf:PTSIZE ,
                                  zilf:PUSH ,
                                  zilf:PUT ,
