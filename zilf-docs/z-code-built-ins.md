@@ -778,6 +778,17 @@ Z-code built-in function used inside ROUTINE that pops a value from a stack. If 
 
 ---
 
+### PRINTB
+**Usage:** `<PRINTB string>`
+
+Prints the unpacked-string from the dynamic or static memory (referenced by an unpacked address) that is pointed to by string. String can be a direct address, a local or global variable, or come from the stack.
+
+> **Note:** ZILF supports PRINTB in all versions.
+
+**History:** Zapf syntax: PRINTB, Inform syntax: print_addr
+
+---
+
 ### PTSIZE
 **Usage:** `<PTSIZE property-value>`
 
