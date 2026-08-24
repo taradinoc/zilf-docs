@@ -2986,6 +2986,18 @@ zilf:PRINTB rdf:type owl:NamedIndividual ,
             skos:prefLabel "<PRINTB string>"@en .
 
 
+###  http://example.org/zilf/PRINTC
+zilf:PRINTC rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "Print ASCII character."@en ;
+            skos:editorialNote "ZILF supports PRINTC in all versions."@en ;
+            skos:example "<PRINTC 65>  ;  A"@en ;
+            skos:historyNote "Zapf syntax: PRINTC, Inform syntax: print_char"@en ;
+            skos:prefLabel "<PRINTC character>"@en .
+
+
 ###  http://example.org/zilf/PRINTTYPE
 zilf:PRINTTYPE rdf:type owl:NamedIndividual ,
                         skos:Concept ;
@@ -4688,6 +4700,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:PICSET ,
                                  zilf:POP ,
                                  zilf:PRINTB ,
+                                 zilf:PRINTC ,
                                  zilf:PTSIZE ,
                                  zilf:PUSH ,
                                  zilf:PUT ,
