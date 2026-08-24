@@ -789,6 +789,17 @@ Prints the unpacked-string from the dynamic or static memory (referenced by an u
 
 ---
 
+### PRINTC
+**Usage:** `<PRINTC character>`
+
+Print ASCII character.
+
+> **Note:** ZILF supports PRINTC in all versions.
+
+**History:** Zapf syntax: PRINTC, Inform syntax: print_char
+
+---
+
 ### PTSIZE
 **Usage:** `<PTSIZE property-value>`
 
