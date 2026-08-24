@@ -2533,6 +2533,12 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### PRINTC
+```zil
+<PRINTC 65>  ;  A
+```
+
+
 ### PTSIZE
 ```zil
 <OBJECT MYOBJECT (FOO 1 2 3)>
