@@ -2539,6 +2539,14 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### PRINTD
+```zil
+<GLOBAL MYOBJECT (DESC "sword">
+
+<PRINTD ,MYOBJECT>  ;  "sword"
+```
+
+
 ### PTSIZE
 ```zil
 <OBJECT MYOBJECT (FOO 1 2 3)>
