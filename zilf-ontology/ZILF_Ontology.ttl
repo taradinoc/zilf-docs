@@ -2998,6 +2998,20 @@ zilf:PRINTC rdf:type owl:NamedIndividual ,
             skos:prefLabel "<PRINTC character>"@en .
 
 
+###  http://example.org/zilf/PRINTD
+zilf:PRINTD rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "Print description of object."@en ;
+            skos:editorialNote "ZILF supports PRINTD in all versions."@en ;
+            skos:example """<GLOBAL MYOBJECT (DESC \"sword\">
+
+<PRINTD ,MYOBJECT>  ;  \"sword\""""@en ;
+            skos:historyNote "Zapf syntax: PRINTD, Inform syntax: print_obj"@en ;
+            skos:prefLabel "<PRINTD object>"@en .
+
+
 ###  http://example.org/zilf/PRINTTYPE
 zilf:PRINTTYPE rdf:type owl:NamedIndividual ,
                         skos:Concept ;
@@ -4701,6 +4715,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:POP ,
                                  zilf:PRINTB ,
                                  zilf:PRINTC ,
+                                 zilf:PRINTD ,
                                  zilf:PTSIZE ,
                                  zilf:PUSH ,
                                  zilf:PUT ,
