@@ -800,6 +800,17 @@ Print ASCII character.
 
 ---
 
+### PRINTD
+**Usage:** `<PRINTD object>`
+
+Print description of object.
+
+> **Note:** ZILF supports PRINTD in all versions.
+
+**History:** Zapf syntax: PRINTD, Inform syntax: print_obj
+
+---
+
 ### PTSIZE
 **Usage:** `<PTSIZE property-value>`
 
