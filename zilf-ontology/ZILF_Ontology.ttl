@@ -3019,7 +3019,6 @@ zilf:PRINTF rdf:type owl:NamedIndividual ,
             skos:inScheme zilf:ZILF_Scheme ;
             skos:definition "Print a formatted table. Each line starts with a WORD that is the number of characters that follows. Last byte in each line is 0."@en ;
             skos:editorialNote "ZILF supports PRINTF in versions 6-."@en ;
-            skos:example "" ;
             skos:historyNote "Zapf syntax: PRINTF, Inform syntax: print_form"@en ;
             skos:prefLabel "<PRINTF table>"@en .
 
