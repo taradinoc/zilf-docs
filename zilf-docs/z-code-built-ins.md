@@ -811,6 +811,17 @@ Print description of object.
 
 ---
 
+### PRINTF
+**Usage:** `<PRINTF table>`
+
+Print a formatted table. Each line starts with a WORD that is the number of characters that follows. Last byte in each line is 0.
+
+> **Note:** ZILF supports PRINTF in versions 6-.
+
+**History:** Zapf syntax: PRINTF, Inform syntax: print_form
+
+---
+
 ### PTSIZE
 **Usage:** `<PTSIZE property-value>`
 
