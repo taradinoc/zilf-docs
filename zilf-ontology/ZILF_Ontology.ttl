@@ -3023,6 +3023,18 @@ zilf:PRINTF rdf:type owl:NamedIndividual ,
             skos:prefLabel "<PRINTF table>"@en .
 
 
+###  http://example.org/zilf/PRINTI
+zilf:PRINTI rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "Print in-line string. The string is stored in-line with the code, immediately following the instruction."@en ;
+            skos:editorialNote "ZILF supports PRINTI in all versions."@en ;
+            skos:example "<PRINTI \"Hello, sailor!\">  ;  \"Hello, sailor!\""@en ;
+            skos:historyNote "Zapf syntax: PRINTI, Inform syntax: print"@en ;
+            skos:prefLabel "<PRINTI string>"@en .
+
+
 ###  http://example.org/zilf/PRINTTYPE
 zilf:PRINTTYPE rdf:type owl:NamedIndividual ,
                         skos:Concept ;
@@ -4728,6 +4740,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:PRINTC ,
                                  zilf:PRINTD ,
                                  zilf:PRINTF ,
+                                 zilf:PRINTI ,
                                  zilf:PTSIZE ,
                                  zilf:PUSH ,
                                  zilf:PUT ,
