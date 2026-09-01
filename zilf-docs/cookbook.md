@@ -2547,6 +2547,12 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### PRINTI
+```zil
+<PRINTI "Hello, sailor!">  ;  "Hello, sailor!"
+```
+
+
 ### PTSIZE
 ```zil
 <OBJECT MYOBJECT (FOO 1 2 3)>
