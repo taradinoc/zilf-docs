@@ -822,6 +822,17 @@ Print a formatted table. Each line starts with a WORD that is the number of char
 
 ---
 
+### PRINTI
+**Usage:** `<PRINTI string>`
+
+Print in-line string. The string is stored in-line with the code, immediately following the instruction.
+
+> **Note:** ZILF supports PRINTI in all versions.
+
+**History:** Zapf syntax: PRINTI, Inform syntax: print
+
+---
+
 ### PTSIZE
 **Usage:** `<PTSIZE property-value>`
 
