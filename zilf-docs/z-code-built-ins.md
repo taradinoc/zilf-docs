@@ -833,6 +833,17 @@ Print in-line string. The string is stored in-line with the code, immediately fo
 
 ---
 
+### PRINTN
+**Usage:** `<PRINTN number>`
+
+Print number.
+
+> **Note:** ZILF supports PRINTN in all versions.
+
+**History:** Zapf syntax: PRINTN, Inform syntax: print_num
+
+---
+
 ### PTSIZE
 **Usage:** `<PTSIZE property-value>`
 
