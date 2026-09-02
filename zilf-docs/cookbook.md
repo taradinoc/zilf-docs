@@ -2553,6 +2553,13 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### PRINTN
+```zil
+<PRINTN <+ 1 3>>  ;  4
+<PRINTN -42>  ;  -42
+```
+
+
 ### PTSIZE
 ```zil
 <OBJECT MYOBJECT (FOO 1 2 3)>
