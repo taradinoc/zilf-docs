@@ -2560,6 +2560,12 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### PRINTR
+```zil
+<PRINTR "Hello, Sailor!">  ;  "Hello, sailor!\n"
+```
+
+
 ### PTSIZE
 ```zil
 <OBJECT MYOBJECT (FOO 1 2 3)>
