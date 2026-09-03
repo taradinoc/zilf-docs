@@ -844,6 +844,17 @@ Print number.
 
 ---
 
+### PRINTR
+**Usage:** `<PRINTR string>`
+
+The same as PRINTI with the addition that PRINTR prints the string and then executes a CRLF followed by a RTRUE.
+
+> **Note:** ZILF supports PRINTR in all versions.
+
+**History:** Zapf syntax: PRINTR, Inform syntax: print_ret
+
+---
+
 ### PTSIZE
 **Usage:** `<PTSIZE property-value>`
 
