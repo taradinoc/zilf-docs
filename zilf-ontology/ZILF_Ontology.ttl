@@ -3048,6 +3048,18 @@ zilf:PRINTN rdf:type owl:NamedIndividual ,
             skos:prefLabel "<PRINTN number>"@en .
 
 
+###  http://example.org/zilf/PRINTR
+zilf:PRINTR rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "The same as PRINTI with the addition that PRINTR prints the string and then executes a CRLF followed by a RTRUE."@en ;
+            skos:editorialNote "ZILF supports PRINTR in all versions."@en ;
+            skos:example "<PRINTR \"Hello, Sailor!\">  ;  \"Hello, sailor!\\n\""@en ;
+            skos:historyNote "Zapf syntax: PRINTR, Inform syntax: print_ret"@en ;
+            skos:prefLabel "<PRINTR string>"@en .
+
+
 ###  http://example.org/zilf/PRINTTYPE
 zilf:PRINTTYPE rdf:type owl:NamedIndividual ,
                         skos:Concept ;
@@ -4755,6 +4767,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:PRINTF ,
                                  zilf:PRINTI ,
                                  zilf:PRINTN ,
+                                 zilf:PRINTR ,
                                  zilf:PTSIZE ,
                                  zilf:PUSH ,
                                  zilf:PUT ,
