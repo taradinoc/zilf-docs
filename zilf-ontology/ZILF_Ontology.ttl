@@ -3060,6 +3060,22 @@ zilf:PRINTR rdf:type owl:NamedIndividual ,
             skos:prefLabel "<PRINTR string>"@en .
 
 
+###  http://example.org/zilf/PRINTT
+zilf:PRINTT rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "Print table (string) in rectangle defined by width and height. Default height is 1. If skip is given then that number of characters is skipped between lines."@en ;
+            skos:editorialNote "ZILF supports PRINTT in versions 5-."@en ;
+            skos:example """<GLOBAL MYTEXT <TABLE (STRING) \"hansprestige\">>
+
+<PRINTT ,MYTEXT 6>  ;   \"hanspr\\n\"
+<PRINTT ,MYTEXT 4 3>  ;  \"hans\\npres\\ntige\\n\"
+<PRINTT ,MYTEXT 3 3 1>  ;  \"han\\npre\\ntig\\n\""""@en ;
+            skos:historyNote "Zapf syntax: PRINTT, Inform syntax: print_table"@en ;
+            skos:prefLabel "<PRINTT table width [height] [skip]>"@en .
+
+
 ###  http://example.org/zilf/PRINTTYPE
 zilf:PRINTTYPE rdf:type owl:NamedIndividual ,
                         skos:Concept ;
@@ -4768,6 +4784,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:PRINTI ,
                                  zilf:PRINTN ,
                                  zilf:PRINTR ,
+                                 zilf:PRINTT ,
                                  zilf:PTSIZE ,
                                  zilf:PUSH ,
                                  zilf:PUT ,
