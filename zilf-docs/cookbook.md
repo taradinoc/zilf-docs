@@ -2566,6 +2566,16 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### PRINTT
+```zil
+<GLOBAL MYTEXT <TABLE (STRING) "hansprestige">>
+
+<PRINTT ,MYTEXT 6>  ;   "hanspr\n"
+<PRINTT ,MYTEXT 4 3>  ;  "hans\npres\ntige\n"
+<PRINTT ,MYTEXT 3 3 1>  ;  "han\npre\ntig\n"
+```
+
+
 ### PTSIZE
 ```zil
 <OBJECT MYOBJECT (FOO 1 2 3)>
