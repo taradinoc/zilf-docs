@@ -855,6 +855,17 @@ The same as PRINTI with the addition that PRINTR prints the string and then exec
 
 ---
 
+### PRINTT
+**Usage:** `<PRINTT table width [height] [skip]>`
+
+Print table (string) in rectangle defined by width and height. Default height is 1. If skip is given then that number of characters is skipped between lines.
+
+> **Note:** ZILF supports PRINTT in versions 5-.
+
+**History:** Zapf syntax: PRINTT, Inform syntax: print_table
+
+---
+
 ### PTSIZE
 **Usage:** `<PTSIZE property-value>`
 
