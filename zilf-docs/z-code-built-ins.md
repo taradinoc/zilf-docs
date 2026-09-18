@@ -866,6 +866,17 @@ Print table (string) in rectangle defined by width and height. Default height is
 
 ---
 
+### PRINTU
+**Usage:** `<PRINTU number>`
+
+Print unicode-character number.
+
+> **Note:** ZILF supports PRINTU in versions 5-.
+
+**History:** Zapf syntax: PRINTU, Inform syntax: print_unicode
+
+---
+
 ### PTSIZE
 **Usage:** `<PTSIZE property-value>`
 
