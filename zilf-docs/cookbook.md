@@ -2576,6 +2576,13 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### PRINTU
+```zil
+<PRINTU 65>  ;  A
+<PRINTU 196>  ;  Ä
+```
+
+
 ### PTSIZE
 ```zil
 <OBJECT MYOBJECT (FOO 1 2 3)>
