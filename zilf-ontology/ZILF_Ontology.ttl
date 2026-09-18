@@ -3130,6 +3130,19 @@ See APPLYTYPE, EVALTYPE and NEWTYPE."""@en ;
                skos:prefLabel "<PRINTTYPE atom [handler]>"@en .
 
 
+###  http://example.org/zilf/PRINTU
+zilf:PRINTU rdf:type owl:NamedIndividual ,
+                     skos:Concept ;
+            skos:broader zilf:ZCodeBuiltIns ;
+            skos:inScheme zilf:ZILF_Scheme ;
+            skos:definition "Print unicode-character number."@en ;
+            skos:editorialNote "ZILF supports PRINTU in versions 5-."@en ;
+            skos:example """<PRINTU 65>  ;  A
+<PRINTU 196>  ;  Ä"""@en ;
+            skos:historyNote "Zapf syntax: PRINTU, Inform syntax: print_unicode"@en ;
+            skos:prefLabel "<PRINTU number>"@en .
+
+
 ###  http://example.org/zilf/PROG
 zilf:PROG rdf:type owl:NamedIndividual ,
                    skos:Concept ;
@@ -4785,6 +4798,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:PRINTN ,
                                  zilf:PRINTR ,
                                  zilf:PRINTT ,
+                                 zilf:PRINTU ,
                                  zilf:PTSIZE ,
                                  zilf:PUSH ,
                                  zilf:PUT ,
