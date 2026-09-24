@@ -3582,9 +3582,8 @@ Version 5 -,
 * Byte 2-3, Address to first word in dictionary (0 if word is not in it)
 * Byte 4, Length of first word
 * Byte 5, Start position (in text) of first word
-* Byte 6-9, Second word
-..."""@en ;
-          skos:editorialNote "ZILF supports READ in all versions with the following additional syntax support in versions 1-3: <READ text parse>"@en ;
+* Byte 6-9, Second word"""@en ;
+          skos:editorialNote "`<READ text parse>`  ;  Versions 1-3"@en ;
           skos:example """; See The Inform Designer’s Manual (ch. §2.5, p. 44-46) for more details about READ.
 <GLOBAL READBUF <ITABLE BYTE 63>> 
 <GLOBAL PARSEBUF <ITABLE BYTE 28>> 
