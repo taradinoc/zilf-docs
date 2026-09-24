@@ -2628,6 +2628,31 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### READ
+```zil
+; See The Inform Designer’s Manual (ch. §2.5, p. 44-46) for more details about READ.
+<GLOBAL READBUF <ITABLE BYTE 63>> 
+<GLOBAL PARSEBUF <ITABLE BYTE 28>> 
+<ROUTINE READ-TEST ("AUX" WORDS WLEN WSTART WEND) 
+<PUTB ,READBUF 0 60> 
+<PUTB ,PARSEBUF 0 6> 
+<READ ,READBUF ,PARSEBUF> 
+<SET WORDS <GETB ,PARSEBUF 1>>  ;"# of parsed words" 
+<DO (I 1 .WORDS) 
+  <SET WLEN <GETB .PARSEBUF <* .I 4>>> 
+  <SET WSTART <GETB .PARSEBUF <+ <* .I 4> 1>>> 
+  <SET WEND <+ .WSTART <- .WLEN 1>>> 
+  <TELL "word " N .I " is " N .WLEN " char long. "> 
+  <TELL "The word is '"> 
+  <DO (J .WSTART .WEND) 
+    <PRINTC <GETB .READBUF .J>> ;"To lcase!" 
+  > 
+  <TELL "'." CR> 
+> 
+>
+```
+
+
 ### REMOVE
 ```zil
 <OBJECT ANIMAL>
