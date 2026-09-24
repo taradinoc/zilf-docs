@@ -958,6 +958,43 @@ Z-code built-in function that returns a random number between 1 and range. If ra
 
 ---
 
+### READ
+**Usage:** `<READ text [parse] [time] [routine]>  ;  "Versions 5-"`
+
+**Alternative Usage:** `<READ text parse [time] [routine]>  ;  "Version 4"`
+
+Read text from the keyboard and parse it. Result is stored in two byte-tables. Byte 0 in text must contain the max-size of the buffer and if parse is supplied, byte 0 of it must contain a max number of words that will be parsed.
+
+In version 5-, byte 1 should be 0 before READ begins, otherwise READ appends characters starting from value in byte 1.
+
+After READ, text contains:
+
+Version 1 - 4,
+
+* Byte 0, Max number of chars read into the buffer
+* Byte 1-, The typed chars all converted to lowercase 
+
+Version 5 -,
+
+* Byte 0, Max number of chars read into the buffer
+* Byte 1, Actual number of chars read into the buffer 
+* Byte 2-, The typed chars all converted to lowercase
+
+`parse` contains: 
+
+* Byte 0, Max number of words parsed
+* Byte 1, Actual number of words parsed
+* Byte 2-3, Address to first word in dictionary (0 if word is not in it)
+* Byte 4, Length of first word
+* Byte 5, Start position (in text) of first word
+* Byte 6-9, Second word
+
+> **Note:** `<READ text parse>`  ;  Versions 1-3
+
+**History:** Zapf syntax: READ, Inform syntax: aread / sread
+
+---
+
 ### REMOVE
 **Usage:** `<REMOVE object>`
 
