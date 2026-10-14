@@ -1006,6 +1006,17 @@ Z-code built-in function that removes object from parent. To reattach it to anot
 
 ---
 
+### RESTART
+**Usage:** `<RESTART>`
+
+Restarts the game. No questions asked. The only things that survive a restart are bit 0 and bit 1 of Flags 2 in the header (setting for transcribing and monospace).
+
+> **Note:** ZILF supports RESTART in all versions.
+
+**History:** Zapf syntax: RESTART, Inform syntax: restart
+
+---
+
 ### RFALSE
 **Usage:** `<RFALSE>`
 
