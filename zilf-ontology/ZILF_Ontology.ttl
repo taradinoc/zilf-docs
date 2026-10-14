@@ -3725,6 +3725,17 @@ Also see BACK, LENGTH, NTH, PUT, SUBSTRUC and TOP."""@en ;
           skos:prefLabel "<REST structure [count]>"@en .
 
 
+###  http://example.org/zilf/RESTART
+zilf:RESTART rdf:type owl:NamedIndividual ,
+                      skos:Concept ;
+             skos:broader zilf:ZCodeBuiltIns ;
+             skos:inScheme zilf:ZILF_Scheme ;
+             skos:definition "Restarts the game. No questions asked. The only things that survive a restart are bit 0 and bit 1 of Flags 2 in the header (setting for transcribing and monospace)."@en ;
+             skos:editorialNote "ZILF supports RESTART in all versions."@en ;
+             skos:historyNote "Zapf syntax: RESTART, Inform syntax: restart"@en ;
+             skos:prefLabel "<RESTART>"@en .
+
+
 ###  http://example.org/zilf/RETURN
 zilf:RETURN rdf:type owl:NamedIndividual ,
                      skos:Concept ;
@@ -4864,6 +4875,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:RANDOM ,
                                  zilf:READ ,
                                  zilf:REMOVE ,
+                                 zilf:RESTART ,
                                  zilf:RFALSE ,
                                  zilf:RFATAL ,
                                  zilf:RSTACK ,
