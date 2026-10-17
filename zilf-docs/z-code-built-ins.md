@@ -1017,6 +1017,24 @@ Restarts the game. No questions asked. The only things that survive a restart ar
 
 ---
 
+### RESTORE
+**Usage:** `<RESTORE>  ;  "Versions 1-4"`
+
+**Alternative Usage:** `<RESTORE [table] [bytes] [filename]> ; "Versions 5-"`
+
+RESTORE a game to a previously saved state. All questions about filename and path are asked by the interpreter.
+
+* If `RESTORE` fails, game execution continues with the next statement after RESTORE.
+* If `RESTORE` is successful, game execution continues from where the SAVE was issued (SAVE returns 2 in this case).
+
+See The Inform Designer’s Manual (ch. §42, p. 319) and The Z-machine Standards Document for a description about how to SAVE and RESTORE auxiliary files.
+
+> **Note:** ZILF supports RESTORE in all versions.
+
+**History:** Zapf syntax: RESTORE, Inform syntax: restore
+
+---
+
 ### RFALSE
 **Usage:** `<RFALSE>`
 
