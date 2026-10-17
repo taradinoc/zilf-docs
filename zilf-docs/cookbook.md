@@ -2661,6 +2661,21 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### RESTORE
+```zil
+<ROUTINE SAVE-GAME ("AUX" RESULT)
+  <SET RESULT <SAVE>>
+  <COND (<=? .RESULT 0> <TELL "Save failed." CR>)>
+  <COND (<=? .RESULT 1> <TELL "Save successful." CR>)>
+  <COND (<=? .RESULT 2> <TELL "Restore successful." CR>)>
+>
+<ROUTINE RESTORE-GAME ()
+  <RESTORE>
+  <TELL "Restore failed." CR>
+>
+```
+
+
 ### RFALSE
 ```zil
 <RFALSE>
