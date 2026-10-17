@@ -3744,9 +3744,8 @@ zilf:RESTORE rdf:type owl:NamedIndividual ,
              skos:altLabel "<RESTORE [table] [bytes] [filename]> ; \"Versions 5-\""@en ;
              skos:definition """RESTORE a game to a previously saved state. All questions about filename and path are asked by the interpreter.
 
-If RESTORE fails, game execution continues with the next statement after RESTORE.
-
-If RESTORE is successful, game execution continues from where the SAVE was issued (SAVE returns 2 in this case).
+* If `RESTORE` fails, game execution continues with the next statement after RESTORE.
+* If `RESTORE` is successful, game execution continues from where the SAVE was issued (SAVE returns 2 in this case).
 
 See The Inform Designer’s Manual (ch. §42, p. 319) and The Z-machine Standards Document for a description about how to SAVE and RESTORE auxiliary files."""@en ;
              skos:editorialNote "ZILF supports RESTORE in all versions."@en ;
