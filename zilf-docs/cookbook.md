@@ -2789,6 +2789,13 @@ MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR
 ```
 
 
+### T?
+```zil
+<T? <=? 1 1>>  ;  True  
+<T? <=? 1 2>>  ;  False
+```
+
+
 ### THROW
 ```zil
 <ROUTINE TEST-CATCH ("AUX" X)
