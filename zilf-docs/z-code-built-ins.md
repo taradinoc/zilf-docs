@@ -1195,6 +1195,13 @@ See SCREEN for example on how to use SPLIT.
 
 ---
 
+### T?
+**Usage:** `<T? expression>`
+
+Predicate. Test if expression evaluates to true ( not 0).
+
+---
+
 ### THROW
 **Usage:** `<THROW value stack-frame>`
 
