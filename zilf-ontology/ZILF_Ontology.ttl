@@ -4937,7 +4937,8 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  <http://example.org/zilf/INTBL?> ,
                                  <http://example.org/zilf/LESS?> ,
                                  <http://example.org/zilf/NEXT?> ,
-                                 <http://example.org/zilf/ORIGINAL?> .
+                                 <http://example.org/zilf/ORIGINAL?> ,
+                                 <http://example.org/zilf/T?> .
 
 
 ###  http://example.org/zilf/ZGET
@@ -5701,6 +5702,17 @@ By default, if ORDER-TREE? is not used, the order is the same as REVERSE-DEFINED
 <GLOBAL X 5>
 <ROUTINE GO () <TELL N .X>>"""@en ;
                                              skos:prefLabel "<SUPPRESS-WARNINGS? all | none | codes ...>"@en .
+
+
+###  http://example.org/zilf/T?
+<http://example.org/zilf/T?> rdf:type owl:NamedIndividual ,
+                                      skos:Concept ;
+                             skos:broader zilf:ZCodeBuiltIns ;
+                             skos:inScheme zilf:ZILF_Scheme ;
+                             skos:definition "Predicate. Test if expression evaluates to true ( not 0)."@en ;
+                             skos:example """<T? <=? 1 1>>  ;  True  
+<T? <=? 1 2>>  ;  False"""@en ;
+                             skos:prefLabel "<T? expression>"@en .
 
 
 ###  http://example.org/zilf/TYPE?
