@@ -1202,6 +1202,23 @@ Predicate. Test if expression evaluates to true ( not 0).
 
 ---
 
+### TELL
+**Usage:** `<TELL token-commands ...>`
+
+Print formatted text to screen. There is a set built-in tokens that can be replaced with TELL-TOKENS or expanded with ADD-TELL-TOKENS.
+
+The built-in tokens are:
+
+| Pattern | Form | Description |
+|---|---|---|
+| (CR CRLF) | `<CRLF>` | Print CR |
+| D * | `<PRINTD .X>` | Print object-description |
+| N * | `<PRINTN .X>` | Print number |
+| C * | `<PRINTC .X>` | Print character |
+| B * | `<PRINTB .X>` | Print unpacked-string |
+
+---
+
 ### THROW
 **Usage:** `<THROW value stack-frame>`
 
