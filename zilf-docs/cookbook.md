@@ -2796,6 +2796,12 @@ MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR
 ```
 
 
+### TELL
+```zil
+<TELL "You have " N ,SCORE " points." CR>  ;  "You have 42 points.\n"
+```
+
+
 ### THROW
 ```zil
 <ROUTINE TEST-CATCH ("AUX" X)
