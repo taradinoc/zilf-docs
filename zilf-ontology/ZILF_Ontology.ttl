@@ -4334,6 +4334,26 @@ The flag LENGTH is implied in LTABLE and PLTABLE. The flag PURE is implied in PT
            skos:prefLabel "<TABLE [(flags ...)] values ...>"@en .
 
 
+###  http://example.org/zilf/TELL
+zilf:TELL rdf:type owl:NamedIndividual ,
+                   skos:Concept ;
+          skos:broader zilf:ZCodeBuiltIns ;
+          skos:inScheme zilf:ZILF_Scheme ;
+          skos:definition """Print formatted text to screen. There is a set built-in tokens that can be replaced with TELL-TOKENS or expanded with ADD-TELL-TOKENS.
+
+The built-in tokens are:
+
+| Pattern | Form | Description |
+|---|---|---|
+| (CR CRLF) | `<CRLF>` | Print CR |
+| D * | `<PRINTD .X>` | Print object-description |
+| N * | `<PRINTN .X>` | Print number |
+| C * | `<PRINTC .X>` | Print character |
+| B * | `<PRINTB .X>` | Print unpacked-string |""" ;
+          skos:example "<TELL \"You have \" N ,SCORE \" points.\" CR>  ;  \"You have 42 points.\\n\""@en ;
+          skos:prefLabel "<TELL token-commands ...>"@en .
+
+
 ###  http://example.org/zilf/TELL-TOKENS
 zilf:TELL-TOKENS rdf:type owl:NamedIndividual ,
                           skos:Concept ;
@@ -4916,6 +4936,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:SHIFT ,
                                  zilf:SOUND ,
                                  zilf:SPLIT ,
+                                 zilf:TELL ,
                                  zilf:THROW ,
                                  zilf:USL ,
                                  zilf:VALUE ,
