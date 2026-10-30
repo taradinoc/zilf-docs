@@ -4349,7 +4349,7 @@ The built-in tokens are:
 | D * | `<PRINTD .X>` | Print object-description |
 | N * | `<PRINTN .X>` | Print number |
 | C * | `<PRINTC .X>` | Print character |
-| B * | `<PRINTB .X>` | Print unpacked-string |""" ;
+| B * | `<PRINTB .X>` | Print unpacked-string |"""@en ;
           skos:example "<TELL \"You have \" N ,SCORE \" points.\" CR>  ;  \"You have 42 points.\\n\""@en ;
           skos:prefLabel "<TELL token-commands ...>"@en .
 
@@ -4749,6 +4749,35 @@ The different part-of-speech and first definitions have all global values define
          skos:prefLabel "<VOC string [part-of-speech]>"@en .
 
 
+###  http://example.org/zilf/WINATTR
+zilf:WINATTR rdf:type owl:NamedIndividual ,
+                      skos:Concept ;
+             skos:broader zilf:ZCodeBuiltIns ;
+             skos:inScheme zilf:ZILF_Scheme ;
+             skos:definition """Change flags for `window-number`.
+
+The `flags` are:
+
+| Bit | Definition |
+|---|---|
+| 0 | Keep text inside margin |
+| 1 | Scroll when reaching bottom |
+| 2 | Copy text to stream 2 (printer) |
+| 3 | Buffer text and word-wrap |
+
+The `operations` are:
+
+| Operation | Definition |
+|---|---|
+| 0 | Set to `flags` |
+| 1 | Set bits supplied (BOR) |
+| 2 | Clear bits supplied |
+| 3 | Reverse bits supplied |"""@en ;
+             skos:editorialNote "ZILF supports WINATTR in versions 6-."@en ;
+             skos:historyNote "Zapf syntax: WINATTR, Inform syntax: window_style"@en ;
+             skos:prefLabel "<WINATTR window-number flags operation>"@en .
+
+
 ###  http://example.org/zilf/WINGET
 zilf:WINGET rdf:type owl:NamedIndividual ,
                      skos:Concept ;
@@ -4941,6 +4970,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:USL ,
                                  zilf:VALUE ,
                                  zilf:VERIFY ,
+                                 zilf:WINATTR ,
                                  zilf:WINGET ,
                                  zilf:WINPOS ,
                                  zilf:WINPUT ,
