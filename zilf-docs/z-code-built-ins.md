@@ -1266,6 +1266,35 @@ Z-code built-in function that returns true if sum($0040:PLENTH (byte 26-27 in he
 
 ---
 
+### WINATTR
+**Usage:** `<WINATTR window-number flags operation>`
+
+Change flags for `window-number`.
+
+The `flags` are:
+
+| Bit | Definition |
+|---|---|
+| 0 | Keep text inside margin |
+| 1 | Scroll when reaching bottom |
+| 2 | Copy text to stream 2 (printer) |
+| 3 | Buffer text and word-wrap |
+
+The `operations` are:
+
+| Operation | Definition |
+|---|---|
+| 0 | Set to `flags` |
+| 1 | Set bits supplied (BOR) |
+| 2 | Clear bits supplied |
+| 3 | Reverse bits supplied |
+
+> **Note:** ZILF supports WINATTR in versions 6-.
+
+**History:** Zapf syntax: WINATTR, Inform syntax: window_style
+
+---
+
 ### WINGET
 **Usage:** `<WINGET window-number property>`
 
