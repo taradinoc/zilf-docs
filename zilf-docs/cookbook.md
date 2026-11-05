@@ -714,6 +714,19 @@ BAR!-OB  ;  BAR!-OB
 ```
 
 
+### ITABLE
+```zil
+<ITABLE 3>  ;  [0 0 0 0 0 0] (3x#WORD)
+<ITABLE 3 1>  ;  [0 1 0 1 0 1] (3x#WORD)
+<ITABLE WORD 3 1>  ;  [0 3 0 1 0 1 0 1] (#WORD + 3x#WORD)
+<ITABLE 3 (BYTE) 1>  ;  [1 1 1] (3x#BYTE)
+<ITABLE 3 (LENGTH BYTE) 1>  ;  [3 1 1 1] (#BYTE + 3x#BYTE)
+<ITABLE BYTE 3 1>  ;  [3 0 1 0 1 0 1] (#BYTE + 3x#WORD)
+<ITABLE 3 (LEXV) 1 2 3>  ;  [0 1 2 3 0 1 2 3 0 1 2 3] (3x(#WORD #BYTE #BYTE))
+<ITABLE 3 (LENGTH LEXV) 1 2 3>  ;  [0 9 0 1 2 3 0 1 2 3 0 1 2 3] (#WORD + 3x(#WORD #BYTE #BYTE))
+```
+
+
 ### ITEM
 ```zil
 <DEFINE LAST-ASOC ()
@@ -2288,16 +2301,6 @@ THEI   <THEI-PRINT>>
 ### ISAVE
 ```zil
 <ISAVE>
-```
-
-
-### ITABLE
-```zil
-<ITABLE 4 0>  ;  Element 0 WORD (0), Element 1 WORD (0), Element 2 WORD (0) , Element 3 WORD (0)
-
-<ITABLE (BYTE LENGTH) 4 0>  ;  Element 0 BYTE (4), Element 1 BYTE (0), Element 2 BYTE (0) , Element 3 BYTE (0), Element 4 BYTE (0)
-
-<ITABLE BYTE 4 0>  ;  Element 0 BYTE (4), Element 1 BYTE (0), Element 2 BYTE (0) , Element 3 BYTE (0), Element 4 BYTE (0)
 ```
 
 
