@@ -758,6 +758,7 @@ zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                                  zilf:INSERT ,
                                  zilf:INSERT-FILE ,
                                  zilf:ISTRING ,
+                                 zilf:ITABLE ,
                                  zilf:ITEM ,
                                  zilf:IVECTOR ,
                                  zilf:LANGUAGE ,
@@ -1910,16 +1911,20 @@ zilf:ISTRING rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/ITABLE
 zilf:ITABLE rdf:type owl:NamedIndividual ,
                      skos:Concept ;
-            skos:broader zilf:ZCodeBuiltIns ;
+            skos:broader zilf:CoreFunctions ;
             skos:inScheme zilf:ZILF_Scheme ;
             skos:definition """Defines a table of count elements filled with default values: either zeros or, if the default list is specified, the specified list of values repeated until the table is full.
 
-The optional specifier may be the atoms NONE, BYTE, or WORD. BYTE and WORD change the type of the table and also turn on the length marker (element 0 in the table contains the length of the table), This can also be done with the flags (see TABLE about flags)."""@en ;
-            skos:example """<ITABLE 4 0>  ;  Element 0 WORD (0), Element 1 WORD (0), Element 2 WORD (0) , Element 3 WORD (0)
-
-<ITABLE (BYTE LENGTH) 4 0>  ;  Element 0 BYTE (4), Element 1 BYTE (0), Element 2 BYTE (0) , Element 3 BYTE (0), Element 4 BYTE (0)
-
-<ITABLE BYTE 4 0>  ;  Element 0 BYTE (4), Element 1 BYTE (0), Element 2 BYTE (0) , Element 3 BYTE (0), Element 4 BYTE (0)"""@en ;
+The optional specifier may be the atoms NONE, BYTE, or WORD. BYTE and WORD turn on the length marker (element 0 in the table contains the length of the table) and also set its form. This can also be done with the flags (see TABLE about flags)."""@en ;
+            skos:editorialNote "TABLE is a ZIL-specific structure that can be used both outside and inside ROUTINES."@en ;
+            skos:example """<ITABLE 3>  ;  [0 0 0 0 0 0] (3x#WORD)
+<ITABLE 3 1>  ;  [0 1 0 1 0 1] (3x#WORD)
+<ITABLE WORD 3 1>  ;  [0 3 0 1 0 1 0 1] (#WORD + 3x#WORD)
+<ITABLE 3 (BYTE) 1>  ;  [1 1 1] (3x#BYTE)
+<ITABLE 3 (LENGTH BYTE) 1>  ;  [3 1 1 1] (#BYTE + 3x#BYTE)
+<ITABLE BYTE 3 1>  ;  [3 0 1 0 1 0 1] (#BYTE + 3x#WORD)
+<ITABLE 3 (LEXV) 1 2 3>  ;  [0 1 2 3 0 1 2 3 0 1 2 3] (3x(#WORD #BYTE #BYTE))
+<ITABLE 3 (LENGTH LEXV) 1 2 3>  ;  [0 9 0 1 2 3 0 1 2 3 0 1 2 3] (#WORD + 3x(#WORD #BYTE #BYTE))"""@en ;
             skos:prefLabel "<ITABLE [specifier] count [(flags...)] defaults ...>"@en .
 
 
@@ -4914,7 +4919,6 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:INPUT ,
                                  zilf:IRESTORE ,
                                  zilf:ISAVE ,
-                                 zilf:ITABLE ,
                                  zilf:LEX ,
                                  zilf:LOC ,
                                  zilf:LOWCORE ,
