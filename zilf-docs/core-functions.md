@@ -712,6 +712,17 @@ MDL built-in function that returns a STRING with count items all set to init (ch
 
 ---
 
+### ITABLE
+**Usage:** `<ITABLE [specifier] count [(flags...)] defaults ...>`
+
+Defines a table of count elements filled with default values: either zeros or, if the default list is specified, the specified list of values repeated until the table is full.
+
+The optional specifier may be the atoms NONE, BYTE, or WORD. BYTE and WORD turn on the length marker (element 0 in the table contains the length of the table) and also set its form. This can also be done with the flags (see TABLE about flags).
+
+> **Note:** TABLE is a ZIL-specific structure that can be used both outside and inside ROUTINES.
+
+---
+
 ### ITEM
 **Usage:** `<ITEM asoc>`
 
