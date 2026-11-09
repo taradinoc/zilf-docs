@@ -320,6 +320,29 @@ MDL built-in function that  has the same syntax as DEFINE, but defines a MACRO i
 
 ---
 
+### DEFSTRUCT
+**Usage:** `<DEFSTRUCT type-name {base-type | (base-type struct-options ...)} (field-name decl [field-options ...]) ...>`
+
+MDL built-in function that creates abstract record structures and creates an user-defined TYPE. In practice DEFSTRUCT builds a couple of MACROs that can be used to create and access instances of the structure.
+
+type-name is the name of the new structure-type. There will also be a new TYPE with type-name and the MACRO, MAKE-[type-name] is created that can be used to create new instances of this new TYPE.
+
+The base-type is the container TYPE for this new structure-type. It is usually a VECTOR, LIST or TABLE. The struct-options are used to change the default behaviour of the base-type. It is possible to change the default behaviour with SET-DEFSTRUCT-DEFAULT-FILE. The struct-options are: 
+* 'CONSTRUCTOR: Defines a new constructor for the MAKE- MACRO. See examples below on how to define a new constructor. If there is no definition specified after 'CONSTRUCTOR no MACRO will be created for this type-name.
+* 'INIT-ARGS: Defines if there are arguments when the base-type is created. For example (PURE) when using TABLE as a container. Default is that there are no arguments.
+* 'NODECL: Specifies that no TYPE-checking should occur when storing values in container base-type. Default is that there is TYPE-checking.
+* 'NOTYPE: Specifies that no new TYPE is created for this type-name. Default is that a new TYPE is created.
+
+Then follows all the fields in the record. Every field has a field-name and a TYPE declaration, decl. The decl follows the ordinary syntax for declarations, see GDECL. The field-options are optional, but they can be one or more of these:
+* default-value: A default value for this field.
+* 'NTH: FUNCTION to read fields from the container. Default FUNCTION is NTH.
+* 'OFFSET: Index in container to store this value. FUNCTION is NTH.
+* 'PUT: FUNCTION to insert value in this field in the container. Default FUNCTION is PUT.
+
+For every field in the record there is a MACRO created with the field-name that can be used to read and insert values in the field.
+
+---
+
 ### DELAY-DEFINITION
 **Usage:** `<DELAY-DEFINITION name>`
 
