@@ -365,6 +365,93 @@ zyxwvutsrqponmlkjihgfedcba
 ```
 
 
+### DEFSTRUCT
+```zil
+<DEFSTRUCT BOOK LIST (TITLE STRING) (AUTHOR STRING)   
+                 (SUBJECT STRING) (BOOK-ID FIX)>  
+<SET BOOK1 <MAKE-BOOK 'TITLE "C Programming"   
+                  'AUTHOR "Nuha Ali"   
+                  'SUBJECT "C-Programming Tutorial"  
+                  'BOOK-ID 478>>  
+<SET BOOK2 <MAKE-BOOK 'TITLE "Telecom Billing"   
+                  'AUTHOR "Zara Ali"   
+                  'SUBJECT "C-Programming Tutorial"  
+                  'BOOK-ID 501>>  
+<TITLE .BOOK1>  ;  "C Programming"  
+<TYPE .BOOK1>  ;  BOOK  
+<1 .BOOK2>  ;  "Telecom Billing"  
+<AUTHOR .BOOK2 "Paul Auster">  
+<AUTHOR .BOOK2>  ;  "Paul Auster"  
+<MAKE-BOOK>  ;  ("" "" "" 0)
+
+;  "Put values into existing object"  
+<DEFSTRUCT POINT VECTOR (POINT-X FIX) (POINT-Y FIX)>  
+<SET MY-VECTOR [123 456 789 1011]>  
+<MAKE-POINT 'POINT .MY-VECTOR 'POINT-Y 999 'POINT-X 888>  ;  [888 999 789 1011]
+
+;  "Use field value-default and offset"  
+<DEFSTRUCT RPOINT VECTOR (RPOINT-X FIX 'OFFSET 2)   
+                    (RPOINT-Y FIX 456 'OFFSET 1)>  
+<MAKE-RPOINT 'RPOINT-X 123>  ;  #RPOINT [456 123]  
+<RPOINT-Y #RPOINT [234 567]>  ;  234
+
+;  "Create struct without creating TYPE"  
+<DEFSTRUCT PTNT (VECTOR 'NOTYPE) (PTNT-X FIX) (PTNT-Y FIX)>  
+<VALID-TYPE? PTNT>  ;  #FALSE  
+<PTNT-X [123 456]>  ;  123
+
+;  "Create struct without declaration checks"  
+<DEFSTRUCT PTND (VECTOR 'NODECL) (PTND-X FIX) (PTND-Y FIX)>  
+<CHTYPE [FOO BAR] PTND>  ;  [FOO BAR]  
+<CHTYPE [FOO BAR] POINT>  ;  ERROR
+
+;  "Create struct with suppressed constructor"  
+<DEFSTRUCT P-C (VECTOR 'CONSTRUCTOR) (P-C FIX) (P-C-Y FIX)>  
+<GASSIGNED? MAKE-P-C>  ;  #FALSE  
+<VALID-TYPE? P-C>  ;  P-C
+
+;  "Create struct with INIT-ARGS"  
+<DEFSTRUCT PT-TBL (TABLE ('INIT-ARGS (PURE)))   
+    (PT-TBL-X FIX) (PT-TBL-Y FIX)>  
+<MAKE-PT-TBL 123 456>  ; #PT-TBL %<TABLE (PURE) 123 456>
+
+;  "Positional constructor arguments"  
+<DEFSTRUCT FOO VECTOR (FOO-A ATOM) (FOO-B <OR FIX FALSE>)>  
+<MAKE-FOO BAR>  ;  #FOO [BAR #FALSE ()]
+
+;  "Custom constructor"  
+<SETG NEXT-ID 0>  
+<DEFSTRUCT RGBA (VECTOR 'CONSTRUCTOR  
+    ('CONSTRUCTOR MAKE-RGBA   
+    ('RED 'GREEN 'BLUE "OPT" ('ALPHA 255)   
+    "AUX" (RGBA-ID '<SETG NEXT-ID <+ ,NEXT-ID 1>>))))  
+    (RED FIX) (GREEN FIX) (BLUE FIX) (ALPHA FIX)   
+    (RGBA-ID FIX)>  
+<RED <MAKE-RGBA 10 20 30>>  ;  10  
+<RGBA-ID <MAKE-RGBA 11 22 33>>  ;  1  
+<ALPHA <MAKE-RGBA 11 22 33>>  ;  255  
+<ALPHA <MAKE-RGBA 11 22 33 44>>  ;  44  
+  
+;  "Eval or not to eval arguments"  
+<DEFSTRUCT E-PT VECTOR (E-PT-X FIX) (E-PT-Y <OR FIX FORM>)>  
+<MAKE-E-PT <+ 1 2> '<+ 3 4>>  ;  #E-PT [3 <+ 3 4>]
+
+; "Explicit default values"  
+<DEFSTRUCT PT2 VECTOR (PT2-X FIX 123) (PT2-Y FIX 456)   
+                  (PT2-ID FIX <ALLOCATE-ID>)>  
+<SETG NEXT-ID 1>  
+<DEFINE ALLOCATE-ID ("AUX" (R ,NEXT-ID))  
+    <SETG NEXT-ID <+ ,NEXT-ID 1>> .R>  
+<PT2-ID <MAKE-PT2>>  ;  1  
+<PT2-ID <MAKE-PT2>>  ;  2  
+<PT2-ID <MAKE-PT2 'PT2-ID 1001>>  ;  1001  
+<PT2-ID <MAKE-PT2>>  ;  3  
+<PT2-X <MAKE-PT2 'PT2-Y 0>>  ;  123  
+<PT2-Y <MAKE-PT2 'PT2-Y 0>>  ;  0  
+<PT2-ID <MAKE-PT2>>  ;  6
+```
+
+
 ### DELAY-DEFINITION
 ```zil
 ;"REPLACE can be defined after DEFAULT" 
