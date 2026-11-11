@@ -3,6 +3,13 @@
 # Core Functions
 ---
 
+### ALLTYPES
+**Usage:** `<ALLTYPES>`
+
+MDL built-in function that returns a VECTOR containing the ATOMs which can currently be returned by TYPE or PRIMTYPE.
+
+---
+
 ### ASCII
 **Usage:** `<ASCII {number | character}>`
 
