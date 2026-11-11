@@ -288,6 +288,22 @@ Predicate. Decrease variable (signed) name with 1 and returns true if variable n
 
 ---
 
+### DO
+**Usage:** `<DO (name start end [step]) [(END expressions ...)] expressions ...>`
+
+Z-code built-in function that executes a loop, behaving as a cross between a Pascal-style "for" statement and a C-style "for" statement.
+
+Pascal-style "for" statements loop over a range of values:
+<DO (I 1 10) ...>
+<DO (J 10 1 -1) ...>
+
+C-style "for" statements initialize some state, then mutate it and repeat until a condition becomes true (note: the condition is reversed from C, the loop exits when it becomes true):
+<DO (I <FIRST? .OBJ> <NOT .I> <NEXT? .I>) ...>
+
+The behavior of DO depends on the syntax used for each part. If the third value inside the parens is a complex FORM -- meaning one that isn't a simple LVAL or GVAL, like '.MAX' is -- it's assumed to be a "C-style" exit condition, otherwise it's assumed to be a "Pascal-style" upper/lower bound. Likewise, the optional fourth value is treated as either a C-style mutator or a Pascal-style step size.
+
+---
+
 ### ERASE
 **Usage:** `<ERASE value>`
 
