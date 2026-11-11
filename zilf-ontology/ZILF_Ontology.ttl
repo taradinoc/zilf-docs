@@ -57,6 +57,15 @@ zilf:ADJ-SYNONYM rdf:type owl:NamedIndividual ,
                  skos:prefLabel "<ADJ-SYNONYM original synonyms ...>"@en .
 
 
+###  http://example.org/zilf/ALLTYPES
+zilf:ALLTYPES rdf:type owl:NamedIndividual ,
+                       skos:Concept ;
+              skos:broader zilf:CoreFunctions ;
+              skos:inScheme zilf:ZILF_Scheme ;
+              skos:definition "MDL built-in function that returns a VECTOR containing the ATOMs which can currently be returned by TYPE or PRIMTYPE."@en ;
+              skos:prefLabel "<ALLTYPES>"@en .
+
+
 ###  http://example.org/zilf/APPLY
 zilf:APPLY rdf:type owl:NamedIndividual ,
                     skos:Concept ;
@@ -697,7 +706,8 @@ zilf:CURSET rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/CoreFunctions
 zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                             skos:Concept ;
-                   skos:narrower zilf:ASCII ,
+                   skos:narrower zilf:ALLTYPES ,
+                                 zilf:ASCII ,
                                  zilf:ATOM ,
                                  zilf:AVALUE ,
                                  zilf:BEGIN-SEGMENT ,
