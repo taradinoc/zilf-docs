@@ -2231,6 +2231,155 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### DO
+```zil
+<ROUTINE GO ()
+    <TEST-PASCAL-STYLE>
+    <TEST-C-STYLE>
+    <TEST-MIXED-STYLE>
+    <QUIT>>
+
+<CONSTANT C-ONE 1>
+<CONSTANT C-TEN 10>
+
+<ROUTINE TEST-PASCAL-STYLE ("AUX" (ONE 1) (TEN 10))
+    <TELL "== Pascal style ==" CR>
+
+    <TELL "Counting from 1 to 10...">
+    ;"1 2 3 4 5 6 7 8 9 10"
+    <DO (I 1 10)
+        (END <CRLF>)
+        <TELL " " N .I>>
+    
+    <TELL "Counting from 1 to 10 with step 2...">
+    ;"1 3 5 7 9"
+    <DO (I 1 10 2)
+        (END <CRLF>)
+        <TELL " " N .I>>
+      
+    <TELL "Counting from 10 to 1...">
+    ;"10 9 8 7 6 5 4 3 2 1"
+    <DO (I 10 1)
+        (END <CRLF>)
+        <TELL " " N .I>>
+
+    <TELL "Counting from 10 to 1 with step -2...">
+    ;"10 8 6 4 2"
+    <DO (I 10 1 -2)
+        (END <CRLF>)
+        <TELL " " N .I>>
+
+    <TELL "Counting from .ONE to .TEN...">
+    ;"1 2 3 4 5 6 7 8 9 10"
+    <DO (I .ONE .TEN)
+        (END <CRLF>)
+        <TELL " " N .I>>
+      
+    <TELL "Counting from .TEN to .ONE...">
+    ;"10"
+    ;"Since the loop bounds aren't FIXes (numeric   
+    literals), ZILF doesn't know the loop is meant   
+    to count down, and it compiles a loop that counts   
+    up and exits after the first iteration. A DO loop   
+    whose condition is a constant or simple FORM always   
+    runs at least once."
+    <DO (I .TEN .ONE)
+        (END <CRLF>)
+        <TELL " " N .I>>
+
+    <TELL "Counting from 10 to .ONE...">
+    ;"10"
+    ;"See above."
+    <DO (I 10 .ONE)
+        (END <CRLF>)
+        <TELL " " N .I>>
+
+    <TELL "Counting from .TEN to 1...">
+    ;"10"
+    ;"See above."
+    <DO (I .TEN 1)
+        (END <CRLF>)
+        <TELL " " N .I>>
+
+    <TELL "Counting from .TEN to .ONE with step -1...">
+    ;"10 9 8 7 6 5 4 3 2 1"
+    <DO (I .TEN .ONE -1)
+        (END <CRLF>)
+        <TELL " " N .I>>
+
+    <TELL "Counting from ,C-TEN to ,C-ONE...">
+    ;"10"
+    ;"Even defining the loop bounds as CONSTANTs won't   
+    tell ZILF that the loop needs to run backwards."
+    <DO (I ,C-TEN ,C-ONE)
+        (END <CRLF>)
+        <TELL " " N .I>>
+
+    <TELL "Counting from %,C-TEN to %,C-ONE...">
+    ;"10 9 8 7 5 4 3 2 1"
+    ;"The % forces ,C-TEN to be evaluated at read time,   
+    so the loop bounds are specified as FIXes, allowing   
+    ZILF to determine that the loop runs backwards."
+    <DO (I %,C-TEN %,C-ONE)
+        (END <CRLF>)
+        <TELL " " N .I>>
+
+    <CRLF>>
+
+<OBJECT DESK
+    (DESC "desk")>
+
+<OBJECT MONITOR
+    (DESC "monitor")
+    (LOC DESK)>
+
+<OBJECT KEYBOARD
+    (DESC "keyboard")
+    (LOC DESK)>
+
+<OBJECT MOUSE
+    (DESC "mouse")
+    (LOC DESK)>
+
+<ROUTINE TEST-C-STYLE ()
+    <TELL "== C style ==" CR>
+
+    <TELL "Counting from 10 down to 1...">
+    ;"10 9 8 7 6 5 4 3 2 1"
+    <DO (I 10 <L? .I 1> <- .I 1>)
+        (END <CRLF>)
+        <TELL " " N .I>>
+      
+    <TELL "Counting from 10 up (!) to 1...">
+    ;""
+    ;"Nothing is printed, because the exit condition   
+    is initially true. A DO loop whose condition is   
+    a complex FORM can exit before the first iteration."
+    <DO (I 10 <G? .I 1> <+ .I 1>)
+        (END <CRLF>)
+        <TELL " " N .I>>
+      
+    <TELL "On the desk:">
+    ;"monitor mouse keyboard"
+    <DO (I <FIRST? ,DESK> <NOT .I> <NEXT? .I>)
+        (END <CRLF>)
+        <TELL " " D .I>>
+      
+    <CRLF>>
+
+<ROUTINE TEST-MIXED-STYLE ()
+    <TELL "== Mixed ==" CR>
+      
+    <TELL "Powers of 2 up to 1000:">
+    ;"1 2 4 8 16 32 64 128 256 512"
+    <DO (I 1 1000 <* .I 2>)
+        (END <CRLF>)
+        <TELL " " N .I>>
+      
+    <CRLF>>
+```
+
+
 ### ERASE
 ```zil
 <ERASE 1>  ;  Clears from cursor to end of line
