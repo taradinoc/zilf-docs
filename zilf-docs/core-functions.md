@@ -10,6 +10,22 @@ MDL built-in function that returns a VECTOR containing the ATOMs which can curre
 
 ---
 
+### AND
+**Usage:** `<AND expressions...>`
+
+MDL built-in function that is a boolean AND. Requires that all expressions evaluate to true to return true. Exits on the first expression that evaluates to false (rest of expressions are not evaluated).
+
+> **Note:** Because 0 is considered false and all other values are considered true inside a routine AND returns 0 if one expression is false or the value of the last expression if all expressions are true. Because false is its own TYPE outside a routine AND returns #FALSE if one of the expressions is false or the value of the last expression if all expressions are true.
+
+---
+
+### AND?
+**Usage:** `<AND? expressions ...>`
+
+MDL built-in function that returns the same result as AND with the difference that all expressions are evaluated.
+
+---
+
 ### ASCII
 **Usage:** `<ASCII {number | character}>`
 
