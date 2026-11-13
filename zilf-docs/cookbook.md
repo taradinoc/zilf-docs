@@ -5,6 +5,23 @@
 
 ## Core Functions
 
+### AND
+```zil
+<AND <=? 1 1> <N=? 1 2>>  ;  True
+<AND <=? 1 2> <SET X 2>>  ;  X never set to 2 because first predicate evaluates to false
+<SET X <AND 1 2 3 0 4>>  ;  X is set to 0
+<SET X <AND 1 2 3 <> 4>>  ;  X is set to #FALSE
+<SET X <AND 1 4 3 2>>  ;  X is set to 2
+```
+
+
+### AND?
+```zil
+<AND? <=? 1 1> <N=? 1 2>>  ;  True
+<AND? <=? 1 2> <SET X 2>>  ;  X is set to 2 because all expressions are evaluated
+```
+
+
 ### ASCII
 ```zil
 <ASCII !\A>  ;  65
@@ -2004,6 +2021,16 @@ THEI   <THEI-PRINT>>
 
 
 ## Z-Code Built-ins
+
+### AND
+```zil
+<AND <=? 1 1> <N=? 1 2>>  ;  True
+<AND <=? 1 2> <SET X 2>>  ;  X never set to 2 because first predicate evaluates to false
+<SET X <AND 1 2 3 0 4>>  ;  X is set to 0
+<SET X <AND 1 2 3 <> 4>>  ;  X is set to #FALSE
+<SET X <AND 1 4 3 2>>  ;  X is set to 2
+```
+
 
 ### APPLY
 ```zil
