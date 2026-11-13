@@ -66,6 +66,24 @@ zilf:ALLTYPES rdf:type owl:NamedIndividual ,
               skos:prefLabel "<ALLTYPES>"@en .
 
 
+
+
+###  http://example.org/zilf/AND
+zilf:AND rdf:type owl:NamedIndividual ,
+                  skos:Concept ;
+         skos:broader zilf:CoreFunctions ,
+                      zilf:ZCodeBuiltIns ;
+         skos:inScheme zilf:ZILF_Scheme ;
+         skos:definition "MDL built-in function that is a boolean AND. Requires that all expressions evaluate to true to return true. Exits on the first expression that evaluates to false (rest of expressions are not evaluated)."@en ;
+         skos:editorialNote "Because 0 is considered false and all other values are considered true inside a routine AND returns 0 if one expression is false or the value of the last expression if all expressions are true. Because false is its own TYPE outside a routine AND returns #FALSE if one of the expressions is false or the value of the last expression if all expressions are true."@en ;
+         skos:example """<AND <=? 1 1> <N=? 1 2>>  ;  True
+<AND <=? 1 2> <SET X 2>>  ;  X never set to 2 because first predicate evaluates to false
+<SET X <AND 1 2 3 0 4>>  ;  X is set to 0
+<SET X <AND 1 2 3 <> 4>>  ;  X is set to #FALSE
+<SET X <AND 1 4 3 2>>  ;  X is set to 2"""@en ;
+         skos:prefLabel "<AND expressions...>"@en .
+
+
 ###  http://example.org/zilf/APPLY
 zilf:APPLY rdf:type owl:NamedIndividual ,
                     skos:Concept ;
@@ -707,6 +725,8 @@ zilf:CURSET rdf:type owl:NamedIndividual ,
 zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                             skos:Concept ;
                    skos:narrower zilf:ALLTYPES ,
+                                 zilf:AND ,
+                                 <http://example.org/zilf/AND?> ,
                                  zilf:ASCII ,
                                  zilf:ATOM ,
                                  zilf:AVALUE ,
@@ -5297,6 +5317,17 @@ zilf:ZZSECTION rdf:type owl:NamedIndividual ,
 <TEST 1>  ; X is assigned."""@en ;
                                     skos:historyNote "Zapf syntax: ASSIGNED?, Inform syntax: check_arg_count"@en ;
                                     skos:prefLabel "<ASSIGNED? Name>"@en .
+
+
+###  http://example.org/zilf/AND?
+<http://example.org/zilf/AND?> rdf:type owl:NamedIndividual ,
+                                        skos:Concept ;
+                               skos:broader zilf:CoreFunctions ;
+                               skos:inScheme zilf:ZILF_Scheme ;
+                               skos:definition "MDL built-in function that returns the same result as AND with the difference that all expressions are evaluated."@en ;
+                               skos:example """<AND? <=? 1 1> <N=? 1 2>>  ;  True
+<AND? <=? 1 2> <SET X 2>>  ;  X is set to 2 because all expressions are evaluated"""@en ;
+                               skos:prefLabel "<AND? expressions ...>"@en .
 
 
 ###  http://example.org/zilf/BOUND?
