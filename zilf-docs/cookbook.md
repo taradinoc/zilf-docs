@@ -22,6 +22,13 @@
 ```
 
 
+### APPLICABLE?
+```zil
+<DEFINE SQR (X) <* .X .X>>
+<APPLICABLE? ,SQR>  ;  True
+```
+
+
 ### ASCII
 ```zil
 <ASCII !\A>  ;  65
