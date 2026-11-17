@@ -5120,6 +5120,7 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                                  zilf:WINSIZE ,
                                  zilf:XPUSH ,
                                  zilf:ZWSTR ,
+                                 <http://example.org/zilf/APPLICABLE?> ,
                                  <http://example.org/zilf/ASSIGNED?> ,
                                  <http://example.org/zilf/DLESS?> ,
                                  <http://example.org/zilf/F?> ,
@@ -5295,6 +5296,18 @@ zilf:ZZSECTION rdf:type owl:NamedIndividual ,
                skos:inScheme zilf:ZILF_Scheme ;
                skos:definition "ZIL library function that is an alias for DEFINITIONS."@en ;
                skos:prefLabel "<ZZSECTION package-name>"@en .
+
+
+###  http://example.org/zilf/APPLICABLE?
+<http://example.org/zilf/APPLICABLE?> rdf:type owl:NamedIndividual ,
+                                                skos:Concept ;
+                                       skos:broader zilf:CoreFunctions ;
+                                       skos:inScheme zilf:ZILF_Scheme ;
+                                       skos:definition "MDL built-in predicate. Returns true if TYPE of value is of an applicable TYPE."@en ;
+                                       skos:editorialNote "Applicable TYPEs: FIX, FSUBR, FUNCTION, MACRO, OFFSET, SUBR."@en ;
+                                       skos:example """<DEFINE SQR (X) <* .X .X>>
+<APPLICABLE? ,SQR>  ;  True"""@en ;
+                                       skos:prefLabel "<APPLICABLE? value>"@en .
 
 
 ###  http://example.org/zilf/ASSIGNED?
