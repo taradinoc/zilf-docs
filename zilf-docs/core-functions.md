@@ -26,6 +26,15 @@ MDL built-in function that returns the same result as AND with the difference th
 
 ---
 
+### APPLICABLE?
+**Usage:** `<APPLICABLE? value>`
+
+MDL built-in predicate. Returns true if TYPE of value is of an applicable TYPE.
+
+> **Note:** Applicable TYPEs: FIX, FSUBR, FUNCTION, MACRO, OFFSET, SUBR.
+
+---
+
 ### ASCII
 **Usage:** `<ASCII {number | character}>`
 
