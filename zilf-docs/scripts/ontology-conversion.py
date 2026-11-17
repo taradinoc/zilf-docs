@@ -39,6 +39,11 @@ def format_zil_code(code_str):
         return ""
     return f"```zil\n{code_str}\n```"
 
+def format_inline_usage(usage_str):
+    """Formats single or multi-line usage strings safely for inline backticks."""
+    lines = [line.strip() for line in usage_str.splitlines() if line.strip()]
+    return " | ".join(f"`{line}`" for line in lines)
+
 def write_file(filename, content):
     """Writes content to the output directory."""
     out_path = OUTPUT_DIR / filename
@@ -50,7 +55,6 @@ def append_concept_documentation(g, subj, lines):
     """Helper to append standard documentation fields to the line list."""
     name = subj.split('/')[-1]
     usage = get_literal(g, subj, SKOS.prefLabel)
-    # Fetch alternative label
     alt_usage = get_literal(g, subj, SKOS.altLabel)
     
     definition = get_literal(g, subj, SKOS.definition)
@@ -60,12 +64,12 @@ def append_concept_documentation(g, subj, lines):
     lines.append(f"\n### {name}")
     
     # Standard Usage
-    if usage: 
-        lines.append(f"**Usage:** `{usage}`\n")
+    if usage:
+        lines.append(f"**Usage:** {format_inline_usage(usage)}\n")
     
     # Alternative Usage
     if alt_usage:
-        lines.append(f"**Alternative Usage:** `{alt_usage}`\n")
+        lines.append(f"**Alternative Usage:** {format_inline_usage(alt_usage)}\n")
 
     if definition: lines.append(f"{definition}\n")
     if note: lines.append(f"> **Note:** {note}\n")
@@ -83,8 +87,8 @@ Welcome to the ZILF Reference Guide. Select a concept below to view detailed doc
 | :--- | :--- |
 | **[Core Functions](./core-functions.md)** | Fundamental MDL built-in functions and ZIL library functions (`EVAL`, `ROUTINE`). |
 | **[Z-Code Built-ins](./z-code-built-ins.md)** | Z-machine instructions used inside ROUTINE (`POP`). |
-| **[Object System](./object-system.md)** | Entities (`OBJECT`), properties (`DESC`), and state flags (`ONBIT`, `TAKEBIT`). |
-| **[Parser System](./parser-system.md)** | Directives for syntax (`SYNTAX`) and synonym definitions (`SYNONYM`). |
+| **[Object System](./object-system.md)** | Entities (`OBJECT`, `ROOM`), properties (`DESC`), and state flags (`ONBIT`, `TAKEBIT`). |
+| **[Parser System](./parser-system.md)** | Directives for syntax (`SYNTAX`), search flags (`HAVE`, `TAKE`), and synonym definitions (`SYNONYM`). |
 
 ---
 
@@ -129,19 +133,25 @@ def generate_object_system(g):
         "# Object System",
         "**Parent Concept:** Object System",
         "",
-        "Entities (`OBJECT`), properties (`DESC`, `SYNONYM`), and state flags (`ONBIT`, `TAKEBIT`).",
+        "Entities (`OBJECT`, `ROOM`), properties (`DESC`, `SYNONYM`), and state flags (`ONBIT`, `TAKEBIT`).",
         "",
         "---"
     ]
 
-    # 1. Base Object
-    if (ZILF.OBJECT, RDF.type, None) in g:
-         append_concept_documentation(g, ZILF.OBJECT, lines)
+    # 1. Base Entities (OBJECT, ROOM, etc.)
+    entities = list(g.subjects(SKOS.broader, ZILF.ObjectSystem))
+    if ZILF.ObjectProperties in entities:
+        entities.remove(ZILF.ObjectProperties)
+    entities.sort(key=lambda s: s.split('/')[-1])
+
+    for ent in entities:
+        append_concept_documentation(g, ent, lines)
 
     # 2. Properties
     lines.append("\n## Object Properties")
     props = list(g.subjects(SKOS.broader, ZILF.ObjectProperties))
-    if ZILF.PropFlags in props: props.remove(ZILF.PropFlags)
+    if ZILF.PropFlags in props:
+        props.remove(ZILF.PropFlags)
     props.sort(key=lambda s: s.split('/')[-1])
 
     for p in props:
@@ -163,40 +173,51 @@ def generate_parser_system(g):
     """Generates parser-system.md."""
     lines = ["[← Back to Main Index](./index.md)", "", "# Parser System", "---"]
     concepts = list(g.subjects(SKOS.broader, ZILF.ParserSystem))
+    if ZILF.SyntaxFlags in concepts:
+        concepts.remove(ZILF.SyntaxFlags)
     concepts.sort(key=lambda s: s.split('/')[-1])
 
     for c in concepts:
         append_concept_documentation(g, c, lines)
-        
+
+    # Syntax Search & Scope Flags
+    syntax_flags = list(g.subjects(SKOS.broader, ZILF.SyntaxFlags))
+    if syntax_flags:
+        lines.append("\n## Syntax Search & Scope Flags")
+        lines.append("*Search scope and behavior flags used in `SYNTAX` definitions.*")
+        syntax_flags.sort(key=lambda s: s.split('/')[-1])
+        for sf in syntax_flags:
+            append_concept_documentation(g, sf, lines)
+
     write_file("parser-system.md", "\n".join(lines))
 
 def generate_cookbook(g):
     """Generates cookbook.md by pulling all skos:example entries and grouping by category."""
     lines = ["[← Back to Main Index](./index.md)", "", "# ZILF Cookbook", "---"]
     
-    # Map the categories to their respective broader subjects in the ontology
+    # Collect Parser System subjects (including SyntaxFlags)
+    parser_subjects = list(g.subjects(SKOS.broader, ZILF.ParserSystem))
+    parser_subjects.extend(g.subjects(SKOS.broader, ZILF.SyntaxFlags))
+
+    # Collect Object System subjects (Entities, Properties, Flags)
+    object_system_subjects = list(g.subjects(SKOS.broader, ZILF.ObjectSystem))
+    object_system_subjects.extend(g.subjects(SKOS.broader, ZILF.ObjectProperties))
+    object_system_subjects.extend(g.subjects(SKOS.broader, ZILF.PropFlags))
+
     categories = {
         "Core Functions": list(g.subjects(SKOS.broader, ZILF.CoreFunctions)),
         "Z-Code Built-ins": list(g.subjects(SKOS.broader, ZILF.ZCodeBuiltIns)),
-        "Parser System": list(g.subjects(SKOS.broader, ZILF.ParserSystem)),
+        "Parser System": parser_subjects,
+        "Object System": object_system_subjects,
     }
-    
-    # Manually collect Object System subjects (OBJECT, Properties, Flags)
-    object_system_subjects = [ZILF.OBJECT]
-    object_system_subjects.extend(g.subjects(SKOS.broader, ZILF.ObjectProperties))
-    object_system_subjects.extend(g.subjects(SKOS.broader, ZILF.PropFlags))
-    categories["Object System"] = object_system_subjects
 
     processed_subjects = set()
     
-    # Iterate through mapped categories and pull examples
     for cat_name, subjects in categories.items():
-        # Only keep subjects that actually have a skos:example defined
-        subjects_with_examples = [s for s in subjects if (s, SKOS.example, None) in g]
+        subjects_with_examples = [s for s in set(subjects) if (s, SKOS.example, None) in g]
         
         if subjects_with_examples:
             lines.append(f"\n## {cat_name}")
-            # Sort alphabetically within category
             subjects_with_examples.sort(key=lambda s: s.split('/')[-1])
             
             for subj in subjects_with_examples:
@@ -210,7 +231,6 @@ def generate_cookbook(g):
                         lines.append(format_zil_code(ex))
                     lines.append("")
                     
-    # Catch examples that don't fit into predefined categories
     all_example_subjects = set(g.subjects(SKOS.example, None))
     uncategorized = list(all_example_subjects - processed_subjects)
     
