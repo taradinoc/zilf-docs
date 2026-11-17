@@ -3,12 +3,97 @@
 # Z-Code Built-ins
 ---
 
+### *
+**Usage:** `<* numbers ...>`
+
+**Alternative Usage:** `<MUL numbers ...>`
+
+MDL and Z-code built-in function that multiplies numbers.
+
+**History:** Zapf syntax: MUL, Inform syntax: mul
+
+---
+
+### +
+**Usage:** `<+ numbers ...>`
+
+**Alternative Usage:** `<ADD numbers ...>`
+
+MDL and Z-code built-in function that adds numbers.
+
+**History:** Zapf syntax: ADD, Inform syntax: add
+
+---
+
+### -
+**Usage:** `<- numbers ...>`
+
+**Alternative Usage:** `<SUB numbers ...>`
+
+MDL and Z-code built-in function that subtracts the first number by subsequent numbers, or negates a single number.
+
+**History:** Zapf syntax: SUB, Inform syntax: sub
+
+---
+
+### 0?
+**Usage:** `<0? value>`
+
+**Alternative Usage:** `<ZERO? value>`
+
+MDL and Z-code built-in predicate that returns true if value is 0, otherwise false.
+
+**History:** Zapf syntax: ZERO?, Inform syntax: jz
+
+---
+
+### 1?
+**Usage:** `<1? value>`
+
+MDL and Z-code built-in predicate that returns true if value is 1, otherwise false.
+
+---
+
+### ==?
+**Usage:** `<==? value1 value2>`
+
+MDL and Z-code predicate that returns TRUE if value1 and value2 are the same object (or equal to any subsequent argument in Z-code), otherwise FALSE.
+
+**History:** Zapf syntax: EQUAL?, Inform syntax: je
+
+---
+
+### =?
+**Usage:** `<=? value1 value2>`
+
+**Alternative Usage:** `<EQUAL? value1 value2 ...>`
+
+MDL and Z-code predicate that returns TRUE if value1 and value2 are of the same TYPE and structurally equal (or equal to any subsequent argument in Z-code), otherwise FALSE.
+
+**History:** Zapf syntax: EQUAL?, Inform syntax: je
+
+---
+
+### AGAIN
+**Usage:** `<AGAIN [activation]>`
+
+MDL and Z-code built-in function that restarts execution from the specified or most recent activation block (PROG, REPEAT, BIND, DO, or ROUTINE).
+
+---
+
 ### AND
 **Usage:** `<AND expressions...>`
 
 MDL built-in function that is a boolean AND. Requires that all expressions evaluate to true to return true. Exits on the first expression that evaluates to false (rest of expressions are not evaluated).
 
 > **Note:** Because 0 is considered false and all other values are considered true inside a routine AND returns 0 if one expression is false or the value of the last expression if all expressions are true. Because false is its own TYPE outside a routine AND returns #FALSE if one of the expressions is false or the value of the last expression if all expressions are true.
+
+---
+
+### ANDB
+**Usage:** `<ANDB numbers ...>`
+
+MDL built-in function for bitwise AND (and alias for BAND in Z-code).
 
 ---
 
@@ -50,7 +135,9 @@ Z-code built in predicate that can test if an optimate argument named `name` is 
 ### BACK
 **Usage:** `<BACK table [bytes]>`
 
-Z-code built-in function that returns table with address moved bytes back. If the count moves past the start of the table no error is raised. Default value for bytes is 1. 
+MDL built-in function (<BACK array [count]>) that moves count elements back in a VECTOR or STRING array.
+
+Z-code built-in function (<BACK table [bytes]>) that returns table with address moved bytes back (or aliases SUB for numbers). If the count moves past the start of the table no error is raised. Default value for bytes is 1. 
 
 Note that this is not a copy of the table, it is pointing to the same table with another starting address. Also see GET, GETB, PUT, PUTB and REST.
 
@@ -75,6 +162,17 @@ Z-code built-in function that is a bitwise NOT, reversing all bits in the WORD v
 > **Note:** ZILF supports BCOM in all versions.
 
 **History:** Zapf syntax: BCOM, Inform syntax: not
+
+---
+
+### BIND
+**Usage:** `<BIND [activation] (bindings ...) [decl] expressions ...>`
+
+MDL built-in function that defines a program block with its own set of bindings. BIND is similar to PROG and REPEAT but BIND doesn't create a default activation (like PROG and REPEAT) at the start of the block and doesn't have an automatic AGAIN at the end of the block (like REPEAT). If an activation is needed it must be specified. AGAIN and RETURN without specified activation inside a BIND-block will start over or return from the closest surrounding activation within the current function.
+
+The decl is used to specify the valid TYPE of the variables. In its simplest form decl is formatted like: #DECL ((X) FIX), meaning that X must be of the TYPE FIX. For more information on how to format the decl see GDECL. 
+
+Also see AGAIN, PROG, REPEAT and RETURN for more details how to control program flow.
 
 ---
 
@@ -195,6 +293,17 @@ Copies length number of bytes from src-table to dest-table. The tables are allow
 
 ---
 
+### CRLF
+**Usage:** `<CRLF [channel]>`
+
+MDL built-in function that prints a carriage-return and a line-feed to channel (default for channel is <LVAL OUTCHAN>; the console). CRLF returns true.
+
+> **Note:** ZILF supports CRLF in all versions.
+
+**History:** Zapf syntax: CRLF, Inform syntax: new_line
+
+---
+
 ### CURGET
 **Usage:** `<CURGET table>`
 
@@ -286,6 +395,17 @@ Draw picture-number at coordinates row and column. If row and column are omitted
 
 ---
 
+### DIV
+**Usage:** `</ numbers ...>`
+
+**Alternative Usage:** `<DIV numbers ...>`
+
+MDL and Z-code built-in function that divides the first number by subsequent numbers.
+
+**History:** Zapf syntax: DIV, Inform syntax: div
+
+---
+
 ### DLESS?
 **Usage:** `<DLESS? name value>`
 
@@ -333,7 +453,7 @@ Version 6: if the value is 1, erase from the current cursor position to the end 
 
 Z-code built-in predicate that tests is expression evaluates to false.
 
-> **Note:** ZILF supports FONT in all versions.
+> **Note:** ZILF supports F? in all versions.
 
 ---
 
@@ -408,6 +528,13 @@ Removes number of items from system stack or given stack (table).
 
 ---
 
+### G=?
+**Usage:** `<G=? value1 value2>`
+
+MDL and Z-code predicate that returns true if value1 is greater than or equal to value2, otherwise false.
+
+---
+
 ### GET
 **Usage:** `<GET table offset>`
 
@@ -469,6 +596,17 @@ Predicate. Returns true if value1 is greater than value2, otherwise false.
 
 ---
 
+### GVAL
+**Usage:** `<GVAL atom>`
+
+**Alternative Usage:** `,atom`
+
+MDL built-in function that gets the value of the global atom.
+
+> **Note:** Typically used in its alternate form ",atom".
+
+---
+
 ### HLIGHT
 **Usage:** `<HLIGHT style>`
 
@@ -483,6 +621,20 @@ Set text to style. It is possible to combine styles.
 > **Note:** ZILF supports HLIGHT in versions 4-.
 
 **History:** Zapf syntax: HLIGHT, Inform syntax: set_text_style
+
+---
+
+### IFFLAG
+**Usage:** `<IFFLAG (condition body ...) ...>`
+
+ZIL library function that returns the result as soon as any body is evaluated. If no body is evaluated, the function returns FALSE. Each condition is either:
+
+* A STRING naming a compilation flag, to evaluate the corresponding body if the flag’s value is true. 
+* An ATOM whose PNAME names a compilation flag, to evaluate the corresponding body if the flag’s value is true.
+* A FORM, to evaluate the FORM after replacing any element ATOMs whose PNAMEs name compilation flags with the flag values, and then evaluate the corresponding body if the result is true.
+* Any other value, to evaluate the corresponding body immediately.
+
+> **Note:** As a consequence of the evaluation conditions (rules), undefined compilation flags are effectively TRUE.
 
 ---
 
@@ -531,8 +683,7 @@ Z-code built-in function that  reads a single character from the keyboard. Calls
 ---
 
 ### INTBL?
-**Usage:** `<INTBL? value table length [rec-spec]>  ;  "Version 5, 7-"
-<INTBL? value table length>   ;  "Version 4, 6"`
+**Usage:** `<INTBL? value table length [rec-spec]>  ;  "Version 5, 7-"` | `<INTBL? value table length>   ;  "Version 4, 6"`
 
 Z-code built-in predicate that that returns the address of value if value is in the table table of the length length, otherwise 0. 
 
@@ -563,6 +714,24 @@ Z-code built-in function that saves the game state to memory that later can be r
 > **Note:** ZILF supports ISAVE in versions 5-.
 
 **History:** Zapf syntax: ISAVE, Inform syntax: save_undo
+
+---
+
+### ITABLE
+**Usage:** `<ITABLE [specifier] count [(flags...)] defaults ...>`
+
+Defines a table of count elements filled with default values: either zeros or, if the default list is specified, the specified list of values repeated until the table is full.
+
+The optional specifier may be the atoms NONE, BYTE, or WORD. BYTE and WORD turn on the length marker (element 0 in the table contains the length of the table) and also set its form. This can also be done with the flags (see TABLE about flags).
+
+> **Note:** TABLE is a ZIL-specific structure that can be used both outside and inside ROUTINES.
+
+---
+
+### L=?
+**Usage:** `<L=? value1 value2>`
+
+MDL and Z-code predicate that returns true if value1 is less than or equal to value2, otherwise false.
 
 ---
 
@@ -606,7 +775,7 @@ Z-code built-in function that returns parent to object.
 
 Z-code built-in function that reads and in some cases writes to the header information fields.
 
-> **Note:** TODO: Valid values for field-spec to be listed in a separate document to be linked from this note.
+> **Note:** Valid field-spec symbols (Appendix B): ZVERSION, ZORKID/RELEASEID, ENDLOD, START, VOCAB, OBJECT, GLOBALS, PURBOT, FLAGS, SERIAL, SERI1, SERI2, FWORDS, PLENTH, PCHKSUM, INTWRD, INTID, INTVER, SCRWRD, SCRV, SCRH, HWRD, VWRD, FWRD, LMRG/FOFF, RMRG/SOFF, CLRWRD, TCHARS, CRCNT, TWID, CRFUNC/STDREV, CHRSET, EXTAB, and extended header fields MSLOCX, MSLOCY, MSETBL/UNITBL, MSEDIR/FLAGS3, MSEINV/TRUFGC, MSEVRB/TRUBGC, MSEWRD, BUTTON, JOYSTICK, BSTAT, JSTAT.
 
 ---
 
@@ -615,7 +784,16 @@ Z-code built-in function that reads and in some cases writes to the header infor
 
 Z-code built-in function that reads the length number of bytes from field-spec and calls routine between each byte.
 
-> **Note:** TODO: Valid values for field-spec to be listed in a separate document to be linked from this note.
+> **Note:** See LOWCORE and Appendix B of the ZILF Reference Guide for valid header field-spec symbols.
+
+---
+
+### LSH
+**Usage:** `<LSH number places>`
+
+MDL built-in function that is a bitwise shift, shifting number left when places is positive and right if it is negative. When right shifting, the sign is not preserved (0 is always shifted in). For example.
+
+1000 0000 0000 1010  -->  0100 0000 0000 0101
 
 ---
 
@@ -728,6 +906,20 @@ Move object1 to be the first child of object2. Children of object1 move with it.
 
 ---
 
+### N==?
+**Usage:** `<N==? value1 value2>`
+
+MDL and Z-code predicate that returns false if value1 and value2 are the same object, otherwise true. Opposite of ==?.
+
+---
+
+### N=?
+**Usage:** `<N=? value1 value2>`
+
+MDL and Z-code predicate that returns false if value1 and value2 are structurally equal (or equal to any subsequent argument in Z-code), otherwise true. Opposite of =?.
+
+---
+
 ### NEXT?
 **Usage:** `<NEXT? object>`
 
@@ -747,6 +939,24 @@ Returns the property that comes after property on the object. Returns 0 if there
 > **Note:** ZILF supports NEXTP in all versions.
 
 **History:** Zapf syntax: NEXTP, Inform syntax: get_next_prop
+
+---
+
+### NOT
+**Usage:** `<NOT value>`
+
+MDL built-in function that returns true if value is false (#FALSE <>), otherwise NOT returns false.
+
+> **Note:** This is a boolean (logical) "not."
+
+---
+
+### OR
+**Usage:** `<OR expressions...>`
+
+MDL built-in function that is a boolean OR. Requires that one of the expressions evaluates to true to return true. Exits on the first expression that evaluates to true (rest of expressions are not evaluated).
+
+> **Note:** Because false is its own TYPE outside a routine OR returns #FALSE if all expressions are false or the value of the first true expression.
 
 ---
 
@@ -783,6 +993,15 @@ Z-code built-in function that gives the interpreter a table of picture numbers t
 
 ---
 
+### PLTABLE
+**Usage:** `<PLTABLE [flags ...] values ...>`
+
+ZIL library function that defines a table containing the specified values and with the PURE and LENGTH flag (see TABLE about LENGTH, PURE and other flags).
+
+> **Note:** TABLE is a ZIL-specific structure that can be used both outside and inside ROUTINES.
+
+---
+
 ### POP
 **Usage:** `<POP [stack]>`
 
@@ -791,6 +1010,17 @@ Z-code built-in function used inside ROUTINE that pops a value from a stack. If 
 > **Note:** ZILF currently supports POP in versions 6-.
 
 **History:** Zapf syntax: POP, Inform syntax: pull
+
+---
+
+### PRINT
+**Usage:** `<PRINT value [channel]>`
+
+MDL built-in function that prints a CRLF, the evaluated representation of value, and a space to channel, returning the evaluated value.
+
+Z-code built-in function (print_paddr) that prints a packed string from high memory pointed to by string.
+
+> **Note:** PRINT is just like PRIN1, except that it first prints a CRLF, then the evaluated representation of value and lastly a space.
 
 ---
 
@@ -893,6 +1123,26 @@ Print unicode-character number.
 
 ---
 
+### PROG
+**Usage:** `<PROG [activation] (bindings ...) [decl] expressions ...>`
+
+MDL built-in function that defines a program block with its own set of bindings. PROG is similar to BIND and REPEAT but unlike BIND it creates a default activation (like REPEAT) at the start of the block and doesn't have an automatic AGAIN at the end of the block (like REPEAT). It is possible to name an atom to the activation but it is not necessary. AGAIN and RETURN inside a PROG-block will start the block over or return from the block.
+
+The decl is used to specify the valid TYPE of the variables. In its simplest form decl is formatted like: #DECL ((X) FIX), meaning that X must be of the TYPE FIX. For more information on how to format the decl see GDECL.
+
+> **Note:** Also see AGAIN, BIND, REPEAT and RETURN for more details how to control program flow.
+
+---
+
+### PTABLE
+**Usage:** `<PTABLE [(flags ...)] values ...>`
+
+ZIL library function that defines a table containing the specified values and with the PURE flag (see TABLE about PURE and other flags).
+
+> **Note:** TABLE is a ZIL-specific structure that can be used both outside and inside ROUTINES.
+
+---
+
 ### PTSIZE
 **Usage:** `<PTSIZE property-value>`
 
@@ -909,16 +1159,18 @@ Z-code built-in function that gets the property size in bytes at property-addres
 
 Z-code built-in function that pushes value on the game stack.
 
-> **Note:** ZILF supports POP in all versions.
+> **Note:** ZILF supports PUSH in all versions.
 
-**History:** Zapf syntax: PUT, Inform syntax: storew
+**History:** Zapf syntax: PUSH, Inform syntax: push
 
 ---
 
 ### PUT
 **Usage:** `<PUT table offset value>`
 
-Z-code built-in function that puts a 16-bit WORD value in the table at word position offset. Actual address is table-address+offset*2. Note that table can be a byte-address in dynamic memory. 
+MDL built-in function (<PUT structure index new-value>) that sets the element at 1-based index in structure to new-value.
+
+Z-code built-in function (<PUT table offset value>) that puts a 16-bit WORD value in the table at 0-based word position offset. Actual address is table-address+offset*2. Note that table can be a byte-address in dynamic memory. 
 
 Also see BACK, GET, GETB, PUTB and REST.
 
@@ -1014,11 +1266,39 @@ Version 5 -,
 ### REMOVE
 **Usage:** `<REMOVE object>`
 
-Z-code built-in function that removes object from parent. To reattach it to another object, see MOVE.
+MDL built-in function (<REMOVE pname oblist> or <REMOVE atom>) that removes an ATOM from an OBLIST.
+
+Z-code built-in function (<REMOVE object>) that detaches object from its parent object. To reattach it, see MOVE.
 
 > **Note:** ZILF supports REMOVE in all versions.
 
 **History:** Zapf syntax: REMOVE, Inform syntax: remove_obj
+
+---
+
+### REPEAT
+**Usage:** `<REPEAT [activation] (bindings ...) [decl] expressions ...>`
+
+MDL built-in function that  defines a program block with its own set of bindings. REPEAT is similar to BIND and PROG but unlike BIND it creates a default activation (like PROG) at the start of the block but unlike PROG it also has an automatic AGAIN at the end of the block. It is possible to name an atom to the activation but it is not necessary. A REPEAT-block repeatedly executes expressions until it encounters a RETURN statement that will exit the block. 
+
+The decl is used to specify the valid TYPE of the variables. In its simplest form decl is formatted like: #DECL ((X) FIX), meaning that X must be of the TYPE FIX. For more information on how to format the decl see GDECL.
+
+> **Note:** Also see AGAIN, BIND, PROG and RETURN for more details on how to control program flow.
+
+---
+
+### REST
+**Usage:** `<REST structure [count]>`
+
+MDL built-in function (<REST structure [count]>) that returns structure without its first count elements (default 1).
+
+Z-code built-in function (<REST table [bytes]>) that returns a table address advanced by bytes (default 1). Note that this is not a copy of the structure, it is pointing to the same structure with another starting element. 
+
+structure must be an object that STRUCTURED? evaluates to true.
+
+> **Note:** Note that TABLE is not a structure.
+
+Also see BACK, LENGTH, NTH, PUT, SUBSTRUC and TOP.
 
 ---
 
@@ -1048,6 +1328,17 @@ See The Inform Designer’s Manual (ch. §42, p. 319) and The Z-machine Standard
 > **Note:** ZILF supports RESTORE in all versions.
 
 **History:** Zapf syntax: RESTORE, Inform syntax: restore
+
+---
+
+### RETURN
+**Usage:** `<RETURN [value] [activation]>`
+
+MDL built-in function that  returns value from program-block defined by activation. True is returned if no value is specified. If activation is not specified RETURN will exit the current defined program-block where an automatic activation was created (PROG and REPEAT creates automatic activations, BIND does not).
+
+In practice RETURN exits the current program-block and returns value  to the outer program-block defined by BIND (needs activation), PROG or REPEAT.
+
+> **Note:** See AGAIN, BIND, PROG and REPEAT for more examples of using RETURN and details how to control program flow.
 
 ---
 
@@ -1092,8 +1383,7 @@ Z-code built-in function that always exits routine and returns true (1). Note th
 ---
 
 ### SAVE
-**Usage:** `<SAVE>  ;  Versions 1-4, 
-<SAVE [table] [bytes] [filename]>  ;  Versions 5-`
+**Usage:** `<SAVE>  ;  Versions 1-4,` | `<SAVE [table] [bytes] [filename]>  ;  Versions 5-`
 
 Z-code built-in function that saves a game state that later can be restored. All questions about filename and path are asked by the interpreter. 
 
@@ -1134,8 +1424,7 @@ Z-code built-in function that scrolls window-number up (pixels is positive) or d
 ---
 
 ### SET
-**Usage:** `MDL: <SET atom value [environment]>,
-Zapf: <SET name value>`
+**Usage:** `MDL: <SET atom value [environment]>,` | `Zapf: <SET name value>`
 
 MDL built-in function that asigns a value to the local atom. It is possible to supply an environment for SET. See EVAL for more about the environment.
 
@@ -1148,8 +1437,7 @@ Z-code built-in function that stores value in local variable name.
 ---
 
 ### SETG
-**Usage:** `MDL: <SETG atom value>,
-Zapf: <SETG name value>`
+**Usage:** `MDL: <SETG atom value>,` | `Zapf: <SETG name value>`
 
 MDL built-in function that assigns a value to the global atom. If an atom is already assigned a value, it is changed.
 
@@ -1179,8 +1467,7 @@ Also see ASH.
 ---
 
 ### SOUND
-**Usage:** `<SOUND number [effect] [volume]>  ;  "Versions 3-4",
-<SOUND number [effect] [volrep] [routine]>  ;  "Versions 5-"`
+**Usage:** `<SOUND number [effect] [volume]>  ;  "Versions 3-4",` | `<SOUND number [effect] [volrep] [routine]>  ;  "Versions 5-"`
 
 Z-code built-in  that plays sound number (1 = high-pitch beep, 2 = low-pitch beep and 3- is user defined). 
 
@@ -1215,6 +1502,31 @@ See SCREEN for example on how to use SPLIT.
 **Usage:** `<T? expression>`
 
 Predicate. Test if expression evaluates to true ( not 0).
+
+---
+
+### TABLE
+**Usage:** `<TABLE [(flags ...)] values ...>`
+
+ZIL library function that defines a table containing the specified values. The following flags control the table format.
+
+*   WORD causes the elements to be 2-byte words. This is the default.
+
+*  BYTE causes the elements to be single bytes.
+
+*  LEXV  causes the elements to be 4-byte records. If default values are given to ITABLE with this flag, they will be split into groups of three: the first compiled as a word, the next two compiled as bytes. The table is also prefixed with a byte indicating the number of records, followed by a zero byte.
+
+*  STRING causes the elements to be single bytes and also changes the initializer format. This flag may not be used with ITABLE. When this flag is given, any values given as strings will be compiled as a series of individual ASCII characters, rather than as string addresses.
+
+The following flags alter the table without changing its basic format:
+
+*  LENGTH  causes a length marker to be written at the beginning of the table, indicating the number of elements that follow. The length marker is a byte if BYTE or STRING are also given; otherwise the length marker is a WORD. This flag is ignored if LEXV is given.
+
+*  PURE causes the table to be compiled into static memory (ROM).
+
+The flag LENGTH is implied in LTABLE and PLTABLE. The flag PURE is implied in PTABLE and PLTABLE.
+
+> **Note:** TABLE is a ZIL-specific structure that can be used both outside and inside ROUTINES.
 
 ---
 
@@ -1258,8 +1570,7 @@ Z-code built-in function that updates the status line. This command is only reco
 ---
 
 ### VALUE
-**Usage:** `MDL: <VALUE atom [environment]>, 
-Zapf: <VALUE name/number>`
+**Usage:** `MDL: <VALUE atom [environment]>,` | `Zapf: <VALUE name/number>`
 
 MDL built-in function that returns the value of an atom. If  the atom has an LVAL then the LVAL is returned, otherwise the GVAL of the atom is returned. It is possible to supply an environment for VALUE. See EVAL for more about the environment.
 
@@ -1279,6 +1590,22 @@ Z-code built-in function that returns true if sum($0040:PLENTH (byte 26-27 in he
 > **Note:** ZILF supports VERIFY in all versions.
 
 **History:** Zapf syntax: VERIFY, Inform syntax: verify
+
+---
+
+### VERSION?
+**Usage:** `<VERSION? (version-spec body ...) ...>`
+
+ZIL library predicate that tells the compiler to use different code-blocks depending on the setting of VERSION. 
+
+The version-spec can be:
+* 3 (ZIP) 
+* 4 (EZIP) 
+* 5 (XZIIP) 
+* 6 (YZIP) 
+* 7 
+* 8 
+* ELSE/T
 
 ---
 

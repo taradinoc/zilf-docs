@@ -7,8 +7,8 @@ Welcome to the ZILF Reference Guide. Select a concept below to view detailed doc
 | :--- | :--- |
 | **[Core Functions](./core-functions.md)** | Fundamental MDL built-in functions and ZIL library functions (`EVAL`, `ROUTINE`). |
 | **[Z-Code Built-ins](./z-code-built-ins.md)** | Z-machine instructions used inside ROUTINE (`POP`). |
-| **[Object System](./object-system.md)** | Entities (`OBJECT`), properties (`DESC`), and state flags (`ONBIT`, `TAKEBIT`). |
-| **[Parser System](./parser-system.md)** | Directives for syntax (`SYNTAX`) and synonym definitions (`SYNONYM`). |
+| **[Object System](./object-system.md)** | Entities (`OBJECT`, `ROOM`), properties (`DESC`), and state flags (`ONBIT`, `TAKEBIT`). |
+| **[Parser System](./parser-system.md)** | Directives for syntax (`SYNTAX`), search flags (`HAVE`, `TAKE`), and synonym definitions (`SYNONYM`). |
 
 ---
 

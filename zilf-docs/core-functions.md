@@ -3,6 +3,91 @@
 # Core Functions
 ---
 
+### *
+**Usage:** `<* numbers ...>`
+
+**Alternative Usage:** `<MUL numbers ...>`
+
+MDL and Z-code built-in function that multiplies numbers.
+
+**History:** Zapf syntax: MUL, Inform syntax: mul
+
+---
+
+### +
+**Usage:** `<+ numbers ...>`
+
+**Alternative Usage:** `<ADD numbers ...>`
+
+MDL and Z-code built-in function that adds numbers.
+
+**History:** Zapf syntax: ADD, Inform syntax: add
+
+---
+
+### -
+**Usage:** `<- numbers ...>`
+
+**Alternative Usage:** `<SUB numbers ...>`
+
+MDL and Z-code built-in function that subtracts the first number by subsequent numbers, or negates a single number.
+
+**History:** Zapf syntax: SUB, Inform syntax: sub
+
+---
+
+### 0?
+**Usage:** `<0? value>`
+
+**Alternative Usage:** `<ZERO? value>`
+
+MDL and Z-code built-in predicate that returns true if value is 0, otherwise false.
+
+**History:** Zapf syntax: ZERO?, Inform syntax: jz
+
+---
+
+### 1?
+**Usage:** `<1? value>`
+
+MDL and Z-code built-in predicate that returns true if value is 1, otherwise false.
+
+---
+
+### ==?
+**Usage:** `<==? value1 value2>`
+
+MDL and Z-code predicate that returns TRUE if value1 and value2 are the same object (or equal to any subsequent argument in Z-code), otherwise FALSE.
+
+**History:** Zapf syntax: EQUAL?, Inform syntax: je
+
+---
+
+### =?
+**Usage:** `<=? value1 value2>`
+
+**Alternative Usage:** `<EQUAL? value1 value2 ...>`
+
+MDL and Z-code predicate that returns TRUE if value1 and value2 are of the same TYPE and structurally equal (or equal to any subsequent argument in Z-code), otherwise FALSE.
+
+**History:** Zapf syntax: EQUAL?, Inform syntax: je
+
+---
+
+### ADD-TELL-TOKENS
+**Usage:** `<ADD-TELL-TOKENS {pattern form} ...>`
+
+ZIL library function that adds new pattern and form definitions to the current TELL-TOKENS for use in TELL.
+
+---
+
+### AGAIN
+**Usage:** `<AGAIN [activation]>`
+
+MDL and Z-code built-in function that restarts execution from the specified or most recent activation block (PROG, REPEAT, BIND, DO, or ROUTINE).
+
+---
+
 ### ALLTYPES
 **Usage:** `<ALLTYPES>`
 
@@ -26,6 +111,13 @@ MDL built-in function that returns the same result as AND with the difference th
 
 ---
 
+### ANDB
+**Usage:** `<ANDB numbers ...>`
+
+MDL built-in function for bitwise AND (and alias for BAND in Z-code).
+
+---
+
 ### APPLICABLE?
 **Usage:** `<APPLICABLE? value>`
 
@@ -35,10 +127,51 @@ MDL built-in predicate. Returns true if TYPE of value is of an applicable TYPE.
 
 ---
 
+### APPLY
+**Usage:** `<APPLY routine values...>`
+
+Call the routine with values. <APPLY routine values ...> is equivalent to <routine values ...>, but APPLY is often used when the routine to be called is resolved during run-time (dispatch-table).
+
+---
+
+### APPLYTYPE
+**Usage:** `<APPLYTYPE atom [handler]>`
+
+MDL built-in function that tells the TYPE atom how it should be applied in a FORM, or returns the active handler if called without handler.
+
+---
+
 ### ASCII
 **Usage:** `<ASCII {number | character}>`
 
 MDL built-in function that converts a number to a character or a character to a number.
+
+---
+
+### ASK-FOR-PICTURE-FILE?
+**Usage:** `<ASK-FOR-PICTURE-FILE?>`
+
+ZIL library function.
+
+> **Note:** ZILF ignores this and always returns FALSE.
+
+---
+
+### ASSIGNED?
+**Usage:** `<ASSIGNED? Name>`
+
+Z-code built in predicate that can test if an optimate argument named `name` is supplied in call to routine.
+
+> **Note:** ZILF supports ASSIGNED? in versions 5-.
+
+**History:** Zapf syntax: ASSIGNED?, Inform syntax: check_arg_count
+
+---
+
+### ASSOCIATIONS
+**Usage:** `<ASSOCIATIONS>`
+
+MDL built-in function that returns the first ASOC entry in the association chain, or FALSE if empty.
 
 ---
 
@@ -55,6 +188,17 @@ MDL built-in that returns a newly created ATOM with pname (string). The ATOM is 
 MDL built-in function that returns the value part from an asoc entry, of TYPE ASOC, in the ASSOCIATION chain.
 
 > **Note:** See ASSOCIATIONS, GETPROP, INDICATOR, ITEM, NEXT and PUTPROP.
+
+---
+
+### BACK
+**Usage:** `<BACK table [bytes]>`
+
+MDL built-in function (<BACK array [count]>) that moves count elements back in a VECTOR or STRING array.
+
+Z-code built-in function (<BACK table [bytes]>) that returns table with address moved bytes back (or aliases SUB for numbers). If the count moves past the start of the table no error is raised. Default value for bytes is 1. 
+
+Note that this is not a copy of the table, it is pointing to the same table with another starting address. Also see GET, GETB, PUT, PUTB and REST.
 
 ---
 
@@ -175,6 +319,15 @@ Characters 2 and 3 change the alphabet for the next character (“shift”) and 
 
 ---
 
+### CHTYPE
+**Usage:** `<CHTYPE value type>`
+
+**Alternative Usage:** `#type value`
+
+MDL built-in function that returns a new object with TYPE type and the same data part as value, provided their PRIMTYPE matches.
+
+---
+
 ### CLOSE
 **Usage:** `<CLOSE channel>`
 
@@ -220,6 +373,15 @@ ZIL library function that returns the value of the COMPILATION-FLAG atom-or-stri
 ZIL library function that is presumably  used in the MDL environment to determine if the game is compiled with ZILCH or running in the interpreter.
 
 > **Note:** ZILF ignores this and always returns TRUE.
+
+---
+
+### COND
+**Usage:** `<COND (condition expressions...)...>`
+
+Test condition (predicate) and if condition evaluates to true expressions are executed.
+
+IF-THEN style: <COND (<AND <=? 1 1> <=? 2 2>> <TELL "IF-THEN <...>">)>
 
 ---
 
@@ -386,6 +548,17 @@ See DEFAULT-DEFINITION and REPLACE-DEFINITION.
 
 ---
 
+### DIV
+**Usage:** `</ numbers ...>`
+
+**Alternative Usage:** `<DIV numbers ...>`
+
+MDL and Z-code built-in function that divides the first number by subsequent numbers.
+
+**History:** Zapf syntax: DIV, Inform syntax: div
+
+---
+
 ### EMPTY?
 **Usage:** `<EMPTY? structure>`
 
@@ -508,6 +681,13 @@ MDL built-in function that performs the first EVAL of the value. In case the val
 
 ---
 
+### FILE-FLAGS
+**Usage:** `<FILE-FLAGS {CLEAN-STACK? | MDL-ZIL? | SENTENCE-ENDS? | ZAP-TO-SOURCE-DIRECTORY?} ...>`
+
+ZIL library function that sets per-file compilation flags (CLEAN-STACK?, MDL-ZIL?, SENTENCE-ENDS?, ZAP-TO-SOURCE-DIRECTORY?).
+
+---
+
 ### FILE-LENGTH
 **Usage:** `<FILE-LENGTH channel>`
 
@@ -540,6 +720,15 @@ ZIL library predicate.
 
 ---
 
+### FUNCTION
+**Usage:** `<FUNCTION [activation] arg-list [decl] expressions ...>`
+
+**Alternative Usage:** `#FUNCTION ([activation] arg-list [decl] expressions ...)`
+
+MDL built-in function that creates an applicable FUNCTION object taking an argument list, optional declarations, and body expressions.
+
+---
+
 ### FUNNY-GLOBALS?
 **Usage:** `<FUNNY-GLOBALS? [boolean]>`
 
@@ -551,10 +740,15 @@ If needed, ZILF will move the extra variables into a table (GLOBAL-VARS-TABLE) a
 
 ---
 
+### G=?
+**Usage:** `<G=? value1 value2>`
+
+MDL and Z-code predicate that returns true if value1 is greater than or equal to value2, otherwise false.
+
+---
+
 ### G?
 **Usage:** `<G? value1 value2>`
-
-**Alternative Usage:** `<G=? value1 value2>`
 
 MDL built-in predicate that returns true if value1 is greater than value2, otherwise the predicate returns false.
 
@@ -594,12 +788,32 @@ MDL built-in function.
 
 ---
 
+### GDECL
+**Usage:** `<GDECL (atoms ...) decl ...>`
+
+MDL built-in function that declares the type/structure pattern for the global values of the listed ATOMs.
+
+---
+
 ### GET-DECL
 **Usage:** `<GET-DECL item>`
 
 MDL built-in function that returns the pattern defined to the item. It returns FALSE if no item exists.
 
 > **Note:** See DECL?, GDECL and PUT-DECL for more on declaration patterns.
+
+---
+
+### GETB
+**Usage:** `<GETB table offset>`
+
+Z-code built-in that returns BYTE-record (1 byte) stored at offset. Note that table is an address in memory so the BYTE that is returned is at table+offset. It is legal to use, for example, 0 as an address to retrieve information from the header. 
+
+Also see BACK, GET, PUT, PUTB and REST.
+
+> **Note:** ZILF supports GETB in all versions.
+
+**History:** Zapf syntax: GETB, Inform syntax: loadb
 
 ---
 
@@ -796,12 +1010,17 @@ MDL built-in function that returns a VECTOR with count items all set to init.
 
 ---
 
+### L=?
+**Usage:** `<L=? value1 value2>`
+
+MDL and Z-code predicate that returns true if value1 is less than or equal to value2, otherwise false.
+
+---
+
 ### L?
 **Usage:** `<L? value1 value2>`
 
-**Alternative Usage:** `<L=? value1 value2>`
-
-MDL built-in predicate that returns true if value1 is lower or equal than value2 otherwise false.
+MDL built-in predicate that returns true if value1 is lower than value2 otherwise false.
 
 > **Note:** L means less than.
 
@@ -850,6 +1069,13 @@ MDL built-in predicate that returns false if LENGTH of structure is greater than
 
 ---
 
+### LINK
+**Usage:** `<LINK value str oblist>`
+
+MDL built-in function that links value to PNAME str in the specified oblist so encountering str replaces it with value.
+
+---
+
 ### LIST
 **Usage:** `<LIST values ...>`
 
@@ -892,6 +1118,26 @@ MDL built-in function that  is just like PARSE with the exception that LPARSE re
 MDL built-in function that is a bitwise shift, shifting number left when places is positive and right if it is negative. When right shifting, the sign is not preserved (0 is always shifted in). For example.
 
 1000 0000 0000 1010  -->  0100 0000 0000 0101
+
+---
+
+### LTABLE
+**Usage:** `<LTABLE [(flags ...)] values ...>`
+
+Z-code built-in function that Defines a table containing the specified values and with the LENGTH flag.
+
+> **Note:** See TABLE for more information about LENGTH and other flags.
+
+---
+
+### LVAL
+**Usage:** `<LVAL name>`
+
+**Alternative Usage:** `.name`
+
+Z-code built-in function that gets the value of local variable name.
+
+> **Note:** LVAL is more often used in its short for, which is .name.
 
 ---
 
@@ -1006,12 +1252,37 @@ MDL built-in function that creates and returns a new empty OBLIST named name. If
 
 ---
 
+### MOD
+**Usage:** `<MOD number1 number2>`
+
+Z-code built-in function that Returns remainder of 16-bit signed division. number2 is not allowed to be 0 ("Division by zero").
+
+> **Note:** ZILF supports MOD in all versions.
+
+**History:** Zapf syntax: MOD, Inform syntax: mod
+
+---
+
 ### MSETG
 **Usage:** `<MSETG atom value>`
 
 ZIL library function that defines an atom with value that will never be changed. The atom can is accessed inside a ROUTINE with GVAL (or ,) just like a GLOBAL atom. Defining a MSETG (CONSTANT) instead of a GLOBAL when possible can be vital information the compiler can use for optimization.
 
 > **Note:** MSETG means "manifest set global," which is an alias for CONSTANT.
+
+---
+
+### N==?
+**Usage:** `<N==? value1 value2>`
+
+MDL and Z-code predicate that returns false if value1 and value2 are the same object, otherwise true. Opposite of ==?.
+
+---
+
+### N=?
+**Usage:** `<N=? value1 value2>`
+
+MDL and Z-code predicate that returns false if value1 and value2 are structurally equal (or equal to any subsequent argument in Z-code), otherwise true. Opposite of =?.
 
 ---
 
@@ -1255,7 +1526,9 @@ MDL built-in function that returns the evaluated representation of value.
 ### PRINT
 **Usage:** `<PRINT value [channel]>`
 
-MDL built-in function that returns the evaluated representation of value.
+MDL built-in function that prints a CRLF, the evaluated representation of value, and a space to channel, returning the evaluated value.
+
+Z-code built-in function (print_paddr) that prints a packed string from high memory pointed to by string.
 
 > **Note:** PRINT is just like PRIN1, except that it first prints a CRLF, then the evaluated representation of value and lastly a space.
 
@@ -1330,6 +1603,21 @@ ZIL library function that defines a table containing the specified values and wi
 
 ---
 
+### PUT
+**Usage:** `<PUT table offset value>`
+
+MDL built-in function (<PUT structure index new-value>) that sets the element at 1-based index in structure to new-value.
+
+Z-code built-in function (<PUT table offset value>) that puts a 16-bit WORD value in the table at 0-based word position offset. Actual address is table-address+offset*2. Note that table can be a byte-address in dynamic memory. 
+
+Also see BACK, GET, GETB, PUTB and REST.
+
+> **Note:** ZILF supports PUT in all versions.
+
+**History:** Zapf syntax: PUT, Inform syntax: storew
+
+---
+
 ### PUT-DECL
 **Usage:** `<PUT-DECL item pattern>`
 
@@ -1343,6 +1631,19 @@ MDL built-in function that  defines an alias, item, for a pattern. See DECL?, GD
 ZIL library function.
 
 > **Note:** ZILF ignores this and always returns FALSE.
+
+---
+
+### PUTB
+**Usage:** `<PUTB table offset value>`
+
+Z-code built-in function that puts a byte value in the table at byte position offset. The actual address is table-address+offset. Note that table can be a byte-address in dynamic memory.
+
+Also see BACK, GET, GETB, PUT and REST.
+
+> **Note:** ZILF supports PUTB in all versions.
+
+**History:** Zapf syntax: PUTB, Inform syntax: storeb
 
 ---
 
@@ -1397,6 +1698,19 @@ MDL built-in function that reads bytes from the channel into buffer-str and retu
 
 ---
 
+### REMOVE
+**Usage:** `<REMOVE object>`
+
+MDL built-in function (<REMOVE pname oblist> or <REMOVE atom>) that removes an ATOM from an OBLIST.
+
+Z-code built-in function (<REMOVE object>) that detaches object from its parent object. To reattach it, see MOVE.
+
+> **Note:** ZILF supports REMOVE in all versions.
+
+**History:** Zapf syntax: REMOVE, Inform syntax: remove_obj
+
+---
+
 ### RENTRY
 **Usage:** `<RENTRY atoms ...>`
 
@@ -1433,7 +1747,9 @@ See DEFAULT-DEFINITION and REPLACE-DEFINITION.
 ### REST
 **Usage:** `<REST structure [count]>`
 
-MDL built-in function that returns structure without its first count elements (count is default 1). Note that this is not a copy of the structure, it is pointing to the same structure with another starting element. 
+MDL built-in function (<REST structure [count]>) that returns structure without its first count elements (default 1).
+
+Z-code built-in function (<REST table [bytes]>) that returns a table address advanced by bytes (default 1). Note that this is not a copy of the structure, it is pointing to the same structure with another starting element. 
 
 structure must be an object that STRUCTURED? evaluates to true.
 
@@ -1544,8 +1860,7 @@ The flags are:
 ---
 
 ### SET
-**Usage:** `MDL: <SET atom value [environment]>,
-Zapf: <SET name value>`
+**Usage:** `MDL: <SET atom value [environment]>,` | `Zapf: <SET name value>`
 
 MDL built-in function that asigns a value to the local atom. It is possible to supply an environment for SET. See EVAL for more about the environment.
 
@@ -1576,6 +1891,8 @@ The tokens that can have changed default behaviour are:
 
 *  'NTH, the default ATOM for this is NTH. Change to other with ('NTH MY-NTH).
 
+*  'PRINTTYPE, change the default ATOM for PRINTTYPE with ('PRINTTYPE MY-PRINTTYPE).
+
 *  'PUT, the default ATOM for this is PUT. Change to other with ('PUT MY-PUT).
 
 *  'START-OFFSET, the default value is 1. Change with ('START-OFFSET value).
@@ -1587,8 +1904,7 @@ See DEFSTRUCT for more on user defined structures.
 ---
 
 ### SETG
-**Usage:** `MDL: <SETG atom value>,
-Zapf: <SETG name value>`
+**Usage:** `MDL: <SETG atom value>,` | `Zapf: <SETG name value>`
 
 MDL built-in function that assigns a value to the global atom. If an atom is already assigned a value, it is changed.
 
@@ -1825,8 +2141,7 @@ MDL build-in function that returns the TYPE if the atom is a valid name of a TYP
 ---
 
 ### VALUE
-**Usage:** `MDL: <VALUE atom [environment]>, 
-Zapf: <VALUE name/number>`
+**Usage:** `MDL: <VALUE atom [environment]>,` | `Zapf: <VALUE name/number>`
 
 MDL built-in function that returns the value of an atom. If  the atom has an LVAL then the LVAL is returned, otherwise the GVAL of the atom is returned. It is possible to supply an environment for VALUE. See EVAL for more about the environment.
 

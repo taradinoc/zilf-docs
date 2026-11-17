@@ -5,11 +5,58 @@
 
 ## Core Functions
 
+### *
+```zil
+<* 2 3 4>  ;  24
+```
+
+
+### +
+```zil
+<+ 2 3 4>  ;  7
+```
+
+
+### -
+```zil
+<- 8 3 4>  ;  1
+<- 5>  ;  -5
+```
+
+
+### 0?
+```zil
+<0? <- 1 1>>  ;  TRUE
+```
+
+
+### 1?
+```zil
+<1? <- 2 1>>  ;  TRUE
+```
+
+
+### ==?
+```zil
+<SET X 1>
+<==? .X 1>  ;  True
+<SET X (1 2 3)>
+<==? .X (1 2 3)>  ;  False
+```
+
+
+### =?
+```zil
+<=? 1 1>  ;  TRUE
+<=? 1 2 1>  ;  TRUE
+```
+
+
 ### AND
 ```zil
 <AND <=? 1 1> <N=? 1 2>>  ;  True
 <AND <=? 1 2> <SET X 2>>  ;  X never set to 2 because first predicate evaluates to false
-<SET X <AND 1 2 3 0 4>>  ;  X is set to 0
+<SET X <AND 1 2 3 0 4>>  ;  X is set to 4 (outside routine in MDL) or 0 (inside routine in Z-code)
 <SET X <AND 1 2 3 <> 4>>  ;  X is set to #FALSE
 <SET X <AND 1 4 3 2>>  ;  X is set to 2
 ```
@@ -22,6 +69,13 @@
 ```
 
 
+### ANDB
+```zil
+<ANDB 33 96>  ;  32
+<ANDB 33 96 64>  ;  0
+```
+
+
 ### APPLICABLE?
 ```zil
 <DEFINE SQR (X) <* .X .X>>
@@ -29,10 +83,36 @@
 ```
 
 
+### APPLY
+```zil
+<GLOBAL MYROUTINES <LTABLE ROUTINE1 ROUTINE2>>
+...
+<APPLY <GET ,MYROUTINES 1> .X>  ;  <ROUTINE1 .X>
+<APPLY <GET ,MYROUTINES 2> .X>  ;  <ROUTINE2 .X>
+<APPLY <GETP .OBJECT ,P?ACTION>>  ;  Call ACTION-routine on OBJECT
+```
+
+
 ### ASCII
 ```zil
 <ASCII !\A>  ;  65
 <ASCII 65>  ;  !\A
+```
+
+
+### ASSIGNED?
+```zil
+<ROUTINE TEST("OPT" X)
+<COND (<ASSIGNED? X>
+  <TELL "X is assigned." CR>
+)
+(ELSE
+  <TELL "X is not assigned." CR>
+)>
+>
+
+<TEST>  ;  X is not assigned.
+<TEST 1>  ; X is assigned.
 ```
 
 
@@ -53,6 +133,14 @@
 <PUTPROP NEW-ASOC TEXT "Hello, world!">
 <SET A <LAST-ASOC>>
 <AVALUE .A>  ;  "Hello, world!"
+```
+
+
+### BACK
+```zil
+<GLOBAL TBL1 <TABLE 1 2 3 4>>  ;  TBL1 = [1 2 3 4]
+<GLOBAL TBL2 <REST ,STRUCT1 4>>  ;  TBL2 = [3 4] Move 4 because WORD-table!
+<SETG TBL2 <BACK ,TBL2 2>>  ;  TBL2 = [2 3 4]
 ```
 
 
@@ -168,6 +256,13 @@ zyxwvutsrqponmlkjihgfedcba
 ```
 
 
+### CHTYPE
+```zil
+<CHTYPE !\A FIX>  ;  65
+#FIX !\A  ;  65
+```
+
+
 ### COMPILATION-FLAG
 ```zil
 <COMPILATION-FLAG MYFLAG>
@@ -193,6 +288,58 @@ zyxwvutsrqponmlkjihgfedcba
 <COMPILATION-FLAG MYFLAG 123>
 <COMPILATION-FLAG-VALUE MYFLAG>  ;  123
 <COMPILATION-FLAG-VALUE ASDFGHJKL>  ;  #FALSE
+```
+
+
+### COND
+```zil
+;  SWITCH style
+<COND
+  (<=? .SWITCH 1>
+    <TELL "Variable SWITCH = 1" CR>)
+  (<=? .SWITCH 2>
+    <TELL "Variable SWITCH = 2" CR>)
+  (<=? .SWITCH 3>
+    <TELL "Variable SWITCH = 3" CR>)
+  (T
+    <TELL "Variable SWITCH not in (1 2 3)" CR>)
+>
+
+;  IF-THEN-ELSE style
+
+<COND (<AND <=? 1 1> <=? 2 2>>
+  <TELL "THEN <...>" CR>
+)
+  (ELSE  ;  "Or T"
+  <TELL "ELSE <...>" CR>
+)>
+
+;  COND evaluates each condition in turn and executes the expressions directly after the first condition that evaluates to true. ELSE is an alias for T so if the first condition is false the second is always true and is executed.
+
+;  Note that only one of the (conditions expressions …)is executed, the conditions after a condition that evaluates to true is skipped.
+
+<COND
+  (T
+    <TELL "Variable SWITCH not in (1 2 3)" CR>)
+  (<=? .SWITCH 1>
+    <TELL "Variable SWITCH = 1" CR>)
+  (<=? .SWITCH 2>
+    <TELL "Variable SWITCH = 2" CR>)
+  (<=? .SWITCH 3>
+    <TELL "Variable SWITCH = 3" CR>)
+>
+
+;  In this case conditions for 1, 2 & 3 is never executed and should result in a compiler warning.
+<COND
+  (T
+    <TELL "Variable SWITCH not in (1 2 3)" CR>)
+  (<=? .SWITCH 1>
+    <TELL "Variable SWITCH = 1" CR>)
+  (<=? .SWITCH 2>
+    <TELL "Variable SWITCH = 2" CR>)
+  (<=? .SWITCH 3>
+    <TELL "Variable SWITCH = 3" CR>)
+>
 ```
 
 
@@ -496,6 +643,12 @@ zyxwvutsrqponmlkjihgfedcba
 ```
 
 
+### DIV
+```zil
+</ 20 5 2>  ;  2
+```
+
+
 ### EMPTY?
 ```zil
 <EMPTY? [1 2 3]>  ;  False
@@ -606,6 +759,12 @@ A  ;  5
 ```
 
 
+### FILE-FLAGS
+```zil
+<FILE-FLAGS CLEAN-STACK? MDL-ZIL?>
+```
+
+
 ### FILE-LENGTH
 ```zil
 ;  "ZILF ver 0.9"
@@ -621,6 +780,13 @@ A  ;  5
 <DEFINE INC-FORM (A) 
     <FORM SET .A <FORM + 1 <FORM LVAL .A>>>> 
 <INC-FORM X>  ;  <SET X <+ 1 .X>
+```
+
+
+### G=?
+```zil
+<G=? 5 4>  ;  T
+<G=? 5 5>  ;  T
 ```
 
 
@@ -655,6 +821,12 @@ A  ;  5
 <GET-DECL BOOLEAN>  ;  #FALSE
 <PUT-DECL BOOLEAN '<OR ATOM FALSE>>
 <GET-DECL BOOLEAN>  ;  <OR ATOM FALSE>
+```
+
+
+### GETB
+```zil
+<GETB <TABLE (BYTE) !\A !\B !\C !\D> 2>  ;  !\C
 ```
 
 
@@ -859,6 +1031,13 @@ BAR!-OB  ;  BAR!-OB
 ```
 
 
+### L=?
+```zil
+<L=? 5 4>  ;  <>
+<L=? 5 5>  ;  T
+```
+
+
 ### LEGAL?
 ```zil
 ;  "Activation"
@@ -887,6 +1066,12 @@ BAR!-OB  ;  BAR!-OB
 <LENGTH? (1 2 3) 1>  ;  False
 <LENGTH? (1 2 3) 3>  ;  3
 <NOT <NOT <LENGTH? (1 2 3) 4>>>  ;  True
+```
+
+
+### LINK
+```zil
+<LINK '<INSERT-FILE "HEDGEMAZE"> "H" <ROOT>>
 ```
 
 
@@ -946,6 +1131,14 @@ FOO!-MYOBLIST
 ```zil
 <LSH 4 1>  ;  8 
 <LSH 4 -2>  ;  1
+```
+
+
+### LVAL
+```zil
+<SET X 5> 
+<LVAL X>  ;  5
+.X  ;  5
 ```
 
 
@@ -1063,11 +1256,34 @@ FOO!-NEW-OBLIST  ;  "This can also be done with trailer"
 ```
 
 
+### MOD
+```zil
+<MOD 15 4>  ;  3
+<MOD -15 4>  ;  -3
+<MOD -15 -4>  ;  -3
+<MOD 15 -4>  ;  3
+```
+
+
 ### MSETG
 ```zil
 <MSETG MSG-CANT-DO-THAT "You can't do that!">
 ...
 <TELL ,MSG-CANT-DO-THAT CR>
+```
+
+
+### N==?
+```zil
+<SET X 1>
+<N==? .X 1>  ;  False
+```
+
+
+### N=?
+```zil
+<N=? 1 1>  ;  FALSE
+<N=? 1 2>  ;  TRUE
 ```
 
 
@@ -1451,12 +1667,25 @@ FOO!-NEW-OBLIST  ;  "This can also be done with trailer"
 ```
 
 
+### PUT
+```zil
+<PUT ,MYTABLE 1 123>  ;  Stores 123 at position 1 in MYTABLE
+<PUT 0 8 <BOR <GET 0 8> 2>>  ;  Sets bit 1 in Flags 2 in header (force monospace)
+```
+
+
 ### PUT-DECL
 ```zil
 <DECL? T BOOLEAN>  ;  Error 
 <PUT-DECL BOOLEAN '<OR ATOM FALSE>>
 <DECL? T BOOLEAN>  ;  T
 <DECL? "Hi" BOOLEAN>  ;  #FALSE
+```
+
+
+### PUTB
+```zil
+<PUTB ,MYTABLE 1 !\A>  ;  Stores character A at position 1 in MYTABLE
 ```
 
 
@@ -1535,6 +1764,14 @@ FOO!-NEW-OBLIST  ;  "This can also be done with trailer"
 <READSTRING .BUFFER .CH "ZIL">  ;  10
 <LVAL BUFFER>  ;  "\n\n<SETG "
 <CLOSE .CH>  ;  "\n = CR+LF"
+```
+
+
+### REMOVE
+```zil
+<OBJECT ANIMAL>
+<OBJECT CAT (LOC ANIMAL)>
+<REMOVE ,CAT)  ;  Detach CAT from ANIMAL
 ```
 
 
@@ -2029,13 +2266,67 @@ THEI   <THEI-PRINT>>
 
 ## Z-Code Built-ins
 
+### *
+```zil
+<* 2 3 4>  ;  24
+```
+
+
+### +
+```zil
+<+ 2 3 4>  ;  7
+```
+
+
+### -
+```zil
+<- 8 3 4>  ;  1
+<- 5>  ;  -5
+```
+
+
+### 0?
+```zil
+<0? <- 1 1>>  ;  TRUE
+```
+
+
+### 1?
+```zil
+<1? <- 2 1>>  ;  TRUE
+```
+
+
+### ==?
+```zil
+<SET X 1>
+<==? .X 1>  ;  True
+<SET X (1 2 3)>
+<==? .X (1 2 3)>  ;  False
+```
+
+
+### =?
+```zil
+<=? 1 1>  ;  TRUE
+<=? 1 2 1>  ;  TRUE
+```
+
+
 ### AND
 ```zil
 <AND <=? 1 1> <N=? 1 2>>  ;  True
 <AND <=? 1 2> <SET X 2>>  ;  X never set to 2 because first predicate evaluates to false
-<SET X <AND 1 2 3 0 4>>  ;  X is set to 0
+<SET X <AND 1 2 3 0 4>>  ;  X is set to 4 (outside routine in MDL) or 0 (inside routine in Z-code)
 <SET X <AND 1 2 3 <> 4>>  ;  X is set to #FALSE
 <SET X <AND 1 4 3 2>>  ;  X is set to 2
+```
+
+
+### ANDB
+```zil
+<ANDB 33 96>  ;  32
+<ANDB 33 96 64>  ;  0
 ```
 
 
@@ -2090,6 +2381,25 @@ THEI   <THEI-PRINT>>
 ### BCOM
 ```zil
 <BCOM #2 000011110001111>  ;  #2 1111000011110000
+```
+
+
+### BIND
+```zil
+<BIND ((X 1)) #DECL ((X) FIX)  
+<BIND ((X 2)) <PRIN1 .X>> <PRIN1 .X>>  ;  "21"
+
+<DEFINE TEST-BIND-AS-REPEAT () 
+    <PRINC "START "> 
+    <BIND ACT ((X 0)) 
+        <SET X <+ .X 1>> 
+        <PRIN1 .X> 
+        <COND (<=? .X 3> <RETURN T .ACT>)>  ;  "--> exit block"
+        <AGAIN .ACT>  ;  "--> repeat"
+    >
+    <PRINC " END">
+>
+<TEST-BIND-AS-REPEAT>  ;  "START 123 END"
 ```
 
 
@@ -2203,6 +2513,12 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### CRLF
+```zil
+<CRLF>  ;  "Moves cursor to position 1 on new line"
+```
+
+
 ### CURGET
 ```zil
 <GLOBAL CURTABLE <TABLE 0 0>>
@@ -2250,6 +2566,12 @@ THEI   <THEI-PRINT>>
 ### DISPLAY
 ```zil
 <DISPLAY 1>  ;  Draws picture 1 at current cursor position
+```
+
+
+### DIV
+```zil
+</ 20 5 2>  ;  2
 ```
 
 
@@ -2463,6 +2785,13 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### G=?
+```zil
+<G=? 5 4>  ;  T
+<G=? 5 5>  ;  T
+```
+
+
 ### GET
 ```zil
 <GET <TABLE 0 1 2 3> 2>  ;  2
@@ -2497,9 +2826,25 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### GVAL
+```zil
+<SETG X 5>
+<GVAL X>  ;  5 
+,X  ;  5
+```
+
+
 ### HLIGHT
 ```zil
 <HLIGHT 2>  ;  Set font to bold
+```
+
+
+### IFFLAG
+```zil
+<COMPILATION-FLAG MYFLAG <>>
+<IFFLAG (MYFLAG <SETG FOO "NOT OFF">) (T <SETG FOO "OFF">)>
+,FOO  ;  "OFF"
 ```
 
 
@@ -2574,6 +2919,26 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### ITABLE
+```zil
+<ITABLE 3>  ;  [0 0 0 0 0 0] (3x#WORD)
+<ITABLE 3 1>  ;  [0 1 0 1 0 1] (3x#WORD)
+<ITABLE WORD 3 1>  ;  [0 3 0 1 0 1 0 1] (#WORD + 3x#WORD)
+<ITABLE 3 (BYTE) 1>  ;  [1 1 1] (3x#BYTE)
+<ITABLE 3 (LENGTH BYTE) 1>  ;  [3 1 1 1] (#BYTE + 3x#BYTE)
+<ITABLE BYTE 3 1>  ;  [3 0 1 0 1 0 1] (#BYTE + 3x#WORD)
+<ITABLE 3 (LEXV) 1 2 3>  ;  [0 1 2 3 0 1 2 3 0 1 2 3] (3x(#WORD #BYTE #BYTE))
+<ITABLE 3 (LENGTH LEXV) 1 2 3>  ;  [0 9 0 1 2 3 0 1 2 3 0 1 2 3] (#WORD + 3x(#WORD #BYTE #BYTE))
+```
+
+
+### L=?
+```zil
+<L=? 5 4>  ;  <>
+<L=? 5 5>  ;  T
+```
+
+
 ### LESS?
 ```zil
 <LESS? 5 4>  ;  <>
@@ -2617,6 +2982,13 @@ THEI   <THEI-PRINT>>
 ```zil
 ;  Reads 6 bytes from SERIAL and print each byte as character 
 <LOWCORE-TABLE SERIAL 6 PRINTC>
+```
+
+
+### LSH
+```zil
+<LSH 4 1>  ;  8 
+<LSH 4 -2>  ;  1
 ```
 
 
@@ -2754,6 +3126,20 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### N==?
+```zil
+<SET X 1>
+<N==? .X 1>  ;  False
+```
+
+
+### N=?
+```zil
+<N=? 1 1>  ;  FALSE
+<N=? 1 2>  ;  TRUE
+```
+
+
 ### NEXT?
 ```zil
 <OBJECT ANIMAL>
@@ -2772,6 +3158,23 @@ THEI   <THEI-PRINT>>
 <=? <NEXTP ,MYOBJ 0> P?FOO>  ;  T
 <=? <NEXTP ,MYOBJ P?FOO> P?BAR>  ;  T
 <NEXTP ,MYOBJ P?BAR>  ;  0 (false)
+```
+
+
+### NOT
+```zil
+<NOT <>>  ;  T
+<NOT T>  ;  #FALSE <>
+<NOT <=? 1 2>>  ;  T (Same as <N=? 1 2>
+```
+
+
+### OR
+```zil
+<OR <=? 1 2> <=? 1 1>>  ;  True 
+ <OR <=? 1 1> <SET X 2>> ;  X is never set to 2 because first predicate evaluates to true 
+ <SET X <OR 0 1 2 3>>  ;  X is set to 0 
+ <SET X <OR <> 1 2 3>>  ;  X is set to 1
 ```
 
 
@@ -2795,6 +3198,16 @@ THEI   <THEI-PRINT>>
 <SET FOO some-new-value>
 ;code
 <SET FOO <POP>>
+```
+
+
+### PRINT
+```zil
+<PRINT !\A>  ;  !\A<space>
+<PRINT 42>  ; 42<space>
+<PRINT "Hello, world!">  ;  "Hello, world!"<space>
+<PRINT (1 2 3)>  ;  (1 2 3)<space>
+<PRINT <+ 1 2>>  ;  3<space>
 ```
 
 
@@ -2853,6 +3266,30 @@ THEI   <THEI-PRINT>>
 ```zil
 <PRINTU 65>  ;  A
 <PRINTU 196>  ;  Ä
+```
+
+
+### PROG
+```zil
+<PROG ((X 1)) #DECL ((X) FIX)  
+    <PROG ((X 2)) <PRIN1 .X>> <PRIN1 .X>>  ;  "21" 
+<DEFINE TEST-PROG-AS-REPEAT ()
+    <PRINC "START ">
+    <PROG ((X 0))
+        <SET X <+ .X 1>>
+        <PRIN1 .X>
+        <COND (<=? .X 3> <RETURN>)>  ;  "--> exit block"
+        <AGAIN>  ;  "--> repeat"
+    >
+    <PRINC " END">
+>
+    <TEST-PROG-AS-REPEAT>  ;  "START 123 END"
+```
+
+
+### PTABLE
+```zil
+<PTABLE 1 2 3 4>
 ```
 
 
@@ -2934,6 +3371,32 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### REPEAT
+```zil
+<REPEAT ((X 1)) #DECL ((X) FIX)  
+    <REPEAT ((X 2)) <PRIN1 .X> <RETURN>>  
+    <PRIN1 .X> <RETURN>>  ;  "21"
+<DEFINE TEST-REPEAT () 
+    <PRINC "START "> 
+    <REPEAT ((X 0)) 
+        <SET X <+ .X 1>> 
+        <PRIN1 .X> 
+        <COND (<=? .X 3> <RETURN>)>  ;  "--> exit block" 
+    > 
+    <PRINC " END"> 
+> 
+    <TEST-REPEAT>  ;  "START 123 END"
+```
+
+
+### REST
+```zil
+<SETG STRUCT1 [1 2 3 4]>  ;  STRUCT1 = [1 2 3 4]
+<SETG STRUCT2 <REST ,STRUCT1>>  ;  STRUCT2 = [2 3 4]
+<PUT ,STRUCT2 1 5>  ;  STRUCT1 = [1 5 3 4], STRUCT2 = [5 3 4]
+```
+
+
 ### RESTORE
 ```zil
 <ROUTINE SAVE-GAME ("AUX" RESULT)
@@ -2946,6 +3409,15 @@ THEI   <THEI-PRINT>>
   <RESTORE>
   <TELL "Restore failed." CR>
 >
+```
+
+
+### RETURN
+```zil
+<PROG () <RETURN>>  ;  T
+<PROG ACT ()
+    <PROG () <RETURN 42 .ACT>>
+<RETURN 43>> ;"Never reached"  -->  42
 ```
 
 
@@ -3069,6 +3541,20 @@ MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR
 ```
 
 
+### TABLE
+```zil
+<TABLE 1 2 3 4>
+|  Element 0 WORD | Element 1 WORD | Element 2 WORD | Element 3 WORD |
+| --- | --- | --- | --- |
+| 1 | 2 | 3 | 4 |
+
+<TABLE (BYTE LENGTH) 1 2 3 4>
+|  Element 0 BYTE | Element 1 BYTE | Element 2 BYTE | Element 3 BYTE | Element 4 BYTE |
+| --- | --- | --- | --- |
+| 4 | 1 | 2 | 3 | 4 |
+```
+
+
 ### TELL
 ```zil
 <TELL "You have " N ,SCORE " points." CR>  ;  "You have 42 points.\n"
@@ -3114,6 +3600,16 @@ MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR
 ### VERIFY
 ```zil
 <VERIFY>
+```
+
+
+### VERSION?
+```zil
+<VERSION? 
+  (ZIP <ROUTINE RTN-ZIP () ...>) 
+  (XZIP <ROUTINE RTN-XZIP () ...>) 
+  (ELSE <ROUTINE RTN-OTHER () ...>) 
+ >
 ```
 
 
@@ -3280,4 +3776,28 @@ MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR
 ### PropAdjective
 ```zil
 ADJECTIVE BRASS SMALL
+```
+
+
+### ROOM
+```zil
+<ROOM INSIDE-HOUSE
+    (DESC "Inside House")
+    (IN ROOMS)
+    (LDESC
+"You are standing inside the rotting house. The house is
+  sparsely furnished, in fact not at all. On one wall is
+  positioned a sign. Beside the sign is a button, and an open
+  trap-door is placed on the floor. The exit is west
+  and there is a walk-in closet in the eastern wall.")
+(UP "You have yet to master the art of flying.")
+(EAST TO CLOSET)
+(WEST TO OUTSIDE-HOUSE IF FRONT-DOOR-FLAG ELSE ,MSG-025)
+(DOWN PER TRAP-DOOR-F)
+(ACTION INSIDE-HOUSE-F)
+(FLAGS LIGHTBIT NDUNGEONBIT)
+(THINGS (<>) (BUTTON) LIGHTBUTTON-F
+                 (<>) (SIGN) HOUSE-SIGN-F
+                 (<>) (HOUSE FLOOR CLOSET KEYHOLE) STANDARD-F)
+(GLOBAL FRONT-DOOR)>
 ```

@@ -3,6 +3,13 @@
 # Parser System
 ---
 
+### ADD-WORD
+**Usage:** `<ADD-WORD atom-or-string [part-of-speech] [value] [flags]>`
+
+ZIL parser library function (used with NEW-PARSER? T) that adds a word to the vocabulary with optional part-of-speech, value, and flags.
+
+---
+
 ### ADJ-SYNONYM
 **Usage:** `<ADJ-SYNONYM original synonyms ...>`
 
@@ -74,10 +81,7 @@ ZIL parser library function that creates one or more synonyms to the original ve
 ### SYNTAX
 **Usage:** `SYNTAX`
 
-**Alternative Usage:** `<SYNTAX verb [prep1] [OBJECT] [(FIND flag-name)]
-    [(search-flags ...)] [prep2] [OBJECT]
-    [(FIND flag-name)] [(search-flags ...)]
-        = action-routine-name [preaction-routine-name]>`
+**Alternative Usage:** `<SYNTAX verb [prep1] [OBJECT] [(FIND flag-name)]` | `[(search-flags ...)] [prep2] [OBJECT]` | `[(FIND flag-name)] [(search-flags ...)]` | `= action-routine-name [preaction-routine-name]>`
 
 ZIL parser library function that  defines a verb-phrase and specifies which action-routine-name should be called when an input matches this verb-phrase. A SYNTAX must contain a verb and an action-routine-name. Optionally it can contain one direct noun-phrase, the first token OBJECT, and one indirect noun-phrase, the second token OBJECT. Each noun-phrase can also have a corresponding preposition, prep1 and prep2 respectively.
 
@@ -122,5 +126,71 @@ Each occurrence of an action-routine-name together with an optional preaction-ro
 ZIL parser library function that creates one or more synonyms to the original verb.
 
 > **Note:** ZILF treats VERB-SYNONYM as an alias to SYNONYM.
+
+---
+
+## Syntax Search & Scope Flags
+*Search scope and behavior flags used in `SYNTAX` definitions.*
+
+### FlagCARRIED
+**Usage:** `CARRIED`
+
+SYNTAX scope flag to search inside open containers in the player's inventory.
+
+---
+
+### FlagHAVE
+**Usage:** `HAVE`
+
+SYNTAX search flag requiring the object to be in the player's inventory.
+
+---
+
+### FlagHELD
+**Usage:** `HELD`
+
+SYNTAX scope flag to search in the player's top-level inventory.
+
+---
+
+### FlagINROOM
+**Usage:** `IN-ROOM`
+
+SYNTAX scope flag to search inside containers on the ground.
+
+---
+
+### FlagKLUDGEBIT
+**Usage:** `KLUDGEBIT`
+
+Special FIND bit used when a SYNTAX line ends with a preposition and has no indirect object.
+
+---
+
+### FlagMANY
+**Usage:** `MANY`
+
+SYNTAX search flag allowing multiple objects with the verb.
+
+---
+
+### FlagNEWSFLAGS
+**Usage:** `NEW-SFLAGS`
+
+GVAL table used to define custom search flags in Version 6 new parser games.
+
+---
+
+### FlagONGROUND
+**Usage:** `ON-GROUND`
+
+SYNTAX scope flag to search on the ground at top-level.
+
+---
+
+### FlagTAKE
+**Usage:** `TAKE`
+
+SYNTAX search flag instructing the parser to attempt an implicit take if the object is not held.
 
 ---
