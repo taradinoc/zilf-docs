@@ -255,7 +255,7 @@ MDL built-in function that  pushes current binding of the local ATOM OBLIST and 
 ### BOUND?
 **Usage:** `<BOUND? atom [environment]>`
 
-MDL bulit-in predicate that returns true if the atom ever had a local value in the environment.
+MDL built-in predicate that returns true if the atom ever had a local value in the environment.
 
 If no environment is supplied, the environment defaults to current scope. See EVAL for more about the environment.
 
@@ -1441,10 +1441,7 @@ MDL built-in function that is a boolean OR. Requires that one of the expressions
 ### OR?
 **Usage:** `<OR? Expressions ...>`
 
-MDL built-in function that returns the same result as OR with the difference that all exressions are evaluated.
-
-> **Note:** <OR? <=? 1 2> <=? 1 1>>  ; True 
->  <OR? <=? 1 1> <SET X 2>> ;  X is set to 2 because all expressions are evaluated
+MDL built-in function that returns the same result as OR with the difference that all expressions are evaluated.
 
 ---
 
@@ -2268,7 +2265,7 @@ ZIL library predicate that tells the compiler to use different code-blocks depen
 The version-spec can be:
 * 3 (ZIP) 
 * 4 (EZIP) 
-* 5 (XZIIP) 
+* 5 (XZIP) 
 * 6 (YZIP) 
 * 7 
 * 8 
