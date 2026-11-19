@@ -30,6 +30,8 @@ Reserved GVAL (default: |) specifying the character interpreted as a newline ins
 ### ResDoFunnyReturns
 **Usage:** `DO-FUNNY-RETURNS?`
 
+**Alternative Usage:** `DO-FUNNY-RETURN?`
+
 Reserved GVAL (default: <> in V3-4, T in V5-) controlling whether <RETURN value> inside PROG/REPEAT exits the enclosing ROUTINE.
 
 ---
