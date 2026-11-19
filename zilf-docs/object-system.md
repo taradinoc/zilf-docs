@@ -3,7 +3,7 @@
 # Object System
 **Parent Concept:** Object System
 
-Entities (`OBJECT`, `ROOM`), properties (`DESC`, `SYNONYM`), and state flags (`ONBIT`, `TAKEBIT`).
+Entities (`OBJECT`, `ROOM`), properties (`DESC`, `SYNONYM`), and state flags (`LIGHTBIT`, `OPENBIT`, `TAKEBIT`).
 
 ---
 
@@ -87,8 +87,8 @@ ZIL library function that creates a room-object with the internal objectname, na
     *  M-ENTER, the routine-name is called with this value to RARG when the player enters the ROOM (before any room description).
 
 > **Note:** Note that ROOMs can just as easily be created with OBJECT as long as they are (IN ROOMS).
-
-See Learning ZIL, Steve E. Meretzky and ZIL Course, Marc S. Blank for more on properties, flagbits and how to write and design games.
+>
+> See Learning ZIL, Steve E. Meretzky and ZIL Course, Marc S. Blank for more on properties, flagbits and how to write and design games.
 
 ---
 
@@ -234,10 +234,75 @@ Scoring value of an OBJECT.
 ## Flags
 *A collection of boolean bits (flags) that define the state or behavior of an object.*
 
+### BitCont
+**Usage:** `CONTBIT`
+
+Object flag indicating that an object is a container (commonly used with FIND CONTBIT in SYNTAX).
+
+---
+
+### BitDevice
+**Usage:** `DEVICEBIT`
+
+Object flag indicating that an object is a switchable device (commonly used with FIND DEVICEBIT in SYNTAX).
+
+---
+
+### BitDoor
+**Usage:** `DOORBIT`
+
+Object flag indicating that an object is a door (commonly used with FIND DOORBIT in SYNTAX).
+
+---
+
+### BitLight
+**Usage:** `LIGHTBIT`
+
+Object or room flag indicating that a room is lit or an object can provide light.
+
+---
+
+### BitNdungeon
+**Usage:** `NDUNGEONBIT`
+
+Room flag shown in ZILF Reference Guide room examples (indicating a non-dungeon room).
+
+---
+
 ### BitOn
 **Usage:** `ONBIT`
 
 Flag indicating that a light-source object is currently providing light.
+
+> **Note:** Traditional ZIL/zillib light-state flag; not explicitly listed in the ZILF Reference Guide (which uses LIGHTBIT).
+
+---
+
+### BitOpen
+**Usage:** `OPENBIT`
+
+Object flag indicating that a container or door is currently open.
+
+---
+
+### BitPerson
+**Usage:** `PERSONBIT`
+
+Object flag indicating that an object is a person/NPC (commonly used with FIND PERSONBIT in SYNTAX).
+
+---
+
+### BitRoom
+**Usage:** `ROOMBIT`
+
+Special flag sometimes used in place of KLUDGEBIT when a SYNTAX line ends with a preposition.
+
+---
+
+### BitSurface
+**Usage:** `SURFACEBIT`
+
+Object flag indicating that an object is a supporter/surface (commonly used with FIND SURFACEBIT in SYNTAX).
 
 ---
 

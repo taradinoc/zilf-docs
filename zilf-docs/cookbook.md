@@ -698,7 +698,7 @@ XYZZY!-MY-OBLIST
 
 ### EQVB
 ```zil
-<XORB 250 245>  
+<EQVB 250 245>  
 ;  00000000 00000000 00000000 11111010
 ;  00000000 00000000 00000000 11110101
 ;  -----------------------------------
@@ -1333,6 +1333,21 @@ FOO!-NEW-OBLIST  ;  "This can also be done with trailer"
 ```
 
 
+### OBJECT
+```zil
+<OBJECT LAMP
+  (IN LIVING-ROOM)
+  (SYNONYM LAMP LANTERN LIGHT)
+  (ADJECTIVE BRASS)
+  (DESC "brass lantern")
+  (FLAGS TAKEBIT LIGHTBIT)
+  (ACTION LANTERN)
+  (FDESC "A battery-powered brass lantern is on the trophy case.")
+  (LDESC "There is a brass lantern (battery-powered) here.")
+  (SIZE 15)>
+```
+
+
 ### OBLIST?
 ```zil
 <==? <OBLIST? STRING> <ROOT>>  ;  T   
@@ -1883,7 +1898,7 @@ FOO!-NEW-OBLIST  ;  "This can also be done with trailer"
 
 ### ROUTINE-FLAGS
 ```zil
-<FILE-FLAGS CLEAN-STACK?>
+<ROUTINE-FLAGS CLEAN-STACK?>
 ```
 
 
@@ -2155,52 +2170,6 @@ THEI   <THEI-PRINT>>
   (XZIP <ROUTINE RTN-XZIP () ...>) 
   (ELSE <ROUTINE RTN-OTHER () ...>) 
  >
-```
-
-
-### VOC
-```zil
-<VERSION XZIP>
-<VOC "FALSE" <>>
-<VOC "NOUN" NOUN>
-<VOC "BUZZ" BUZZ>
-<VOC "VERB" VERB>
-<VOC "ADJECTIVE" ADJ>
-<VOC "PREP" PREP>
-  <ROUTINE GO () <TEST-VOC> <INPUT 1>>
-  <ROUTINE TEST-VOC ("AUX" P)
-    <SET P W?FALSE>
-      <TELL "FALSE: Pos=" N <GETB .P 6>
-        ", V1=" N <GETB .P 7>
-        ", V2=" N <GETB .P 8> CR>
-    <SET P W?NOUN>
-      <TELL "NOUN: Pos=" N <GETB .P 6>
-        ", V1=" N <GETB .P 7>
-        ", V2=" N <GETB .P 8> CR>
-    <SET P W?BUZZ>
-      <TELL "BUZZ: Pos=" N <GETB .P 6>
-        ", V1=" N <GETB .P 7>
-        ", V2=" N <GETB .P 8> CR>
-    <SET P W?VERB>
-      <TELL "VERB: Pos=" N <GETB .P 6>
-        ", V1=" N <GETB .P 7>
-        ", V2=" N <GETB .P 8> CR>
-    <SET P W?ADJECTIVE>
-      <TELL "ADJECTIVE: Pos=" N <GETB .P 6>
-        ", V1=" N <GETB .P 7>
-        ", V2=" N <GETB .P 8> CR>
-    <SET P W?PREP>
-      <TELL "PREP: Pos=" N <GETB .P 6>
-        ", V1=" N <GETB .P 7>
-        ", V2=" N <GETB .P 8> CR>>
-
-; -->
-;  FALSE: Pos=0, V1=0, V2=0
-;  NOUN: Pos=128, V1=1, V2=0
-;  BUZZ: Pos=4, V1=255, V2=0
-;  VERB: Pos=65, V1=255, V2=0
-;  ADJECTIVE: Pos=32, V1=0, V2=0
-;  PREP: Pos=8, V1=255, V2=0
 ```
 
 
@@ -3178,10 +3147,17 @@ THEI   <THEI-PRINT>>
 ```
 
 
+### ORB
+```zil
+<ORB 33 96>  ;  97
+<ORB 33 96 64>  ;  97
+```
+
+
 ### PICINF
 ```zil
 <GLOBAL MYPIC <ITABLE 2048 0>>
-<PICINFO 1 ,MYPIC>  ;  Writes picture data into MYPIC
+<PICINF 1 ,MYPIC>  ;  Writes picture data into MYPIC
 ```
 
 
@@ -3753,6 +3729,52 @@ MDL/Zapf: <SETG MYVAR 42>  ;  Store 42 in global atom MYVAR
 <VERB-SYNONYM GO MOVE>
 <VERB-SYNONYM MAKE CREATE BUILD>
 <VERB-SYNONYM GET OBTAIN ACQUIRE>
+```
+
+
+### VOC
+```zil
+<VERSION XZIP>
+<VOC "FALSE" <>>
+<VOC "NOUN" NOUN>
+<VOC "BUZZ" BUZZ>
+<VOC "VERB" VERB>
+<VOC "ADJECTIVE" ADJ>
+<VOC "PREP" PREP>
+  <ROUTINE GO () <TEST-VOC> <INPUT 1>>
+  <ROUTINE TEST-VOC ("AUX" P)
+    <SET P W?FALSE>
+      <TELL "FALSE: Pos=" N <GETB .P 6>
+        ", V1=" N <GETB .P 7>
+        ", V2=" N <GETB .P 8> CR>
+    <SET P W?NOUN>
+      <TELL "NOUN: Pos=" N <GETB .P 6>
+        ", V1=" N <GETB .P 7>
+        ", V2=" N <GETB .P 8> CR>
+    <SET P W?BUZZ>
+      <TELL "BUZZ: Pos=" N <GETB .P 6>
+        ", V1=" N <GETB .P 7>
+        ", V2=" N <GETB .P 8> CR>
+    <SET P W?VERB>
+      <TELL "VERB: Pos=" N <GETB .P 6>
+        ", V1=" N <GETB .P 7>
+        ", V2=" N <GETB .P 8> CR>
+    <SET P W?ADJECTIVE>
+      <TELL "ADJECTIVE: Pos=" N <GETB .P 6>
+        ", V1=" N <GETB .P 7>
+        ", V2=" N <GETB .P 8> CR>
+    <SET P W?PREP>
+      <TELL "PREP: Pos=" N <GETB .P 6>
+        ", V1=" N <GETB .P 7>
+        ", V2=" N <GETB .P 8> CR>>
+
+; -->
+;  FALSE: Pos=0, V1=0, V2=0
+;  NOUN: Pos=128, V1=1, V2=0
+;  BUZZ: Pos=4, V1=255, V2=0
+;  VERB: Pos=65, V1=255, V2=0
+;  ADJECTIVE: Pos=32, V1=0, V2=0
+;  PREP: Pos=8, V1=255, V2=0
 ```
 
 

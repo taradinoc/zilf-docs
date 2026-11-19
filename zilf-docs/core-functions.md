@@ -28,7 +28,7 @@ MDL and Z-code built-in function that adds numbers.
 ### -
 **Usage:** `<- numbers ...>`
 
-**Alternative Usage:** `<SUB numbers ...>`
+**Alternative Usage:** `<BACK number1 number2>` | `<SUB numbers ...>`
 
 MDL and Z-code built-in function that subtracts the first number by subsequent numbers, or negates a single number.
 
@@ -84,7 +84,9 @@ ZIL library function that adds new pattern and form definitions to the current T
 ### AGAIN
 **Usage:** `<AGAIN [activation]>`
 
-MDL and Z-code built-in function that restarts execution from the specified or most recent activation block (PROG, REPEAT, BIND, DO, or ROUTINE).
+MDL built-in function (<AGAIN [activation]>) that restarts evaluation from the specified or most recent automatically created activation (PROG or REPEAT) without re-binding arguments or AUX variables.
+
+Z-code built-in function (<AGAIN [activation]>) that restarts a BIND, DO, PROG, REPEAT, or ROUTINE block from the top. Inside a ROUTINE, restarting the ROUTINE itself reinitializes arguments/variables that have default starting values, whereas restarting BIND, DO, PROG, or REPEAT preserves variable values.
 
 ---
 
@@ -130,7 +132,11 @@ MDL built-in predicate. Returns true if TYPE of value is of an applicable TYPE.
 ### APPLY
 **Usage:** `<APPLY routine values...>`
 
-Call the routine with values. <APPLY routine values ...> is equivalent to <routine values ...>, but APPLY is often used when the routine to be called is resolved during run-time (dispatch-table).
+**Alternative Usage:** `<APPLY applicable args ...>`
+
+MDL built-in function (<APPLY applicable args ...>) that calls an applicable object (FUNCTION, SUBR, FSUBR, MACRO, FIX, or OFFSET) with args.
+
+Z-code built-in function (<APPLY routine values ...>) that calls a Z-machine routine with values, commonly used when the target routine is resolved at runtime (e.g., dispatch tables or object ACTION properties).
 
 ---
 
@@ -160,7 +166,11 @@ ZIL library function.
 ### ASSIGNED?
 **Usage:** `<ASSIGNED? Name>`
 
-Z-code built in predicate that can test if an optimate argument named `name` is supplied in call to routine.
+**Alternative Usage:** `<ASSIGNED? atom [environment]>`
+
+MDL built-in predicate (<ASSIGNED? atom [environment]>) that returns true if atom has a local value (LVAL) in the given or current environment.
+
+Z-code built-in predicate (<ASSIGNED? name>) that tests if an optional argument named name was supplied in the call to the current ROUTINE.
 
 > **Note:** ZILF supports ASSIGNED? in versions 5-.
 
@@ -221,6 +231,8 @@ MDL built-in function that defines a program block with its own set of bindings.
 The decl is used to specify the valid TYPE of the variables. In its simplest form decl is formatted like: #DECL ((X) FIX), meaning that X must be of the TYPE FIX. For more information on how to format the decl see GDECL. 
 
 Also see AGAIN, PROG, REPEAT and RETURN for more details how to control program flow.
+
+Z-code built-in (<BIND [activation] (bindings...) expressions...>): Inside a ROUTINE, BIND defines a local variable block without creating a default activation; bare AGAIN or RETURN targets the enclosing activation (typically the ROUTINE). Variables in BIND are not reinitialized on AGAIN.
 
 ---
 
@@ -383,6 +395,8 @@ Test condition (predicate) and if condition evaluates to true expressions are ex
 
 IF-THEN style: <COND (<AND <=? 1 1> <=? 2 2>> <TELL "IF-THEN <...>">)>
 
+MDL built-in (<COND (condition body ...) ...>): Outside a ROUTINE, evaluates each condition in turn until one is not #FALSE, evaluates all body expressions in that clause, and returns the value of the last evaluated expression (or #FALSE if no condition matches).
+
 ---
 
 ### CONS
@@ -406,7 +420,11 @@ ZIL library function that defines an atom with value that will never be changed.
 ### CRLF
 **Usage:** `<CRLF [channel]>`
 
-MDL built-in function that prints a carriage-return and a line-feed to channel (default for channel is <LVAL OUTCHAN>; the console). CRLF returns true.
+**Alternative Usage:** `<CRLF>`
+
+MDL built-in function (<CRLF [channel]>) that prints a carriage-return and line-feed to channel (default <LVAL OUTCHAN>) and returns true.
+
+Z-code built-in function (<CRLF>) that prints a carriage-return and line-feed to the active Z-machine output stream (takes no channel argument).
 
 > **Note:** ZILF supports CRLF in all versions.
 
@@ -440,8 +458,8 @@ If the block was replaced (via REPLACE-DEFINITION), the replacement body supplie
 If the block was delayed (via DELAY-DEFINITION), the body is ignored, and this function returns FALSE.
 
 > **Note:** It is possible to do the same by setting REDEFINE to true. This actually makes it possible to change ALL definitions (it is the last one that becomes the one actually compiled). 
-
-See DELAY-DEFINITION and REPLACE-DEFINITION.
+>
+> See DELAY-DEFINITION and REPLACE-DEFINITION.
 
 ---
 
@@ -471,8 +489,8 @@ ZIL library function that defines a set of macros that can be used for global st
 Each atom-or-adecl becomes the name of a new macro which can be called with no arguments (to read the global value) or one argument (to write it). The optional initializer sets the initial value, as in GLOBAL. BYTE or WORD can be specified to set the global’s size; WORD is the default.
 
 > **Note:** ZILF ignores the group-name.  
-
-See FUNNY-GLOBALS? for a more convenient way to bypass the Z-machine’s global variable limit. (In fact, ZILF implements DEFINE-GLOBALS by turning on FUNNY-GLOBALS? and defining a global variable for each macro.)
+>
+> See FUNNY-GLOBALS? for a more convenient way to bypass the Z-machine’s global variable limit. (In fact, ZILF implements DEFINE-GLOBALS by turning on FUNNY-GLOBALS? and defining a global variable for each macro.)
 
 ---
 
@@ -636,7 +654,7 @@ MDL package system that creates/moves one or more ATOMs to the external OBLIST i
 
 MDL built-in function that evaluates bitwise equivalence (inverse of exclusive “or”).
 
-> **Note:** EQVB uses 32-bit.
+> **Note:** EQVB uses 32-bit. (Note: the ZILF Reference Guide example has a typo calling XORB instead of EQVB.)
 
 ---
 
@@ -807,7 +825,7 @@ MDL built-in function that returns the pattern defined to the item. It returns F
 ### GETB
 **Usage:** `<GETB table offset>`
 
-Z-code built-in that returns BYTE-record (1 byte) stored at offset. Note that table is an address in memory so the BYTE that is returned is at table+offset. It is legal to use, for example, 0 as an address to retrieve information from the header. 
+ZIL library function (<GETB table index>) and Z-code built-in (<GETB table offset>) that returns the 1-byte record stored at the given byte offset (usable both outside and inside ROUTINEs). Note that table is an address in memory so the BYTE that is returned is at table+offset. It is legal to use, for example, 0 as an address to retrieve information from the header. 
 
 Also see BACK, GET, PUT, PUTB and REST.
 
@@ -832,13 +850,13 @@ MDL built-in returns the property-value stored under indicator on item. If no va
 ZIL library function that declares a global variable atom, which can laater be used inside a ROUTINE. The variable is initialized with default-value.
 
 > **Note:** ZILF ignores the DECL because DECL is checked in code that runs at compile time (i.e. MDL code); however, there is no type checking for compiled code inside routines, at runtime or compile time.
-
-For example, the following:
-<GDECL (BAR) FIX> T
-<SETG BAR "fsdf">
-
-Outputs this error: 
-[error MDL0206] <stdin>:1: expected GVAL of BAR to match DECL FIX, but got "fdsf"
+>
+> For example, the following:
+> <GDECL (BAR) FIX> T
+> <SETG BAR "fsdf">
+>
+> Outputs this error: 
+> [error MDL0206] <stdin>:1: expected GVAL of BAR to match DECL FIX, but got "fdsf"
 
 ---
 
@@ -909,8 +927,8 @@ MDL package system that activates one or many package-names and makes its conten
 If the package-name is not available in the current environment, INCLUDE tries to load “package-name.zil” from the current path.
 
 > **Note:** INCLUDE only works together with DEFINITIONS and if the definition of the package-name is missing from the environment or no file is found containing that definition is found, an error is raised. 
-
-See DEFINITIONS and INCLUDE-WHEN.
+>
+> See DEFINITIONS and INCLUDE-WHEN.
 
 ---
 
@@ -920,8 +938,8 @@ See DEFINITIONS and INCLUDE-WHEN.
 MDL package system that only activates the package-name if the condition evaluates to TRUE.
 
 > **Note:** INCLUDE-WHEN is mostly like INCLUDE.
-
-See DEFINITIONS and INCLUDE.
+>
+> See DEFINITIONS and INCLUDE.
 
 ---
 
@@ -967,8 +985,8 @@ ZIL library function that inserts a file with filename at this point. If extensi
 The filename can have an absolute or relative path. If no path is given, the compiler looks in the current library and the libraries specified to the compiler with the -ip switch.
 
 > **Note:** Note that path is specified like in Linux (forward slashes etc.) and uppercase/lowercase can be significant, depending on the host system.
-
-ZILF ignores all but the first argument.
+>
+> ZILF ignores all but the first argument.
 
 ---
 
@@ -1034,13 +1052,13 @@ ZIL library setting that changes how text is encoded in two ways: it lets you wr
 If change-chrset is false, the Z-machine character set won’t be changed, so the language setting will only affect how source code is read.
 
 > **Note:** The escape-char is !\% by default, meaning that language-specific characters may be used in strings or atoms by adding a percent sign prefix (e.g. %s for ß).
-
-The name may be GERMAN, or DEFAULT to stick with classic ZSCII. GERMAN is defined as follows:
-
-*  Alphabet 0: abcdefghiklmnoprstuwzäöü., 
-*  Alphabet 1: ABCDEFGHIKLMNOPRSTUWZjqvxy 
-*  Alphabet 2: 0123456789!?'-:()JÄÖÜß«» 
-*  Special characters:  ä(%a), ö(%o), ü(%u), ß(%s), Ä(%A), Ö(%O), Ü(%U), «(%<), »(%>)
+>
+> The name may be GERMAN, or DEFAULT to stick with classic ZSCII. GERMAN is defined as follows:
+>
+> *  Alphabet 0: abcdefghiklmnoprstuwzäöü., 
+> *  Alphabet 1: ABCDEFGHIKLMNOPRSTUWZjqvxy 
+> *  Alphabet 2: 0123456789!?'-:()JÄÖÜß«» 
+> *  Special characters:  ä(%a), ö(%o), ü(%u), ß(%s), Ä(%A), Ö(%O), Ü(%U), «(%<), »(%>)
 
 ---
 
@@ -1135,7 +1153,9 @@ Z-code built-in function that Defines a table containing the specified values an
 
 **Alternative Usage:** `.name`
 
-Z-code built-in function that gets the value of local variable name.
+MDL built-in function (<LVAL atom [environment]>) that gets the local value of atom in the optional or current environment.
+
+Z-code built-in function (<LVAL name>) that gets the value of local variable name inside a ROUTINE.
 
 > **Note:** LVAL is more often used in its short for, which is .name.
 
@@ -1255,7 +1275,9 @@ MDL built-in function that creates and returns a new empty OBLIST named name. If
 ### MOD
 **Usage:** `<MOD number1 number2>`
 
-Z-code built-in function that Returns remainder of 16-bit signed division. number2 is not allowed to be 0 ("Division by zero").
+MDL built-in function that divides 32-bit FIX number1 by non-zero number2 and returns the remainder.
+
+Z-code built-in function that returns the remainder of 16-bit signed division (number2 must be non-zero).
 
 > **Note:** ZILF supports MOD in all versions.
 
@@ -1301,8 +1323,8 @@ ZIL library predicate.
 MDL built-in function that creates a new TYPE with the name, name and the same PRIMTYPE as primtype-atom. It returns the new TYPE. The name must be unique (<VALID-TYPE? name> is FALSE> otherwise NEWTYPE results in an error.
 
 > **Note:** It is possible to specify a decl (see GDECL) for the new TYPE that is enforced when CHTYPE.
-
-See APPLYTYPE, EVALTYPE and PRINTTYPE.
+>
+> See APPLYTYPE, EVALTYPE and PRINTTYPE.
 
 ---
 
@@ -1318,7 +1340,9 @@ MDL built-in function that returns the next asoc entry, of TYPE ASOC, in the ASS
 ### NOT
 **Usage:** `<NOT value>`
 
-MDL built-in function that returns true if value is false (#FALSE <>), otherwise NOT returns false.
+MDL built-in function (<NOT value>) that returns true if value is #FALSE (<>), otherwise false (0 is truthy in MDL).
+
+Z-code built-in function (<NOT expression>) that returns boolean NOT (1 if expression is 0, otherwise 0).
 
 > **Note:** This is a boolean (logical) "not."
 
@@ -1332,8 +1356,47 @@ MDL built-in function that returns true if value is false (#FALSE <>), otherwise
 MDL built-in function that returns the element at index in structure. Valid values for index are between 1 and \<LENGTH structure\>. structure must be an object that STRUCTURED? evaluates to TRUE. NTH can also be abbreviated as <index structure>.
 
 > **Note:** Note that TABLE is not a structure.
+>
+> Also see BACK, LENGTH, PUT, REST, SUBSTRUC and TOP.
 
-Also see BACK, LENGTH, PUT, REST, SUBSTRUC and TOP.
+---
+
+### OBJECT
+**Usage:** `<OBJECT name (property values ...) ...>`
+
+ZIL library function that creates an object with the internal objectname, name. After the name follows LISTs of properties for the OBJECT and the values for each property. Which properties that define up a OBJECT is determined by the parser and it’s possible to add new properties with PROPDEF as long as the parser is modified to support the new property. Below is a list of common properties.
+
+*  IN or LOC is the OBJECTs initial location. This could, for example, be a ROOM, another OBJECT (container) or the player (in its inventory). There are a couple of special locations like GLOBAL-OBJECTS for OBJECTs that the player can refer to everywhere, LOCAL-GLOBALS for OBJECTs the player can refer to in ROOMs that define this OBJECT in its GLOBAL list and GENERIC-OBJECTS for OBJECTs that are concepts more than objects (for example the murder or the new will in Deadline).
+
+*  SYNONYMS lists all the nouns that can be used to refer to the OBJECT.
+
+*  ADJECTIVE lists all the adjectives that can be used to refer to the OBJECT.
+
+* DESC is the short description text of the OBJECT. This is the text that is, for example, printed in the players inventory.
+
+*  FLAGS lists all the flagbits that are set on this OBJECT.
+
+*  FDESC means "first description," and it is the text that is used to describe the OBJECT until it is touched (picked up).
+
+*  LDESC means "long description," and it is the text that is used to describe the OBJECT, when it is on the ground, after it is touched.
+
+*  GLOBAL is an optional property. This is a LIST of all the OBJECTs that is IN the LOCAL-GLOBALS that are accessible from this ROOM. This could, for example, be a door that is accessible from two different ROOMs.
+
+*  THINGS is an optional property.  This creates one or more simple “pseudo-objects”. Each object has three parts: a LIST of adjectives (FALSE if none), a LIST of nouns and the name of the action-routine to call when this object is accessed. In early Infocom games this property was called PSEUDO and had a slightly different syntax.
+
+*  ACTION is defined as (ACTION routine-name). This is the OBJECTs action-routine. For OBJECTs action-routines there is no argument. SIZE  Size of OBJECT (for inventory handling).
+
+*  SiZE is the size of OBJECT (for inventory handling).
+
+*  VALUE is the value of OBJECT (for scoring purposes).
+
+*  DESCFCN  is used to define a function to handle the OBJECTs description. It is called with an argument, ARG, that can be M-OBJDESC? or M-OBJDESC. If the routine returns FALSE during the M-OBJDESC? call, the OBJECT defaults to standard descriptions with FDESC and LDESC, otherwise the description is handled during the M-OBJDESC call.
+
+*  CAPACITY is the capacity of the OBJECT if it is a container.
+
+*  CONTFCN is a routine that is called on the container when OBJECTs inside the container are handled (used raretly).
+
+> **Note:** See Learning ZIL, Steve E. Meretzky and ZIL Course, Marc S. Blank for more on properties, flagbits and how to write and design games.
 
 ---
 
@@ -1352,8 +1415,8 @@ MDL built-in function that creates an OFFSET TYPE that is used with NTH and PUT 
 The index is an integer and the structure-decl follow the normal rules for a decl (see GDECL). Because the OFFSET only specifies the decl for one element in the structure it is possible to split the decl in two parts where structure-decl specifies the structure and value-decl is the decl for this specific element.
 
 > **Note:** Note that in ZILF can OFFSET only be used with NTH and PUT in the form <index-or-offset structure> and <index-or-offset structure value> respectively. 
-
-GET-DECL and PUT-DECL can be used to examine and change the decl of the OFFSET and INDEX returns the index of an OFFSET.
+>
+> GET-DECL and PUT-DECL can be used to examine and change the decl of the OFFSET and INDEX returns the index of an OFFSET.
 
 ---
 
@@ -1371,7 +1434,7 @@ MDL built-in function that opens the file at path for input.
 
 MDL built-in function that is a boolean OR. Requires that one of the expressions evaluates to true to return true. Exits on the first expression that evaluates to true (rest of expressions are not evaluated).
 
-> **Note:** Because false is its own TYPE outside a routine OR returns #FALSE if all expressions are false or the value of the first true expression.
+> **Note:** Outside a routine (MDL), OR returns #FALSE if all expressions are false, or the value of the first non-false expression (0 is truthy). Inside a routine (Z-code), 0 is false, so OR returns 0 if all expressions are false or the value of the first non-zero expression.
 
 ---
 
@@ -1381,7 +1444,7 @@ MDL built-in function that is a boolean OR. Requires that one of the expressions
 MDL built-in function that returns the same result as OR with the difference that all exressions are evaluated.
 
 > **Note:** <OR? <=? 1 2> <=? 1 1>>  ; True 
- <OR? <=? 1 1> <SET X 2>> ;  X is set to 2 because all expressions are evaluated
+>  <OR? <=? 1 1> <SET X 2>> ;  X is set to 2 because all expressions are evaluated
 
 ---
 
@@ -1457,8 +1520,8 @@ The PACKAGE definition is ended by END-PACKAGE (in fact an ENDBLOCK) which resto
 When you decide to use a package by USE or USE-WHEN the OBLIST package-name is copied and added last to the local OBLIST (<LVAL OBLIST>). This means that all ATOMs on the external package OBLIST becomes available in current environment.
 
 > **Note:** Note that a PACKAGE can be defined additive (i.e. multiple PACKAGE definitions with the same package-name is added together to one PACKAGE). ZILF has three packages predefined in <MOBLIST PACKAGE>; NEWSTRUC, ZIL and ZILCH. They are all empty and are only there for compatibility (all ATOMs in these packages are already in ZILF).
-
-See DEFINITIONS, ENDPACKAGE, ENTRY, RENTRY, USE and USE-WHEN.
+>
+> See DEFINITIONS, ENDPACKAGE, ENTRY, RENTRY, USE and USE-WHEN.
 
 ---
 
@@ -1549,8 +1612,8 @@ ZIL library function that prints multiple items to channel with the printer. The
 MDL built-in function that tells the TYPE atom how it should be printed (PRIN1-style). If PRINTTYPE is called without a handler then the currently active handler is returned. If there is no active handler, FALSE is returned.
 
 > **Note:** Note that it is possible to replace the handler with a new handler, even on the predefined TYPEs.
-
-See APPLYTYPE, EVALTYPE and NEWTYPE.
+>
+> See APPLYTYPE, EVALTYPE and NEWTYPE.
 
 ---
 
@@ -1561,7 +1624,7 @@ MDL built-in function that defines a program block with its own set of bindings.
 
 The decl is used to specify the valid TYPE of the variables. In its simplest form decl is formatted like: #DECL ((X) FIX), meaning that X must be of the TYPE FIX. For more information on how to format the decl see GDECL.
 
-> **Note:** Also see AGAIN, BIND, REPEAT and RETURN for more details how to control program flow.
+> **Note:** In Z-code (inside a ROUTINE), DO-FUNNY-RETURN? controls whether <RETURN value> exits the enclosing ROUTINE (when true, default in V5+) or the PROG block (when false, default in V3-4). Bare <RETURN> always exits the PROG block. Also see AGAIN, BIND, REPEAT and RETURN.
 
 ---
 
@@ -1637,7 +1700,7 @@ ZIL library function.
 ### PUTB
 **Usage:** `<PUTB table offset value>`
 
-Z-code built-in function that puts a byte value in the table at byte position offset. The actual address is table-address+offset. Note that table can be a byte-address in dynamic memory.
+ZIL library function (<PUTB table index new-value>) and Z-code built-in (<PUTB table offset value>) that writes a 1-byte value into table at the given byte offset (usable both outside and inside ROUTINEs). The actual address is table-address+offset. Note that table can be a byte-address in dynamic memory.
 
 Also see BACK, GET, GETB, PUT and REST.
 
@@ -1653,10 +1716,10 @@ Also see BACK, GET, GETB, PUT and REST.
 MDL built-in function that stores value as an association on the item under the indicator and returns the item. If no value is specified PUTPROP returns the value and then clears the association.
 
 > **Note:** In ZILF, there is a special indicator, PROPSPEC, that has a special meaning inside OBJECTs. A PROPSPEC property is defined: <PUTPROP item PROPSPEC [function]>
-
-When an item defined in this way is used in an OBJECT, the function is invoked during the compilation with the LIST (containing the item) as an argument. The return value from the function must be a LIST and it is stored as value under PROPSPEC on the item. If no function is specified the PROPSPEC for the item is cleared. See examples below. 
-
-See ASSOCIATIONS, AVALUE, GETPROP, INDICATOR, ITEM and NEXT.
+>
+> When an item defined in this way is used in an OBJECT, the function is invoked during the compilation with the LIST (containing the item) as an argument. The return value from the function must be a LIST and it is stored as value under PROPSPEC on the item. If no function is specified the PROPSPEC for the item is cleared. See examples below. 
+>
+> See ASSOCIATIONS, AVALUE, GETPROP, INDICATOR, ITEM and NEXT.
 
 ---
 
@@ -1672,7 +1735,11 @@ Note that this actually changes the list.
 ### QUIT
 **Usage:** `<QUIT [exit-code]>`
 
-MDL built-in function that exits ZILF (interpreter mode) and returns to the operating system with exit-code.
+**Alternative Usage:** `<QUIT>`
+
+MDL built-in function (<QUIT [exit-code]>) that exits ZILF interpreter mode and returns to the operating system with exit-code.
+
+Z-code built-in function (<QUIT>) that immediately halts Z-machine game execution (takes no arguments).
 
 > **Note:** ZILF supports QUIT in all versions.
 
@@ -1727,7 +1794,7 @@ MDL built-in function that  defines a program block with its own set of bindings
 
 The decl is used to specify the valid TYPE of the variables. In its simplest form decl is formatted like: #DECL ((X) FIX), meaning that X must be of the TYPE FIX. For more information on how to format the decl see GDECL.
 
-> **Note:** Also see AGAIN, BIND, PROG and RETURN for more details on how to control program flow.
+> **Note:** In Z-code (inside a ROUTINE), DO-FUNNY-RETURN? controls whether <RETURN value> exits the enclosing ROUTINE (when true, default in V5+) or the REPEAT block (when false, default in V3-4). Bare <RETURN> always exits the REPEAT block. Also see AGAIN, BIND, PROG and RETURN.
 
 ---
 
@@ -1739,8 +1806,8 @@ ZIL library function that  tells the compiler this block of code defined by name
 This is usually used when there is a library that is inserted (like "parser.zil") where some definitions are possible to override.
 
 > **Note:** Note that the REPLACE-DEFINITION is required to appear before the DEFAULT-DEFINITION. It is possible to do the same by setting REDEFINE to true. This actually makes it possible to change ALL definitions (it is the last one that becomes the one actually compiled).
-
-See DEFAULT-DEFINITION and REPLACE-DEFINITION.
+>
+> See DEFAULT-DEFINITION and REPLACE-DEFINITION.
 
 ---
 
@@ -1754,8 +1821,8 @@ Z-code built-in function (<REST table [bytes]>) that returns a table address adv
 structure must be an object that STRUCTURED? evaluates to true.
 
 > **Note:** Note that TABLE is not a structure.
-
-Also see BACK, LENGTH, NTH, PUT, SUBSTRUC and TOP.
+>
+> Also see BACK, LENGTH, NTH, PUT, SUBSTRUC and TOP.
 
 ---
 
@@ -1766,7 +1833,7 @@ MDL built-in function that  returns value from program-block defined by activati
 
 In practice RETURN exits the current program-block and returns value  to the outer program-block defined by BIND (needs activation), PROG or REPEAT.
 
-> **Note:** See AGAIN, BIND, PROG and REPEAT for more examples of using RETURN and details how to control program flow.
+> **Note:** In Z-code (inside a ROUTINE, Zapf: RETURN, Inform: ret), <RETURN [value] [activation]> returns 1 (true) if no value is given, or exits the specified/enclosing block; when DO-FUNNY-RETURN? is true (default V5+), <RETURN value> without an activation exits the ROUTINE. See AGAIN, BIND, DO, PROG and REPEAT.
 
 ---
 
@@ -1811,8 +1878,8 @@ ZIL library function that creates a room-object with the internal objectname, na
     *  M-ENTER, the routine-name is called with this value to RARG when the player enters the ROOM (before any room description).
 
 > **Note:** Note that ROOMs can just as easily be created with OBJECT as long as they are (IN ROOMS).
-
-See Learning ZIL, Steve E. Meretzky and ZIL Course, Marc S. Blank for more on properties, flagbits and how to write and design games.
+>
+> See Learning ZIL, Steve E. Meretzky and ZIL Course, Marc S. Blank for more on properties, flagbits and how to write and design games.
 
 ---
 
@@ -1831,27 +1898,27 @@ MDL built-in function that returns the OBLIST containing names of primitives (th
 ZIL library function that is the central building block of a ZIL-program. Inside the ROUTINE it is only possible to use the reduced instruction set that can be executed on the Z-machine. It is the instructions inside the ROUTINEs that are compiled to the actual ZIP-program.
 
 > **Note:** ROUTINE defines a program block with its own set of bindings. It is possible to specify an activation-atom to use as an argument to control the RETURN statement inside the ROUTINE. 
-
-The arg-list is formatted the same way as FUNCTION, but the legal tokens is reduced to these:
-
-Arguments: The required arguments for this ROUTINE. The arguments are bound to local variables inside this ROUTINE. 
-
-"OPT": The optional arguments for this ROUTINE. The arguments are bound to local variables inside this ROUTINE and can be defined with a default value. "OPTIONAL" is an alias for "OPT".
-
-"AUX": Followed by any number of ATOMs that becomes local variables inside this ROUTINE and can be defined with a default value. "EXTRA" is a alias for "AUX". 
-
-"NAME": Followed by an ATOM that becomes the activation-atom for this ROUTINE. This is equivalent to naming the activation-atom  before the arg-list. "ACT" is an alias for "NAME". 
-
-Default values for "OPT" and "AUX" are defined by a two-element LIST whose first element is the ATOM and the second element it is assigned to.
-
-<ROUTINE TEST ("AUX" (X 1) (Y 2)) <+ .X .Y>>  Means that the local variables X and Y are initially assigned 1 and 2. After the arg-list follows the ZIL-instructions that makes up the body of the ROUTINE.
+>
+> The arg-list is formatted the same way as FUNCTION, but the legal tokens is reduced to these:
+>
+> Arguments: The required arguments for this ROUTINE. The arguments are bound to local variables inside this ROUTINE. 
+>
+> "OPT": The optional arguments for this ROUTINE. The arguments are bound to local variables inside this ROUTINE and can be defined with a default value. "OPTIONAL" is an alias for "OPT".
+>
+> "AUX": Followed by any number of ATOMs that becomes local variables inside this ROUTINE and can be defined with a default value. "EXTRA" is a alias for "AUX". 
+>
+> "NAME": Followed by an ATOM that becomes the activation-atom for this ROUTINE. This is equivalent to naming the activation-atom  before the arg-list. "ACT" is an alias for "NAME". 
+>
+> Default values for "OPT" and "AUX" are defined by a two-element LIST whose first element is the ATOM and the second element it is assigned to.
+>
+> <ROUTINE TEST ("AUX" (X 1) (Y 2)) <+ .X .Y>>  Means that the local variables X and Y are initially assigned 1 and 2. After the arg-list follows the ZIL-instructions that makes up the body of the ROUTINE.
 
 ---
 
 ### ROUTINE-FLAGS
 **Usage:** `<ROUTINE-FLAGS CLEAN-STACK?>`
 
-ZIL library function that sets flags to control how ZILF should compile. To clear, call FILE-FLAGS without any flags.
+ZIL library function that sets flags to control how ZILF should compile. Applies to the next ROUTINE definition. (Note: the ZILF Reference Guide example erroneously shows FILE-FLAGS.)
 
 The flags are:
 
@@ -1898,8 +1965,8 @@ The tokens that can have changed default behaviour are:
 *  'START-OFFSET, the default value is 1. Change with ('START-OFFSET value).
 
 > **Note:** If SET-DEFSTRUCT-FILE-DEFAULTS is called without any arguments the built-in default behaviour is restored.
-
-See DEFSTRUCT for more on user defined structures.
+>
+> See DEFSTRUCT for more on user defined structures.
 
 ---
 
@@ -2068,8 +2135,8 @@ MDL built-in function that returns array with all elements put back in  array. T
 MDL built-in function that is just like a VECTOR with the only difference that a TUPLE should live on the control stack. The advantage of a TUPLE over a VECTOR is that a TUPLE doesn't need to be garbage collected, the disadvantage is that a TUPLE only lives during the execution of the function where it was declared. It is only valid to declare a TUPLE in the "AUX" or "OPTIONAL" part of a functions definition or as a "TUPLE" in a functions definition.
 
 > **Note:** In ZILF, TUPLE is treated as an alias to VECTOR. 
-
-A TUPLE defined in the "AUX" or "OPT" is just like a VECTOR. A "TUPLE" definition makes it possible to have a variable number of arguments to a FUNCTION.
+>
+> A TUPLE defined in the "AUX" or "OPT" is just like a VECTOR. A "TUPLE" definition makes it possible to have a variable number of arguments to a FUNCTION.
 
 ---
 
@@ -2097,9 +2164,9 @@ MDL built-in function that evaluates to the primitive type of type. The primitiv
 ### UNASSIGN
 **Usage:** `<UNASSIGN atom [environment]>`
 
-MDL built-in function that unassigns the global atom.
+MDL built-in function that unassigns the local atom (removes its LVAL).
 
-> **Note:** It is possible to supply an environment for the ASSIGNED? predicate. See EVAL for more about the environment.
+> **Note:** It is possible to supply an environment for UNASSIGN. See EVAL for more about the environment. (Note: the ZILF Reference Guide text erroneously says 'global atom', though its example and MDL semantics apply to local LVALs; use GUNASSIGN for global atoms.)
 
 ---
 
@@ -2119,8 +2186,8 @@ If the package-name is not available in the current environment, USE tries to lo
 “package-name.zil” from the current path.
 
 > **Note:** USE only works together with PACKAGE and if the definition of the package-name is missing from the environment or no file is found containing that definition is found, an error is raised.
-
-See PACKAGE and USE-WHEN.
+>
+> See PACKAGE and USE-WHEN.
 
 ---
 
@@ -2209,64 +2276,6 @@ The version-spec can be:
 
 ---
 
-### VOC
-**Usage:** `<VOC string [part-of-speech]>`
-
-ZIL parser library function that  inserts the string in the game vocabulary (dictionary). Normally there is no need to define the vocabulary with VOC, the vocabulary is automatically updated with words when you define ROOMs, OBJECTs, SYNTAX, etc.
-
-What follows below is a description of the vocabulary when you use the standard parser library. The vocabulary description for the new parser (<SETG NEW-PARSER? T>) is in ADD-WORD.
-
-The part-of-speech can be one of the following:
-
-part-of-speech, Value, Description
-<>, 0, None
-BUZZ, 4, Buzz-word
-PREP, 8, Preposition
-DIR, 16, Direction
-ADJ or ADJECTIVE, 32, Adjective
-VERB, 64, Verb
-NOUN or OBJECT, 128, Noun
-
-The vocabulary then occupies 7 or 9 bytes, depending on version, per entry distributed as follows.
-
-Version 3
-Bytes 0-3, Word up to 6 Z-characters (5 bit)
-Byte 4, PoS
-Byte 5, Value
-Byte 6, V2
-
-Version 4-
-Bytes 0-5, Word up to 9 Z-characters (5 bit)
-Byte 6, PoS
-Byte 7, V1
-Byte 8, V2
-
-For PoS, Byte 6 (or byte 4) contains the part-of-speech value (as above) plus if  the word is defined as a first part-of-speech in the first 2 bytes.
-
-- 0, None
-- 1, Verb first
-- 2, Adjective first
-- 3, Direction first
-
-For V1, Byte 7 (or byte 5) contains the words value (id). Each part-of-speech can have 255 (65535 for NOUNs) unique words (synonyms have the same value as parent).
-
-For V2, Byte 8 is used for NOUNs (V1 & V2 gives 2 bytes, 1-65535 OBJECTs).
-
-The different part-of-speech and first definitions have all global values defined as:
-
-- P1?OBJECT    0 
-- P1?VERB    1 
-- P1?ADJECTIVE   2 
-- P1?DIRECTION   3 
-- PS?BUZZ-WORD   4 
-- PS?PREPOSITION   8 
-- PS?DIRECTION  16 
-- PS?ADJECTIVE  32 
-- PS?VERB   64 
-- PS?OBJECT  128
-
----
-
 ### WARN-AS-ERROR?
 **Usage:** `<WARN-AS-ERROR? value>`
 
@@ -2298,8 +2307,8 @@ MDL built-in function that is a bitwise exclusive OR.
 ZIL library function that returns WORD-record (2 bytes) stored at index. TABLE is a ZIL-specific structure that can be used both outside and inside ROUTINES.
 
 > **Note:** ZGET is equivalent to the Z-code built-in GET.
-
-Also see GETB, PUTB, ZPUT and ZREST.
+>
+> Also see GETB, PUTB, ZPUT and ZREST.
 
 ---
 
@@ -2335,8 +2344,8 @@ ZIL library function that is an alias for PACKAGE.
 ZIL library function that puts a 16-bit WORD new-value in the table at word position index. The actual address is table-address+index*2.
 
 > **Note:** TABLE is a ZIL-specific structure that can be used both outside and inside ROUTINES. ZPUT is equivalent to the Z-code built-in PUT.
-
-Also see GETB, PUTB, ZGET and ZREST.
+>
+> Also see GETB, PUTB, ZGET and ZREST.
 
 ---
 
@@ -2346,8 +2355,8 @@ Also see GETB, PUTB, ZGET and ZREST.
 ZIL library function that returns table without its first bytes. TABLE is a ZIL-specific structure that can be used both outside and inside ROUTINES. ZREST is equivalent to the Z-code built-in REST.
 
 > **Note:** This is not a copy of the table, it is pointing to the same table with another starting address.
-
-Also see GETB, PUTB, ZGET and ZPUT.
+>
+> Also see GETB, PUTB, ZGET and ZPUT.
 
 ---
 

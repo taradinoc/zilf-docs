@@ -28,7 +28,7 @@ MDL and Z-code built-in function that adds numbers.
 ### -
 **Usage:** `<- numbers ...>`
 
-**Alternative Usage:** `<SUB numbers ...>`
+**Alternative Usage:** `<BACK number1 number2>` | `<SUB numbers ...>`
 
 MDL and Z-code built-in function that subtracts the first number by subsequent numbers, or negates a single number.
 
@@ -77,7 +77,9 @@ MDL and Z-code predicate that returns TRUE if value1 and value2 are of the same 
 ### AGAIN
 **Usage:** `<AGAIN [activation]>`
 
-MDL and Z-code built-in function that restarts execution from the specified or most recent activation block (PROG, REPEAT, BIND, DO, or ROUTINE).
+MDL built-in function (<AGAIN [activation]>) that restarts evaluation from the specified or most recent automatically created activation (PROG or REPEAT) without re-binding arguments or AUX variables.
+
+Z-code built-in function (<AGAIN [activation]>) that restarts a BIND, DO, PROG, REPEAT, or ROUTINE block from the top. Inside a ROUTINE, restarting the ROUTINE itself reinitializes arguments/variables that have default starting values, whereas restarting BIND, DO, PROG, or REPEAT preserves variable values.
 
 ---
 
@@ -100,7 +102,11 @@ MDL built-in function for bitwise AND (and alias for BAND in Z-code).
 ### APPLY
 **Usage:** `<APPLY routine values...>`
 
-Call the routine with values. <APPLY routine values ...> is equivalent to <routine values ...>, but APPLY is often used when the routine to be called is resolved during run-time (dispatch-table).
+**Alternative Usage:** `<APPLY applicable args ...>`
+
+MDL built-in function (<APPLY applicable args ...>) that calls an applicable object (FUNCTION, SUBR, FSUBR, MACRO, FIX, or OFFSET) with args.
+
+Z-code built-in function (<APPLY routine values ...>) that calls a Z-machine routine with values, commonly used when the target routine is resolved at runtime (e.g., dispatch tables or object ACTION properties).
 
 ---
 
@@ -114,8 +120,8 @@ Arithmetic shift. Shift number left when places is positive and right if it is n
 1000 0000 0000 1010 --> 1100 0000 0000 0101
 
 > **Note:** ZILF supports ASH, ASHIFT in versions 5-.
-
-Also see LSH.
+>
+> Also see LSH.
 
 **History:** Zapf syntax: ASHIFT, Inform syntax: art_shift
 
@@ -124,7 +130,11 @@ Also see LSH.
 ### ASSIGNED?
 **Usage:** `<ASSIGNED? Name>`
 
-Z-code built in predicate that can test if an optimate argument named `name` is supplied in call to routine.
+**Alternative Usage:** `<ASSIGNED? atom [environment]>`
+
+MDL built-in predicate (<ASSIGNED? atom [environment]>) that returns true if atom has a local value (LVAL) in the given or current environment.
+
+Z-code built-in predicate (<ASSIGNED? name>) that tests if an optional argument named name was supplied in the call to the current ROUTINE.
 
 > **Note:** ZILF supports ASSIGNED? in versions 5-.
 
@@ -173,6 +183,8 @@ MDL built-in function that defines a program block with its own set of bindings.
 The decl is used to specify the valid TYPE of the variables. In its simplest form decl is formatted like: #DECL ((X) FIX), meaning that X must be of the TYPE FIX. For more information on how to format the decl see GDECL. 
 
 Also see AGAIN, PROG, REPEAT and RETURN for more details how to control program flow.
+
+Z-code built-in (<BIND [activation] (bindings...) expressions...>): Inside a ROUTINE, BIND defines a local variable block without creating a default activation; bare AGAIN or RETURN targets the enclosing activation (typically the ROUTINE). Variables in BIND are not reinitialized on AGAIN.
 
 ---
 
@@ -280,6 +292,8 @@ Test condition (predicate) and if condition evaluates to true expressions are ex
 
 IF-THEN style: <COND (<AND <=? 1 1> <=? 2 2>> <TELL "IF-THEN <...>">)>
 
+MDL built-in (<COND (condition body ...) ...>): Outside a ROUTINE, evaluates each condition in turn until one is not #FALSE, evaluates all body expressions in that clause, and returns the value of the last evaluated expression (or #FALSE if no condition matches).
+
 ---
 
 ### COPYT
@@ -296,7 +310,11 @@ Copies length number of bytes from src-table to dest-table. The tables are allow
 ### CRLF
 **Usage:** `<CRLF [channel]>`
 
-MDL built-in function that prints a carriage-return and a line-feed to channel (default for channel is <LVAL OUTCHAN>; the console). CRLF returns true.
+**Alternative Usage:** `<CRLF>`
+
+MDL built-in function (<CRLF [channel]>) that prints a carriage-return and line-feed to channel (default <LVAL OUTCHAN>) and returns true.
+
+Z-code built-in function (<CRLF>) that prints a carriage-return and line-feed to the active Z-machine output stream (takes no channel argument).
 
 > **Note:** ZILF supports CRLF in all versions.
 
@@ -535,6 +553,15 @@ MDL and Z-code predicate that returns true if value1 is greater than or equal to
 
 ---
 
+### G?
+**Usage:** `<G? value1 value2>`
+
+MDL built-in predicate that returns true if value1 is greater than value2, otherwise the predicate returns false.
+
+> **Note:** 'G' means "is greater than."
+
+---
+
 ### GET
 **Usage:** `<GET table offset>`
 
@@ -551,7 +578,7 @@ Also see BACK, GETB, PUT, PUTB and REST.
 ### GETB
 **Usage:** `<GETB table offset>`
 
-Z-code built-in that returns BYTE-record (1 byte) stored at offset. Note that table is an address in memory so the BYTE that is returned is at table+offset. It is legal to use, for example, 0 as an address to retrieve information from the header. 
+ZIL library function (<GETB table index>) and Z-code built-in (<GETB table offset>) that returns the 1-byte record stored at the given byte offset (usable both outside and inside ROUTINEs). Note that table is an address in memory so the BYTE that is returned is at table+offset. It is legal to use, for example, 0 as an address to retrieve information from the header. 
 
 Also see BACK, GET, PUT, PUTB and REST.
 
@@ -735,6 +762,15 @@ MDL and Z-code predicate that returns true if value1 is less than or equal to va
 
 ---
 
+### L?
+**Usage:** `<L? value1 value2>`
+
+MDL built-in predicate that returns true if value1 is lower than value2 otherwise false.
+
+> **Note:** L means less than.
+
+---
+
 ### LESS?
 **Usage:** `<LESS? Value1 value2>`
 
@@ -811,7 +847,9 @@ Z-code built-in function that Defines a table containing the specified values an
 
 **Alternative Usage:** `.name`
 
-Z-code built-in function that gets the value of local variable name.
+MDL built-in function (<LVAL atom [environment]>) that gets the local value of atom in the optional or current environment.
+
+Z-code built-in function (<LVAL name>) that gets the value of local variable name inside a ROUTINE.
 
 > **Note:** LVAL is more often used in its short for, which is .name.
 
@@ -860,7 +898,9 @@ Z-code built-in function that controls menu 3- (not menu 0-2, they are system me
 ### MOD
 **Usage:** `<MOD number1 number2>`
 
-Z-code built-in function that Returns remainder of 16-bit signed division. number2 is not allowed to be 0 ("Division by zero").
+MDL built-in function that divides 32-bit FIX number1 by non-zero number2 and returns the remainder.
+
+Z-code built-in function that returns the remainder of 16-bit signed division (number2 must be non-zero).
 
 > **Note:** ZILF supports MOD in all versions.
 
@@ -945,7 +985,9 @@ Returns the property that comes after property on the object. Returns 0 if there
 ### NOT
 **Usage:** `<NOT value>`
 
-MDL built-in function that returns true if value is false (#FALSE <>), otherwise NOT returns false.
+MDL built-in function (<NOT value>) that returns true if value is #FALSE (<>), otherwise false (0 is truthy in MDL).
+
+Z-code built-in function (<NOT expression>) that returns boolean NOT (1 if expression is 0, otherwise 0).
 
 > **Note:** This is a boolean (logical) "not."
 
@@ -956,7 +998,14 @@ MDL built-in function that returns true if value is false (#FALSE <>), otherwise
 
 MDL built-in function that is a boolean OR. Requires that one of the expressions evaluates to true to return true. Exits on the first expression that evaluates to true (rest of expressions are not evaluated).
 
-> **Note:** Because false is its own TYPE outside a routine OR returns #FALSE if all expressions are false or the value of the first true expression.
+> **Note:** Outside a routine (MDL), OR returns #FALSE if all expressions are false, or the value of the first non-false expression (0 is truthy). Inside a routine (Z-code), 0 is false, so OR returns 0 if all expressions are false or the value of the first non-zero expression.
+
+---
+
+### ORB
+**Usage:** `<ORB numbers ...>`
+
+MDL built-in function that performs a bitwise OR.
 
 ---
 
@@ -976,7 +1025,7 @@ Predicate that tests if the game disc is an original. Almost all modern interpre
 
 Z-code built-in function that Writes picture data from picture-number into table. Word 0 of table holds picture width and word 1 holds picture height. Then follows the picture data. If picture-number is 0, the number of available pictures is written into word 0 of table and release number of picture file is written into word 1.
 
-> **Note:** ZILF currently supports PICINF in versions 6-.
+> **Note:** ZILF currently supports PICINF in versions 6-. (Note: the ZILF Reference Guide example has a typo calling PICINFO instead of PICINF.)
 
 **History:** Zapf syntax: PICINF, Inform syntax: picture_data
 
@@ -1130,7 +1179,7 @@ MDL built-in function that defines a program block with its own set of bindings.
 
 The decl is used to specify the valid TYPE of the variables. In its simplest form decl is formatted like: #DECL ((X) FIX), meaning that X must be of the TYPE FIX. For more information on how to format the decl see GDECL.
 
-> **Note:** Also see AGAIN, BIND, REPEAT and RETURN for more details how to control program flow.
+> **Note:** In Z-code (inside a ROUTINE), DO-FUNNY-RETURN? controls whether <RETURN value> exits the enclosing ROUTINE (when true, default in V5+) or the PROG block (when false, default in V3-4). Bare <RETURN> always exits the PROG block. Also see AGAIN, BIND, REPEAT and RETURN.
 
 ---
 
@@ -1183,7 +1232,7 @@ Also see BACK, GET, GETB, PUTB and REST.
 ### PUTB
 **Usage:** `<PUTB table offset value>`
 
-Z-code built-in function that puts a byte value in the table at byte position offset. The actual address is table-address+offset. Note that table can be a byte-address in dynamic memory.
+ZIL library function (<PUTB table index new-value>) and Z-code built-in (<PUTB table offset value>) that writes a 1-byte value into table at the given byte offset (usable both outside and inside ROUTINEs). The actual address is table-address+offset. Note that table can be a byte-address in dynamic memory.
 
 Also see BACK, GET, GETB, PUT and REST.
 
@@ -1207,7 +1256,11 @@ Z-code built-in function that puts value into property on the object.
 ### QUIT
 **Usage:** `<QUIT [exit-code]>`
 
-MDL built-in function that exits ZILF (interpreter mode) and returns to the operating system with exit-code.
+**Alternative Usage:** `<QUIT>`
+
+MDL built-in function (<QUIT [exit-code]>) that exits ZILF interpreter mode and returns to the operating system with exit-code.
+
+Z-code built-in function (<QUIT>) that immediately halts Z-machine game execution (takes no arguments).
 
 > **Note:** ZILF supports QUIT in all versions.
 
@@ -1283,7 +1336,7 @@ MDL built-in function that  defines a program block with its own set of bindings
 
 The decl is used to specify the valid TYPE of the variables. In its simplest form decl is formatted like: #DECL ((X) FIX), meaning that X must be of the TYPE FIX. For more information on how to format the decl see GDECL.
 
-> **Note:** Also see AGAIN, BIND, PROG and RETURN for more details on how to control program flow.
+> **Note:** In Z-code (inside a ROUTINE), DO-FUNNY-RETURN? controls whether <RETURN value> exits the enclosing ROUTINE (when true, default in V5+) or the REPEAT block (when false, default in V3-4). Bare <RETURN> always exits the REPEAT block. Also see AGAIN, BIND, PROG and RETURN.
 
 ---
 
@@ -1297,8 +1350,8 @@ Z-code built-in function (<REST table [bytes]>) that returns a table address adv
 structure must be an object that STRUCTURED? evaluates to true.
 
 > **Note:** Note that TABLE is not a structure.
-
-Also see BACK, LENGTH, NTH, PUT, SUBSTRUC and TOP.
+>
+> Also see BACK, LENGTH, NTH, PUT, SUBSTRUC and TOP.
 
 ---
 
@@ -1338,7 +1391,7 @@ MDL built-in function that  returns value from program-block defined by activati
 
 In practice RETURN exits the current program-block and returns value  to the outer program-block defined by BIND (needs activation), PROG or REPEAT.
 
-> **Note:** See AGAIN, BIND, PROG and REPEAT for more examples of using RETURN and details how to control program flow.
+> **Note:** In Z-code (inside a ROUTINE, Zapf: RETURN, Inform: ret), <RETURN [value] [activation]> returns 1 (true) if no value is given, or exits the specified/enclosing block; when DO-FUNNY-RETURN? is true (default V5+), <RETURN value> without an activation exits the ROUTINE. See AGAIN, BIND, DO, PROG and REPEAT.
 
 ---
 
