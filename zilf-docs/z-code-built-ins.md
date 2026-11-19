@@ -712,7 +712,7 @@ Z-code built-in function that  reads a single character from the keyboard. Calls
 ### INTBL?
 **Usage:** `<INTBL? value table length [rec-spec]>  ;  "Version 5, 7-"` | `<INTBL? value table length>   ;  "Version 4, 6"`
 
-Z-code built-in predicate that that returns the address of value if value is in the table table of the length length, otherwise 0. 
+Z-code built-in predicate that returns the address of value if value is in the table table of the length length, otherwise 0. 
 
 In version 5, 7 and 8 the rec-spec describes the field where bit 7 is set for words and clear for bytes, rest defines the length of the field.
 
@@ -1193,7 +1193,7 @@ ZIL library function that defines a table containing the specified values and wi
 ---
 
 ### PTSIZE
-**Usage:** `<PTSIZE property-value>`
+**Usage:** `<PTSIZE property-address>`
 
 Z-code built-in function that gets the property size in bytes at property-address.
 
@@ -1654,7 +1654,7 @@ ZIL library predicate that tells the compiler to use different code-blocks depen
 The version-spec can be:
 * 3 (ZIP) 
 * 4 (EZIP) 
-* 5 (XZIIP) 
+* 5 (XZIP) 
 * 6 (YZIP) 
 * 7 
 * 8 
