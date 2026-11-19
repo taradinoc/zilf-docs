@@ -245,7 +245,7 @@ Z-code built-in function (<BACK table [bytes]>) that returns table with address 
 
 Note that this is not a copy of the table, it is pointing to the same table with another starting address. Also see GET, GETB, PUT, PUTB and REST."""@en ;
           skos:example """<GLOBAL TBL1 <TABLE 1 2 3 4>>  ;  TBL1 = [1 2 3 4]
-<GLOBAL TBL2 <REST ,STRUCT1 4>>  ;  TBL2 = [3 4] Move 4 because WORD-table!
+<GLOBAL TBL2 <REST ,TBL1 4>>  ;  TBL2 = [3 4] Move 4 because WORD-table!
 <SETG TBL2 <BACK ,TBL2 2>>  ;  TBL2 = [2 3 4]"""@en ;
           skos:prefLabel "<BACK table [bytes]>"@en .
 
@@ -272,7 +272,7 @@ zilf:BCOM rdf:type owl:NamedIndividual ,
           skos:inScheme zilf:ZILF_Scheme ;
           skos:definition "Z-code built-in function that is a bitwise NOT, reversing all bits in the WORD value (16 bits)."@en ;
           skos:editorialNote "ZILF supports BCOM in all versions."@en ;
-          skos:example "<BCOM #2 000011110001111>  ;  #2 1111000011110000"@en ;
+          skos:example "<BCOM #2 0000111100001111>  ;  #2 1111000011110000"@en ;
           skos:historyNote "Zapf syntax: BCOM, Inform syntax: not"@en ;
           skos:prefLabel "<BCOM value>"@en .
 
@@ -1492,8 +1492,10 @@ Later versions can format output text to width (number of characters if width is
 * 2 = File on host (transcript) 
 * 3 = Table 
 * 4 = File of commands on host"""@en ;
-            skos:example """<DIROUT 3>  ;  Turns on output to file 
-<DIROUT -3>  ;  Turns off output to file"""@en ;
+            skos:example """<DIROUT 2>  ;  Turns on output to transcript file
+<DIROUT -2>  ;  Turns off output to transcript file
+<DIROUT 3 ,MYTABLE>  ;  Turns on output to table
+<DIROUT -3>  ;  Turns off output to table"""@en ;
             skos:historyNote "Zapf syntax: DIROUT, Inform syntax: output_stream"@en ;
             skos:prefLabel "<DIROUT stream-number [table]>  ;  Versions -5"@en .
 
@@ -1981,7 +1983,7 @@ zilf:FORM rdf:type owl:NamedIndividual ,
           skos:example """<FORM + 1 2>  ;  <+ 1 2> 
 <DEFINE INC-FORM (A) 
     <FORM SET .A <FORM + 1 <FORM LVAL .A>>>> 
-<INC-FORM X>  ;  <SET X <+ 1 .X>"""@en ;
+<INC-FORM X>  ;  <SET X <+ 1 .X>>"""@en ;
           skos:prefLabel "<FORM values ...>"@en .
 
 
@@ -3726,9 +3728,9 @@ zilf:PRINC rdf:type owl:NamedIndividual ,
            skos:inScheme zilf:ZILF_Scheme ;
            skos:definition "MDL built-in function that returns the evaluated representation of value."@en ;
            skos:editorialNote "PRINC is just like PRIN1, except for STRING and CHARACTER where surrounding double quote (\") and initial !\\ is suppressed."@en ;
-           skos:example """<PRINC !\\A>  ;  !\\A
-<PRINC 42>  ; 42
-<PRINC \"Hello, world!\">  ;  \"Hello, world!\"
+           skos:example """<PRINC !\\A>  ;  A
+<PRINC 42>  ;  42
+<PRINC \"Hello, world!\">  ;  Hello, world!
 <PRINC (1 2 3)>  ;  (1 2 3)
 <PRINC <+ 1 2>>  ;  3"""@en ;
            skos:prefLabel "<PRINC value [channel]>"@en .
@@ -3802,7 +3804,7 @@ zilf:PRINTD rdf:type owl:NamedIndividual ,
             skos:inScheme zilf:ZILF_Scheme ;
             skos:definition "Print description of object."@en ;
             skos:editorialNote "ZILF supports PRINTD in all versions."@en ;
-            skos:example """<GLOBAL MYOBJECT (DESC \"sword\">
+            skos:example """<OBJECT MYOBJECT (DESC \"sword\")>
 
 <PRINTD ,MYOBJECT>  ;  \"sword\""""@en ;
             skos:historyNote "Zapf syntax: PRINTD, Inform syntax: print_obj"@en ;
@@ -4128,7 +4130,7 @@ zilf:PTSIZE rdf:type owl:NamedIndividual ,
             skos:example """<OBJECT MYOBJECT (FOO 1 2 3)>
 <PTSIZE <GETPT ,MYOBJECT ,P?FOO>>  ;  6"""@en ;
             skos:historyNote "Zapf syntax: PTSIZE, Inform syntax: get_prop_len"@en ;
-            skos:prefLabel "<PTSIZE property-value>"@en .
+            skos:prefLabel "<PTSIZE property-address>"@en .
 
 
 ###  http://example.org/zilf/PUSH
@@ -4655,7 +4657,7 @@ Z-code built-in function (<REMOVE object>) that detaches object from its parent 
             skos:editorialNote "ZILF supports REMOVE in all versions."@en ;
             skos:example """<OBJECT ANIMAL>
 <OBJECT CAT (LOC ANIMAL)>
-<REMOVE ,CAT)  ;  Detach CAT from ANIMAL"""@en ;
+<REMOVE ,CAT>  ;  Detach CAT from ANIMAL"""@en ;
             skos:historyNote "Zapf syntax: REMOVE, Inform syntax: remove_obj"@en ;
             skos:prefLabel "<REMOVE object>"@en .
 
@@ -6344,7 +6346,7 @@ zilf:ZZSECTION rdf:type owl:NamedIndividual ,
            skos:inScheme zilf:ZILF_Scheme ;
            skos:altLabel "<ADD numbers ...>"@en ;
            skos:definition "MDL and Z-code built-in function that adds numbers."@en ;
-           skos:example """<+ 2 3 4>  ;  7"""@en ;
+           skos:example """<+ 2 3 4>  ;  9"""@en ;
            skos:historyNote "Zapf syntax: ADD, Inform syntax: add"@en ;
            skos:prefLabel "<+ numbers ...>"@en .
 
@@ -6491,15 +6493,15 @@ Z-code built-in predicate (<ASSIGNED? name>) that tests if an optional argument 
                       zilf:LanguageConstruct ;
                                  skos:broader zilf:CoreFunctions ;
                                  skos:inScheme zilf:ZILF_Scheme ;
-                                 skos:definition """MDL bulit-in predicate that returns true if the atom ever had a local value in the environment.
+                                 skos:definition """MDL built-in predicate that returns true if the atom ever had a local value in the environment.
 
 If no environment is supplied, the environment defaults to current scope. See EVAL for more about the environment."""@en ;
                                  skos:example """<SET X 42>
 <ASSIGNED? X>  ;  True
-<GBOUND? X>  ;  True
-<GUNASSIGN X>
-<GASSIGNED? X>  ;  False
-<GBOUND? X>  ;  True"""@en ;
+<BOUND? X>  ;  True
+<UNASSIGN X>
+<ASSIGNED? X>  ;  False
+<BOUND? X>  ;  True"""@en ;
                                  skos:prefLabel "<BOUND? atom [environment]>"@en .
 
 
@@ -6809,20 +6811,20 @@ If needed, ZILF will move the extra variables into a table (GLOBAL-VARS-TABLE) a
                       zilf:LanguageConstruct ;
                                  skos:broader zilf:ZCodeBuiltIns ;
                                  skos:inScheme zilf:ZILF_Scheme ;
-                                 skos:definition """Z-code built-in predicate that that returns the address of value if value is in the table table of the length length, otherwise 0. 
+                                 skos:definition """Z-code built-in predicate that returns the address of value if value is in the table table of the length length, otherwise 0. 
 
 In version 5, 7 and 8 the rec-spec describes the field where bit 7 is set for words and clear for bytes, rest defines the length of the field."""@en ;
                                  skos:editorialNote "ZILF supports INTBL? in versions 4-."@en ;
-                                 skos:example """<T <INTBL? 3 <TABLE 1 2 3 4> 4>>  ;  T
-<T <INTBL? 6 <TABLE 1 2 3 4> 4>>  ;  #FALSE
+                                 skos:example """<T? <INTBL? 3 <TABLE 1 2 3 4> 4>>  ;  T
+<T? <INTBL? 6 <TABLE 1 2 3 4> 4>>  ;  #FALSE
 
 ;  \"Search byte-table with record length 3 (ver 5, 7-)\"
-<T <INTBL? 8 <TABLE (BYTE) 2 0 1 4 0 1 8 0 1> 9 3>>  ;  T
-<T <INTBL? 1 <TABLE (BYTE) 2 0 1 4 0 1 8 0 1> 9 3>>  ;  <>
+<T? <INTBL? 8 <TABLE (BYTE) 2 0 1 4 0 1 8 0 1> 9 3>>  ;  T
+<T? <INTBL? 1 <TABLE (BYTE) 2 0 1 4 0 1 8 0 1> 9 3>>  ;  <>
 
 ;  \"Search word-table with record length 3 (ver 5, 7-)\"
-<T <INTBL? 8 <TABLE 2 0 1 4 0 1 8 0 1> 9 131>>  ;  T
-<T <INTBL? 1 <TABLE 2 0 1 4 0 1 8 0 1> 9 131>>  ;  <>"""@en ;
+<T? <INTBL? 8 <TABLE 2 0 1 4 0 1 8 0 1> 9 131>>  ;  T
+<T? <INTBL? 1 <TABLE 2 0 1 4 0 1 8 0 1> 9 131>>  ;  <>"""@en ;
                                  skos:historyNote "Zapf syntax: INTBL?, Inform syntax: scan_table"@en ;
                                  skos:prefLabel """<INTBL? value table length [rec-spec]>  ;  \"Version 5, 7-\"
 <INTBL? value table length>   ;  \"Version 4, 6\""""@en .
@@ -6915,7 +6917,7 @@ In version 5, 7 and 8 the rec-spec describes the field where bit 7 is set for wo
                                       skos:example """;  For example, the table might be defined as equivalent to the following.
 
 <CONSTANT LONG-WORDS-TABLE
-    <CONSTANT LONG-WORDS-TABLE
+    <TABLE 2
         ,W?HEMIDEMIS \"hemidemisemiquaver\"
         ,W?SUPERCALI \"supercalifragilisticexpialidocious\">>
 
@@ -6925,13 +6927,13 @@ In version 5, 7 and 8 the rec-spec describes the field where bit 7 is set for wo
 <OBJECT FOO (SYNONYM HEMIDEMISEMI)>
 <VOC \"SUPERCALIFRAG\">
 <ROUTINE GO ()
-    <TELL \"Table length = \" N <GET ,LONG-WORD-TABLE 0> CR>
+    <TELL \"Table length = \" N <GET ,LONG-WORDS-TABLE 0> CR>
     <TELL \"W?SUPERCALIFRAG = \" N ,W?SUPERCALIFRAG CR>
-    <TELL \"WORD 1 = \" N <GET ,LONG-WORD-TABLE 1> CR>
-    <TELL \"WORD 2 = \" <GET ,LONG-WORD-TABLE 2> CR>
+    <TELL \"WORD 1 = \" N <GET ,LONG-WORDS-TABLE 1> CR>
+    <TELL \"WORD 2 = \" <GET ,LONG-WORDS-TABLE 2> CR>
     <TELL \"W?HEMIDEMISEMI = \" N ,W?HEMIDEMISEMI CR>
-    <TELL \"WORD 3 = \" N <GET ,LONG-WORD-TABLE 3> CR>
-    <TELL \"WORD 4 = \" <GET ,LONG-WORD-TABLE 4> CR>
+    <TELL \"WORD 3 = \" N <GET ,LONG-WORDS-TABLE 3> CR>
+    <TELL \"WORD 4 = \" <GET ,LONG-WORDS-TABLE 4> CR>
 >"""@en ;
                                       skos:prefLabel "<LONG-WORDS? [boolean]>"@en .
 
@@ -7010,9 +7012,9 @@ In version 5, 7 and 8 the rec-spec describes the field where bit 7 is set for wo
                       zilf:LanguageConstruct ;
                               skos:broader zilf:CoreFunctions ;
                               skos:inScheme zilf:ZILF_Scheme ;
-                              skos:definition "MDL built-in function that returns the same result as OR with the difference that all exressions are evaluated."@en ;
-                              skos:editorialNote """<OR? <=? 1 2> <=? 1 1>>  ; True 
- <OR? <=? 1 1> <SET X 2>> ;  X is set to 2 because all expressions are evaluated"""@en ;
+                              skos:definition "MDL built-in function that returns the same result as OR with the difference that all expressions are evaluated."@en ;
+                              skos:example """<OR? <=? 1 2> <=? 1 1>>  ;  True
+<OR? <=? 1 1> <SET X 2>>  ;  X is set to 2 because all expressions are evaluated"""@en ;
                               skos:prefLabel "<OR? Expressions ...>"@en .
 
 
@@ -7200,7 +7202,7 @@ By default, if ORDER-TREE? is not used, the order is the same as REVERSE-DEFINED
 The version-spec can be:
 * 3 (ZIP) 
 * 4 (EZIP) 
-* 5 (XZIIP) 
+* 5 (XZIP) 
 * 6 (YZIP) 
 * 7 
 * 8 
@@ -8429,6 +8431,7 @@ zilf:ResDoFunnyReturns rdf:type owl:NamedIndividual,
                     zilf:LanguageConstruct ;
            skos:broader zilf:ReservedSymbols ;
            skos:inScheme zilf:ZILF_Scheme ;
+           skos:altLabel "DO-FUNNY-RETURN?"@en ;
            skos:definition "Reserved GVAL (default: <> in V3-4, T in V5-) controlling whether <RETURN value> inside PROG/REPEAT exits the enclosing ROUTINE."@en ;
            skos:prefLabel "DO-FUNNY-RETURNS?"@en .
 
