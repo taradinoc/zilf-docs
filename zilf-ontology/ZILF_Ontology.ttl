@@ -22,12 +22,12 @@ skos:altLabel rdf:type owl:AnnotationProperty ;
 
 ###  http://www.w3.org/2004/02/skos/core#editorialNote
 skos:editorialNote rdf:type owl:AnnotationProperty ;
-                   rdfs:subPropertyOf rdfs:label .
+                   rdfs:subPropertyOf skos:note .
 
 
 ###  http://www.w3.org/2004/02/skos/core#historyNote
 skos:historyNote rdf:type owl:AnnotationProperty ;
-                 rdfs:subPropertyOf rdfs:label .
+                 rdfs:subPropertyOf skos:note .
 
 
 #################################################################
@@ -85,7 +85,9 @@ zilf:AGAIN rdf:type owl:NamedIndividual ,
            skos:broader zilf:CoreFunctions ,
                         zilf:ZCodeBuiltIns ;
            skos:inScheme zilf:ZILF_Scheme ;
-           skos:definition "MDL and Z-code built-in function that restarts execution from the specified or most recent activation block (PROG, REPEAT, BIND, DO, or ROUTINE)."@en ;
+           skos:definition """MDL built-in function (<AGAIN [activation]>) that restarts evaluation from the specified or most recent automatically created activation (PROG or REPEAT) without re-binding arguments or AUX variables.
+
+Z-code built-in function (<AGAIN [activation]>) that restarts a BIND, DO, PROG, REPEAT, or ROUTINE block from the top. Inside a ROUTINE, restarting the ROUTINE itself reinitializes arguments/variables that have default starting values, whereas restarting BIND, DO, PROG, or REPEAT preserves variable values."""@en ;
            skos:prefLabel "<AGAIN [activation]>"@en .
 
 
@@ -136,7 +138,10 @@ zilf:APPLY rdf:type owl:NamedIndividual ,
            skos:broader zilf:CoreFunctions ,
                       zilf:ZCodeBuiltIns ;
            skos:inScheme zilf:ZILF_Scheme ;
-           skos:definition "Call the routine with values. <APPLY routine values ...> is equivalent to <routine values ...>, but APPLY is often used when the routine to be called is resolved during run-time (dispatch-table)."@en ;
+           skos:altLabel "<APPLY applicable args ...>"@en ;
+           skos:definition """MDL built-in function (<APPLY applicable args ...>) that calls an applicable object (FUNCTION, SUBR, FSUBR, MACRO, FIX, or OFFSET) with args.
+
+Z-code built-in function (<APPLY routine values ...>) that calls a Z-machine routine with values, commonly used when the target routine is resolved at runtime (e.g., dispatch tables or object ACTION properties)."""@en ;
            skos:example """<GLOBAL MYROUTINES <LTABLE ROUTINE1 ROUTINE2>>
 ...
 <APPLY <GET ,MYROUTINES 1> .X>  ;  <ROUTINE1 .X>
@@ -304,8 +309,9 @@ zilf:BIND rdf:type owl:NamedIndividual ,
 
 The decl is used to specify the valid TYPE of the variables. In its simplest form decl is formatted like: #DECL ((X) FIX), meaning that X must be of the TYPE FIX. For more information on how to format the decl see GDECL. 
 
-Also see AGAIN, PROG, REPEAT and RETURN for more details how to control program flow."""@en ;
-          skos:editorialNote "" ;
+Also see AGAIN, PROG, REPEAT and RETURN for more details how to control program flow.
+
+Z-code built-in (<BIND [activation] (bindings...) expressions...>): Inside a ROUTINE, BIND defines a local variable block without creating a default activation; bare AGAIN or RETURN targets the enclosing activation (typically the ROUTINE). Variables in BIND are not reinitialized on AGAIN."""@en ;
           skos:example """<BIND ((X 1)) #DECL ((X) FIX)  
 <BIND ((X 2)) <PRIN1 .X>> <PRIN1 .X>>  ;  \"21\"
 
@@ -320,7 +326,6 @@ Also see AGAIN, PROG, REPEAT and RETURN for more details how to control program 
     <PRINC \" END\">
 >
 <TEST-BIND-AS-REPEAT>  ;  \"START 123 END\""""@en ;
-          skos:historyNote "" ;
           skos:prefLabel "<BIND [activation] (bindings ...) [decl] expressions ...>"@en .
 
 
@@ -448,7 +453,8 @@ zilf:BitOn rdf:type owl:NamedIndividual ,
                     skos:Concept ,
                       zilf:LanguageConstruct ;
            skos:broader zilf:PropFlags ;
-           skos:definition "Flag indicating that a light-source object is currently providing light." ;
+           skos:definition "Flag indicating that a light-source object is currently providing light."@en ;
+           skos:editorialNote "Traditional ZIL/zillib light-state flag; not explicitly listed in the ZILF Reference Guide (which uses LIGHTBIT)."@en ;
            skos:inScheme zilf:ZILF_Scheme ;
            skos:prefLabel "ONBIT"@en .
 
@@ -458,7 +464,7 @@ zilf:BitTake rdf:type owl:NamedIndividual ,
                       skos:Concept ,
                       zilf:LanguageConstruct ;
              skos:broader zilf:PropFlags ;
-             skos:definition "Flag indicating that an object can be picked up by the player." ;
+             skos:definition "Flag indicating that an object can be picked up by the player."@en ;
              skos:inScheme zilf:ZILF_Scheme ;
            skos:prefLabel "TAKEBIT"@en .
 
@@ -699,7 +705,9 @@ zilf:COND rdf:type owl:NamedIndividual ,
           skos:inScheme zilf:ZILF_Scheme ;
           skos:definition """Test condition (predicate) and if condition evaluates to true expressions are executed.
 
-IF-THEN style: <COND (<AND <=? 1 1> <=? 2 2>> <TELL \"IF-THEN <...>\">)>"""@en ;
+IF-THEN style: <COND (<AND <=? 1 1> <=? 2 2>> <TELL \"IF-THEN <...>\">)>
+
+MDL built-in (<COND (condition body ...) ...>): Outside a ROUTINE, evaluates each condition in turn until one is not #FALSE, evaluates all body expressions in that clause, and returns the value of the last evaluated expression (or #FALSE if no condition matches)."""@en ;
           skos:example """;  SWITCH style
 <COND
   (<=? .SWITCH 1>
@@ -806,7 +814,10 @@ zilf:CRLF rdf:type owl:NamedIndividual ,
           skos:broader zilf:CoreFunctions ,
                       zilf:ZCodeBuiltIns ;
           skos:inScheme zilf:ZILF_Scheme ;
-          skos:definition "MDL built-in function that prints a carriage-return and a line-feed to channel (default for channel is <LVAL OUTCHAN>; the console). CRLF returns true."@en ;
+          skos:altLabel "<CRLF>"@en ;
+          skos:definition """MDL built-in function (<CRLF [channel]>) that prints a carriage-return and line-feed to channel (default <LVAL OUTCHAN>) and returns true.
+
+Z-code built-in function (<CRLF>) that prints a carriage-return and line-feed to the active Z-machine output stream (takes no channel argument)."""@en ;
           skos:editorialNote "ZILF supports CRLF in all versions."@en ;
           skos:example "<CRLF>  ;  \"Moves cursor to position 1 on new line\""@en ;
           skos:historyNote "Zapf syntax: CRLF, Inform syntax: new_line"@en ;
@@ -841,7 +852,7 @@ zilf:CURSET rdf:type owl:NamedIndividual ,
             skos:definition "CURSET moves the cursor to row and column in the current window (or supplied window-number)."@en ;
             skos:editorialNote "ZILF supports CURSET in versions 4-."@en ;
             skos:example "<CURSET 1 1>  ;  Move cursor to upper left corner in current window"@en ;
-            skos:historyNote "In versions 4-5 it is only possible to move the cursor in the upper window (window-number = 1). In versions 6-, if row is -1 then the cursor is turned off (-2 turns it back on)." ;
+            skos:historyNote "In versions 4-5 it is only possible to move the cursor in the upper window (window-number = 1). In versions 6-, if row is -1 then the cursor is turned off (-2 turns it back on)."@en ;
             skos:prefLabel "<CURSET row column>  ;  \"Versions: 4-5\""@en .
 
 
@@ -849,228 +860,228 @@ zilf:CURSET rdf:type owl:NamedIndividual ,
 zilf:CoreFunctions rdf:type owl:NamedIndividual ,
                             skos:Concept ;
                    skos:narrower <http://example.org/zilf/*> ,
-                                 <http://example.org/zilf/+> ,
-                                 <http://example.org/zilf/-> ,
-                                 <http://example.org/zilf/0?> ,
-                                 <http://example.org/zilf/1?> ,
-                                 <http://example.org/zilf/==?> ,
-                                 <http://example.org/zilf/=?> ,
-                                 <http://example.org/zilf/AND?> ,
-                                 <http://example.org/zilf/APPLICABLE?> ,
-                                 <http://example.org/zilf/ASK-FOR-PICTURE-FILE?> ,
-                                 <http://example.org/zilf/ASSIGNED?> ,
-                                 <http://example.org/zilf/BOUND?> ,
-                                 <http://example.org/zilf/CHECK-VERSION?> ,
-                                 <http://example.org/zilf/COMPILING?> ,
-                                 <http://example.org/zilf/DECL?> ,
-                                 <http://example.org/zilf/EMPTY?> ,
-                                 <http://example.org/zilf/FREQUENT-WORDS?> ,
-                                 <http://example.org/zilf/FUNNY-GLOBALS?> ,
-                                 <http://example.org/zilf/G=?> ,
-                                 <http://example.org/zilf/G?> ,
-                                 <http://example.org/zilf/GASSIGNED?> ,
-                                 <http://example.org/zilf/GBOUND?> ,
-                                 <http://example.org/zilf/L=?> ,
-                                 <http://example.org/zilf/L?> ,
-                                 <http://example.org/zilf/LEGAL?> ,
-                                 <http://example.org/zilf/LENGTH?> ,
-                                 <http://example.org/zilf/LONG-WORDS?> ,
-                                 <http://example.org/zilf/N==?> ,
-                                 <http://example.org/zilf/N=?> ,
-                                 <http://example.org/zilf/NEVER-ZAP-TO-SOURCE-DIRECTORY?> ,
-                                 <http://example.org/zilf/OBLIST?> ,
-                                 <http://example.org/zilf/OR?> ,
-                                 <http://example.org/zilf/ORDER-FLAGS?> ,
-                                 <http://example.org/zilf/ORDER-OBJECTS?> ,
-                                 <http://example.org/zilf/ORDER-TREE?> ,
-                                 <http://example.org/zilf/STRUCTURED?> ,
-                                 <http://example.org/zilf/SUPPRESS-WARNINGS?> ,
-                                 <http://example.org/zilf/TYPE?> ,
-                                 <http://example.org/zilf/VALID-TYPE?> ,
-                                 <http://example.org/zilf/VERSION?> ,
-                                 <http://example.org/zilf/WARN-AS-ERROR?> ,
-                                 zilf:ADD-TELL-TOKENS ,
-                                 zilf:AGAIN ,
-                                 zilf:ALLTYPES ,
-                                 zilf:AND ,
-                                 zilf:ANDB ,
-                                 zilf:APPLY ,
-                                 zilf:APPLYTYPE ,
-                                 zilf:ASCII ,
-                                 zilf:ASSOCIATIONS ,
-                                 zilf:ATOM ,
-                                 zilf:AVALUE ,
-                                 zilf:BACK ,
-                                 zilf:BEGIN-SEGMENT ,
-                                 zilf:BIND ,
-                                 zilf:BLOAT ,
-                                 zilf:BLOCK ,
-                                 zilf:BYTE ,
-                                 zilf:CHECKPOINT ,
-                                 zilf:CHRSET ,
-                                 zilf:CHTYPE ,
-                                 zilf:CLOSE ,
-                                 zilf:COMPILATION-FLAG ,
-                                 zilf:COMPILATION-FLAG-DEFAULT ,
-                                 zilf:COMPILATION-FLAG-VALUE ,
-                                 zilf:COND ,
-                                 zilf:CONS ,
-                                 zilf:CONSTANT ,
-                                 zilf:CRLF ,
-                                 zilf:DECL-CHECK ,
-                                 zilf:DEFAULT-DEFINITION ,
-                                 zilf:DEFAULTS-DEFINED ,
-                                 zilf:DEFINE ,
-                                 zilf:DEFINE-GLOBALS ,
-                                 zilf:DEFINE-SEGMENT ,
-                                 zilf:DEFINE20 ,
-                                 zilf:DEFINITIONS ,
-                                 zilf:DEFMAC ,
-                                 zilf:DEFSTRUCT ,
-                                 zilf:DELAY-DEFINITION ,
-                                 zilf:DIV ,
-                                 zilf:END-DEFINITIONS ,
-                                 zilf:END-SEGMENT ,
-                                 zilf:ENDBLOCK ,
-                                 zilf:ENDLOAD ,
-                                 zilf:ENDPACKAGE ,
-                                 zilf:ENDSECTION ,
-                                 zilf:ENTRY ,
-                                 zilf:EQVB ,
-                                 zilf:ERROR ,
-                                 zilf:EVAL ,
-                                 zilf:EVAL-IN-SEGMENT ,
-                                 zilf:EVALTYPE ,
-                                 zilf:EXPAND ,
-                                 zilf:FILE-FLAGS ,
-                                 zilf:FILE-LENGTH ,
-                                 zilf:FLOAD ,
-                                 zilf:FORM ,
-                                 zilf:FUNCTION ,
-                                 zilf:GC ,
-                                 zilf:GC-MON ,
-                                 zilf:GDECL ,
-                                 zilf:GET-DECL ,
-                                 zilf:GETB ,
-                                 zilf:GETPROP ,
-                                 zilf:GLOBAL ,
-                                 zilf:GROW ,
-                                 zilf:GUNASSIGN ,
-                                 zilf:GVAL ,
-                                 zilf:IFFLAG ,
-                                 zilf:ILIST ,
-                                 zilf:IMAGE ,
-                                 zilf:INCLUDE ,
-                                 zilf:INCLUDE-WHEN ,
-                                 zilf:INDENT-TO ,
-                                 zilf:INDEX ,
-                                 zilf:INDICATOR ,
-                                 zilf:INSERT ,
-                                 zilf:INSERT-FILE ,
-                                 zilf:ISTRING ,
-                                 zilf:ITABLE ,
-                                 zilf:ITEM ,
-                                 zilf:IVECTOR ,
-                                 zilf:LANGUAGE ,
-                                 zilf:LENGTH ,
-                                 zilf:LINK ,
-                                 zilf:LIST ,
-                                 zilf:LOOKUP ,
-                                 zilf:LPARSE ,
-                                 zilf:LSH ,
-                                 zilf:LTABLE ,
-                                 zilf:LVAL ,
-                                 zilf:M-HPOS ,
-                                 zilf:MAKE-GVAL ,
-                                 zilf:MAPF ,
-                                 zilf:MAPLEAVE ,
-                                 zilf:MAPR ,
-                                 zilf:MAPRET ,
-                                 zilf:MAPSTOP ,
-                                 zilf:MAX ,
-                                 zilf:MEMBER ,
-                                 zilf:MEMQ ,
-                                 zilf:MIN ,
-                                 zilf:MOBLIST ,
-                                 zilf:MOD ,
-                                 zilf:MSETG ,
-                                 zilf:NEWTYPE ,
-                                 zilf:NEXT ,
-                                 zilf:NOT ,
-                                 zilf:NTH ,
-                                 zilf:OFFSET ,
-                                 zilf:OPEN ,
-                                 zilf:OR ,
-                                 zilf:ORB ,
-                                 zilf:PACKAGE ,
-                                 zilf:PARSE ,
-                                 zilf:PICFILE ,
-                                 zilf:PLTABLE ,
-                                 zilf:PNAME ,
-                                 zilf:PRIMTYPE ,
-                                 zilf:PRIN1 ,
-                                 zilf:PRINC ,
-                                 zilf:PRINT ,
-                                 zilf:PRINT-MANY ,
-                                 zilf:PRINTTYPE ,
-                                 zilf:PROG ,
-                                 zilf:PROPDEF ,
-                                 zilf:PTABLE ,
-                                 zilf:PUT ,
-                                 zilf:PUT-DECL ,
-                                 zilf:PUT-PURE-HERE ,
-                                 zilf:PUTB ,
-                                 zilf:PUTPROP ,
-                                 zilf:PUTREST ,
-                                 zilf:QUIT ,
-                                 zilf:QUOTE ,
-                                 zilf:READSTRING ,
-                                 zilf:REMOVE ,
-                                 zilf:RENTRY ,
-                                 zilf:REPEAT ,
-                                 zilf:REPLACE-DEFINITION ,
-                                 zilf:REST ,
-                                 zilf:RETURN ,
-                                 zilf:ROOM ,
-                                 zilf:ROOT ,
-                                 zilf:ROUTINE ,
-                                 zilf:ROUTINE-FLAGS ,
-                                 zilf:SET ,
-                                 zilf:SET-DEFSTRUCT-FILE-DEFAULTS ,
-                                 zilf:SETG ,
-                                 zilf:SETG20 ,
-                                 zilf:SORT ,
-                                 zilf:SPNAME ,
-                                 zilf:STRING ,
-                                 zilf:SUBSTRUC ,
-                                 zilf:TABLE ,
-                                 zilf:TELL-TOKENS ,
-                                 zilf:TIME ,
-                                 zilf:TOP ,
-                                 zilf:TUPLE ,
-                                 zilf:TYPE ,
-                                 zilf:TYPEPRIM ,
-                                 zilf:UNASSIGN ,
-                                 zilf:UNPARSE ,
-                                 zilf:USE ,
-                                 zilf:USE-WHEN ,
-                                 zilf:VALUE ,
-                                 zilf:VECTOR ,
-                                 zilf:VERSION ,
-                                 zilf:VOC ,
-                                 zilf:XFLOAD ,
-                                 zilf:XORB ,
-                                 zilf:ZGET ,
-                                 zilf:ZIP-OPTIONS ,
-                                 zilf:ZPACKAGE ,
-                                 zilf:ZPUT ,
-                                 zilf:ZREST ,
-                                 zilf:ZSECTION ,
-                                 zilf:ZSTART ,
-                                 zilf:ZSTR-OFF ,
-                                 zilf:ZSTR-ON ,
-                                 zilf:ZZPACKAGE ,
-                                 zilf:ZZSECTION ;
+                   <http://example.org/zilf/+> ,
+                   <http://example.org/zilf/-> ,
+                   <http://example.org/zilf/0?> ,
+                   <http://example.org/zilf/1?> ,
+                   <http://example.org/zilf/==?> ,
+                   <http://example.org/zilf/=?> ,
+                   <http://example.org/zilf/AND?> ,
+                   <http://example.org/zilf/APPLICABLE?> ,
+                   <http://example.org/zilf/ASK-FOR-PICTURE-FILE?> ,
+                   <http://example.org/zilf/ASSIGNED?> ,
+                   <http://example.org/zilf/BOUND?> ,
+                   <http://example.org/zilf/CHECK-VERSION?> ,
+                   <http://example.org/zilf/COMPILING?> ,
+                   <http://example.org/zilf/DECL?> ,
+                   <http://example.org/zilf/EMPTY?> ,
+                   <http://example.org/zilf/FREQUENT-WORDS?> ,
+                   <http://example.org/zilf/FUNNY-GLOBALS?> ,
+                   <http://example.org/zilf/G=?> ,
+                   <http://example.org/zilf/G?> ,
+                   <http://example.org/zilf/GASSIGNED?> ,
+                   <http://example.org/zilf/GBOUND?> ,
+                   <http://example.org/zilf/L=?> ,
+                   <http://example.org/zilf/L?> ,
+                   <http://example.org/zilf/LEGAL?> ,
+                   <http://example.org/zilf/LENGTH?> ,
+                   <http://example.org/zilf/LONG-WORDS?> ,
+                   <http://example.org/zilf/N==?> ,
+                   <http://example.org/zilf/N=?> ,
+                   <http://example.org/zilf/NEVER-ZAP-TO-SOURCE-DIRECTORY?> ,
+                   <http://example.org/zilf/OBLIST?> ,
+                   <http://example.org/zilf/OR?> ,
+                   <http://example.org/zilf/ORDER-FLAGS?> ,
+                   <http://example.org/zilf/ORDER-OBJECTS?> ,
+                   <http://example.org/zilf/ORDER-TREE?> ,
+                   <http://example.org/zilf/STRUCTURED?> ,
+                   <http://example.org/zilf/SUPPRESS-WARNINGS?> ,
+                   <http://example.org/zilf/TYPE?> ,
+                   <http://example.org/zilf/VALID-TYPE?> ,
+                   <http://example.org/zilf/VERSION?> ,
+                   <http://example.org/zilf/WARN-AS-ERROR?> ,
+                   zilf:ADD-TELL-TOKENS ,
+                   zilf:AGAIN ,
+                   zilf:ALLTYPES ,
+                   zilf:AND ,
+                   zilf:ANDB ,
+                   zilf:APPLY ,
+                   zilf:APPLYTYPE ,
+                   zilf:ASCII ,
+                   zilf:ASSOCIATIONS ,
+                   zilf:ATOM ,
+                   zilf:AVALUE ,
+                   zilf:BACK ,
+                   zilf:BEGIN-SEGMENT ,
+                   zilf:BIND ,
+                   zilf:BLOAT ,
+                   zilf:BLOCK ,
+                   zilf:BYTE ,
+                   zilf:CHECKPOINT ,
+                   zilf:CHRSET ,
+                   zilf:CHTYPE ,
+                   zilf:CLOSE ,
+                   zilf:COMPILATION-FLAG ,
+                   zilf:COMPILATION-FLAG-DEFAULT ,
+                   zilf:COMPILATION-FLAG-VALUE ,
+                   zilf:COND ,
+                   zilf:CONS ,
+                   zilf:CONSTANT ,
+                   zilf:CRLF ,
+                   zilf:DECL-CHECK ,
+                   zilf:DEFAULT-DEFINITION ,
+                   zilf:DEFAULTS-DEFINED ,
+                   zilf:DEFINE ,
+                   zilf:DEFINE-GLOBALS ,
+                   zilf:DEFINE-SEGMENT ,
+                   zilf:DEFINE20 ,
+                   zilf:DEFINITIONS ,
+                   zilf:DEFMAC ,
+                   zilf:DEFSTRUCT ,
+                   zilf:DELAY-DEFINITION ,
+                   zilf:DIV ,
+                   zilf:END-DEFINITIONS ,
+                   zilf:END-SEGMENT ,
+                   zilf:ENDBLOCK ,
+                   zilf:ENDLOAD ,
+                   zilf:ENDPACKAGE ,
+                   zilf:ENDSECTION ,
+                   zilf:ENTRY ,
+                   zilf:EQVB ,
+                   zilf:ERROR ,
+                   zilf:EVAL ,
+                   zilf:EVAL-IN-SEGMENT ,
+                   zilf:EVALTYPE ,
+                   zilf:EXPAND ,
+                   zilf:FILE-FLAGS ,
+                   zilf:FILE-LENGTH ,
+                   zilf:FLOAD ,
+                   zilf:FORM ,
+                   zilf:FUNCTION ,
+                   zilf:GC ,
+                   zilf:GC-MON ,
+                   zilf:GDECL ,
+                   zilf:GET-DECL ,
+                   zilf:GETB ,
+                   zilf:GETPROP ,
+                   zilf:GLOBAL ,
+                   zilf:GROW ,
+                   zilf:GUNASSIGN ,
+                   zilf:GVAL ,
+                   zilf:IFFLAG ,
+                   zilf:ILIST ,
+                   zilf:IMAGE ,
+                   zilf:INCLUDE ,
+                   zilf:INCLUDE-WHEN ,
+                   zilf:INDENT-TO ,
+                   zilf:INDEX ,
+                   zilf:INDICATOR ,
+                   zilf:INSERT ,
+                   zilf:INSERT-FILE ,
+                   zilf:ISTRING ,
+                   zilf:ITABLE ,
+                   zilf:ITEM ,
+                   zilf:IVECTOR ,
+                   zilf:LANGUAGE ,
+                   zilf:LENGTH ,
+                   zilf:LINK ,
+                   zilf:LIST ,
+                   zilf:LOOKUP ,
+                   zilf:LPARSE ,
+                   zilf:LSH ,
+                   zilf:LTABLE ,
+                   zilf:LVAL ,
+                   zilf:M-HPOS ,
+                   zilf:MAKE-GVAL ,
+                   zilf:MAPF ,
+                   zilf:MAPLEAVE ,
+                   zilf:MAPR ,
+                   zilf:MAPRET ,
+                   zilf:MAPSTOP ,
+                   zilf:MAX ,
+                   zilf:MEMBER ,
+                   zilf:MEMQ ,
+                   zilf:MIN ,
+                   zilf:MOBLIST ,
+                   zilf:MOD ,
+                   zilf:MSETG ,
+                   zilf:NEWTYPE ,
+                   zilf:NEXT ,
+                   zilf:NOT ,
+                   zilf:NTH ,
+                   zilf:OBJECT ,
+                   zilf:OFFSET ,
+                   zilf:OPEN ,
+                   zilf:OR ,
+                   zilf:ORB ,
+                   zilf:PACKAGE ,
+                   zilf:PARSE ,
+                   zilf:PICFILE ,
+                   zilf:PLTABLE ,
+                   zilf:PNAME ,
+                   zilf:PRIMTYPE ,
+                   zilf:PRIN1 ,
+                   zilf:PRINC ,
+                   zilf:PRINT ,
+                   zilf:PRINT-MANY ,
+                   zilf:PRINTTYPE ,
+                   zilf:PROG ,
+                   zilf:PROPDEF ,
+                   zilf:PTABLE ,
+                   zilf:PUT ,
+                   zilf:PUT-DECL ,
+                   zilf:PUT-PURE-HERE ,
+                   zilf:PUTB ,
+                   zilf:PUTPROP ,
+                   zilf:PUTREST ,
+                   zilf:QUIT ,
+                   zilf:QUOTE ,
+                   zilf:READSTRING ,
+                   zilf:REMOVE ,
+                   zilf:RENTRY ,
+                   zilf:REPEAT ,
+                   zilf:REPLACE-DEFINITION ,
+                   zilf:REST ,
+                   zilf:RETURN ,
+                   zilf:ROOM ,
+                   zilf:ROOT ,
+                   zilf:ROUTINE ,
+                   zilf:ROUTINE-FLAGS ,
+                   zilf:SET ,
+                   zilf:SET-DEFSTRUCT-FILE-DEFAULTS ,
+                   zilf:SETG ,
+                   zilf:SETG20 ,
+                   zilf:SORT ,
+                   zilf:SPNAME ,
+                   zilf:STRING ,
+                   zilf:SUBSTRUC ,
+                   zilf:TABLE ,
+                   zilf:TELL-TOKENS ,
+                   zilf:TIME ,
+                   zilf:TOP ,
+                   zilf:TUPLE ,
+                   zilf:TYPE ,
+                   zilf:TYPEPRIM ,
+                   zilf:UNASSIGN ,
+                   zilf:UNPARSE ,
+                   zilf:USE ,
+                   zilf:USE-WHEN ,
+                   zilf:VALUE ,
+                   zilf:VECTOR ,
+                   zilf:VERSION ,
+                   zilf:XFLOAD ,
+                   zilf:XORB ,
+                   zilf:ZGET ,
+                   zilf:ZIP-OPTIONS ,
+                   zilf:ZPACKAGE ,
+                   zilf:ZPUT ,
+                   zilf:ZREST ,
+                   zilf:ZSECTION ,
+                   zilf:ZSTART ,
+                   zilf:ZSTR-OFF ,
+                   zilf:ZSTR-ON ,
+                   zilf:ZZPACKAGE ,
+                   zilf:ZZSECTION ;
                    skos:topConceptOf zilf:ZILF_Scheme ;
                    skos:inScheme zilf:ZILF_Scheme ;
            skos:prefLabel "Core Functions"@en .
@@ -1786,8 +1797,8 @@ zilf:EQVB rdf:type owl:NamedIndividual ,
           skos:broader zilf:CoreFunctions ;
           skos:inScheme zilf:ZILF_Scheme ;
           skos:definition "MDL built-in function that evaluates bitwise equivalence (inverse of exclusive “or”)."@en ;
-          skos:editorialNote "EQVB uses 32-bit."@en ;
-          skos:example """<XORB 250 245>  
+          skos:editorialNote "EQVB uses 32-bit. (Note: the ZILF Reference Guide example has a typo calling XORB instead of EQVB.)"@en ;
+          skos:example """<EQVB 250 245>  
 ;  00000000 00000000 00000000 11111010
 ;  00000000 00000000 00000000 11110101
 ;  -----------------------------------
@@ -2075,7 +2086,8 @@ zilf:FlagMANY rdf:type owl:NamedIndividual ,
 zilf:FlagNEWSFLAGS rdf:type owl:NamedIndividual ,
                     skos:Concept ,
                     zilf:LanguageConstruct ;
-           skos:broader zilf:SyntaxFlags ;
+           skos:broader zilf:ReservedSymbols ,
+                         zilf:SyntaxFlags ;
            skos:inScheme zilf:ZILF_Scheme ;
            skos:definition "GVAL table used to define custom search flags in Version 6 new parser games."@en ;
            skos:prefLabel "NEW-SFLAGS"@en .
@@ -2171,7 +2183,7 @@ zilf:GETB rdf:type owl:NamedIndividual ,
           skos:broader zilf:CoreFunctions ,
                       zilf:ZCodeBuiltIns ;
           skos:inScheme zilf:ZILF_Scheme ;
-          skos:definition """Z-code built-in that returns BYTE-record (1 byte) stored at offset. Note that table is an address in memory so the BYTE that is returned is at table+offset. It is legal to use, for example, 0 as an address to retrieve information from the header. 
+          skos:definition """ZIL library function (<GETB table index>) and Z-code built-in (<GETB table offset>) that returns the 1-byte record stored at the given byte offset (usable both outside and inside ROUTINEs). Note that table is an address in memory so the BYTE that is returned is at table+offset. It is legal to use, for example, 0 as an address to retrieve information from the header. 
 
 Also see BACK, GET, PUT, PUTB and REST."""@en ;
           skos:editorialNote "ZILF supports GETB in all versions."@en ;
@@ -2819,7 +2831,9 @@ zilf:LVAL rdf:type owl:NamedIndividual ,
                       zilf:ZCodeBuiltIns ;
           skos:inScheme zilf:ZILF_Scheme ;
           skos:altLabel ".name"@en ;
-          skos:definition "Z-code built-in function that gets the value of local variable name."@en ;
+          skos:definition """MDL built-in function (<LVAL atom [environment]>) that gets the local value of atom in the optional or current environment.
+
+Z-code built-in function (<LVAL name>) that gets the value of local variable name inside a ROUTINE."""@en ;
           skos:editorialNote "LVAL is more often used in its short for, which is .name."@en ;
           skos:example """<SET X 5> 
 <LVAL X>  ;  5
@@ -3150,7 +3164,9 @@ zilf:MOD rdf:type owl:NamedIndividual ,
          skos:broader zilf:CoreFunctions ,
                       zilf:ZCodeBuiltIns ;
          skos:inScheme zilf:ZILF_Scheme ;
-         skos:definition "Z-code built-in function that Returns remainder of 16-bit signed division. number2 is not allowed to be 0 (\"Division by zero\")."@en ;
+         skos:definition """MDL built-in function that divides 32-bit FIX number1 by non-zero number2 and returns the remainder.
+
+Z-code built-in function that returns the remainder of 16-bit signed division (number2 must be non-zero)."""@en ;
          skos:editorialNote "ZILF supports MOD in all versions."@en ;
          skos:example """<MOD 15 4>  ;  3
 <MOD -15 4>  ;  -3
@@ -3304,7 +3320,9 @@ zilf:NOT rdf:type owl:NamedIndividual ,
          skos:broader zilf:CoreFunctions ,
                       zilf:ZCodeBuiltIns ;
          skos:inScheme zilf:ZILF_Scheme ;
-         skos:definition "MDL built-in function that returns true if value is false (#FALSE <>), otherwise NOT returns false."@en ;
+         skos:definition """MDL built-in function (<NOT value>) that returns true if value is #FALSE (<>), otherwise false (0 is truthy in MDL).
+
+Z-code built-in function (<NOT expression>) that returns boolean NOT (1 if expression is 0, otherwise 0)."""@en ;
          skos:editorialNote "This is a boolean (logical) \"not.\""@en ;
          skos:example """<NOT <>>  ;  T
 <NOT T>  ;  #FALSE <>
@@ -3332,7 +3350,8 @@ Also see BACK, LENGTH, PUT, REST, SUBSTRUC and TOP."""@en ;
 zilf:OBJECT rdf:type owl:NamedIndividual ,
                      skos:Concept ,
                      zilf:LanguageConstruct ;
-            skos:broader zilf:ObjectSystem ;
+            skos:broader zilf:CoreFunctions ,
+                         zilf:ObjectSystem ;
             skos:inScheme zilf:ZILF_Scheme ;
             skos:definition """ZIL library function that creates an object with the internal objectname, name. After the name follows LISTs of properties for the OBJECT and the values for each property. Which properties that define up a OBJECT is determined by the parser and it’s possible to add new properties with PROPDEF as long as the parser is modified to support the new property. Below is a list of common properties.
 
@@ -3429,7 +3448,7 @@ zilf:OR rdf:type owl:NamedIndividual ,
                       zilf:ZCodeBuiltIns ;
         skos:inScheme zilf:ZILF_Scheme ;
         skos:definition "MDL built-in function that is a boolean OR. Requires that one of the expressions evaluates to true to return true. Exits on the first expression that evaluates to true (rest of expressions are not evaluated)."@en ;
-        skos:editorialNote "Because false is its own TYPE outside a routine OR returns #FALSE if all expressions are false or the value of the first true expression."@en ;
+        skos:editorialNote "Outside a routine (MDL), OR returns #FALSE if all expressions are false, or the value of the first non-false expression (0 is truthy). Inside a routine (Z-code), 0 is false, so OR returns 0 if all expressions are false or the value of the first non-zero expression."@en ;
         skos:example """<OR <=? 1 2> <=? 1 1>>  ;  True 
  <OR <=? 1 1> <SET X 2>> ;  X is never set to 2 because first predicate evaluates to true 
  <SET X <OR 0 1 2 3>>  ;  X is set to 0 
@@ -3441,7 +3460,8 @@ zilf:OR rdf:type owl:NamedIndividual ,
 zilf:ORB rdf:type owl:NamedIndividual ,
                   skos:Concept ,
                       zilf:LanguageConstruct ;
-         skos:broader zilf:CoreFunctions ;
+         skos:broader zilf:CoreFunctions ,
+                      zilf:ZCodeBuiltIns ;
          skos:inScheme zilf:ZILF_Scheme ;
          skos:definition "MDL built-in function that performs a bitwise OR."@en ;
          skos:example """<ORB 33 96>  ;  97
@@ -3454,25 +3474,25 @@ zilf:ObjectProperties rdf:type owl:NamedIndividual ,
                                skos:Concept ;
                       skos:broader zilf:ObjectSystem ;
                       skos:narrower zilf:PropAction ,
-                                 zilf:PropAdjective ,
-                                 zilf:PropCapacity ,
-                                 zilf:PropCexit ,
-                                 zilf:PropContfcn ,
-                                 zilf:PropDesc ,
-                                 zilf:PropDescfcn ,
-                                 zilf:PropDexit ,
-                                 zilf:PropFdesc ,
-                                 zilf:PropFexit ,
-                                 zilf:PropFlags ,
-                                 zilf:PropGlobal ,
-                                 zilf:PropIn ,
-                                 zilf:PropLdesc ,
-                                 zilf:PropNexit ,
-                                 zilf:PropSize ,
-                                 zilf:PropSynonym ,
-                                 zilf:PropThings ,
-                                 zilf:PropUexit ,
-                                 zilf:PropValue ;
+                   zilf:PropAdjective ,
+                   zilf:PropCapacity ,
+                   zilf:PropCexit ,
+                   zilf:PropContfcn ,
+                   zilf:PropDesc ,
+                   zilf:PropDescfcn ,
+                   zilf:PropDexit ,
+                   zilf:PropFdesc ,
+                   zilf:PropFexit ,
+                   zilf:PropFlags ,
+                   zilf:PropGlobal ,
+                   zilf:PropIn ,
+                   zilf:PropLdesc ,
+                   zilf:PropNexit ,
+                   zilf:PropSize ,
+                   zilf:PropSynonym ,
+                   zilf:PropThings ,
+                   zilf:PropUexit ,
+                   zilf:PropValue ;
                       skos:inScheme zilf:ZILF_Scheme ;
            skos:prefLabel "Object Properties"@en .
 
@@ -3481,8 +3501,8 @@ zilf:ObjectProperties rdf:type owl:NamedIndividual ,
 zilf:ObjectSystem rdf:type owl:NamedIndividual ,
                            skos:Concept ;
                   skos:narrower zilf:OBJECT ,
-                                 zilf:ObjectProperties ,
-                                 zilf:ROOM ;
+                   zilf:ObjectProperties ,
+                   zilf:ROOM ;
                   skos:topConceptOf zilf:ZILF_Scheme ;
                   skos:inScheme zilf:ZILF_Scheme ;
            skos:prefLabel "Object System"@en .
@@ -3591,9 +3611,9 @@ zilf:PICINF rdf:type owl:NamedIndividual ,
             skos:broader zilf:ZCodeBuiltIns ;
             skos:inScheme zilf:ZILF_Scheme ;
             skos:definition "Z-code built-in function that Writes picture data from picture-number into table. Word 0 of table holds picture width and word 1 holds picture height. Then follows the picture data. If picture-number is 0, the number of available pictures is written into word 0 of table and release number of picture file is written into word 1."@en ;
-            skos:editorialNote "ZILF currently supports PICINF in versions 6-."@en ;
+            skos:editorialNote "ZILF currently supports PICINF in versions 6-. (Note: the ZILF Reference Guide example has a typo calling PICINFO instead of PICINF.)"@en ;
             skos:example """<GLOBAL MYPIC <ITABLE 2048 0>>
-<PICINFO 1 ,MYPIC>  ;  Writes picture data into MYPIC"""@en ;
+<PICINF 1 ,MYPIC>  ;  Writes picture data into MYPIC"""@en ;
             skos:historyNote "Zapf syntax: PICINF, Inform syntax: picture_data"@en ;
             skos:prefLabel "<PICINF picture-number table>"@en .
 
@@ -3721,11 +3741,6 @@ zilf:PRINT rdf:type owl:NamedIndividual ,
            skos:broader zilf:CoreFunctions ,
                       zilf:ZCodeBuiltIns ;
            skos:inScheme zilf:ZILF_Scheme ;
-           rdfs:isDefinedBy """<PRINT !\\A>  ;  !\\A<space>
-<PRINT 42>  ; 42<space>
-<PRINT \"Hello, world!\">  ;  \"Hello, world!\"<space>
-<PRINT (1 2 3)>  ;  (1 2 3)<space>
-<PRINT <+ 1 2>>  ;  3<space>"""@en ;
            skos:definition """MDL built-in function that prints a CRLF, the evaluated representation of value, and a space to channel, returning the evaluated value.
 
 Z-code built-in function (print_paddr) that prints a packed string from high memory pointed to by string."""@en ;
@@ -3942,7 +3957,7 @@ zilf:PROG rdf:type owl:NamedIndividual ,
           skos:definition """MDL built-in function that defines a program block with its own set of bindings. PROG is similar to BIND and REPEAT but unlike BIND it creates a default activation (like REPEAT) at the start of the block and doesn't have an automatic AGAIN at the end of the block (like REPEAT). It is possible to name an atom to the activation but it is not necessary. AGAIN and RETURN inside a PROG-block will start the block over or return from the block.
 
 The decl is used to specify the valid TYPE of the variables. In its simplest form decl is formatted like: #DECL ((X) FIX), meaning that X must be of the TYPE FIX. For more information on how to format the decl see GDECL."""@en ;
-          skos:editorialNote "Also see AGAIN, BIND, REPEAT and RETURN for more details how to control program flow."@en ;
+          skos:editorialNote "In Z-code (inside a ROUTINE), DO-FUNNY-RETURN? controls whether <RETURN value> exits the enclosing ROUTINE (when true, default in V5+) or the PROG block (when false, default in V3-4). Bare <RETURN> always exits the PROG block. Also see AGAIN, BIND, REPEAT and RETURN."@en ;
           skos:example """<PROG ((X 1)) #DECL ((X) FIX)  
     <PROG ((X 2)) <PRIN1 .X>> <PRIN1 .X>>  ;  \"21\" 
 <DEFINE TEST-PROG-AS-REPEAT ()
@@ -4180,7 +4195,7 @@ zilf:PUTB rdf:type owl:NamedIndividual ,
           skos:broader zilf:CoreFunctions ,
                       zilf:ZCodeBuiltIns ;
           skos:inScheme zilf:ZILF_Scheme ;
-          skos:definition """Z-code built-in function that puts a byte value in the table at byte position offset. The actual address is table-address+offset. Note that table can be a byte-address in dynamic memory.
+          skos:definition """ZIL library function (<PUTB table index new-value>) and Z-code built-in (<PUTB table offset value>) that writes a 1-byte value into table at the given byte offset (usable both outside and inside ROUTINEs). The actual address is table-address+offset. Note that table can be a byte-address in dynamic memory.
 
 Also see BACK, GET, GETB, PUT and REST."""@en ;
           skos:editorialNote "ZILF supports PUTB in all versions."@en ;
@@ -4272,17 +4287,19 @@ Note that this actually changes the list."""@en ;
 zilf:ParserSystem rdf:type owl:NamedIndividual ,
                            skos:Concept ;
                   skos:narrower zilf:ADD-WORD ,
-                                 zilf:ADJ-SYNONYM ,
-                                 zilf:BIT-SYNONYM ,
-                                 zilf:BUZZ ,
-                                 zilf:DIR-SYNONYM ,
-                                 zilf:DIRECTIONS ,
-                                 zilf:NEW-ADD-WORD ,
-                                 zilf:PREP-SYNONYM ,
-                                 zilf:SYNONYM ,
-                                 zilf:SYNTAX ,
-                                 zilf:SyntaxFlags ,
-                                 zilf:VERB-SYNONYM ;
+                   zilf:ADJ-SYNONYM ,
+                   zilf:BIT-SYNONYM ,
+                   zilf:BUZZ ,
+                   zilf:DIR-SYNONYM ,
+                   zilf:DIRECTIONS ,
+                   zilf:NEW-ADD-WORD ,
+                   zilf:PREP-SYNONYM ,
+                   zilf:ParserTables ,
+                   zilf:SYNONYM ,
+                   zilf:SYNTAX ,
+                   zilf:SyntaxFlags ,
+                   zilf:VERB-SYNONYM ,
+                   zilf:VOC ;
                   skos:topConceptOf zilf:ZILF_Scheme ;
                   skos:inScheme zilf:ZILF_Scheme ;
            skos:prefLabel "Parser System"@en .
@@ -4303,8 +4320,8 @@ zilf:PropAdjective rdf:type owl:NamedIndividual ,
                             skos:Concept ,
                       zilf:LanguageConstruct ;
                    skos:broader zilf:ObjectProperties ;
-                   skos:definition "A list of adjectives the parser accepts to identify a specific object." ;
-                   skos:example "ADJECTIVE BRASS SMALL" ;
+                   skos:definition "A list of adjectives the parser accepts to identify a specific object."@en ;
+                   skos:example "ADJECTIVE BRASS SMALL"@en ;
                    skos:inScheme zilf:ZILF_Scheme ;
            skos:prefLabel "ADJECTIVE"@en .
 
@@ -4344,7 +4361,7 @@ zilf:PropDesc rdf:type owl:NamedIndividual ,
                        skos:Concept ,
                       zilf:LanguageConstruct ;
               skos:broader zilf:ObjectProperties ;
-              skos:definition "A short string used to name the object in game output." ;
+              skos:definition "A short string used to name the object in game output."@en ;
               skos:inScheme zilf:ZILF_Scheme ;
            skos:prefLabel "DESC"@en .
 
@@ -4394,9 +4411,18 @@ zilf:PropFlags rdf:type owl:NamedIndividual ,
                         skos:Concept ,
                       zilf:LanguageConstruct ;
                skos:broader zilf:ObjectProperties ;
-               skos:narrower zilf:BitOn ,
-                             zilf:BitTake ;
-               skos:definition "A collection of boolean bits (flags) that define the state or behavior of an object." ;
+               skos:narrower zilf:BitCont ,
+                   zilf:BitDevice ,
+                   zilf:BitDoor ,
+                   zilf:BitLight ,
+                   zilf:BitNdungeon ,
+                   zilf:BitOn ,
+                   zilf:BitOpen ,
+                   zilf:BitPerson ,
+                   zilf:BitRoom ,
+                   zilf:BitSurface ,
+                   zilf:BitTake ;
+               skos:definition "A collection of boolean bits (flags) that define the state or behavior of an object."@en ;
                skos:inScheme zilf:ZILF_Scheme ;
            skos:prefLabel "FLAGS"@en .
 
@@ -4457,7 +4483,7 @@ zilf:PropSynonym rdf:type owl:NamedIndividual ,
                           skos:Concept ,
                       zilf:LanguageConstruct ;
                  skos:broader zilf:ObjectProperties ;
-                 skos:definition "A list of nouns the parser accepts for this object." ;
+                 skos:definition "A list of nouns the parser accepts for this object."@en ;
                  skos:inScheme zilf:ZILF_Scheme ;
            skos:prefLabel "SYNONYM"@en .
 
@@ -4500,7 +4526,10 @@ zilf:QUIT rdf:type owl:NamedIndividual ,
           skos:broader zilf:CoreFunctions ,
                        zilf:ZCodeBuiltIns ;
           skos:inScheme zilf:ZILF_Scheme ;
-          skos:definition "MDL built-in function that exits ZILF (interpreter mode) and returns to the operating system with exit-code."@en ;
+          skos:altLabel "<QUIT>"@en ;
+          skos:definition """MDL built-in function (<QUIT [exit-code]>) that exits ZILF interpreter mode and returns to the operating system with exit-code.
+
+Z-code built-in function (<QUIT>) that immediately halts Z-machine game execution (takes no arguments)."""@en ;
           skos:editorialNote "ZILF supports QUIT in all versions."@en ;
           skos:example "<QUIT>"@en ;
           skos:historyNote "Zapf syntax: QUIT, Inform syntax: quit"@en ;
@@ -4658,7 +4687,7 @@ zilf:REPEAT rdf:type owl:NamedIndividual ,
             skos:definition """MDL built-in function that  defines a program block with its own set of bindings. REPEAT is similar to BIND and PROG but unlike BIND it creates a default activation (like PROG) at the start of the block but unlike PROG it also has an automatic AGAIN at the end of the block. It is possible to name an atom to the activation but it is not necessary. A REPEAT-block repeatedly executes expressions until it encounters a RETURN statement that will exit the block. 
 
 The decl is used to specify the valid TYPE of the variables. In its simplest form decl is formatted like: #DECL ((X) FIX), meaning that X must be of the TYPE FIX. For more information on how to format the decl see GDECL."""@en ;
-            skos:editorialNote "Also see AGAIN, BIND, PROG and RETURN for more details on how to control program flow."@en ;
+            skos:editorialNote "In Z-code (inside a ROUTINE), DO-FUNNY-RETURN? controls whether <RETURN value> exits the enclosing ROUTINE (when true, default in V5+) or the REPEAT block (when false, default in V3-4). Bare <RETURN> always exits the REPEAT block. Also see AGAIN, BIND, PROG and RETURN."@en ;
             skos:example """<REPEAT ((X 1)) #DECL ((X) FIX)  
     <REPEAT ((X 2)) <PRIN1 .X> <RETURN>>  
     <PRIN1 .X> <RETURN>>  ;  \"21\"
@@ -4772,7 +4801,7 @@ zilf:RETURN rdf:type owl:NamedIndividual ,
             skos:definition """MDL built-in function that  returns value from program-block defined by activation. True is returned if no value is specified. If activation is not specified RETURN will exit the current defined program-block where an automatic activation was created (PROG and REPEAT creates automatic activations, BIND does not).
 
 In practice RETURN exits the current program-block and returns value  to the outer program-block defined by BIND (needs activation), PROG or REPEAT."""@en ;
-            skos:editorialNote "See AGAIN, BIND, PROG and REPEAT for more examples of using RETURN and details how to control program flow."@en ;
+            skos:editorialNote "In Z-code (inside a ROUTINE, Zapf: RETURN, Inform: ret), <RETURN [value] [activation]> returns 1 (true) if no value is given, or exits the specified/enclosing block; when DO-FUNNY-RETURN? is true (default V5+), <RETURN value> without an activation exits the ROUTINE. See AGAIN, BIND, DO, PROG and REPEAT."@en ;
             skos:example """<PROG () <RETURN>>  ;  T
 <PROG ACT ()
     <PROG () <RETURN 42 .ACT>>
@@ -4924,12 +4953,12 @@ zilf:ROUTINE-FLAGS rdf:type owl:NamedIndividual ,
                       zilf:LanguageConstruct ;
                    skos:broader zilf:CoreFunctions ;
                    skos:inScheme zilf:ZILF_Scheme ;
-                   skos:definition """ZIL library function that sets flags to control how ZILF should compile. To clear, call FILE-FLAGS without any flags.
+                   skos:definition """ZIL library function that sets flags to control how ZILF should compile. Applies to the next ROUTINE definition. (Note: the ZILF Reference Guide example erroneously shows FILE-FLAGS.)
 
 The flags are:
 
 *  CLEAN-STACK?  which tells the compiler to generate extra code to remove unneeded values from the stack. Without it, the compiler will generate smaller code in some cases, at the risk of potentially causing stack overflow at runtime."""@en ;
-                   skos:example "<FILE-FLAGS CLEAN-STACK?>"@en ;
+                   skos:example "<ROUTINE-FLAGS CLEAN-STACK?>"@en ;
                    skos:prefLabel "<ROUTINE-FLAGS CLEAN-STACK?>"@en .
 
 
@@ -5334,6 +5363,22 @@ zilf:SyntaxFlags rdf:type owl:NamedIndividual ,
                     skos:Concept ;
            skos:broader zilf:ParserSystem ;
            skos:inScheme zilf:ZILF_Scheme ;
+           skos:narrower zilf:FlagADJACENT ,
+                   zilf:FlagALL ,
+                   zilf:FlagCARRIED ,
+                   zilf:FlagEVERYWHERE ,
+                   zilf:FlagHAVE ,
+                   zilf:FlagHELD ,
+                   zilf:FlagINROOM ,
+                   zilf:FlagKLUDGEBIT ,
+                   zilf:FlagMANY ,
+                   zilf:FlagMOBY ,
+                   zilf:FlagNEWSFLAGS ,
+                   zilf:FlagOFFGROUND ,
+                   zilf:FlagONGROUND ,
+                   zilf:FlagPOCKETS ,
+                   zilf:FlagROOM ,
+                   zilf:FlagTAKE ;
            skos:definition "Search scope and behavior flags used in SYNTAX definitions."@en ;
            skos:prefLabel "Syntax Flags"@en .
 
@@ -5522,8 +5567,8 @@ zilf:UNASSIGN rdf:type owl:NamedIndividual ,
                       zilf:LanguageConstruct ;
               skos:broader zilf:CoreFunctions ;
               skos:inScheme zilf:ZILF_Scheme ;
-              skos:definition "MDL built-in function that unassigns the global atom."@en ;
-              skos:editorialNote "It is possible to supply an environment for the ASSIGNED? predicate. See EVAL for more about the environment."@en ;
+              skos:definition "MDL built-in function that unassigns the local atom (removes its LVAL)."@en ;
+              skos:editorialNote "It is possible to supply an environment for UNASSIGN. See EVAL for more about the environment. (Note: the ZILF Reference Guide text erroneously says 'global atom', though its example and MDL semantics apply to local LVALs; use GUNASSIGN for global atoms.)"@en ;
               skos:example """<SET X 1>
 <ASSIGNED? X>  ;  True
 <UNASSIGN X>
@@ -5711,7 +5756,7 @@ Version 8
 zilf:VOC rdf:type owl:NamedIndividual ,
                   skos:Concept ,
                       zilf:LanguageConstruct ;
-         skos:broader zilf:CoreFunctions ;
+         skos:broader zilf:ParserSystem ;
          skos:inScheme zilf:ZILF_Scheme ;
          skos:definition """ZIL parser library function that  inserts the string in the game vocabulary (dictionary). Normally there is no need to define the vocabulary with VOC, the vocabulary is automatically updated with words when you define ROOMs, OBJECTs, SYNTAX, etc.
 
@@ -5948,118 +5993,153 @@ zilf:ZCodeBuiltIns rdf:type owl:NamedIndividual ,
                             skos:Concept ;
                    skos:inScheme zilf:ZILF_Scheme ;
                    skos:topConceptOf zilf:ZILF_Scheme ;
-                   skos:narrower zilf:APPLY ,
-                                 zilf:ASH ,
-                                 zilf:BACK ,
-                                 zilf:BAND ,
-                                 zilf:BCOM ,
-                                 zilf:BOR ,
-                                 zilf:BTST ,
-                                 zilf:BUFOUT ,
-                                 zilf:CATCH ,
-                                 zilf:CHECKU ,
-                                 zilf:CLEAR ,
-                                 zilf:COLOR ,
-                                 zilf:COND ,
-                                 zilf:COPYT ,
-                                 zilf:CURGET ,
-                                 zilf:CURSET ,
-                                 zilf:DCLEAR ,
-                                 zilf:DEC ,
-                                 zilf:DIRIN ,
-                                 zilf:DIROUT ,
-                                 zilf:DISPLAY ,
-                                 zilf:DO ,
-                                 zilf:ERASE ,
-                                 zilf:FCLEAR ,
-                                 zilf:FONT ,
-                                 zilf:FSET ,
-                                 zilf:FSTACK ,
-                                 zilf:GET ,
-                                 zilf:GETB ,
-                                 zilf:GETP ,
-                                 zilf:GETPT ,
-                                 zilf:HLIGHT ,
-                                 zilf:INC ,
-                                 zilf:INPUT ,
-                                 zilf:IRESTORE ,
-                                 zilf:ISAVE ,
-                                 zilf:LEX ,
-                                 zilf:LOC ,
-                                 zilf:LOWCORE ,
-                                 zilf:LOWCORE-TABLE ,
-                                 zilf:LTABLE ,
-                                 zilf:LVAL ,
-                                 zilf:MAP-CONTENTS ,
-                                 zilf:MAP-DIRECTIONS ,
-                                 zilf:MARGIN ,
-                                 zilf:MENU ,
-                                 zilf:MOD ,
-                                 zilf:MOUSE-INFO ,
-                                 zilf:MOUSE-LIMIT ,
-                                 zilf:MOVE ,
-                                 zilf:NEXTP ,
-                                 zilf:PICINF ,
-                                 zilf:PICSET ,
-                                 zilf:POP ,
-                                 zilf:PRINTB ,
-                                 zilf:PRINTC ,
-                                 zilf:PRINTD ,
-                                 zilf:PRINTF ,
-                                 zilf:PRINTI ,
-                                 zilf:PRINTN ,
-                                 zilf:PRINTR ,
-                                 zilf:PRINTT ,
-                                 zilf:PRINTU ,
-                                 zilf:PTSIZE ,
-                                 zilf:PUSH ,
-                                 zilf:PUT ,
-                                 zilf:PUTB ,
-                                 zilf:PUTP ,
-                                 zilf:QUIT ,
-                                 zilf:RANDOM ,
-                                 zilf:READ ,
-                                 zilf:REMOVE ,
-                                 zilf:RESTART ,
-                                 zilf:RESTORE ,
-                                 zilf:RFALSE ,
-                                 zilf:RFATAL ,
-                                 zilf:RSTACK ,
-                                 zilf:RTRUE ,
-                                 zilf:SAVE ,
-                                 zilf:SCREEN ,
-                                 zilf:SCROLL ,
-                                 zilf:SET ,
-                                 zilf:SETG ,
-                                 zilf:SHIFT ,
-                                 zilf:SOUND ,
-                                 zilf:SPLIT ,
-                                 zilf:TELL ,
-                                 zilf:THROW ,
-                                 zilf:USL ,
-                                 zilf:VALUE ,
-                                 zilf:VERIFY ,
-                                 zilf:WINATTR ,
-                                 zilf:WINGET ,
-                                 zilf:WINPOS ,
-                                 zilf:WINPUT ,
-                                 zilf:WINSIZE ,
-                                 zilf:XPUSH ,
-                                 zilf:ZWSTR ,
-                                 <http://example.org/zilf/APPLICABLE?> ,
-                                 <http://example.org/zilf/ASSIGNED?> ,
-                                 <http://example.org/zilf/DLESS?> ,
-                                 <http://example.org/zilf/F?> ,
-                                 <http://example.org/zilf/FIRST?> ,
-                                 <http://example.org/zilf/FSET?> ,
-                                 <http://example.org/zilf/GRTR?> ,
-                                 <http://example.org/zilf/IGRTR?> ,
-                                 <http://example.org/zilf/IN?> ,
-                                 <http://example.org/zilf/INTBL?> ,
-                                 <http://example.org/zilf/LESS?> ,
-                                 <http://example.org/zilf/NEXT?> ,
-                                 <http://example.org/zilf/ORIGINAL?> ,
-                                 <http://example.org/zilf/T?> .
+                   skos:prefLabel "Z-Code Built-Ins"@en ;
+                   skos:narrower <http://example.org/zilf/*> ,
+                   <http://example.org/zilf/+> ,
+                   <http://example.org/zilf/-> ,
+                   <http://example.org/zilf/0?> ,
+                   <http://example.org/zilf/1?> ,
+                   <http://example.org/zilf/==?> ,
+                   <http://example.org/zilf/=?> ,
+                   <http://example.org/zilf/ASSIGNED?> ,
+                   <http://example.org/zilf/DLESS?> ,
+                   <http://example.org/zilf/F?> ,
+                   <http://example.org/zilf/FIRST?> ,
+                   <http://example.org/zilf/FSET?> ,
+                   <http://example.org/zilf/G=?> ,
+                   <http://example.org/zilf/G?> ,
+                   <http://example.org/zilf/GRTR?> ,
+                   <http://example.org/zilf/IGRTR?> ,
+                   <http://example.org/zilf/IN?> ,
+                   <http://example.org/zilf/INTBL?> ,
+                   <http://example.org/zilf/L=?> ,
+                   <http://example.org/zilf/L?> ,
+                   <http://example.org/zilf/LESS?> ,
+                   <http://example.org/zilf/N==?> ,
+                   <http://example.org/zilf/N=?> ,
+                   <http://example.org/zilf/NEXT?> ,
+                   <http://example.org/zilf/ORIGINAL?> ,
+                   <http://example.org/zilf/T?> ,
+                   <http://example.org/zilf/VERSION?> ,
+                   zilf:AGAIN ,
+                   zilf:AND ,
+                   zilf:ANDB ,
+                   zilf:APPLY ,
+                   zilf:ASH ,
+                   zilf:BACK ,
+                   zilf:BAND ,
+                   zilf:BCOM ,
+                   zilf:BIND ,
+                   zilf:BOR ,
+                   zilf:BTST ,
+                   zilf:BUFOUT ,
+                   zilf:CATCH ,
+                   zilf:CHECKU ,
+                   zilf:CLEAR ,
+                   zilf:COLOR ,
+                   zilf:COND ,
+                   zilf:COPYT ,
+                   zilf:CRLF ,
+                   zilf:CURGET ,
+                   zilf:CURSET ,
+                   zilf:DCLEAR ,
+                   zilf:DEC ,
+                   zilf:DIRIN ,
+                   zilf:DIROUT ,
+                   zilf:DISPLAY ,
+                   zilf:DIV ,
+                   zilf:DO ,
+                   zilf:ERASE ,
+                   zilf:FCLEAR ,
+                   zilf:FONT ,
+                   zilf:FSET ,
+                   zilf:FSTACK ,
+                   zilf:GET ,
+                   zilf:GETB ,
+                   zilf:GETP ,
+                   zilf:GETPT ,
+                   zilf:GVAL ,
+                   zilf:HLIGHT ,
+                   zilf:IFFLAG ,
+                   zilf:INC ,
+                   zilf:INPUT ,
+                   zilf:IRESTORE ,
+                   zilf:ISAVE ,
+                   zilf:ITABLE ,
+                   zilf:LEX ,
+                   zilf:LOC ,
+                   zilf:LOWCORE ,
+                   zilf:LOWCORE-TABLE ,
+                   zilf:LSH ,
+                   zilf:LTABLE ,
+                   zilf:LVAL ,
+                   zilf:MAP-CONTENTS ,
+                   zilf:MAP-DIRECTIONS ,
+                   zilf:MARGIN ,
+                   zilf:MENU ,
+                   zilf:MOD ,
+                   zilf:MOUSE-INFO ,
+                   zilf:MOUSE-LIMIT ,
+                   zilf:MOVE ,
+                   zilf:NEXTP ,
+                   zilf:NOT ,
+                   zilf:OR ,
+                   zilf:ORB ,
+                   zilf:PICINF ,
+                   zilf:PICSET ,
+                   zilf:PLTABLE ,
+                   zilf:POP ,
+                   zilf:PRINT ,
+                   zilf:PRINTB ,
+                   zilf:PRINTC ,
+                   zilf:PRINTD ,
+                   zilf:PRINTF ,
+                   zilf:PRINTI ,
+                   zilf:PRINTN ,
+                   zilf:PRINTR ,
+                   zilf:PRINTT ,
+                   zilf:PRINTU ,
+                   zilf:PROG ,
+                   zilf:PTABLE ,
+                   zilf:PTSIZE ,
+                   zilf:PUSH ,
+                   zilf:PUT ,
+                   zilf:PUTB ,
+                   zilf:PUTP ,
+                   zilf:QUIT ,
+                   zilf:RANDOM ,
+                   zilf:READ ,
+                   zilf:REMOVE ,
+                   zilf:REPEAT ,
+                   zilf:REST ,
+                   zilf:RESTART ,
+                   zilf:RESTORE ,
+                   zilf:RETURN ,
+                   zilf:RFALSE ,
+                   zilf:RFATAL ,
+                   zilf:RSTACK ,
+                   zilf:RTRUE ,
+                   zilf:SAVE ,
+                   zilf:SCREEN ,
+                   zilf:SCROLL ,
+                   zilf:SET ,
+                   zilf:SETG ,
+                   zilf:SHIFT ,
+                   zilf:SOUND ,
+                   zilf:SPLIT ,
+                   zilf:TABLE ,
+                   zilf:TELL ,
+                   zilf:THROW ,
+                   zilf:USL ,
+                   zilf:VALUE ,
+                   zilf:VERIFY ,
+                   zilf:WINATTR ,
+                   zilf:WINGET ,
+                   zilf:WINPOS ,
+                   zilf:WINPUT ,
+                   zilf:WINSIZE ,
+                   zilf:XPUSH ,
+                   zilf:ZWSTR .
 
 
 ###  http://example.org/zilf/ZGET
@@ -6080,9 +6160,13 @@ Also see GETB, PUTB, ZPUT and ZREST."""@en ;
 zilf:ZILF_Scheme rdf:type owl:NamedIndividual ,
                           skos:ConceptScheme ;
                  skos:hasTopConcept zilf:CoreFunctions ,
-                                    zilf:ObjectSystem ,
-                                    zilf:ParserSystem ,
-                                    zilf:ZCodeBuiltIns ;
+                   zilf:HeaderFields ,
+                   zilf:LanguageFundamentals ,
+                   zilf:ObjectSystem ,
+                   zilf:ParserSystem ,
+                   zilf:ReservedSymbols ,
+                   zilf:ZCodeBuiltIns ,
+                   zilf:ZMachineOpcodes ;
                  skos:prefLabel "ZILF Reference Scheme"@en .
 
 
@@ -6272,7 +6356,8 @@ zilf:ZZSECTION rdf:type owl:NamedIndividual ,
            skos:broader zilf:CoreFunctions ,
                         zilf:ZCodeBuiltIns ;
            skos:inScheme zilf:ZILF_Scheme ;
-           skos:altLabel "<SUB numbers ...>"@en ;
+           skos:altLabel "<SUB numbers ...>"@en ,
+                         "<BACK number1 number2>"@en ;
            skos:definition "MDL and Z-code built-in function that subtracts the first number by subsequent numbers, or negates a single number."@en ;
            skos:example """<- 8 3 4>  ;  1
 <- 5>  ;  -5"""@en ;
@@ -6380,7 +6465,10 @@ zilf:ZZSECTION rdf:type owl:NamedIndividual ,
                                     skos:broader zilf:CoreFunctions ,
                       zilf:ZCodeBuiltIns ;
                                     skos:inScheme zilf:ZILF_Scheme ;
-                                    skos:definition "Z-code built in predicate that can test if an optimate argument named `name` is supplied in call to routine."@en ;
+                                    skos:altLabel "<ASSIGNED? atom [environment]>"@en ;
+                                    skos:definition """MDL built-in predicate (<ASSIGNED? atom [environment]>) that returns true if atom has a local value (LVAL) in the given or current environment.
+
+Z-code built-in predicate (<ASSIGNED? name>) that tests if an optional argument named name was supplied in the call to the current ROUTINE."""@en ;
                                     skos:editorialNote "ZILF supports ASSIGNED? in versions 5-."@en ;
                                     skos:example """<ROUTINE TEST(\"OPT\" X)
 <COND (<ASSIGNED? X>
@@ -6627,7 +6715,8 @@ If needed, ZILF will move the extra variables into a table (GLOBAL-VARS-TABLE) a
 <http://example.org/zilf/G?> rdf:type owl:NamedIndividual ,
                                       skos:Concept ,
                       zilf:LanguageConstruct ;
-                             skos:broader zilf:CoreFunctions ;
+                             skos:broader zilf:CoreFunctions ,
+                      zilf:ZCodeBuiltIns ;
                              skos:inScheme zilf:ZILF_Scheme ;
                              skos:definition "MDL built-in predicate that returns true if value1 is greater than value2, otherwise the predicate returns false."@en ;
                              skos:editorialNote "'G' means \"is greater than.\""@en ;
@@ -6756,7 +6845,8 @@ In version 5, 7 and 8 the rec-spec describes the field where bit 7 is set for wo
 <http://example.org/zilf/L?> rdf:type owl:NamedIndividual ,
                                       skos:Concept ,
                       zilf:LanguageConstruct ;
-                             skos:broader zilf:CoreFunctions ;
+                             skos:broader zilf:CoreFunctions ,
+                      zilf:ZCodeBuiltIns ;
                              skos:inScheme zilf:ZILF_Scheme ;
                              skos:definition "MDL built-in predicate that returns true if value1 is lower than value2 otherwise false."@en ;
                              skos:editorialNote "L means less than."@en ;
@@ -7141,6 +7231,1501 @@ The version-spec can be:
 <GLOBAL X 5>
 <ROUTINE GO () <TELL N .X>>"""@en ;
                                          skos:prefLabel "<WARN-AS-ERROR? value>"@en .
+
+
+###  http://example.org/zilf/BitLight
+zilf:BitLight rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:PropFlags ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Object or room flag indicating that a room is lit or an object can provide light."@en ;
+           skos:prefLabel "LIGHTBIT"@en .
+
+
+###  http://example.org/zilf/BitOpen
+zilf:BitOpen rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:PropFlags ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Object flag indicating that a container or door is currently open."@en ;
+           skos:prefLabel "OPENBIT"@en .
+
+
+###  http://example.org/zilf/BitDoor
+zilf:BitDoor rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:PropFlags ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Object flag indicating that an object is a door (commonly used with FIND DOORBIT in SYNTAX)."@en ;
+           skos:prefLabel "DOORBIT"@en .
+
+
+###  http://example.org/zilf/BitCont
+zilf:BitCont rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:PropFlags ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Object flag indicating that an object is a container (commonly used with FIND CONTBIT in SYNTAX)."@en ;
+           skos:prefLabel "CONTBIT"@en .
+
+
+###  http://example.org/zilf/BitDevice
+zilf:BitDevice rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:PropFlags ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Object flag indicating that an object is a switchable device (commonly used with FIND DEVICEBIT in SYNTAX)."@en ;
+           skos:prefLabel "DEVICEBIT"@en .
+
+
+###  http://example.org/zilf/BitPerson
+zilf:BitPerson rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:PropFlags ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Object flag indicating that an object is a person/NPC (commonly used with FIND PERSONBIT in SYNTAX)."@en ;
+           skos:prefLabel "PERSONBIT"@en .
+
+
+###  http://example.org/zilf/BitSurface
+zilf:BitSurface rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:PropFlags ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Object flag indicating that an object is a supporter/surface (commonly used with FIND SURFACEBIT in SYNTAX)."@en ;
+           skos:prefLabel "SURFACEBIT"@en .
+
+
+###  http://example.org/zilf/BitRoom
+zilf:BitRoom rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:PropFlags ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Special flag sometimes used in place of KLUDGEBIT when a SYNTAX line ends with a preposition."@en ;
+           skos:prefLabel "ROOMBIT"@en .
+
+
+###  http://example.org/zilf/BitNdungeon
+zilf:BitNdungeon rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:PropFlags ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Room flag shown in ZILF Reference Guide room examples (indicating a non-dungeon room)."@en ;
+           skos:prefLabel "NDUNGEONBIT"@en .
+
+
+###  http://example.org/zilf/FlagALL
+zilf:FlagALL rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:SyntaxFlags ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Version 6 new-parser SYNTAX search flag (value 15 = ROOM + CARRIED) searching both the room and inventory."@en ;
+           skos:prefLabel "ALL"@en .
+
+
+###  http://example.org/zilf/FlagROOM
+zilf:FlagROOM rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:SyntaxFlags ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Version 6 new-parser SYNTAX search flag (value 3 = ON-GROUND + OFF-GROUND) searching the current room."@en ;
+           skos:prefLabel "ROOM"@en .
+
+
+###  http://example.org/zilf/FlagEVERYWHERE
+zilf:FlagEVERYWHERE rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:SyntaxFlags ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Version 6 new-parser SYNTAX search flag (value 128) allowing an object to be matched anywhere in the game."@en ;
+           skos:prefLabel "EVERYWHERE"@en .
+
+
+###  http://example.org/zilf/FlagMOBY
+zilf:FlagMOBY rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:SyntaxFlags ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Version 6 new-parser SYNTAX search flag (value 128, synonym for EVERYWHERE) matching objects regardless of location."@en ;
+           skos:prefLabel "MOBY"@en .
+
+
+###  http://example.org/zilf/FlagADJACENT
+zilf:FlagADJACENT rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:SyntaxFlags ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Version 6 new-parser SYNTAX search flag (value 192) searching adjacent rooms/locations."@en ;
+           skos:prefLabel "ADJACENT"@en .
+
+
+###  http://example.org/zilf/FlagOFFGROUND
+zilf:FlagOFFGROUND rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:SyntaxFlags ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Version 6 new-parser SYNTAX search bit (value 2, implicit component of ROOM/IN-ROOM; not explicitly defined in NEW-SFLAGS)."@en ;
+           skos:prefLabel "OFF-GROUND"@en .
+
+
+###  http://example.org/zilf/FlagPOCKETS
+zilf:FlagPOCKETS rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:SyntaxFlags ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Version 6 new-parser SYNTAX search bit (value 8, implicit component of CARRIED; not explicitly defined in NEW-SFLAGS)."@en ;
+           skos:prefLabel "POCKETS"@en .
+
+
+###  http://example.org/zilf/LanguageFundamentals
+zilf:LanguageFundamentals rdf:type owl:NamedIndividual,
+                    skos:Concept ;
+           skos:topConceptOf zilf:ZILF_Scheme ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:narrower zilf:DataTypes ,
+                   zilf:LexicalAndEvaluationRules ;
+           skos:definition "Core ZILF/MDL language fundamentals covering primitive and derived data types, truth semantics, OBLISTs, blocking, read macros, and segments."@en ;
+           skos:prefLabel "Language Fundamentals"@en .
+
+
+###  http://example.org/zilf/DataTypes
+zilf:DataTypes rdf:type owl:NamedIndividual,
+                    skos:Concept ;
+           skos:broader zilf:LanguageFundamentals ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:narrower zilf:TypeADECL ,
+                   zilf:TypeASOC ,
+                   zilf:TypeATOM ,
+                   zilf:TypeBYTE ,
+                   zilf:TypeCHANNEL ,
+                   zilf:TypeCHARACTER ,
+                   zilf:TypeDECL ,
+                   zilf:TypeFALSE ,
+                   zilf:TypeFIX ,
+                   zilf:TypeFORM ,
+                   zilf:TypeFSUBR ,
+                   zilf:TypeFUNCTION ,
+                   zilf:TypeLIST ,
+                   zilf:TypeMACRO ,
+                   zilf:TypeOBLIST ,
+                   zilf:TypeSEGMENT ,
+                   zilf:TypeSPLICE ,
+                   zilf:TypeSTRING ,
+                   zilf:TypeSUBR ,
+                   zilf:TypeTABLE ,
+                   zilf:TypeUVECTOR ,
+                   zilf:TypeVECTOR ;
+           skos:definition "Primitive types (ATOM, FIX, LIST, STRING, TABLE, VECTOR) and derived/structured types recognized by ZILF."@en ;
+           skos:prefLabel "Data Types"@en .
+
+
+###  http://example.org/zilf/LexicalAndEvaluationRules
+zilf:LexicalAndEvaluationRules rdf:type owl:NamedIndividual,
+                    skos:Concept ;
+           skos:broader zilf:LanguageFundamentals ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:narrower zilf:RuleBlocking ,
+                   zilf:RuleOblists ,
+                   zilf:RuleReadMacroDoublePercent ,
+                   zilf:RuleReadMacroPercent ,
+                   zilf:RuleSegments ,
+                   zilf:RuleTrueFalse ;
+           skos:definition "Core ZILF/MDL lexical, scoping, truth-value, and read-time evaluation mechanisms."@en ;
+           skos:prefLabel "Lexical and Evaluation Rules"@en .
+
+
+###  http://example.org/zilf/TypeATOM
+zilf:TypeATOM rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:DataTypes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Primitive type representing a named identifier/variable with a print name (PNAME) that can hold both a global value (GVAL) and a local value (LVAL)."@en ;
+           skos:prefLabel "ATOM (Primitive Type)"@en .
+
+
+###  http://example.org/zilf/TypeFIX
+zilf:TypeFIX rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:DataTypes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Primitive type representing a 32-bit signed integer (-2147483648 to 2147483647). Supports decimal, octal (*747*), and binary (#2 10110111) literals."@en ;
+           skos:prefLabel "FIX (Primitive Type)"@en .
+
+
+###  http://example.org/zilf/TypeLIST
+zilf:TypeLIST rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:DataTypes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Primitive type representing a forward-linked list enclosed in parentheses (...). Base PRIMTYPE for FORM, FUNCTION, MACRO, FALSE, DECL, and SEGMENT."@en ;
+           skos:prefLabel "LIST (Primitive Type)"@en .
+
+
+###  http://example.org/zilf/TypeSTRING
+zilf:TypeSTRING rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:DataTypes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Primitive type representing a contiguous byte array of characters enclosed in double quotes (\"...\")."@en ;
+           skos:prefLabel "STRING (Primitive Type)"@en .
+
+
+###  http://example.org/zilf/TypeTABLE
+zilf:TypeTABLE rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:DataTypes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "ZIL-specific primitive type representing a zero-based contiguous byte or word array without per-element type tags. Not considered STRUCTURED? in MDL."@en ;
+           skos:prefLabel "TABLE (Primitive Type)"@en .
+
+
+###  http://example.org/zilf/TypeVECTOR
+zilf:TypeVECTOR rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:DataTypes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Primitive type representing a contiguous array of typed elements enclosed in square brackets [...]."@en ;
+           skos:prefLabel "VECTOR (Primitive Type)"@en .
+
+
+###  http://example.org/zilf/TypeUVECTOR
+zilf:TypeUVECTOR rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:DataTypes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "MDL uniform vector type (![... !]) where all elements share a single type. ZILF does not distinguish UVECTOR and treats it as a standard VECTOR."@en ;
+           skos:prefLabel "UVECTOR (Type)"@en .
+
+
+###  http://example.org/zilf/TypeCHARACTER
+zilf:TypeCHARACTER rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:DataTypes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Derived type (PRIMTYPE FIX, 8-bit 0-255) representing a single character, written with !\\ prefix (e.g., !\\A)."@en ;
+           skos:prefLabel "CHARACTER (Type)"@en .
+
+
+###  http://example.org/zilf/TypeBYTE
+zilf:TypeBYTE rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:DataTypes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Derived type (PRIMTYPE FIX, 8-bit 0-255) representing a single unsigned byte value, created via <BYTE n> or #BYTE n."@en ;
+           skos:prefLabel "BYTE (Type)"@en .
+
+
+###  http://example.org/zilf/TypeFALSE
+zilf:TypeFALSE rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:DataTypes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Derived structured type (PRIMTYPE LIST) representing boolean falsity outside routines, evaluating to an empty form <> (#FALSE ())."@en ;
+           skos:prefLabel "FALSE (Type)"@en .
+
+
+###  http://example.org/zilf/TypeFORM
+zilf:TypeFORM rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:DataTypes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Derived structured type (PRIMTYPE LIST) enclosed in angle brackets <...> representing an evaluable expression."@en ;
+           skos:prefLabel "FORM (Type)"@en .
+
+
+###  http://example.org/zilf/TypeFUNCTION
+zilf:TypeFUNCTION rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:DataTypes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Derived structured and applicable type (PRIMTYPE LIST) created by FUNCTION or DEFINE."@en ;
+           skos:prefLabel "FUNCTION (Type)"@en .
+
+
+###  http://example.org/zilf/TypeMACRO
+zilf:TypeMACRO rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:DataTypes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Derived structured and applicable type (PRIMTYPE LIST) created by DEFMAC; evaluated twice (expansion at compile time, then evaluation of result)."@en ;
+           skos:prefLabel "MACRO (Type)"@en .
+
+
+###  http://example.org/zilf/TypeASOC
+zilf:TypeASOC rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:DataTypes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Type representing an entry in the global association chain containing ITEM, INDICATOR, and AVALUE."@en ;
+           skos:prefLabel "ASOC (Type)"@en .
+
+
+###  http://example.org/zilf/TypeOBLIST
+zilf:TypeOBLIST rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:DataTypes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Structured type representing an object list (namespace/symbol table) of ATOMs."@en ;
+           skos:prefLabel "OBLIST (Type)"@en .
+
+
+###  http://example.org/zilf/TypeCHANNEL
+zilf:TypeCHANNEL rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:DataTypes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Structured type representing an I/O channel (such as .OUTCHAN or a file opened with OPEN)."@en ;
+           skos:prefLabel "CHANNEL (Type)"@en .
+
+
+###  http://example.org/zilf/TypeDECL
+zilf:TypeDECL rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:DataTypes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Structured type representing a type/structure declaration pattern (e.g., #DECL ((X) FIX)) used for compile-time type checking."@en ;
+           skos:prefLabel "DECL (Type)"@en .
+
+
+###  http://example.org/zilf/TypeADECL
+zilf:TypeADECL rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:DataTypes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Annotated declaration binding an identifier or placeholder to a DECL pattern using colon syntax (e.g., X:FIX or *:FIX)."@en ;
+           skos:prefLabel "ADECL (Type)"@en .
+
+
+###  http://example.org/zilf/TypeSEGMENT
+zilf:TypeSEGMENT rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:DataTypes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Structured type (PRIMTYPE LIST) written !<...> that evaluates to a structure and splices its elements into an enclosing structure."@en ;
+           skos:prefLabel "SEGMENT (Type)"@en .
+
+
+###  http://example.org/zilf/TypeSPLICE
+zilf:TypeSPLICE rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:DataTypes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Structured type used internally when splicing multiple expressions during macro expansion."@en ;
+           skos:prefLabel "SPLICE (Type)"@en .
+
+
+###  http://example.org/zilf/TypeSUBR
+zilf:TypeSUBR rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:DataTypes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Applicable built-in primitive subroutine whose arguments are evaluated before invocation."@en ;
+           skos:prefLabel "SUBR (Type)"@en .
+
+
+###  http://example.org/zilf/TypeFSUBR
+zilf:TypeFSUBR rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:DataTypes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Applicable built-in special form whose arguments are not automatically evaluated before invocation."@en ;
+           skos:prefLabel "FSUBR (Type)"@en .
+
+
+###  http://example.org/zilf/RuleTrueFalse
+zilf:RuleTrueFalse rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:LexicalAndEvaluationRules ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Outside routines (MDL), FALSE is its own TYPE evaluating to <> (#FALSE ()), and 0 is truthy. Inside routines (Z-code), 0 is FALSE and all non-zero values are TRUE. Consequently, <=? <> 0> is FALSE outside a routine but TRUE inside a routine."@en ;
+           skos:prefLabel "TRUE and FALSE Semantics"@en .
+
+
+###  http://example.org/zilf/RuleReadMacroPercent
+zilf:RuleReadMacroPercent rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:LexicalAndEvaluationRules ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Read-time evaluation macro that immediately passes the following MDL object to EVAL during READ and splices the resulting value into the surrounding expression before READ continues."@en ;
+           skos:prefLabel "% (Read Macro)"@en .
+
+
+###  http://example.org/zilf/RuleReadMacroDoublePercent
+zilf:RuleReadMacroDoublePercent rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:LexicalAndEvaluationRules ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Read-time evaluation macro that immediately passes the following MDL object to EVAL during READ for its side effects, discarding the return value so nothing is inserted into the surrounding expression."@en ;
+           skos:prefLabel "%% (Read Macro)"@en .
+
+
+###  http://example.org/zilf/RuleSegments
+zilf:RuleSegments rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:LexicalAndEvaluationRules ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Segment syntax (!<function args ...!>, trailing ! optional, also !.LVAL / !,GVAL) that evaluates to a structure and splices its elements directly into an enclosing structure."@en ;
+           skos:prefLabel "!<...> (Segments)"@en .
+
+
+###  http://example.org/zilf/RuleOblists
+zilf:RuleOblists rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:LexicalAndEvaluationRules ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "OBLISTs are namespaces of ATOMs. ZILF predefines INITIAL (user atoms) and ROOT (built-in primitives), searched via the local LIST .OBLIST. Trailer syntax atom!-oblist disambiguates or creates atoms on a specific oblist (atom!- targets ROOT)."@en ;
+           skos:prefLabel "OBLISTs and !- Trailer Syntax"@en .
+
+
+###  http://example.org/zilf/RuleBlocking
+zilf:RuleBlocking rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:LexicalAndEvaluationRules ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "ZILF prevents identifier collisions via dynamic blocking (stack-scoped LVALs in FUNCTION, BIND, PROG, REPEAT) and static/lexical blocking (switching .OBLIST namespaces via BLOCK/ENDBLOCK, PACKAGE, and DEFINITIONS)."@en ;
+           skos:prefLabel "Dynamic and Static (Lexical) Blocking"@en .
+
+
+###  http://example.org/zilf/ZMachineOpcodes
+zilf:ZMachineOpcodes rdf:type owl:NamedIndividual,
+                    skos:Concept ;
+           skos:topConceptOf zilf:ZILF_Scheme ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:narrower zilf:OpCALL ,
+                   zilf:OpCALL1 ,
+                   zilf:OpCALL2 ,
+                   zilf:OpICALL ,
+                   zilf:OpICALL1 ,
+                   zilf:OpICALL2 ,
+                   zilf:OpIXCALL ,
+                   zilf:OpJUMP ,
+                   zilf:OpNOOP ,
+                   zilf:OpXCALL ;
+           skos:definition "Z-machine opcodes without direct ZIL function equivalents, used internally by the compiler to invoke routines and control the program counter."@en ;
+           skos:prefLabel "Appendix A: Other Z-Machine OP-Codes"@en .
+
+
+###  http://example.org/zilf/OpCALL1
+zilf:OpCALL1 rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ZMachineOpcodes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:altLabel "call_1s"@en ;
+           skos:definition "Executes routine() and stores resulting return value."@en ;
+           skos:historyNote "Zapf syntax: CALL1, Inform syntax: call_1s"@en ;
+           skos:prefLabel "CALL1"@en .
+
+
+###  http://example.org/zilf/OpCALL2
+zilf:OpCALL2 rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ZMachineOpcodes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:altLabel "call_2s"@en ;
+           skos:definition "Executes routine(arg1) and stores resulting return value."@en ;
+           skos:historyNote "Zapf syntax: CALL2, Inform syntax: call_2s"@en ;
+           skos:prefLabel "CALL2"@en .
+
+
+###  http://example.org/zilf/OpCALL
+zilf:OpCALL rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ZMachineOpcodes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:altLabel "call_vs"@en ;
+           skos:definition "Calls routine with 0 to 3 arguments and stores the resulting return value (the only call instruction in Version 3). Calling address 0 does nothing and returns false."@en ;
+           skos:historyNote "Zapf syntax: CALL, Inform syntax: call_vs"@en ;
+           skos:prefLabel "CALL"@en .
+
+
+###  http://example.org/zilf/OpICALL1
+zilf:OpICALL1 rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ZMachineOpcodes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:altLabel "call_1n"@en ;
+           skos:definition "Executes routine() and discards the result."@en ;
+           skos:historyNote "Zapf syntax: ICALL1, Inform syntax: call_1n"@en ;
+           skos:prefLabel "ICALL1"@en .
+
+
+###  http://example.org/zilf/OpICALL2
+zilf:OpICALL2 rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ZMachineOpcodes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:altLabel "call_2n"@en ;
+           skos:definition "Executes routine(arg1) and discards the result."@en ;
+           skos:historyNote "Zapf syntax: ICALL2, Inform syntax: call_2n"@en ;
+           skos:prefLabel "ICALL2"@en .
+
+
+###  http://example.org/zilf/OpICALL
+zilf:OpICALL rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ZMachineOpcodes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:altLabel "call_vn"@en ;
+           skos:definition "Like CALL, calls routine with 0 to 3 arguments and discards the result."@en ;
+           skos:historyNote "Zapf syntax: ICALL, Inform syntax: call_vn"@en ;
+           skos:prefLabel "ICALL"@en .
+
+
+###  http://example.org/zilf/OpIXCALL
+zilf:OpIXCALL rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ZMachineOpcodes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:altLabel "call_vn2"@en ;
+           skos:definition "Calls routine with a variable number (0 to 7) of arguments using an extra operand-type byte, discarding the result."@en ;
+           skos:historyNote "Zapf syntax: IXCALL, Inform syntax: call_vn2"@en ;
+           skos:prefLabel "IXCALL"@en .
+
+
+###  http://example.org/zilf/OpJUMP
+zilf:OpJUMP rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ZMachineOpcodes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:altLabel "jump"@en ;
+           skos:definition "Unconditional jump to a given label using a 2-byte signed offset applied to the program counter."@en ;
+           skos:historyNote "Zapf syntax: JUMP, Inform syntax: jump"@en ;
+           skos:prefLabel "JUMP"@en .
+
+
+###  http://example.org/zilf/OpNOOP
+zilf:OpNOOP rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ZMachineOpcodes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:altLabel "nop"@en ;
+           skos:definition "No-operation instruction (never emitted in Infocom story files; likely originally intended as a breakpoint)."@en ;
+           skos:historyNote "Zapf syntax: NOOP, Inform syntax: nop"@en ;
+           skos:prefLabel "NOOP"@en .
+
+
+###  http://example.org/zilf/OpXCALL
+zilf:OpXCALL rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ZMachineOpcodes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:altLabel "call_vs2"@en ;
+           skos:definition "Like IXCALL, calls routine with 0 to 7 arguments and stores the resulting return value."@en ;
+           skos:historyNote "Zapf syntax: XCALL, Inform syntax: call_vs2"@en ;
+           skos:prefLabel "XCALL"@en .
+
+
+###  http://example.org/zilf/HeaderFields
+zilf:HeaderFields rdf:type owl:NamedIndividual,
+                    skos:Concept ;
+           skos:topConceptOf zilf:ZILF_Scheme ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:narrower zilf:ExtendedHeaderFields ,
+                   zilf:OrdinaryHeaderFields ;
+           skos:definition "Z-machine ordinary and extended header field-spec symbols used with LOWCORE and LOWCORE-TABLE."@en ;
+           skos:prefLabel "Appendix B: Z-Machine Header Fields"@en .
+
+
+###  http://example.org/zilf/OrdinaryHeaderFields
+zilf:OrdinaryHeaderFields rdf:type owl:NamedIndividual,
+                    skos:Concept ;
+           skos:broader zilf:HeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:narrower zilf:HdrCHRSET ,
+                   zilf:HdrCLRWRD ,
+                   zilf:HdrCRCNT ,
+                   zilf:HdrCRFUNC ,
+                   zilf:HdrENDLOD ,
+                   zilf:HdrEXTAB ,
+                   zilf:HdrFLAGS ,
+                   zilf:HdrFWORDS ,
+                   zilf:HdrFWRD ,
+                   zilf:HdrGLOBALS ,
+                   zilf:HdrHWRD ,
+                   zilf:HdrINTID ,
+                   zilf:HdrINTVER ,
+                   zilf:HdrINTWRD ,
+                   zilf:HdrLMRG ,
+                   zilf:HdrOBJECT ,
+                   zilf:HdrPCHKSUM ,
+                   zilf:HdrPLENTH ,
+                   zilf:HdrPURBOT ,
+                   zilf:HdrRMRG ,
+                   zilf:HdrSCRH ,
+                   zilf:HdrSCRV ,
+                   zilf:HdrSCRWRD ,
+                   zilf:HdrSERI1 ,
+                   zilf:HdrSERI2 ,
+                   zilf:HdrSERIAL ,
+                   zilf:HdrSTART ,
+                   zilf:HdrTCHARS ,
+                   zilf:HdrTWID ,
+                   zilf:HdrVOCAB ,
+                   zilf:HdrVWRD ,
+                   zilf:HdrZORKID ,
+                   zilf:HdrZVERSION ;
+           skos:definition "Standard 64-byte Z-machine header fields (bytes 0-55) accessible via LOWCORE and LOWCORE-TABLE."@en ;
+           skos:prefLabel "Ordinary Header Fields"@en .
+
+
+###  http://example.org/zilf/ExtendedHeaderFields
+zilf:ExtendedHeaderFields rdf:type owl:NamedIndividual,
+                    skos:Concept ;
+           skos:broader zilf:HeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:narrower zilf:HdrBSTAT ,
+                   zilf:HdrBUTTON ,
+                   zilf:HdrJOYSTICK ,
+                   zilf:HdrJSTAT ,
+                   zilf:HdrMSEDIR ,
+                   zilf:HdrMSEINV ,
+                   zilf:HdrMSETBL ,
+                   zilf:HdrMSEVRB ,
+                   zilf:HdrMSEWRD ,
+                   zilf:HdrMSLOCX ,
+                   zilf:HdrMSLOCY ;
+           skos:definition "Header extension table fields (Version 5+, pointed to by EXTAB) accessible via LOWCORE."@en ;
+           skos:prefLabel "Extended Header Fields"@en .
+
+
+###  http://example.org/zilf/HdrZVERSION
+zilf:HdrZVERSION rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Bytes 0-1 (Ver 1-, R): Byte 0 is the Z-machine version number; Byte 1 is Flags 1 (V1-3: status line type, split disc, Tandy bit, status line unavailable, screen-splitting, proportional font; V4+: colors, pictures, bold, italic, monospace, sound, timed input)."@en ;
+           skos:prefLabel "ZVERSION"@en .
+
+
+###  http://example.org/zilf/HdrZORKID
+zilf:HdrZORKID rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:altLabel "RELEASEID"@en ;
+           skos:definition "Bytes 2-3 (Ver 1-, R): Release number word (traditionally 11 bits masked with *3777* in Infocom games)."@en ;
+           skos:prefLabel "ZORKID"@en .
+
+
+###  http://example.org/zilf/HdrENDLOD
+zilf:HdrENDLOD rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Bytes 4-5 (Ver 1-, R): Base of high memory (byte address)."@en ;
+           skos:prefLabel "ENDLOD"@en .
+
+
+###  http://example.org/zilf/HdrSTART
+zilf:HdrSTART rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Bytes 6-7 (Ver 1-5/6, R): Initial program counter byte address (V1-5) or packed address of initial main routine (V6)."@en ;
+           skos:prefLabel "START"@en .
+
+
+###  http://example.org/zilf/HdrVOCAB
+zilf:HdrVOCAB rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Bytes 8-9 (Ver 1-, R): Byte address of the dictionary (vocabulary table)."@en ;
+           skos:prefLabel "VOCAB"@en .
+
+
+###  http://example.org/zilf/HdrOBJECT
+zilf:HdrOBJECT rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Bytes 10-11 (Ver 1-, R): Byte address of the object table."@en ;
+           skos:prefLabel "OBJECT"@en .
+
+
+###  http://example.org/zilf/HdrGLOBALS
+zilf:HdrGLOBALS rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Bytes 12-13 (Ver 1-, R): Byte address of the global variables table."@en ;
+           skos:prefLabel "GLOBALS"@en .
+
+
+###  http://example.org/zilf/HdrPURBOT
+zilf:HdrPURBOT rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Bytes 14-15 (Ver 1-, R): Base of static memory (byte address)."@en ;
+           skos:prefLabel "PURBOT"@en .
+
+
+###  http://example.org/zilf/HdrFLAGS
+zilf:HdrFLAGS rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Bytes 16-17 (Flags 2, R/W): Bit 0 transcripting (V1-, R/W), Bit 1 force monospace (V3-, R/W), Bit 2 redraw request (V6-, R/W), Bit 3 pictures (V5-, R), Bit 4 UNDO (V5-, R; V3 Lurking Horror sound), Bit 5 mouse (V5-, R), Bit 6 colors (V5-, R), Bit 7 sound (V5-, R), Bit 8 menu (V6, R)."@en ;
+           skos:prefLabel "FLAGS"@en .
+
+
+###  http://example.org/zilf/HdrSERIAL
+zilf:HdrSERIAL rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Bytes 18-19 (Ver 3-, R): Serial number YY-part (start of 6-byte ASCII serial number)."@en ;
+           skos:prefLabel "SERIAL"@en .
+
+
+###  http://example.org/zilf/HdrSERI1
+zilf:HdrSERI1 rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Bytes 20-21 (Ver 3-, R): Serial number MM-part."@en ;
+           skos:prefLabel "SERI1"@en .
+
+
+###  http://example.org/zilf/HdrSERI2
+zilf:HdrSERI2 rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Bytes 22-23 (Ver 3-, R): Serial number DD-part."@en ;
+           skos:prefLabel "SERI2"@en .
+
+
+###  http://example.org/zilf/HdrFWORDS
+zilf:HdrFWORDS rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Bytes 24-25 (Ver 2-, R): Byte address of the abbreviations (frequent words) table."@en ;
+           skos:prefLabel "FWORDS"@en .
+
+
+###  http://example.org/zilf/HdrPLENTH
+zilf:HdrPLENTH rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Bytes 26-27 (Ver 3-, R): Length of story file (scaled by version)."@en ;
+           skos:prefLabel "PLENTH"@en .
+
+
+###  http://example.org/zilf/HdrPCHKSUM
+zilf:HdrPCHKSUM rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Bytes 28-29 (Ver 3-, R): File checksum verified by VERIFY."@en ;
+           skos:prefLabel "PCHKSUM"@en .
+
+
+###  http://example.org/zilf/HdrINTWRD
+zilf:HdrINTWRD rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Bytes 30-31 (Ver 4-, R): Interpreter number and version word."@en ;
+           skos:prefLabel "INTWRD"@en .
+
+
+###  http://example.org/zilf/HdrINTID
+zilf:HdrINTID rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Byte 30 (Ver 4-, R): Interpreter number."@en ;
+           skos:prefLabel "INTID"@en .
+
+
+###  http://example.org/zilf/HdrINTVER
+zilf:HdrINTVER rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Byte 31 (Ver 4-, R): Interpreter version."@en ;
+           skos:prefLabel "INTVER"@en .
+
+
+###  http://example.org/zilf/HdrSCRWRD
+zilf:HdrSCRWRD rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Bytes 32-33 (Ver 4-, R): Screen height and width word."@en ;
+           skos:prefLabel "SCRWRD"@en .
+
+
+###  http://example.org/zilf/HdrSCRV
+zilf:HdrSCRV rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Byte 32 (Ver 4-, R): Screen height in lines (255 = infinite)."@en ;
+           skos:prefLabel "SCRV"@en .
+
+
+###  http://example.org/zilf/HdrSCRH
+zilf:HdrSCRH rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Byte 33 (Ver 4-, R): Screen width in characters."@en ;
+           skos:prefLabel "SCRH"@en .
+
+
+###  http://example.org/zilf/HdrHWRD
+zilf:HdrHWRD rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Bytes 34-35 (Ver 5-, R): Screen width in units."@en ;
+           skos:prefLabel "HWRD"@en .
+
+
+###  http://example.org/zilf/HdrVWRD
+zilf:HdrVWRD rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Bytes 36-37 (Ver 5-, R): Screen height in units."@en ;
+           skos:prefLabel "VWRD"@en .
+
+
+###  http://example.org/zilf/HdrFWRD
+zilf:HdrFWRD rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Bytes 38-39 (Ver 5-, R): Font width and height in units (V5: byte 38 width, byte 39 height; V6+: byte 38 height, byte 39 width)."@en ;
+           skos:prefLabel "FWRD"@en .
+
+
+###  http://example.org/zilf/HdrLMRG
+zilf:HdrLMRG rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:altLabel "FOFF"@en ;
+           skos:definition "Bytes 40-41 (Ver 5-, R): Routines offset divided by 8."@en ;
+           skos:prefLabel "LMRG"@en .
+
+
+###  http://example.org/zilf/HdrRMRG
+zilf:HdrRMRG rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:altLabel "SOFF"@en ;
+           skos:definition "Bytes 42-43 (Ver 5-, R): Static strings offset divided by 8."@en ;
+           skos:prefLabel "RMRG"@en .
+
+
+###  http://example.org/zilf/HdrCLRWRD
+zilf:HdrCLRWRD rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Bytes 44-45 (Ver 5-, R): Default background color (byte 44) and default foreground color (byte 45)."@en ;
+           skos:prefLabel "CLRWRD"@en .
+
+
+###  http://example.org/zilf/HdrTCHARS
+zilf:HdrTCHARS rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Bytes 46-47 (Ver 5-, R): Byte address of terminating characters table."@en ;
+           skos:prefLabel "TCHARS"@en .
+
+
+###  http://example.org/zilf/HdrCRCNT
+zilf:HdrCRCNT rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Bytes 48-49 (Ver 5, R/W): Version 5 header field at bytes 48-49."@en ;
+           skos:prefLabel "CRCNT"@en .
+
+
+###  http://example.org/zilf/HdrTWID
+zilf:HdrTWID rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Bytes 48-49 (Ver 6-, R): Total width in pixels of text sent to output stream 3."@en ;
+           skos:prefLabel "TWID"@en .
+
+
+###  http://example.org/zilf/HdrCRFUNC
+zilf:HdrCRFUNC rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:altLabel "STDREV"@en ;
+           skos:definition "Bytes 50-51 (Ver 1-, R/W): Standard revision number."@en ;
+           skos:prefLabel "CRFUNC"@en .
+
+
+###  http://example.org/zilf/HdrCHRSET
+zilf:HdrCHRSET rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Bytes 52-53 (Ver 5-, R): Alphabet table byte address, or 0 for default ZSCII alphabet."@en ;
+           skos:prefLabel "CHRSET"@en .
+
+
+###  http://example.org/zilf/HdrEXTAB
+zilf:HdrEXTAB rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:OrdinaryHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Bytes 54-55 (Ver 5-, R): Header extension table byte address."@en ;
+           skos:prefLabel "EXTAB"@en .
+
+
+###  http://example.org/zilf/HdrMSLOCX
+zilf:HdrMSLOCX rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ExtendedHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Extended header bytes 2-3 (Ver 5-, R): X-coordinate of mouse after a click."@en ;
+           skos:prefLabel "MSLOCX"@en .
+
+
+###  http://example.org/zilf/HdrMSLOCY
+zilf:HdrMSLOCY rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ExtendedHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Extended header bytes 4-5 (Ver 5-, R): Y-coordinate of mouse after a click."@en ;
+           skos:prefLabel "MSLOCY"@en .
+
+
+###  http://example.org/zilf/HdrMSETBL
+zilf:HdrMSETBL rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ExtendedHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:altLabel "UNITBL"@en ;
+           skos:definition "Extended header bytes 6-7 (Ver 5-, R/W): Unicode translation table address (optional)."@en ;
+           skos:prefLabel "MSETBL"@en .
+
+
+###  http://example.org/zilf/HdrMSEDIR
+zilf:HdrMSEDIR rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ExtendedHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:altLabel "FLAGS3"@en ;
+           skos:definition "Extended header bytes 8-9 (Ver 5-, R/W): Flags 3 (Bit 0: game wants to use transparency)."@en ;
+           skos:prefLabel "MSEDIR"@en .
+
+
+###  http://example.org/zilf/HdrMSEINV
+zilf:HdrMSEINV rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ExtendedHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:altLabel "TRUFGC"@en ;
+           skos:definition "Extended header bytes 10-11 (Ver 5-, R/W): True default foreground colour."@en ;
+           skos:prefLabel "MSEINV"@en .
+
+
+###  http://example.org/zilf/HdrMSEVRB
+zilf:HdrMSEVRB rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ExtendedHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:altLabel "TRUBGC"@en ;
+           skos:definition "Extended header bytes 12-13 (Ver 5-, R/W): True default background colour."@en ;
+           skos:prefLabel "MSEVRB"@en .
+
+
+###  http://example.org/zilf/HdrMSEWRD
+zilf:HdrMSEWRD rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ExtendedHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Extended header bytes 14-15 (Ver 5-, R/W): Extended header mouse word."@en ;
+           skos:prefLabel "MSEWRD"@en .
+
+
+###  http://example.org/zilf/HdrBUTTON
+zilf:HdrBUTTON rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ExtendedHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Extended header bytes 16-17 (Ver 5-, R/W): Extended header button state field."@en ;
+           skos:prefLabel "BUTTON"@en .
+
+
+###  http://example.org/zilf/HdrJOYSTICK
+zilf:HdrJOYSTICK rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ExtendedHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Extended header bytes 18-19 (Ver 5-, R/W): Extended header joystick field."@en ;
+           skos:prefLabel "JOYSTICK"@en .
+
+
+###  http://example.org/zilf/HdrBSTAT
+zilf:HdrBSTAT rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ExtendedHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Extended header bytes 20-21 (Ver 5-, R/W): Extended header button status field."@en ;
+           skos:prefLabel "BSTAT"@en .
+
+
+###  http://example.org/zilf/HdrJSTAT
+zilf:HdrJSTAT rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ExtendedHeaderFields ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Extended header bytes 22-23 (Ver 5-, R/W): Extended header joystick status field."@en ;
+           skos:prefLabel "JSTAT"@en .
+
+
+###  http://example.org/zilf/ReservedSymbols
+zilf:ReservedSymbols rdf:type owl:NamedIndividual,
+                    skos:Concept ;
+           skos:topConceptOf zilf:ZILF_Scheme ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:narrower zilf:FlagNEWSFLAGS ,
+                   zilf:ResActions ,
+                   zilf:ResCRLFCharacter ,
+                   zilf:ResDoFunnyReturns ,
+                   zilf:ResFalseValue ,
+                   zilf:ResFatalValue ,
+                   zilf:ResInZilch ,
+                   zilf:ResLastObject ,
+                   zilf:ResNewParser ,
+                   zilf:ResPreactions ,
+                   zilf:ResPreserveSpaces ,
+                   zilf:ResRedefine ,
+                   zilf:ResSentenceEnds ,
+                   zilf:ResVerbs ;
+           skos:definition "Compiler-reserved constants, global variables (GVALs), local variables (LVALs), compilation flags, and file flags recognized by ZILF."@en ;
+           skos:prefLabel "Appendix C: Reserved Constants, Globals & Locals"@en .
+
+
+###  http://example.org/zilf/ResCRLFCharacter
+zilf:ResCRLFCharacter rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ReservedSymbols ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Reserved GVAL (default: |) specifying the character interpreted as a newline inside ZIL strings."@en ;
+           skos:prefLabel "CRLF-CHARACTER"@en .
+
+
+###  http://example.org/zilf/ResDoFunnyReturns
+zilf:ResDoFunnyReturns rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ReservedSymbols ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Reserved GVAL (default: <> in V3-4, T in V5-) controlling whether <RETURN value> inside PROG/REPEAT exits the enclosing ROUTINE."@en ;
+           skos:prefLabel "DO-FUNNY-RETURNS?"@en .
+
+
+###  http://example.org/zilf/ResFalseValue
+zilf:ResFalseValue rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ReservedSymbols ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Reserved CONSTANT (default: 0) representing the runtime Z-machine false return value."@en ;
+           skos:prefLabel "FALSE-VALUE"@en .
+
+
+###  http://example.org/zilf/ResFatalValue
+zilf:ResFatalValue rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ReservedSymbols ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Reserved CONSTANT (default: 2) returned by RFATAL."@en ;
+           skos:prefLabel "FATAL-VALUE"@en .
+
+
+###  http://example.org/zilf/ResInZilch
+zilf:ResInZilch rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ReservedSymbols ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Reserved COMPILATION-FLAG (default: <>) indicating ZILCH/compiler context."@en ;
+           skos:prefLabel "IN-ZILCH"@en .
+
+
+###  http://example.org/zilf/ResNewParser
+zilf:ResNewParser rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ReservedSymbols ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Reserved GVAL (undefined by default); set via <SETG NEW-PARSER? T> to enable the Version 6 new parser vocabulary/syntax format."@en ;
+           skos:prefLabel "NEW-PARSER?"@en .
+
+
+###  http://example.org/zilf/ResPreserveSpaces
+zilf:ResPreserveSpaces rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ReservedSymbols ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Reserved GVAL (default: <>) controlling whether multiple spaces in strings are preserved instead of collapsed."@en ;
+           skos:prefLabel "PRESERVE-SPACES?"@en .
+
+
+###  http://example.org/zilf/ResRedefine
+zilf:ResRedefine rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ReservedSymbols ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Reserved LVAL (default: <>); when set to T, allows redefining existing FUNCTIONs, ROUTINEs, and other definitions without error."@en ;
+           skos:prefLabel "REDEFINE"@en .
+
+
+###  http://example.org/zilf/ResSentenceEnds
+zilf:ResSentenceEnds rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ReservedSymbols ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Reserved FILE-FLAG (Version 6) instructing the compiler to treat two spaces after a period or question mark as a sentence end in TELL."@en ;
+           skos:prefLabel "SENTENCE-ENDS?"@en .
+
+
+###  http://example.org/zilf/ResVerbs
+zilf:ResVerbs rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ReservedSymbols ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Reserved GVAL pointing to the compiler-generated table of verb syntax pointers."@en ;
+           skos:prefLabel "VERBS"@en .
+
+
+###  http://example.org/zilf/ResActions
+zilf:ResActions rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ReservedSymbols ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Reserved GVAL pointing to the compiler-generated table of verb action-routine packed addresses."@en ;
+           skos:prefLabel "ACTIONS"@en .
+
+
+###  http://example.org/zilf/ResPreactions
+zilf:ResPreactions rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ReservedSymbols ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Reserved GVAL pointing to the compiler-generated table of verb preaction-routine packed addresses."@en ;
+           skos:prefLabel "PREACTIONS"@en .
+
+
+###  http://example.org/zilf/ResLastObject
+zilf:ResLastObject rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ReservedSymbols ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Reserved CONSTANT automatically set by the compiler to the object number of the last object."@en ;
+           skos:prefLabel "LAST-OBJECT"@en .
+
+
+###  http://example.org/zilf/ParserTables
+zilf:ParserTables rdf:type owl:NamedIndividual,
+                    skos:Concept ;
+           skos:broader zilf:ParserSystem ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:narrower zilf:FlagOneBytePartsOfSpeech ,
+                   zilf:FlagWordFlagsInTable ,
+                   zilf:FnTERMINALS ,
+                   zilf:NewParserArchitecture ,
+                   zilf:StructVWORD ,
+                   zilf:StructVerbData ,
+                   zilf:TableActions ,
+                   zilf:TablePreactions ,
+                   zilf:TablePrepositions ,
+                   zilf:TableSyntax ,
+                   zilf:TableVerbs ,
+                   zilf:TableVocabulary ,
+                   zilf:TableWordFlagTable ,
+                   zilf:VarCompactSyntaxes ,
+                   zilf:VarCompactVocabulary ,
+                   zilf:VarNewVoc ;
+           skos:definition "Internal Z-machine dictionary, verb, syntax, action, preaction, and preposition table layouts, compiler vocabulary flags, and the Version 6 new parser architecture."@en ;
+           skos:prefLabel "Appendix D: Internal Parser Tables & New Parser"@en .
+
+
+###  http://example.org/zilf/TableVocabulary
+zilf:TableVocabulary rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ParserTables ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Dictionary table located at header VOCAB: break characters, entry count, and 7-byte (V1-3) or 9-byte (V4+) entries containing Z-characters plus PoS, V1, and V2 bytes. Each word defines a W?<WORD> constant."@en ;
+           skos:prefLabel "Vocabulary Table"@en .
+
+
+###  http://example.org/zilf/TableVerbs
+zilf:TableVerbs rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ParserTables ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Pointer table accessible via VERBS mapping verb numbers (starting at 255 downwards) to the start of each verb's syntax lines."@en ;
+           skos:prefLabel "Verbs Table"@en .
+
+
+###  http://example.org/zilf/TableSyntax
+zilf:TableSyntax rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ParserTables ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Table of verb syntax lines (8 bytes per line by default: NOBJ, PREP1, PREP2, FIND1, FIND2, OPTS1, OPTS2, ACTION; or 2/4/7 bytes when COMPACT-SYNTAXES? is set). Each verb defines an ST?<VERB> constant."@en ;
+           skos:prefLabel "Syntax Table"@en .
+
+
+###  http://example.org/zilf/TableActions
+zilf:TableActions rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ParserTables ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Pointer table accessible via ACTIONS holding packed addresses of verb action routines indexed by ACTION."@en ;
+           skos:prefLabel "Actions Table"@en .
+
+
+###  http://example.org/zilf/TablePreactions
+zilf:TablePreactions rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ParserTables ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Pointer table accessible via PREACTIONS holding packed addresses of verb preaction routines indexed by ACTION."@en ;
+           skos:prefLabel "Preactions Table"@en .
+
+
+###  http://example.org/zilf/TablePrepositions
+zilf:TablePrepositions rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ParserTables ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Lookup table accessible via PREPOSITIONS mapping vocabulary addresses to preposition numbers (4 bytes per entry, or 3 bytes when COMPACT-VOCABULARY? is set)."@en ;
+           skos:prefLabel "Prepositions Table"@en .
+
+
+###  http://example.org/zilf/NewParserArchitecture
+zilf:NewParserArchitecture rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ParserTables ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Infocom Version 6 parser format (used in Arthur, Shogun, Zork Zero, Abyss, Milliways) replacing standard vocabulary/syntax tables with VWORD, VERB-DATA, WORD-FLAG-TABLE, and NEW-SFLAGS."@en ;
+           skos:prefLabel "Version 6 New Parser (NEW-PARSER?)"@en .
+
+
+###  http://example.org/zilf/VarNewVoc
+zilf:VarNewVoc rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ParserTables ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Global flag that frees nouns from the standard 2-part-of-speech limit so a word can simultaneously be an adjective, noun, and verb."@en ;
+           skos:prefLabel "NEW-VOC?"@en .
+
+
+###  http://example.org/zilf/VarCompactVocabulary
+zilf:VarCompactVocabulary rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ParserTables ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Global flag that removes extra byte V2 from vocabulary entries (shrinking preposition table entries to 3 bytes) and frees nouns, buzzwords, and prepositions from the part-of-speech limit."@en ;
+           skos:prefLabel "COMPACT-VOCABULARY?"@en .
+
+
+###  http://example.org/zilf/VarCompactSyntaxes
+zilf:VarCompactSyntaxes rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ParserTables ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Global flag enabling variable-length compact syntax table entries (2, 4, or 7 bytes depending on NOBJ)."@en ;
+           skos:prefLabel "COMPACT-SYNTAXES?"@en .
+
+
+###  http://example.org/zilf/FlagWordFlagsInTable
+zilf:FlagWordFlagsInTable rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ParserTables ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Compilation flag (default true in new parser) storing word flags in WORD-FLAG-TABLE instead of inline in each VWORD entry."@en ;
+           skos:prefLabel "WORD-FLAGS-IN-TABLE"@en .
+
+
+###  http://example.org/zilf/FlagOneBytePartsOfSpeech
+zilf:FlagOneBytePartsOfSpeech rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ParserTables ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Compilation flag in the new parser controlling whether CLASSIFICATION-NUMBER occupies 1 byte (9-byte entry, e.g. Zork Zero) or 2 bytes (10-byte entry, e.g. Shogun/Arthur)."@en ;
+           skos:prefLabel "ONE-BYTE-PARTS-OF-SPEECH"@en .
+
+
+###  http://example.org/zilf/TableWordFlagTable
+zilf:TableWordFlagTable rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ParserTables ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "GVAL table created when WORD-FLAGS-IN-TABLE is true, storing pairs of vocabulary word pointers and word flags (FIRST-PERSON, PLURAL-FLAG, SECOND-PERSON, THIRD-PERSON, PRESENT-TENSE, PAST-TENSE, FUTURE-TENSE, POSSESSIVE, THING-PNF, DONT-ORPHAN, DEFAULT-OBJECT)."@en ;
+           skos:prefLabel "WORD-FLAG-TABLE"@en .
+
+
+###  http://example.org/zilf/StructVWORD
+zilf:StructVWORD rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ParserTables ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "DEFSTRUCT required by the new parser describing vocabulary entries (LEXICAL-WORD, SEMANTIC-STUFF, optional FLAGS, CLASSIFICATION-NUMBER)."@en ;
+           skos:prefLabel "VWORD"@en .
+
+
+###  http://example.org/zilf/StructVerbData
+zilf:StructVerbData rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ParserTables ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "DEFSTRUCT required by the new parser describing 8-byte verb dispatch entries (0-object action, preposition, 1-object syntax table, 2-object syntax table)."@en ;
+           skos:prefLabel "VERB-DATA"@en .
+
+
+###  http://example.org/zilf/FnTERMINALS
+zilf:FnTERMINALS rdf:type owl:NamedIndividual,
+                    skos:Concept,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ParserTables ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Game-defined function in the new parser that assigns part-of-speech CLASSIFICATION-NUMBER values and ordering (packing IDs that exceed 1 or 2 bytes with the high bit set)."@en ;
+           skos:prefLabel "TERMINALS"@en .
 
 
 ###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
