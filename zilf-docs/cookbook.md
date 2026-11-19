@@ -13,7 +13,7 @@
 
 ### +
 ```zil
-<+ 2 3 4>  ;  7
+<+ 2 3 4>  ;  9
 ```
 
 
@@ -139,7 +139,7 @@
 ### BACK
 ```zil
 <GLOBAL TBL1 <TABLE 1 2 3 4>>  ;  TBL1 = [1 2 3 4]
-<GLOBAL TBL2 <REST ,STRUCT1 4>>  ;  TBL2 = [3 4] Move 4 because WORD-table!
+<GLOBAL TBL2 <REST ,TBL1 4>>  ;  TBL2 = [3 4] Move 4 because WORD-table!
 <SETG TBL2 <BACK ,TBL2 2>>  ;  TBL2 = [2 3 4]
 ```
 
@@ -200,10 +200,10 @@
 ```zil
 <SET X 42>
 <ASSIGNED? X>  ;  True
-<GBOUND? X>  ;  True
-<GUNASSIGN X>
-<GASSIGNED? X>  ;  False
-<GBOUND? X>  ;  True
+<BOUND? X>  ;  True
+<UNASSIGN X>
+<ASSIGNED? X>  ;  False
+<BOUND? X>  ;  True
 ```
 
 
@@ -779,7 +779,7 @@ A  ;  5
 <FORM + 1 2>  ;  <+ 1 2> 
 <DEFINE INC-FORM (A) 
     <FORM SET .A <FORM + 1 <FORM LVAL .A>>>> 
-<INC-FORM X>  ;  <SET X <+ 1 .X>
+<INC-FORM X>  ;  <SET X <+ 1 .X>>
 ```
 
 
@@ -1087,7 +1087,7 @@ BAR!-OB  ;  BAR!-OB
 ;  For example, the table might be defined as equivalent to the following.
 
 <CONSTANT LONG-WORDS-TABLE
-    <CONSTANT LONG-WORDS-TABLE
+    <TABLE 2
         ,W?HEMIDEMIS "hemidemisemiquaver"
         ,W?SUPERCALI "supercalifragilisticexpialidocious">>
 
@@ -1097,13 +1097,13 @@ BAR!-OB  ;  BAR!-OB
 <OBJECT FOO (SYNONYM HEMIDEMISEMI)>
 <VOC "SUPERCALIFRAG">
 <ROUTINE GO ()
-    <TELL "Table length = " N <GET ,LONG-WORD-TABLE 0> CR>
+    <TELL "Table length = " N <GET ,LONG-WORDS-TABLE 0> CR>
     <TELL "W?SUPERCALIFRAG = " N ,W?SUPERCALIFRAG CR>
-    <TELL "WORD 1 = " N <GET ,LONG-WORD-TABLE 1> CR>
-    <TELL "WORD 2 = " <GET ,LONG-WORD-TABLE 2> CR>
+    <TELL "WORD 1 = " N <GET ,LONG-WORDS-TABLE 1> CR>
+    <TELL "WORD 2 = " <GET ,LONG-WORDS-TABLE 2> CR>
     <TELL "W?HEMIDEMISEMI = " N ,W?HEMIDEMISEMI CR>
-    <TELL "WORD 3 = " N <GET ,LONG-WORD-TABLE 3> CR>
-    <TELL "WORD 4 = " <GET ,LONG-WORD-TABLE 4> CR>
+    <TELL "WORD 3 = " N <GET ,LONG-WORDS-TABLE 3> CR>
+    <TELL "WORD 4 = " <GET ,LONG-WORDS-TABLE 4> CR>
 >
 ```
 
@@ -1391,6 +1391,13 @@ FOO!-NEW-OBLIST  ;  "This can also be done with trailer"
 ```
 
 
+### OR?
+```zil
+<OR? <=? 1 2> <=? 1 1>>  ;  True
+<OR? <=? 1 1> <SET X 2>>  ;  X is set to 2 because all expressions are evaluated
+```
+
+
 ### ORB
 ```zil
 <ORB 33 96>  ;  97
@@ -1483,9 +1490,9 @@ FOO!-NEW-OBLIST  ;  "This can also be done with trailer"
 
 ### PRINC
 ```zil
-<PRINC !\A>  ;  !\A
-<PRINC 42>  ; 42
-<PRINC "Hello, world!">  ;  "Hello, world!"
+<PRINC !\A>  ;  A
+<PRINC 42>  ;  42
+<PRINC "Hello, world!">  ;  Hello, world!
 <PRINC (1 2 3)>  ;  (1 2 3)
 <PRINC <+ 1 2>>  ;  3
 ```
@@ -1786,7 +1793,7 @@ FOO!-NEW-OBLIST  ;  "This can also be done with trailer"
 ```zil
 <OBJECT ANIMAL>
 <OBJECT CAT (LOC ANIMAL)>
-<REMOVE ,CAT)  ;  Detach CAT from ANIMAL
+<REMOVE ,CAT>  ;  Detach CAT from ANIMAL
 ```
 
 
@@ -2243,7 +2250,7 @@ THEI   <THEI-PRINT>>
 
 ### +
 ```zil
-<+ 2 3 4>  ;  7
+<+ 2 3 4>  ;  9
 ```
 
 
@@ -2335,7 +2342,7 @@ THEI   <THEI-PRINT>>
 ### BACK
 ```zil
 <GLOBAL TBL1 <TABLE 1 2 3 4>>  ;  TBL1 = [1 2 3 4]
-<GLOBAL TBL2 <REST ,STRUCT1 4>>  ;  TBL2 = [3 4] Move 4 because WORD-table!
+<GLOBAL TBL2 <REST ,TBL1 4>>  ;  TBL2 = [3 4] Move 4 because WORD-table!
 <SETG TBL2 <BACK ,TBL2 2>>  ;  TBL2 = [2 3 4]
 ```
 
@@ -2349,7 +2356,7 @@ THEI   <THEI-PRINT>>
 
 ### BCOM
 ```zil
-<BCOM #2 000011110001111>  ;  #2 1111000011110000
+<BCOM #2 0000111100001111>  ;  #2 1111000011110000
 ```
 
 
@@ -2527,8 +2534,10 @@ THEI   <THEI-PRINT>>
 
 ### DIROUT
 ```zil
-<DIROUT 3>  ;  Turns on output to file 
-<DIROUT -3>  ;  Turns off output to file
+<DIROUT 2>  ;  Turns on output to transcript file
+<DIROUT -2>  ;  Turns off output to transcript file
+<DIROUT 3 ,MYTABLE>  ;  Turns on output to table
+<DIROUT -3>  ;  Turns off output to table
 ```
 
 
@@ -2863,16 +2872,16 @@ THEI   <THEI-PRINT>>
 
 ### INTBL?
 ```zil
-<T <INTBL? 3 <TABLE 1 2 3 4> 4>>  ;  T
-<T <INTBL? 6 <TABLE 1 2 3 4> 4>>  ;  #FALSE
+<T? <INTBL? 3 <TABLE 1 2 3 4> 4>>  ;  T
+<T? <INTBL? 6 <TABLE 1 2 3 4> 4>>  ;  #FALSE
 
 ;  "Search byte-table with record length 3 (ver 5, 7-)"
-<T <INTBL? 8 <TABLE (BYTE) 2 0 1 4 0 1 8 0 1> 9 3>>  ;  T
-<T <INTBL? 1 <TABLE (BYTE) 2 0 1 4 0 1 8 0 1> 9 3>>  ;  <>
+<T? <INTBL? 8 <TABLE (BYTE) 2 0 1 4 0 1 8 0 1> 9 3>>  ;  T
+<T? <INTBL? 1 <TABLE (BYTE) 2 0 1 4 0 1 8 0 1> 9 3>>  ;  <>
 
 ;  "Search word-table with record length 3 (ver 5, 7-)"
-<T <INTBL? 8 <TABLE 2 0 1 4 0 1 8 0 1> 9 131>>  ;  T
-<T <INTBL? 1 <TABLE 2 0 1 4 0 1 8 0 1> 9 131>>  ;  <>
+<T? <INTBL? 8 <TABLE 2 0 1 4 0 1 8 0 1> 9 131>>  ;  T
+<T? <INTBL? 1 <TABLE 2 0 1 4 0 1 8 0 1> 9 131>>  ;  <>
 ```
 
 
@@ -3203,7 +3212,7 @@ THEI   <THEI-PRINT>>
 
 ### PRINTD
 ```zil
-<GLOBAL MYOBJECT (DESC "sword">
+<OBJECT MYOBJECT (DESC "sword")>
 
 <PRINTD ,MYOBJECT>  ;  "sword"
 ```
@@ -3343,7 +3352,7 @@ THEI   <THEI-PRINT>>
 ```zil
 <OBJECT ANIMAL>
 <OBJECT CAT (LOC ANIMAL)>
-<REMOVE ,CAT)  ;  Detach CAT from ANIMAL
+<REMOVE ,CAT>  ;  Detach CAT from ANIMAL
 ```
 
 
