@@ -118,8 +118,8 @@ Welcome to the ZILF Reference Guide. Select a concept below to view detailed doc
 | **[Language Fundamentals](./language-fundamentals.md)** | Primitive/derived data types (`ATOM`, `FIX`, `LIST`, `TABLE`) and lexical/evaluation rules (`%`, `%%`, `OBLIST`s, segments). |
 | **[Core Functions](./core-functions.md)** | Fundamental MDL built-in functions and ZIL library functions (`EVAL`, `ROUTINE`, `DEFSTRUCT`). |
 | **[Z-Code Built-ins](./z-code-built-ins.md)** | Z-machine instructions used inside `ROUTINE` (`POP`, `TELL`, `DO`). |
-| **[Object System](./object-system.md)** | Entities (`OBJECT`, `ROOM`), properties (`DESC`, `SYNONYM`), and state flags (`LIGHTBIT`, `OPENBIT`, `TAKEBIT`). |
-| **[Parser System](./parser-system.md)** | Directives for vocabulary/syntax (`VOC`, `SYNTAX`, `SYNONYM`), search flags (`HAVE`, `TAKE`), and Appendix D internal parser tables. |
+| **[Object System](./object-system.md)** | Entities (`OBJECT`, `ROOM`), properties (`DESC`, `SYNONYM`), state flags (`LIGHTBIT`, `OPENBIT`, `TAKEBIT`), special locations, and action arguments. |
+| **[Parser System](./parser-system.md)** | Directives for vocabulary/syntax (`VOC`, `SYNTAX`, `SYNONYM`), search flags (`HAVE`, `TAKE`), part-of-speech constants (`P1?*`, `PS?*`), and Appendix D internal parser tables. |
 | **[Z-Machine OP-Codes](./z-machine-opcodes.md)** | Appendix A: Low-level Z-machine opcodes without direct ZIL equivalents (`CALL`, `ICALL`, `JUMP`). |
 | **[Z-Machine Header Fields](./header-fields.md)** | Appendix B: Ordinary and extended Z-machine header `field-spec` symbols for `LOWCORE` and `LOWCORE-TABLE`. |
 | **[Reserved Symbols](./reserved-symbols.md)** | Appendix C: Compiler-reserved constants, globals, locals, and flags (`REDEFINE`, `NEW-PARSER?`, `DO-FUNNY-RETURNS?`). |
@@ -199,13 +199,17 @@ def generate_object_system(g):
         "# Object System",
         "**Parent Concept:** Object System",
         "",
-        "Entities (`OBJECT`, `ROOM`), properties (`DESC`, `SYNONYM`), and state flags (`LIGHTBIT`, `OPENBIT`, `TAKEBIT`).",
+        "Entities (`OBJECT`, `ROOM`), properties (`DESC`, `SYNONYM`), state flags (`LIGHTBIT`, `OPENBIT`, `TAKEBIT`), special locations, and action arguments.",
         "",
         "---",
     ]
 
-    # 1. Base Entities (OBJECT, ROOM, etc.)
-    for ent in get_sorted_children(g, ZILF.ObjectSystem, exclude=[ZILF.ObjectProperties]):
+    # 1. Base Entities (OBJECT, ROOM)
+    for ent in get_sorted_children(
+        g,
+        ZILF.ObjectSystem,
+        exclude=[ZILF.ObjectProperties, ZILF.SpecialLocations, ZILF.ActionArguments],
+    ):
         append_concept_documentation(g, ent, lines)
 
     # 2. Properties
@@ -221,15 +225,39 @@ def generate_object_system(g):
     for f in get_sorted_children(g, ZILF.PropFlags):
         append_concept_documentation(g, f, lines)
 
+    # 4. Special Object Locations
+    special_locs = get_sorted_children(g, ZILF.SpecialLocations)
+    if special_locs:
+        lines.append("\n## Special Object Locations")
+        sl_def = get_literal(g, ZILF.SpecialLocations, SKOS.definition)
+        if sl_def:
+            lines.append(f"*{sl_def}*")
+        for loc in special_locs:
+            append_concept_documentation(g, loc, lines)
+
+    # 5. Room & Description Action Arguments
+    action_args = get_sorted_children(g, ZILF.ActionArguments)
+    if action_args:
+        lines.append("\n## Room & Description Action Arguments")
+        aa_def = get_literal(g, ZILF.ActionArguments, SKOS.definition)
+        if aa_def:
+            lines.append(f"*{aa_def}*")
+        for arg in action_args:
+            append_concept_documentation(g, arg, lines)
+
     write_file("object-system.md", "\n".join(lines))
 
 
 def generate_parser_system(g):
-    """Generates parser-system.md including SyntaxFlags and Appendix D ParserTables."""
+    """Generates parser-system.md including SyntaxFlags, PartOfSpeechConstants, and Appendix D ParserTables."""
     lines = ["[← Back to Main Index](./index.md)", "", "# Parser System", "---"]
 
     # 1. Parser Directives (ADD-WORD, BUZZ, DIRECTIONS, SYNONYM, SYNTAX, VOC, etc.)
-    for c in get_sorted_children(g, ZILF.ParserSystem, exclude=[ZILF.SyntaxFlags, ZILF.ParserTables]):
+    for c in get_sorted_children(
+        g,
+        ZILF.ParserSystem,
+        exclude=[ZILF.SyntaxFlags, ZILF.PartOfSpeechConstants, ZILF.ParserTables],
+    ):
         append_concept_documentation(g, c, lines)
 
     # 2. Syntax Search & Scope Flags (Classic + Version 6 New Parser)
@@ -242,7 +270,17 @@ def generate_parser_system(g):
         for sf in syntax_flags:
             append_concept_documentation(g, sf, lines)
 
-    # 3. Appendix D: Internal Parser Tables & New Parser
+    # 3. Part-of-Speech Constants (P1?* & PS?*)
+    pos_consts = get_sorted_children(g, ZILF.PartOfSpeechConstants)
+    if pos_consts:
+        lines.append("\n## Part-of-Speech Constants (P1?* & PS?*)")
+        pos_def = get_literal(g, ZILF.PartOfSpeechConstants, SKOS.definition)
+        if pos_def:
+            lines.append(f"*{pos_def}*")
+        for pc in pos_consts:
+            append_concept_documentation(g, pc, lines)
+
+    # 4. Appendix D: Internal Parser Tables & New Parser
     parser_tables = get_sorted_children(g, ZILF.ParserTables)
     if parser_tables:
         lines.append("\n## Appendix D: Internal Parser Tables & New Parser")
@@ -332,15 +370,18 @@ def generate_cookbook(g):
     fundamentals_subjects = list(g.subjects(SKOS.broader, ZILF.DataTypes))
     fundamentals_subjects.extend(g.subjects(SKOS.broader, ZILF.LexicalAndEvaluationRules))
 
-    # Collect Parser System subjects (including SyntaxFlags and ParserTables)
+    # Collect Parser System subjects (including SyntaxFlags, PartOfSpeechConstants, and ParserTables)
     parser_subjects = list(g.subjects(SKOS.broader, ZILF.ParserSystem))
     parser_subjects.extend(g.subjects(SKOS.broader, ZILF.SyntaxFlags))
+    parser_subjects.extend(g.subjects(SKOS.broader, ZILF.PartOfSpeechConstants))
     parser_subjects.extend(g.subjects(SKOS.broader, ZILF.ParserTables))
 
-    # Collect Object System subjects (Entities, Properties, Flags)
+    # Collect Object System subjects (Entities, Properties, Flags, SpecialLocations, ActionArguments)
     object_system_subjects = list(g.subjects(SKOS.broader, ZILF.ObjectSystem))
     object_system_subjects.extend(g.subjects(SKOS.broader, ZILF.ObjectProperties))
     object_system_subjects.extend(g.subjects(SKOS.broader, ZILF.PropFlags))
+    object_system_subjects.extend(g.subjects(SKOS.broader, ZILF.SpecialLocations))
+    object_system_subjects.extend(g.subjects(SKOS.broader, ZILF.ActionArguments))
 
     # Collect Header Fields subjects
     header_subjects = list(g.subjects(SKOS.broader, ZILF.OrdinaryHeaderFields))
