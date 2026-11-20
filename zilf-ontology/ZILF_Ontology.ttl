@@ -3502,9 +3502,11 @@ zilf:ObjectProperties rdf:type owl:NamedIndividual ,
 ###  http://example.org/zilf/ObjectSystem
 zilf:ObjectSystem rdf:type owl:NamedIndividual ,
                            skos:Concept ;
-                  skos:narrower zilf:OBJECT ,
+                  skos:narrower zilf:ActionArguments ,
+                   zilf:OBJECT ,
                    zilf:ObjectProperties ,
-                   zilf:ROOM ;
+                   zilf:ROOM ,
+                   zilf:SpecialLocations ;
                   skos:topConceptOf zilf:ZILF_Scheme ;
                   skos:inScheme zilf:ZILF_Scheme ;
            skos:prefLabel "Object System"@en .
@@ -4297,6 +4299,7 @@ zilf:ParserSystem rdf:type owl:NamedIndividual ,
                    zilf:NEW-ADD-WORD ,
                    zilf:PREP-SYNONYM ,
                    zilf:ParserTables ,
+                   zilf:PartOfSpeechConstants ,
                    zilf:SYNONYM ,
                    zilf:SYNTAX ,
                    zilf:SyntaxFlags ,
@@ -7411,13 +7414,15 @@ zilf:DataTypes rdf:type owl:NamedIndividual,
                     skos:Concept ;
            skos:broader zilf:LanguageFundamentals ;
            skos:inScheme zilf:ZILF_Scheme ;
-           skos:narrower zilf:TypeADECL ,
+           skos:narrower zilf:TypeACTIVATION ,
+                   zilf:TypeADECL ,
                    zilf:TypeASOC ,
                    zilf:TypeATOM ,
                    zilf:TypeBYTE ,
                    zilf:TypeCHANNEL ,
                    zilf:TypeCHARACTER ,
                    zilf:TypeDECL ,
+                   zilf:TypeENVIRONMENT ,
                    zilf:TypeFALSE ,
                    zilf:TypeFIX ,
                    zilf:TypeFORM ,
@@ -7426,11 +7431,13 @@ zilf:DataTypes rdf:type owl:NamedIndividual,
                    zilf:TypeLIST ,
                    zilf:TypeMACRO ,
                    zilf:TypeOBLIST ,
+                   zilf:TypeOFFSET ,
                    zilf:TypeSEGMENT ,
                    zilf:TypeSPLICE ,
                    zilf:TypeSTRING ,
                    zilf:TypeSUBR ,
                    zilf:TypeTABLE ,
+                   zilf:TypeTUPLE ,
                    zilf:TypeUVECTOR ,
                    zilf:TypeVECTOR ;
            skos:definition "Primitive types (ATOM, FIX, LIST, STRING, TABLE, VECTOR) and derived/structured types recognized by ZILF."@en ;
@@ -7443,6 +7450,9 @@ zilf:LexicalAndEvaluationRules rdf:type owl:NamedIndividual,
            skos:broader zilf:LanguageFundamentals ;
            skos:inScheme zilf:ZILF_Scheme ;
            skos:narrower zilf:RuleBlocking ,
+                   zilf:RuleComments ,
+                   zilf:RuleNamingPrefixes ,
+                   zilf:RuleNumericLiterals ,
                    zilf:RuleOblists ,
                    zilf:RuleReadMacroDoublePercent ,
                    zilf:RuleReadMacroPercent ,
@@ -8400,17 +8410,30 @@ zilf:ReservedSymbols rdf:type owl:NamedIndividual,
            skos:narrower zilf:FlagNEWSFLAGS ,
                    zilf:ResActions ,
                    zilf:ResCRLFCharacter ,
+                   zilf:ResCleanStack ,
                    zilf:ResDoFunnyReturns ,
                    zilf:ResFalseValue ,
                    zilf:ResFatalValue ,
+                   zilf:ResGlobalVarsTable ,
                    zilf:ResInZilch ,
+                   zilf:ResInitial ,
                    zilf:ResLastObject ,
+                   zilf:ResLongWordsTable ,
+                   zilf:ResMdlZil ,
                    zilf:ResNewParser ,
+                   zilf:ResOblist ,
+                   zilf:ResOutchan ,
+                   zilf:ResPackageOblist ,
                    zilf:ResPreactions ,
+                   zilf:ResPrepositions ,
                    zilf:ResPreserveSpaces ,
+                   zilf:ResPrmanyCrlf ,
+                   zilf:ResPropspec ,
                    zilf:ResRedefine ,
+                   zilf:ResRootOblist ,
                    zilf:ResSentenceEnds ,
-                   zilf:ResVerbs ;
+                   zilf:ResVerbs ,
+                   zilf:ResZapToSourceDirectory ;
            skos:definition "Compiler-reserved constants, global variables (GVALs), local variables (LVALs), compilation flags, and file flags recognized by ZILF."@en ;
            skos:prefLabel "Appendix C: Reserved Constants, Globals & Locals"@en .
 
@@ -8553,6 +8576,8 @@ zilf:ParserTables rdf:type owl:NamedIndividual,
            skos:inScheme zilf:ZILF_Scheme ;
            skos:narrower zilf:FlagOneBytePartsOfSpeech ,
                    zilf:FlagWordFlagsInTable ,
+                   zilf:FnGetClassification ,
+                   zilf:FnMakeVword ,
                    zilf:FnTERMINALS ,
                    zilf:NewParserArchitecture ,
                    zilf:StructVWORD ,
@@ -8564,6 +8589,7 @@ zilf:ParserTables rdf:type owl:NamedIndividual,
                    zilf:TableVerbs ,
                    zilf:TableVocabulary ,
                    zilf:TableWordFlagTable ,
+                   zilf:VarClassified ,
                    zilf:VarCompactSyntaxes ,
                    zilf:VarCompactVocabulary ,
                    zilf:VarNewVoc ;
@@ -8730,5 +8756,496 @@ zilf:FnTERMINALS rdf:type owl:NamedIndividual,
            skos:definition "Game-defined function in the new parser that assigns part-of-speech CLASSIFICATION-NUMBER values and ordering (packing IDs that exceed 1 or 2 bytes with the high bit set)."@en ;
            skos:prefLabel "TERMINALS"@en .
 
+
+
+###  http://example.org/zilf/TypeOFFSET
+zilf:TypeOFFSET rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:DataTypes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Applicable type created by OFFSET that pairs a 1-based structure index with a DECL pattern to validate elements accessed via NTH or PUT (using <offset structure> and <offset structure value>)."@en ;
+           skos:editorialNote "Inspect or modify an OFFSET's declaration with GET-DECL and PUT-DECL; retrieve its index with INDEX."@en ;
+           skos:prefLabel "OFFSET (Type)"@en .
+
+
+###  http://example.org/zilf/TypeTUPLE
+zilf:TypeTUPLE rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:DataTypes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Stack-allocated vector type in MDL used for variable-length argument lists (\"TUPLE\" in FUNCTION/DEFINE) and intermediate results in MAPF/MAPR. ZILF treats TUPLE as an alias for VECTOR."@en ;
+           skos:editorialNote "In MDL, a TUPLE is only valid while its creating function frame is active on the stack (checked with LEGAL?)."@en ;
+           skos:prefLabel "TUPLE (Type)"@en .
+
+
+###  http://example.org/zilf/TypeACTIVATION
+zilf:TypeACTIVATION rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:DataTypes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Stack-lived control-flow frame created automatically by PROG and REPEAT, or explicitly via a leading activation atom or \"NAME\"/\"ACT\" parameter in FUNCTION, DEFINE, DEFMAC, BIND, PROG, REPEAT, or ROUTINE."@en ;
+           skos:editorialNote "Passed to AGAIN and RETURN to target a specific enclosing block; remains valid (LEGAL? returns T) only while its block is active on the stack."@en ;
+           skos:prefLabel "ACTIVATION (Type)"@en .
+
+
+###  http://example.org/zilf/TypeENVIRONMENT
+zilf:TypeENVIRONMENT rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:DataTypes ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Stack-lived variable-binding frame captured via the \"BIND\" parameter token in a FUNCTION, allowing dynamic lookup and mutation of LVALs in a caller's scope."@en ;
+           skos:editorialNote "Accepted as an optional argument by EVAL, LVAL, SET, ASSIGNED?, BOUND?, UNASSIGN, and VALUE; validity is tested with LEGAL?."@en ;
+           skos:prefLabel "ENVIRONMENT (Type)"@en .
+
+
+###  http://example.org/zilf/SpecialLocations
+zilf:SpecialLocations rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:ObjectSystem ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:narrower zilf:LocGenericObjects ,
+                   zilf:LocGlobalObjects ,
+                   zilf:LocLocalGlobals ,
+                   zilf:LocROOMS ;
+           skos:definition "Special parent container objects used in (IN ...) or (LOC ...) clauses to organize rooms and globally or conditionally in-scope objects."@en ;
+           skos:prefLabel "Special Object Locations"@en .
+
+
+###  http://example.org/zilf/LocROOMS
+zilf:LocROOMS rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:SpecialLocations ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Special parent container object holding all ROOM objects via (IN ROOMS) or (LOC ROOMS). Also recognized by ORDER-OBJECTS? to identify rooms."@en ;
+           skos:prefLabel "ROOMS"@en .
+
+
+###  http://example.org/zilf/LocGlobalObjects
+zilf:LocGlobalObjects rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:SpecialLocations ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Special parent location for objects that the player can refer to from anywhere in the game."@en ;
+           skos:prefLabel "GLOBAL-OBJECTS"@en .
+
+
+###  http://example.org/zilf/LocLocalGlobals
+zilf:LocLocalGlobals rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:SpecialLocations ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Special parent location for objects (such as doors or scenery shared across rooms) that are in scope only in ROOMs listing them in their (GLOBAL ...) property. Recognized by ORDER-OBJECTS? for ROOMS-AND-LGS-FIRST."@en ;
+           skos:prefLabel "LOCAL-GLOBALS"@en .
+
+
+###  http://example.org/zilf/LocGenericObjects
+zilf:LocGenericObjects rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:SpecialLocations ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Special parent location for abstract or conceptual objects rather than physical items (for example, the murder or the new will in Infocom's Deadline)."@en ;
+           skos:prefLabel "GENERIC-OBJECTS"@en .
+
+
+###  http://example.org/zilf/ActionArguments
+zilf:ActionArguments rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:ObjectSystem ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:narrower zilf:ArgMBEG ,
+                   zilf:ArgMEND ,
+                   zilf:ArgMENTER ,
+                   zilf:ArgMLOOK ,
+                   zilf:ArgMOBJDESC ,
+                   zilf:ArgMOBJDESCQ ;
+           skos:definition "Message constants passed as arguments to ROOM ACTION routines (RARG) and OBJECT DESCFCN routines."@en ;
+           skos:prefLabel "Room & Description Action Arguments"@en .
+
+
+###  http://example.org/zilf/ArgMBEG
+zilf:ArgMBEG rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ActionArguments ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Room ACTION argument (RARG) passed before any object or verb action routines execute during a turn."@en ;
+           skos:prefLabel "M-BEG"@en .
+
+
+###  http://example.org/zilf/ArgMEND
+zilf:ArgMEND rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ActionArguments ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Room ACTION argument (RARG) passed after object and verb action routines complete during a turn."@en ;
+           skos:prefLabel "M-END"@en .
+
+
+###  http://example.org/zilf/ArgMLOOK
+zilf:ArgMLOOK rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ActionArguments ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Room ACTION argument (RARG) passed when the player executes LOOK to print a custom room description."@en ;
+           skos:prefLabel "M-LOOK"@en .
+
+
+###  http://example.org/zilf/ArgMENTER
+zilf:ArgMENTER rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ActionArguments ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Room ACTION argument (RARG) passed when the player enters a ROOM, before its room description is printed."@en ;
+           skos:prefLabel "M-ENTER"@en .
+
+
+###  http://example.org/zilf/ArgMOBJDESCQ
+zilf:ArgMOBJDESCQ rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ActionArguments ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "DESCFCN routine argument querying whether the object uses a custom description; returning FALSE falls back to standard FDESC/LDESC output."@en ;
+           skos:prefLabel "M-OBJDESC?"@en .
+
+
+###  http://example.org/zilf/ArgMOBJDESC
+zilf:ArgMOBJDESC rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ActionArguments ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "DESCFCN routine argument instructing the routine to print the object's custom description."@en ;
+           skos:prefLabel "M-OBJDESC"@en .
+
+
+###  http://example.org/zilf/ResPrepositions
+zilf:ResPrepositions rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ReservedSymbols ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Compiler-defined constant pointing to the preposition lookup table (mapping vocabulary addresses to preposition numbers)."@en ;
+           skos:prefLabel "PREPOSITIONS"@en .
+
+
+###  http://example.org/zilf/ResCleanStack
+zilf:ResCleanStack rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ReservedSymbols ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "FILE-FLAGS and ROUTINE-FLAGS flag instructing ZILF to emit extra instructions to clear unneeded values from the Z-machine stack, preventing stack overflow at runtime."@en ;
+           skos:prefLabel "CLEAN-STACK?"@en .
+
+
+###  http://example.org/zilf/ResMdlZil
+zilf:ResMdlZil rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ReservedSymbols ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "FILE-FLAGS flag instructing ZILF to treat top-level SETG as GLOBAL and DEFINE as ROUTINE (while SETG20 and DEFINE20 retain MDL semantics)."@en ;
+           skos:prefLabel "MDL-ZIL?"@en .
+
+
+###  http://example.org/zilf/ResZapToSourceDirectory
+zilf:ResZapToSourceDirectory rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ReservedSymbols ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "FILE-FLAGS flag from historical ZILCH controlling output directory placement; ignored by ZILF."@en ;
+           skos:prefLabel "ZAP-TO-SOURCE-DIRECTORY?"@en .
+
+
+###  http://example.org/zilf/ResGlobalVarsTable
+zilf:ResGlobalVarsTable rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ReservedSymbols ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Compiler-generated table used when FUNNY-GLOBALS? (or DEFINE-GLOBALS) is enabled to store global variables beyond the Z-machine's 240-global limit."@en ;
+           skos:prefLabel "GLOBAL-VARS-TABLE"@en .
+
+
+###  http://example.org/zilf/ResLongWordsTable
+zilf:ResLongWordsTable rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ReservedSymbols ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Compiler-generated CONSTANT table created when LONG-WORDS? is enabled, mapping truncated vocabulary word pointers (exceeding 6 Z-chars in V3 or 9 in V4+) to their full printed strings."@en ;
+           skos:prefLabel "LONG-WORDS-TABLE"@en .
+
+
+###  http://example.org/zilf/ResOutchan
+zilf:ResOutchan rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ReservedSymbols ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Predefined LVAL (.OUTCHAN) holding the default output CHANNEL (the console) used by PRIN1, PRINC, PRINT, CRLF, INDENT-TO, M-HPOS, and PRINT-MANY."@en ;
+           skos:prefLabel "OUTCHAN"@en .
+
+
+###  http://example.org/zilf/ResOblist
+zilf:ResOblist rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ReservedSymbols ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Predefined LVAL (.OBLIST) holding the ordered LIST of OBLISTs searched when resolving ATOM names (initially INITIAL followed by ROOT); rebound by BLOCK, PACKAGE, DEFINITIONS, USE, and INCLUDE."@en ;
+           skos:prefLabel "OBLIST"@en .
+
+
+###  http://example.org/zilf/ResInitial
+zilf:ResInitial rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ReservedSymbols ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Predefined OBLIST (<1 .OBLIST> by default) that starts empty and stores user-created ATOMs."@en ;
+           skos:prefLabel "INITIAL"@en .
+
+
+###  http://example.org/zilf/ResRootOblist
+zilf:ResRootOblist rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ReservedSymbols ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Predefined OBLIST (<2 .OBLIST> by default, returned by <ROOT>) containing all built-in SUBRs, FSUBRs, and core symbols such as OBLIST, DEFAULT, and T. Targeted directly by empty trailer syntax (atom!-)."@en ;
+           skos:prefLabel "ROOT (OBLIST)"@en .
+
+
+###  http://example.org/zilf/ResPackageOblist
+zilf:ResPackageOblist rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ReservedSymbols ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Predefined OBLIST storing external package OBLISTs created by PACKAGE and DEFINITIONS. ZILF predefines three empty compatibility packages on it: NEWSTRUC, ZIL, and ZILCH."@en ;
+           skos:prefLabel "PACKAGE (OBLIST)"@en .
+
+
+###  http://example.org/zilf/ResPrmanyCrlf
+zilf:ResPrmanyCrlf rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ReservedSymbols ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Special symbol recognized as an item in PRINT-MANY to print a carriage-return and line-feed (CRLF) at that position."@en ;
+           skos:prefLabel "PRMANY-CRLF"@en .
+
+
+###  http://example.org/zilf/ResPropspec
+zilf:ResPropspec rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ReservedSymbols ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Special PUTPROP indicator (<PUTPROP item PROPSPEC [function]>) that registers a compile-time handler function invoked whenever item appears as a property inside an OBJECT definition."@en ;
+           skos:prefLabel "PROPSPEC"@en .
+
+
+###  http://example.org/zilf/FnGetClassification
+zilf:FnGetClassification rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ParserTables ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "User-provided bootstrap FUNCTION required by the Version 6 new parser (NEW-PARSER? T) that returns the numeric part-of-speech classification ID for a given word type from CLASSIFIED/CLASSIFICATIONS."@en ;
+           skos:prefLabel "<GET-CLASSIFICATION type>"@en .
+
+
+###  http://example.org/zilf/FnMakeVword
+zilf:FnMakeVword rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ParserTables ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "User-provided bootstrap constructor FUNCTION/MACRO (generated by DEFSTRUCT VWORD) used by the Version 6 new parser to build vocabulary word entries from name, classification, and flags."@en ;
+           skos:prefLabel "<MAKE-VWORD name class flags>"@en .
+
+
+###  http://example.org/zilf/VarClassified
+zilf:VarClassified rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:ParserTables ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:altLabel "CLASSIFICATIONS"@en ;
+           skos:definition "User-provided global LIST required by the Version 6 new parser mapping part-of-speech atoms (such as ADJ, BUZZ, DIR, NOUN, PREP, VERB) to their numeric classification values for GET-CLASSIFICATION."@en ;
+           skos:prefLabel "CLASSIFIED"@en .
+
+
+###  http://example.org/zilf/PartOfSpeechConstants
+zilf:PartOfSpeechConstants rdf:type owl:NamedIndividual ,
+                    skos:Concept ;
+           skos:broader zilf:ParserSystem ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:narrower zilf:PosP1Adjective ,
+                   zilf:PosP1Direction ,
+                   zilf:PosP1Object ,
+                   zilf:PosP1Verb ,
+                   zilf:PosPSAdjective ,
+                   zilf:PosPSBuzzWord ,
+                   zilf:PosPSDirection ,
+                   zilf:PosPSObject ,
+                   zilf:PosPSPreposition ,
+                   zilf:PosPSVerb ;
+           skos:definition "Standard parser global constants encoding the part-of-speech (PoS) byte in vocabulary entries: bits 0-1 (P1?*) identify which part-of-speech ID is stored in V1, and bits 2-7 (PS?*) mark part-of-speech membership."@en ;
+           skos:prefLabel "Part-of-Speech Constants (P1?* & PS?*)"@en .
+
+
+###  http://example.org/zilf/PosP1Object
+zilf:PosP1Object rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:PartOfSpeechConstants ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Standard parser PoS constant (value 0; bits 0-1 = 0) indicating none, preposition, buzzword, or noun number is stored in vocabulary byte V1."@en ;
+           skos:prefLabel "P1?OBJECT"@en .
+
+
+###  http://example.org/zilf/PosP1Verb
+zilf:PosP1Verb rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:PartOfSpeechConstants ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Standard parser PoS constant (value 1; bits 0-1 = 1) indicating the verb number is stored in vocabulary byte V1."@en ;
+           skos:prefLabel "P1?VERB"@en .
+
+
+###  http://example.org/zilf/PosP1Adjective
+zilf:PosP1Adjective rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:PartOfSpeechConstants ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Standard parser PoS constant (value 2; bits 0-1 = 2) indicating the adjective number is stored in vocabulary byte V1 (Versions 1-3)."@en ;
+           skos:prefLabel "P1?ADJECTIVE"@en .
+
+
+###  http://example.org/zilf/PosP1Direction
+zilf:PosP1Direction rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:PartOfSpeechConstants ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Standard parser PoS constant (value 3; bits 0-1 = 3) indicating the direction number is stored in vocabulary byte V1."@en ;
+           skos:prefLabel "P1?DIRECTION"@en .
+
+
+###  http://example.org/zilf/PosPSBuzzWord
+zilf:PosPSBuzzWord rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:PartOfSpeechConstants ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:altLabel "PS?BUZZWORD"@en ;
+           skos:definition "Standard parser PoS flag constant (value 4; bit 2) marking a vocabulary word as a buzzword."@en ;
+           skos:prefLabel "PS?BUZZ-WORD"@en .
+
+
+###  http://example.org/zilf/PosPSPreposition
+zilf:PosPSPreposition rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:PartOfSpeechConstants ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Standard parser PoS flag constant (value 8; bit 3) marking a vocabulary word as a preposition."@en ;
+           skos:prefLabel "PS?PREPOSITION"@en .
+
+
+###  http://example.org/zilf/PosPSDirection
+zilf:PosPSDirection rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:PartOfSpeechConstants ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Standard parser PoS flag constant (value 16; bit 4) marking a vocabulary word as a direction."@en ;
+           skos:prefLabel "PS?DIRECTION"@en .
+
+
+###  http://example.org/zilf/PosPSAdjective
+zilf:PosPSAdjective rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:PartOfSpeechConstants ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Standard parser PoS flag constant (value 32; bit 5) marking a vocabulary word as an adjective."@en ;
+           skos:prefLabel "PS?ADJECTIVE"@en .
+
+
+###  http://example.org/zilf/PosPSVerb
+zilf:PosPSVerb rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:PartOfSpeechConstants ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Standard parser PoS flag constant (value 64; bit 6) marking a vocabulary word as a verb."@en ;
+           skos:prefLabel "PS?VERB"@en .
+
+
+###  http://example.org/zilf/PosPSObject
+zilf:PosPSObject rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:PartOfSpeechConstants ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Standard parser PoS flag constant (value 128; bit 7) marking a vocabulary word as a noun (object)."@en ;
+           skos:prefLabel "PS?OBJECT"@en .
+
+
+###  http://example.org/zilf/RuleComments
+zilf:RuleComments rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:LexicalAndEvaluationRules ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "In MDL/ZIL, a semicolon (;) comments out the immediately following MDL object (commonly a double-quoted string such as ;\"comment text\"), causing READ to ignore it."@en ;
+           skos:example """;\"This string is ignored by the reader as a comment.\"
+<SETG A 1> ;\"Inline comment\""""@en ;
+           skos:prefLabel "; (Comments)"@en .
+
+
+###  http://example.org/zilf/RuleNumericLiterals
+zilf:RuleNumericLiterals rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:LexicalAndEvaluationRules ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "FIX integer literals support standard decimal notation (e.g., 616), octal notation enclosed in asterisks (*747*), and binary notation prefixed with #2 (#2 10110111)."@en ;
+           skos:example """616         ; Decimal FIX
+*3777*      ; Octal FIX
+#2 10110111 ; Binary FIX"""@en ;
+           skos:prefLabel "Numeric Radix Literals"@en .
+
+
+###  http://example.org/zilf/RuleNamingPrefixes
+zilf:RuleNamingPrefixes rdf:type owl:NamedIndividual ,
+                    skos:Concept ,
+                    zilf:LanguageConstruct ;
+           skos:broader zilf:LexicalAndEvaluationRules ;
+           skos:inScheme zilf:ZILF_Scheme ;
+           skos:definition "Compiler-generated identifier prefixes and naming conventions: W?<WORD> for vocabulary dictionary addresses, P?<PROP> for object property numbers, ST?<VERB> for verb syntax tables, and V-<verb> / PRE-<verb> by convention for verb action and preaction routines."@en ;
+           skos:example """,W?TAKE      ; Vocabulary address of "take"
+,P?ACTION    ; Property number of ACTION
+,ST?TAKE     ; Syntax table constant for TAKE"""@en ;
+           skos:prefLabel "Compiler Identifier Prefixes (W?, P?, ST?)"@en .
 
 ###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
