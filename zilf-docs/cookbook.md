@@ -3,6 +3,31 @@
 # ZILF Cookbook
 ---
 
+## Language Fundamentals
+
+### RuleComments
+```zil
+;"This string is ignored by the reader as a comment."
+<SETG A 1> ;"Inline comment"
+```
+
+
+### RuleNamingPrefixes
+```zil
+,W?TAKE      ; Vocabulary address of "take"
+,P?ACTION    ; Property number of ACTION
+,ST?TAKE     ; Syntax table constant for TAKE
+```
+
+
+### RuleNumericLiterals
+```zil
+616         ; Decimal FIX
+*3777*      ; Octal FIX
+#2 10110111 ; Binary FIX
+```
+
+
 ## Core Functions
 
 ### *

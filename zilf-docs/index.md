@@ -8,8 +8,8 @@ Welcome to the ZILF Reference Guide. Select a concept below to view detailed doc
 | **[Language Fundamentals](./language-fundamentals.md)** | Primitive/derived data types (`ATOM`, `FIX`, `LIST`, `TABLE`) and lexical/evaluation rules (`%`, `%%`, `OBLIST`s, segments). |
 | **[Core Functions](./core-functions.md)** | Fundamental MDL built-in functions and ZIL library functions (`EVAL`, `ROUTINE`, `DEFSTRUCT`). |
 | **[Z-Code Built-ins](./z-code-built-ins.md)** | Z-machine instructions used inside `ROUTINE` (`POP`, `TELL`, `DO`). |
-| **[Object System](./object-system.md)** | Entities (`OBJECT`, `ROOM`), properties (`DESC`, `SYNONYM`), and state flags (`LIGHTBIT`, `OPENBIT`, `TAKEBIT`). |
-| **[Parser System](./parser-system.md)** | Directives for vocabulary/syntax (`VOC`, `SYNTAX`, `SYNONYM`), search flags (`HAVE`, `TAKE`), and Appendix D internal parser tables. |
+| **[Object System](./object-system.md)** | Entities (`OBJECT`, `ROOM`), properties (`DESC`, `SYNONYM`), state flags (`LIGHTBIT`, `OPENBIT`, `TAKEBIT`), special locations, and action arguments. |
+| **[Parser System](./parser-system.md)** | Directives for vocabulary/syntax (`VOC`, `SYNTAX`, `SYNONYM`), search flags (`HAVE`, `TAKE`), part-of-speech constants (`P1?*`, `PS?*`), and Appendix D internal parser tables. |
 | **[Z-Machine OP-Codes](./z-machine-opcodes.md)** | Appendix A: Low-level Z-machine opcodes without direct ZIL equivalents (`CALL`, `ICALL`, `JUMP`). |
 | **[Z-Machine Header Fields](./header-fields.md)** | Appendix B: Ordinary and extended Z-machine header `field-spec` symbols for `LOWCORE` and `LOWCORE-TABLE`. |
 | **[Reserved Symbols](./reserved-symbols.md)** | Appendix C: Compiler-reserved constants, globals, locals, and flags (`REDEFINE`, `NEW-PARSER?`, `DO-FUNNY-RETURNS?`). |

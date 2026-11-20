@@ -9,6 +9,15 @@ Core ZILF/MDL language fundamentals covering primitive and derived data types, t
 ## Data Types
 *Primitive types (ATOM, FIX, LIST, STRING, TABLE, VECTOR) and derived/structured types recognized by ZILF.*
 
+### TypeACTIVATION
+**Usage:** `ACTIVATION (Type)`
+
+Stack-lived control-flow frame created automatically by PROG and REPEAT, or explicitly via a leading activation atom or "NAME"/"ACT" parameter in FUNCTION, DEFINE, DEFMAC, BIND, PROG, REPEAT, or ROUTINE.
+
+> **Note:** Passed to AGAIN and RETURN to target a specific enclosing block; remains valid (LEGAL? returns T) only while its block is active on the stack.
+
+---
+
 ### TypeADECL
 **Usage:** `ADECL (Type)`
 
@@ -55,6 +64,15 @@ Derived type (PRIMTYPE FIX, 8-bit 0-255) representing a single character, writte
 **Usage:** `DECL (Type)`
 
 Structured type representing a type/structure declaration pattern (e.g., #DECL ((X) FIX)) used for compile-time type checking.
+
+---
+
+### TypeENVIRONMENT
+**Usage:** `ENVIRONMENT (Type)`
+
+Stack-lived variable-binding frame captured via the "BIND" parameter token in a FUNCTION, allowing dynamic lookup and mutation of LVALs in a caller's scope.
+
+> **Note:** Accepted as an optional argument by EVAL, LVAL, SET, ASSIGNED?, BOUND?, UNASSIGN, and VALUE; validity is tested with LEGAL?.
 
 ---
 
@@ -114,6 +132,15 @@ Structured type representing an object list (namespace/symbol table) of ATOMs.
 
 ---
 
+### TypeOFFSET
+**Usage:** `OFFSET (Type)`
+
+Applicable type created by OFFSET that pairs a 1-based structure index with a DECL pattern to validate elements accessed via NTH or PUT (using <offset structure> and <offset structure value>).
+
+> **Note:** Inspect or modify an OFFSET's declaration with GET-DECL and PUT-DECL; retrieve its index with INDEX.
+
+---
+
 ### TypeSEGMENT
 **Usage:** `SEGMENT (Type)`
 
@@ -149,6 +176,15 @@ ZIL-specific primitive type representing a zero-based contiguous byte or word ar
 
 ---
 
+### TypeTUPLE
+**Usage:** `TUPLE (Type)`
+
+Stack-allocated vector type in MDL used for variable-length argument lists ("TUPLE" in FUNCTION/DEFINE) and intermediate results in MAPF/MAPR. ZILF treats TUPLE as an alias for VECTOR.
+
+> **Note:** In MDL, a TUPLE is only valid while its creating function frame is active on the stack (checked with LEGAL?).
+
+---
+
 ### TypeUVECTOR
 **Usage:** `UVECTOR (Type)`
 
@@ -170,6 +206,27 @@ Primitive type representing a contiguous array of typed elements enclosed in squ
 **Usage:** `Dynamic and Static (Lexical) Blocking`
 
 ZILF prevents identifier collisions via dynamic blocking (stack-scoped LVALs in FUNCTION, BIND, PROG, REPEAT) and static/lexical blocking (switching .OBLIST namespaces via BLOCK/ENDBLOCK, PACKAGE, and DEFINITIONS).
+
+---
+
+### RuleComments
+**Usage:** `; (Comments)`
+
+In MDL/ZIL, a semicolon (;) comments out the immediately following MDL object (commonly a double-quoted string such as ;"comment text"), causing READ to ignore it.
+
+---
+
+### RuleNamingPrefixes
+**Usage:** `Compiler Identifier Prefixes (W?, P?, ST?)`
+
+Compiler-generated identifier prefixes and naming conventions: W?<WORD> for vocabulary dictionary addresses, P?<PROP> for object property numbers, ST?<VERB> for verb syntax tables, and V-<verb> / PRE-<verb> by convention for verb action and preaction routines.
+
+---
+
+### RuleNumericLiterals
+**Usage:** `Numeric Radix Literals`
+
+FIX integer literals support standard decimal notation (e.g., 616), octal notation enclosed in asterisks (*747*), and binary notation prefixed with #2 (#2 10110111).
 
 ---
 

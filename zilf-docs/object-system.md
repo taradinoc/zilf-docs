@@ -3,7 +3,7 @@
 # Object System
 **Parent Concept:** Object System
 
-Entities (`OBJECT`, `ROOM`), properties (`DESC`, `SYNONYM`), and state flags (`LIGHTBIT`, `OPENBIT`, `TAKEBIT`).
+Entities (`OBJECT`, `ROOM`), properties (`DESC`, `SYNONYM`), state flags (`LIGHTBIT`, `OPENBIT`, `TAKEBIT`), special locations, and action arguments.
 
 ---
 
@@ -310,5 +310,81 @@ Object flag indicating that an object is a supporter/surface (commonly used with
 **Usage:** `TAKEBIT`
 
 Flag indicating that an object can be picked up by the player.
+
+---
+
+## Special Object Locations
+*Special parent container objects used in (IN ...) or (LOC ...) clauses to organize rooms and globally or conditionally in-scope objects.*
+
+### LocGenericObjects
+**Usage:** `GENERIC-OBJECTS`
+
+Special parent location for abstract or conceptual objects rather than physical items (for example, the murder or the new will in Infocom's Deadline).
+
+---
+
+### LocGlobalObjects
+**Usage:** `GLOBAL-OBJECTS`
+
+Special parent location for objects that the player can refer to from anywhere in the game.
+
+---
+
+### LocLocalGlobals
+**Usage:** `LOCAL-GLOBALS`
+
+Special parent location for objects (such as doors or scenery shared across rooms) that are in scope only in ROOMs listing them in their (GLOBAL ...) property. Recognized by ORDER-OBJECTS? for ROOMS-AND-LGS-FIRST.
+
+---
+
+### LocROOMS
+**Usage:** `ROOMS`
+
+Special parent container object holding all ROOM objects via (IN ROOMS) or (LOC ROOMS). Also recognized by ORDER-OBJECTS? to identify rooms.
+
+---
+
+## Room & Description Action Arguments
+*Message constants passed as arguments to ROOM ACTION routines (RARG) and OBJECT DESCFCN routines.*
+
+### ArgMBEG
+**Usage:** `M-BEG`
+
+Room ACTION argument (RARG) passed before any object or verb action routines execute during a turn.
+
+---
+
+### ArgMEND
+**Usage:** `M-END`
+
+Room ACTION argument (RARG) passed after object and verb action routines complete during a turn.
+
+---
+
+### ArgMENTER
+**Usage:** `M-ENTER`
+
+Room ACTION argument (RARG) passed when the player enters a ROOM, before its room description is printed.
+
+---
+
+### ArgMLOOK
+**Usage:** `M-LOOK`
+
+Room ACTION argument (RARG) passed when the player executes LOOK to print a custom room description.
+
+---
+
+### ArgMOBJDESC
+**Usage:** `M-OBJDESC`
+
+DESCFCN routine argument instructing the routine to print the object's custom description.
+
+---
+
+### ArgMOBJDESCQ
+**Usage:** `M-OBJDESC?`
+
+DESCFCN routine argument querying whether the object uses a custom description; returning FALSE falls back to standard FDESC/LDESC output.
 
 ---
